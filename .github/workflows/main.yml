@@ -58,7 +58,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        flavor: [ 'Debug', 'Release' ]
+        builds: [ 'Debug', 'Release' ]
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
