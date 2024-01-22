@@ -13,7 +13,7 @@
     <PackageReference Include="DNNE" Version="2.0.6" />
   </ItemGroup>
 
-	<PropertyGroup Condition="'$(Platform)'=='x64' And '$(RuntimeIdentifier)'=='win'">
+	<PropertyGroup Condition="'$(Platform)'=='x64' And ('$(RuntimeIdentifier)'=='win' or '$(RuntimeIdentifier)'=='win-x64')">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
 		<DnneGenerateExports>true</DnneGenerateExports>
 		<DnneBuildExports>true</DnneBuildExports>
@@ -23,7 +23,7 @@
 		<AssemblyName>EOSSDK-Win64-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Platform)'=='x86' And '$(RuntimeIdentifier)'=='win'">
+	<PropertyGroup Condition="'$(Platform)'=='x86' And ('$(RuntimeIdentifier)'=='win' or '$(RuntimeIdentifier)'=='win-x86')">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
 		<DnneNativeBinaryName>EOSSDK-Win32-Shipping</DnneNativeBinaryName>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
