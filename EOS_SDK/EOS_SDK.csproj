@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DNNE" Version="2.0.6" />
+  </ItemGroup>
+
+
+	<Choose>
+		<When Condition=" '$(Platform)'=='x64' ">
+			<PropertyGroup>
+				<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
+				<DnneGenerateExports>true</DnneGenerateExports>
+				<DnneBuildExports>true</DnneBuildExports>
+				<DnneNativeBinaryName>EOSSDK-Win64-Shipping</DnneNativeBinaryName>
+				<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+				<EnableDynamicLoading>true</EnableDynamicLoading>
+				<AssemblyName>EOSSDK-Win64-Shipping_cs</AssemblyName>
+				<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+			</PropertyGroup>
+		</When>
+		<When Condition=" '$(Platform)'=='x86' ">
+			<PropertyGroup>
+				<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
+				<DnneNativeBinaryName>EOSSDK-Win32-Shipping</DnneNativeBinaryName>
+				<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+				<EnableDynamicLoading>true</EnableDynamicLoading>
+				<AssemblyName>EOSSDK-Win32-Shipping_cs</AssemblyName>
+				<RuntimeIdentifier>win-x86</RuntimeIdentifier>
+			</PropertyGroup>
+		</When>
+	</Choose>
+
+</Project>
