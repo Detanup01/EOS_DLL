@@ -1,0 +1,77 @@
+name: Build
+
+on:
+  push:
+    paths-ignore:
+      - '**/*.md'
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        builds: [ 'Debug', 'Release' ]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Publish
+      run: dotnet build EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r linux-x64 -o DLLs -p:DnneRuntimeIdentifier=linux-x64 -p:Platform=x64
+    - name: Upload artifact (Lin)
+      uses: actions/upload-artifact@v3
+      with:
+        name: SDK-Linux
+        path: DLLs
+        if-no-files-found: error
+
+  windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        builds: [ 'Debug', 'Release' ]
+        CPU: [ 'x86', 'x64' ]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Publish
+      run: dotnet build EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r win-${{ matrix.CPU }} -o DLLs -p:DnneRuntimeIdentifier=win-${{ matrix.CPU }} -p:Platform=${{ matrix.CPU }}
+    - name: Upload artifact (Win)
+      uses: actions/upload-artifact@v3
+      with:
+        name: SDK-Win
+        path: DLLs
+        if-no-files-found: error
+
+  macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        flavor: [ 'Debug', 'Release' ]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Publish
+      run: dotnet build EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r osx-x64 -o DLLs -p:DnneRuntimeIdentifier=osx-x64 -p:Platform=x64
+    - name: Upload artifact (Mac)
+      uses: actions/upload-artifact@v3
+      with:
+        name: SDK-Mac
+        path: DLLs
+        if-no-files-found: error

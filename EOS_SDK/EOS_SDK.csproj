@@ -5,36 +5,46 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Platforms>AnyCPU;x64;x86</Platforms>
+	<RuntimeIdentifier>win</RuntimeIdentifier>
+	<RuntimeIdentifiers>win;win-x64;win-x86;osx-x64;linux-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="DNNE" Version="2.0.6" />
   </ItemGroup>
 
-
-	<Choose>
-		<When Condition=" '$(Platform)'=='x64' ">
-			<PropertyGroup>
-				<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
-				<DnneGenerateExports>true</DnneGenerateExports>
-				<DnneBuildExports>true</DnneBuildExports>
-				<DnneNativeBinaryName>EOSSDK-Win64-Shipping</DnneNativeBinaryName>
-				<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-				<EnableDynamicLoading>true</EnableDynamicLoading>
-				<AssemblyName>EOSSDK-Win64-Shipping_cs</AssemblyName>
-				<RuntimeIdentifier>win-x64</RuntimeIdentifier>
-			</PropertyGroup>
-		</When>
-		<When Condition=" '$(Platform)'=='x86' ">
-			<PropertyGroup>
-				<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
-				<DnneNativeBinaryName>EOSSDK-Win32-Shipping</DnneNativeBinaryName>
-				<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-				<EnableDynamicLoading>true</EnableDynamicLoading>
-				<AssemblyName>EOSSDK-Win32-Shipping_cs</AssemblyName>
-				<RuntimeIdentifier>win-x86</RuntimeIdentifier>
-			</PropertyGroup>
-		</When>
-	</Choose>
-
+	<PropertyGroup Condition="'$(Platform)'=='x64' And '$(RuntimeIdentifier)'=='win'">
+		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
+		<DnneGenerateExports>true</DnneGenerateExports>
+		<DnneBuildExports>true</DnneBuildExports>
+		<DnneNativeBinaryName>EOSSDK-Win64-Shipping</DnneNativeBinaryName>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
+		<AssemblyName>EOSSDK-Win64-Shipping_cs</AssemblyName>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Platform)'=='x86' And '$(RuntimeIdentifier)'=='win'">
+		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
+		<DnneNativeBinaryName>EOSSDK-Win32-Shipping</DnneNativeBinaryName>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
+		<AssemblyName>EOSSDK-Win32-Shipping_cs</AssemblyName>
+		<RuntimeIdentifier>win-x86</RuntimeIdentifier>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(RuntimeIdentifier)'=='linux-x64'">
+		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
+		<DnneNativeBinaryName>libEOSSDK-Linux-Shipping</DnneNativeBinaryName>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
+		<AssemblyName>libEOSSDK-Linux-Shipping_cs</AssemblyName>
+		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(RuntimeIdentifier)'=='osx-x64'">
+		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
+		<DnneNativeBinaryName>libEOSSDK-Mac-Shipping</DnneNativeBinaryName>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<EnableDynamicLoading>true</EnableDynamicLoading>
+		<AssemblyName>libEOSSDK-Mac-Shipping_cs</AssemblyName>
+		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+	</PropertyGroup>
 </Project>
