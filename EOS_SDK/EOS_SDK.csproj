@@ -22,6 +22,7 @@
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<AssemblyName>EOSSDK-Win64-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<DefineConstants>WIN_X64</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Platform)'=='x86' And ('$(RuntimeIdentifier)'=='win' or '$(RuntimeIdentifier)'=='win-x86')">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
@@ -30,6 +31,7 @@
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<AssemblyName>EOSSDK-Win32-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>win-x86</RuntimeIdentifier>
+		<DefineConstants>WIN_X86</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(RuntimeIdentifier)'=='linux-x64'">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
