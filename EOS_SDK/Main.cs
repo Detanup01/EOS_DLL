@@ -42,7 +42,7 @@ namespace EOS_SDK
             Console.WriteLine(_TESTpublicInput.Result);
             var str_ptr = MakeString("yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet");
             TESTpublic tESTpublic = new()
-            { 
+            {
                 Result = 222,
                 Str = "LOOOOOOOOOONG string",
                 Str2 = str_ptr

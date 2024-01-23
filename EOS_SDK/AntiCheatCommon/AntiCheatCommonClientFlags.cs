@@ -3,19 +3,19 @@
 
 namespace EOS_SDK.AntiCheatCommon
 {
-	/// <summary>
-	/// Flags describing a remote client. These can be updated during a play session
-	/// </summary>
-	[System.Flags]
-	public enum AntiCheatCommonClientFlags : int
-	{
-		/// <summary>
-		/// No particular flags relevant for this client
-		/// </summary>
-		None = 0,
-		/// <summary>
-		/// The client has admin privileges on the game server
-		/// </summary>
-		Admin = (1 << 0)
-	}
+    /// <summary>
+    /// Flags describing a remote client. These can be updated during a play session
+    /// </summary>
+    [System.Flags]
+    public enum AntiCheatCommonClientFlags : int
+    {
+        /// <summary>
+        /// No particular flags relevant for this client
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// The client has admin privileges on the game server
+        /// </summary>
+        Admin = (1 << 0)
+    }
 }

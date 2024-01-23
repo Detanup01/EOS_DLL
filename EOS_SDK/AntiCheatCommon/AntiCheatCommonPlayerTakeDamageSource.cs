@@ -3,26 +3,26 @@
 
 namespace EOS_SDK.AntiCheatCommon
 {
-	/// <summary>
-	/// The source of a damage event
-	/// </summary>
-	public enum AntiCheatCommonPlayerTakeDamageSource : int
-	{
-		/// <summary>
-		/// No particular source relevant
-		/// </summary>
-		None = 0,
-		/// <summary>
-		/// Damage caused by a player controlled character
-		/// </summary>
-		Player = 1,
-		/// <summary>
-		/// Damage caused by a non-player character such as an AI enemy
-		/// </summary>
-		NonPlayerCharacter = 2,
-		/// <summary>
-		/// Damage caused by the world (falling off level, into lava, etc)
-		/// </summary>
-		World = 3
-	}
+    /// <summary>
+    /// The source of a damage event
+    /// </summary>
+    public enum AntiCheatCommonPlayerTakeDamageSource : int
+    {
+        /// <summary>
+        /// No particular source relevant
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Damage caused by a player controlled character
+        /// </summary>
+        Player = 1,
+        /// <summary>
+        /// Damage caused by a non-player character such as an AI enemy
+        /// </summary>
+        NonPlayerCharacter = 2,
+        /// <summary>
+        /// Damage caused by the world (falling off level, into lava, etc)
+        /// </summary>
+        World = 3
+    }
 }

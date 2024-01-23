@@ -3,18 +3,18 @@
 
 namespace EOS_SDK.AntiCheatCommon
 {
-	/// <summary>
-	/// Anti-cheat action values. Applicable to both clients and remote peers.
-	/// </summary>
-	public enum AntiCheatCommonClientAction : int
-	{
-		/// <summary>
-		/// Not used
-		/// </summary>
-		Invalid = 0,
-		/// <summary>
-		/// The client/peer must be removed from the current game session
-		/// </summary>
-		RemovePlayer = 1
-	}
+    /// <summary>
+    /// Anti-cheat action values. Applicable to both clients and remote peers.
+    /// </summary>
+    public enum AntiCheatCommonClientAction : int
+    {
+        /// <summary>
+        /// Not used
+        /// </summary>
+        Invalid = 0,
+        /// <summary>
+        /// The client/peer must be removed from the current game session
+        /// </summary>
+        RemovePlayer = 1
+    }
 }

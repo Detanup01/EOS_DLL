@@ -74,9 +74,10 @@ namespace EOS_SDK.AntiCheatClient
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int EOS_AntiCheatClient_PollStatus(IntPtr handle, IntPtr options, [Out] AntiCheatClientViolationType outViolationType, IntPtr outMessage)
+        public static int EOS_AntiCheatClient_PollStatus(IntPtr handle, IntPtr options, int outViolationType, IntPtr outMessage)
         {
             var _PollStatusOptionspublic = Marshal.PtrToStructure<PollStatusOptionspublic>(options);
+            outViolationType = (int)AntiCheatClientViolationType.Invalid;
             return (int)Result.Success;
         }
 

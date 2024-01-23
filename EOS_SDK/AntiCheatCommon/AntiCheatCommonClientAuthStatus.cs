@@ -3,22 +3,22 @@
 
 namespace EOS_SDK.AntiCheatCommon
 {
-	/// <summary>
-	/// The client/peer's anti-cheat authentication status
-	/// </summary>
-	public enum AntiCheatCommonClientAuthStatus : int
-	{
-		/// <summary>
-		/// Not used
-		/// </summary>
-		Invalid = 0,
-		/// <summary>
-		/// The client/peer's anti-cheat functionality has been validated by this game server
-		/// </summary>
-		LocalAuthComplete = 1,
-		/// <summary>
-		/// The client/peer's anti-cheat functionality has been validated by the anti-cheat backend service
-		/// </summary>
-		RemoteAuthComplete = 2
-	}
+    /// <summary>
+    /// The client/peer's anti-cheat authentication status
+    /// </summary>
+    public enum AntiCheatCommonClientAuthStatus : int
+    {
+        /// <summary>
+        /// Not used
+        /// </summary>
+        Invalid = 0,
+        /// <summary>
+        /// The client/peer's anti-cheat functionality has been validated by this game server
+        /// </summary>
+        LocalAuthComplete = 1,
+        /// <summary>
+        /// The client/peer's anti-cheat functionality has been validated by the anti-cheat backend service
+        /// </summary>
+        RemoteAuthComplete = 2
+    }
 }

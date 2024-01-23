@@ -1,7 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-
-namespace EOS_SDK
+﻿namespace EOS_SDK
 {
     public unsafe class Exports
     {

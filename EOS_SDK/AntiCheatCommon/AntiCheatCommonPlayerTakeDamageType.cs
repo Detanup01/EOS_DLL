@@ -3,26 +3,26 @@
 
 namespace EOS_SDK.AntiCheatCommon
 {
-	/// <summary>
-	/// Type of damage applied in a damage event
-	/// </summary>
-	public enum AntiCheatCommonPlayerTakeDamageType : int
-	{
-		/// <summary>
-		/// No particular type relevant
-		/// </summary>
-		None = 0,
-		/// <summary>
-		/// Damage caused by a point source such as a bullet or melee attack
-		/// </summary>
-		PointDamage = 1,
-		/// <summary>
-		/// Damage caused by a radial source such as an explosion
-		/// </summary>
-		RadialDamage = 2,
-		/// <summary>
-		/// Damage over time such as bleeding, poison, etc
-		/// </summary>
-		DamageOverTime = 3
-	}
+    /// <summary>
+    /// Type of damage applied in a damage event
+    /// </summary>
+    public enum AntiCheatCommonPlayerTakeDamageType : int
+    {
+        /// <summary>
+        /// No particular type relevant
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Damage caused by a point source such as a bullet or melee attack
+        /// </summary>
+        PointDamage = 1,
+        /// <summary>
+        /// Damage caused by a radial source such as an explosion
+        /// </summary>
+        RadialDamage = 2,
+        /// <summary>
+        /// Damage over time such as bleeding, poison, etc
+        /// </summary>
+        DamageOverTime = 3
+    }
 }
