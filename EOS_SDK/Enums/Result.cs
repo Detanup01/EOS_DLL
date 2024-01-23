@@ -706,9 +706,9 @@ namespace EOS_SDK
 		/// </summary>
 		ModsCriticalError = 11003,
 		/// <summary>
-		/// A internal error occurred in the external ModSdk process that we were unable to resolve.
+		/// A public error occurred in the external ModSdk process that we were unable to resolve.
 		/// </summary>
-		ModsToolInternalError = 11004,
+		ModsToolpublicError = 11004,
 		/// <summary>
 		/// A IPC failure occurred in the external ModSdk process.
 		/// </summary>

@@ -5,31 +5,301 @@ namespace EOS_SDK
 {
     public unsafe class Exports
     {
-#if false
+#if true
         #region Exports
 
-
-        
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static ulong EOS_Achievements_AddNotifyAchievementsUnlocked(IntPtr handle, IntPtr options, IntPtr clientData, Achievements.OnAchievementsUnlockedCallbackpublic notificationFn)
+		{
+			var _AddNotifyAchievementsUnlockedOptionspublic = Marshal.PtrToStructure<Achievements.AddNotifyAchievementsUnlockedOptionspublic>(options);
+        }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_AntiCheatServer_AddNotifyClientActionRequired(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Achievements_AddNotifyAchievementsUnlockedV2(IntPtr handle, IntPtr options, IntPtr clientData, Achievements.OnAchievementsUnlockedCallbackV2public notificationFn)
+		{
+			var _AddNotifyAchievementsUnlockedV2Optionspublic = Marshal.PtrToStructure<Achievements.AddNotifyAchievementsUnlockedV2Optionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_Achievements_CopyAchievementDefinitionByAchievementId(IntPtr handle, IntPtr options, IntPtr outDefinition)
+		{
+			var _CopyAchievementDefinitionByAchievementIdOptionspublic = Marshal.PtrToStructure<Achievements.CopyAchievementDefinitionByAchievementIdOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_Achievements_CopyAchievementDefinitionByIndex(IntPtr handle, IntPtr options, IntPtr outDefinition)
+		{
+			var _CopyAchievementDefinitionByIndexOptionspublic = Marshal.PtrToStructure<Achievements.CopyAchievementDefinitionByIndexOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_Achievements_CopyAchievementDefinitionV2ByAchievementId(IntPtr handle, IntPtr options, IntPtr outDefinition)
+		{
+			var _CopyAchievementDefinitionV2ByAchievementIdOptionspublic = Marshal.PtrToStructure<Achievements.CopyAchievementDefinitionV2ByAchievementIdOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_Achievements_CopyAchievementDefinitionV2ByIndex(IntPtr handle, IntPtr options, IntPtr outDefinition)
+		{
+			var _CopyAchievementDefinitionV2ByIndexOptionspublic = Marshal.PtrToStructure<Achievements.CopyAchievementDefinitionV2ByIndexOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_Achievements_CopyPlayerAchievementByAchievementId(IntPtr handle, IntPtr options, IntPtr outAchievement)
+		{
+			var _CopyPlayerAchievementByAchievementIdOptionspublic = Marshal.PtrToStructure<Achievements.CopyPlayerAchievementByAchievementIdOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_Achievements_CopyPlayerAchievementByIndex(IntPtr handle, IntPtr options, IntPtr outAchievement)
+		{
+			var _CopyPlayerAchievementByIndexOptionspublic = Marshal.PtrToStructure<Achievements.CopyPlayerAchievementByIndexOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_Achievements_CopyUnlockedAchievementByAchievementId(IntPtr handle, IntPtr options, IntPtr outAchievement)
+		{
+			var _CopyUnlockedAchievementByAchievementIdOptionspublic = Marshal.PtrToStructure<Achievements.CopyUnlockedAchievementByAchievementIdOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_Achievements_CopyUnlockedAchievementByIndex(IntPtr handle, IntPtr options, IntPtr outAchievement)
+		{
+			var _CopyUnlockedAchievementByIndexOptionspublic = Marshal.PtrToStructure<Achievements.CopyUnlockedAchievementByIndexOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_Achievements_DefinitionV2_Release(IntPtr achievementDefinition)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_Achievements_Definition_Release(IntPtr achievementDefinition)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static uint EOS_Achievements_GetAchievementDefinitionCount(IntPtr handle, IntPtr options)
+		{
+			var _GetAchievementDefinitionCountOptionspublic = Marshal.PtrToStructure<Achievements.GetAchievementDefinitionCountOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static uint EOS_Achievements_GetPlayerAchievementCount(IntPtr handle, IntPtr options)
+		{
+			var _GetPlayerAchievementCountOptionspublic = Marshal.PtrToStructure<Achievements.GetPlayerAchievementCountOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static uint EOS_Achievements_GetUnlockedAchievementCount(IntPtr handle, IntPtr options)
+		{
+			var _GetUnlockedAchievementCountOptionspublic = Marshal.PtrToStructure<Achievements.GetUnlockedAchievementCountOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_Achievements_PlayerAchievement_Release(IntPtr achievement)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_Achievements_QueryDefinitions(IntPtr handle, IntPtr options, IntPtr clientData, Achievements.OnQueryDefinitionsCompleteCallbackpublic completionDelegate)
+		{
+			var _QueryDefinitionsOptionspublic = Marshal.PtrToStructure<Achievements.QueryDefinitionsOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_Achievements_QueryPlayerAchievements(IntPtr handle, IntPtr options, IntPtr clientData, Achievements.OnQueryPlayerAchievementsCompleteCallbackpublic completionDelegate)
+		{
+			var _QueryPlayerAchievementsOptionspublic = Marshal.PtrToStructure<Achievements.QueryPlayerAchievementsOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_Achievements_RemoveNotifyAchievementsUnlocked(IntPtr handle, ulong inId)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_Achievements_UnlockAchievements(IntPtr handle, IntPtr options, IntPtr clientData, Achievements.OnUnlockAchievementsCompleteCallbackpublic completionDelegate)
+		{
+			var _UnlockAchievementsOptionspublic = Marshal.PtrToStructure<Achievements.UnlockAchievementsOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_Achievements_UnlockedAchievement_Release(IntPtr achievement)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_ActiveSession_CopyInfo(IntPtr handle, IntPtr options, IntPtr outActiveSessionInfo)
+		{
+			var _ActiveSessionCopyInfoOptionspublic = Marshal.PtrToStructure<ActiveSessionCopyInfoOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static IntPtr EOS_ActiveSession_GetRegisteredPlayerByIndex(IntPtr handle, IntPtr options)
+		{
+			var _ActiveSessionGetRegisteredPlayerByIndexOptionspublic = Marshal.PtrToStructure<ActiveSessionGetRegisteredPlayerByIndexOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static uint EOS_ActiveSession_GetRegisteredPlayerCount(IntPtr handle, IntPtr options)
+		{
+			var _ActiveSessionGetRegisteredPlayerCountOptionspublic = Marshal.PtrToStructure<ActiveSessionGetRegisteredPlayerCountOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_ActiveSession_Info_Release(IntPtr activeSessionInfo)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_ActiveSession_Release(IntPtr activeSessionHandle)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_AntiCheatClient_AddExternalIntegrityCatalog(IntPtr handle, IntPtr options)
+		{
+			var _AddExternalIntegrityCatalogOptionspublic = Marshal.PtrToStructure<AddExternalIntegrityCatalogOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static ulong EOS_AntiCheatClient_AddNotifyClientIntegrityViolated(IntPtr handle, IntPtr options, IntPtr clientData, AntiCheatClient.OnClientIntegrityViolatedCallbackpublic notificationFn)
+		{
+			var _AddNotifyClientIntegrityViolatedOptionspublic = Marshal.PtrToStructure<AddNotifyClientIntegrityViolatedOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static ulong EOS_AntiCheatClient_AddNotifyMessageToPeer(IntPtr handle, IntPtr options, IntPtr clientData, AntiCheatClient.OnMessageToPeerCallbackpublic notificationFn)
+		{
+			var _AddNotifyMessageToPeerOptionspublic = Marshal.PtrToStructure<AddNotifyMessageToPeerOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static ulong EOS_AntiCheatClient_AddNotifyMessageToServer(IntPtr handle, IntPtr options, IntPtr clientData, AntiCheatClient.OnMessageToServerCallbackpublic notificationFn)
+		{
+			var _AddNotifyMessageToServerOptionspublic = Marshal.PtrToStructure<AddNotifyMessageToServerOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static ulong EOS_AntiCheatClient_AddNotifyPeerActionRequired(IntPtr handle, IntPtr options, IntPtr clientData, AntiCheatClient.OnPeerActionRequiredCallbackpublic notificationFn)
+		{
+			var _AddNotifyPeerActionRequiredOptionspublic = Marshal.PtrToStructure<AddNotifyPeerActionRequiredOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static ulong EOS_AntiCheatClient_AddNotifyPeerAuthStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, AntiCheatClient.OnPeerAuthStatusChangedCallbackpublic notificationFn)
+		{
+			var _AddNotifyPeerAuthStatusChangedOptionspublic = Marshal.PtrToStructure<AddNotifyPeerAuthStatusChangedOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_AntiCheatClient_BeginSession(IntPtr handle, IntPtr options)
+		{
+			var _BeginSessionOptionspublic = Marshal.PtrToStructure<BeginSessionOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_AntiCheatClient_EndSession(IntPtr handle, IntPtr options)
+		{
+			var _EndSessionOptionspublic = Marshal.PtrToStructure<EndSessionOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_AntiCheatClient_GetProtectMessageOutputLength(IntPtr handle, IntPtr options, ref uint outBufferSizeBytes)
+        {
+            var _GetProtectMessageOutputLengthOptionspublic = Marshal.PtrToStructure<GetProtectMessageOutputLengthOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_AntiCheatClient_PollStatus(IntPtr handle, IntPtr options, ref AntiCheatClient.AntiCheatClientViolationType outViolationType, IntPtr outMessage)
+        {
+            var _PollStatusOptionspublic = Marshal.PtrToStructure<PollStatusOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_AntiCheatClient_PollStatus(IntPtr handle, IntPtr options, ref AntiCheatClient.AntiCheatClientViolationType outViolationType, IntPtr outMessage)
+		{
+			var _AntiCheatClientViolationType = Marshal.PtrToStructure<AntiCheatClientViolationType>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_AntiCheatClient_ProtectMessage(IntPtr handle, IntPtr options, IntPtr outBuffer, ref uint outBytesWritten)
+        {
+            var _ProtectMessageOptionspublic = Marshal.PtrToStructure<ProtectMessageOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_AntiCheatClient_ReceiveMessageFromPeer(IntPtr handle, IntPtr options)
+		{
+			var _ReceiveMessageFromPeerOptionspublic = Marshal.PtrToStructure<ReceiveMessageFromPeerOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_AntiCheatClient_ReceiveMessageFromServer(IntPtr handle, IntPtr options)
+		{
+			var _ReceiveMessageFromServerOptionspublic = Marshal.PtrToStructure<ReceiveMessageFromServerOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_AntiCheatClient_RegisterPeer(IntPtr handle, IntPtr options)
+		{
+			var _RegisterPeerOptionspublic = Marshal.PtrToStructure<RegisterPeerOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_AntiCheatClient_RemoveNotifyClientIntegrityViolated(IntPtr handle, ulong notificationId)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_AntiCheatClient_RemoveNotifyMessageToPeer(IntPtr handle, ulong notificationId)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_AntiCheatClient_RemoveNotifyMessageToServer(IntPtr handle, ulong notificationId)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_AntiCheatClient_RemoveNotifyPeerActionRequired(IntPtr handle, ulong notificationId)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void EOS_AntiCheatClient_RemoveNotifyPeerAuthStatusChanged(IntPtr handle, ulong notificationId)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_AntiCheatClient_UnprotectMessage(IntPtr handle, IntPtr options, IntPtr outBuffer, [Out] uint outBytesWritten)
+        {
+            var _UnprotectMessageOptionspublic = Marshal.PtrToStructure<UnprotectMessageOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_AntiCheatClient_UnregisterPeer(IntPtr handle, IntPtr options)
+		{
+			var _UnregisterPeerOptionspublic = Marshal.PtrToStructure<UnregisterPeerOptionspublic>(options);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static ulong EOS_AntiCheatServer_AddNotifyClientActionRequired(IntPtr handle, IntPtr options, IntPtr clientData, AntiCheatServer.OnClientActionRequiredCallbackpublic notificationFn)
 		{
 			var _AddNotifyClientActionRequiredOptionspublic = Marshal.PtrToStructure<AddNotifyClientActionRequiredOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatServer.OnClientActionRequiredCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_AntiCheatServer_AddNotifyClientAuthStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_AntiCheatServer_AddNotifyClientAuthStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, AntiCheatServer.OnClientAuthStatusChangedCallbackpublic notificationFn)
 		{
 			var _AddNotifyClientAuthStatusChangedOptionspublic = Marshal.PtrToStructure<AddNotifyClientAuthStatusChangedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatServer.OnClientAuthStatusChangedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_AntiCheatServer_AddNotifyMessageToClient(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_AntiCheatServer_AddNotifyMessageToClient(IntPtr handle, IntPtr options, IntPtr clientData, AntiCheatServer.OnMessageToClientCallbackpublic notificationFn)
 		{
 			var _AddNotifyMessageToClientOptionspublic = Marshal.PtrToStructure<AddNotifyMessageToClientOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatServer.OnMessageToClientCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -180,10 +450,9 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Auth_AddNotifyLoginStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notification)
+        public static ulong EOS_Auth_AddNotifyLoginStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, Auth.OnLoginStatusChangedCallbackpublic notification)
 		{
 			var _AddNotifyLoginStatusChangedOptionspublic = Marshal.PtrToStructure<AddNotifyLoginStatusChangedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notification; //Delegate Class was: Auth.OnLoginStatusChangedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -199,10 +468,9 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_DeletePersistentAuth(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Auth_DeletePersistentAuth(IntPtr handle, IntPtr options, IntPtr clientData, Auth.OnDeletePersistentAuthCallbackpublic completionDelegate)
 		{
 			var _DeletePersistentAuthOptionspublic = Marshal.PtrToStructure<DeletePersistentAuthOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Auth.OnDeletePersistentAuthCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -241,31 +509,27 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_LinkAccount(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Auth_LinkAccount(IntPtr handle, IntPtr options, IntPtr clientData, Auth.OnLinkAccountCallbackpublic completionDelegate)
 		{
 			var _LinkAccountOptionspublic = Marshal.PtrToStructure<LinkAccountOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Auth.OnLinkAccountCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_Login(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Auth_Login(IntPtr handle, IntPtr options, IntPtr clientData, Auth.OnLoginCallbackpublic completionDelegate)
 		{
 			var _LoginOptionspublic = Marshal.PtrToStructure<LoginOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Auth.OnLoginCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_Logout(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Auth_Logout(IntPtr handle, IntPtr options, IntPtr clientData, Auth.OnLogoutCallbackpublic completionDelegate)
 		{
 			var _LogoutOptionspublic = Marshal.PtrToStructure<LogoutOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Auth.OnLogoutCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_QueryIdToken(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Auth_QueryIdToken(IntPtr handle, IntPtr options, IntPtr clientData, Auth.OnQueryIdTokenCallbackpublic completionDelegate)
 		{
 			var _QueryIdTokenOptionspublic = Marshal.PtrToStructure<QueryIdTokenOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Auth.OnQueryIdTokenCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -279,17 +543,15 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_VerifyIdToken(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Auth_VerifyIdToken(IntPtr handle, IntPtr options, IntPtr clientData, Auth.OnVerifyIdTokenCallbackpublic completionDelegate)
 		{
 			var _VerifyIdTokenOptionspublic = Marshal.PtrToStructure<VerifyIdTokenOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Auth.OnVerifyIdTokenCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_VerifyUserAuth(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Auth_VerifyUserAuth(IntPtr handle, IntPtr options, IntPtr clientData, Auth.OnVerifyUserAuthCallbackpublic completionDelegate)
 		{
 			var _VerifyUserAuthOptionspublic = Marshal.PtrToStructure<VerifyUserAuthOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Auth.OnVerifyUserAuthCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -298,17 +560,15 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Connect_AddNotifyAuthExpiration(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notification)
+        public static ulong EOS_Connect_AddNotifyAuthExpiration(IntPtr handle, IntPtr options, IntPtr clientData, Connect.OnAuthExpirationCallbackpublic notification)
 		{
 			var _AddNotifyAuthExpirationOptionspublic = Marshal.PtrToStructure<AddNotifyAuthExpirationOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notification; //Delegate Class was: Connect.OnAuthExpirationCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Connect_AddNotifyLoginStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notification)
+        public static ulong EOS_Connect_AddNotifyLoginStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, Connect.OnLoginStatusChangedCallbackpublic notification)
 		{
 			var _AddNotifyLoginStatusChangedOptionspublic = Marshal.PtrToStructure<AddNotifyLoginStatusChangedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notification; //Delegate Class was: Connect.OnLoginStatusChangedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -342,24 +602,21 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Connect_CreateDeviceId(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Connect_CreateDeviceId(IntPtr handle, IntPtr options, IntPtr clientData, Connect.OnCreateDeviceIdCallbackpublic completionDelegate)
 		{
 			var _CreateDeviceIdOptionspublic = Marshal.PtrToStructure<CreateDeviceIdOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Connect.OnCreateDeviceIdCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Connect_CreateUser(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Connect_CreateUser(IntPtr handle, IntPtr options, IntPtr clientData, Connect.OnCreateUserCallbackpublic completionDelegate)
 		{
 			var _CreateUserOptionspublic = Marshal.PtrToStructure<CreateUserOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Connect.OnCreateUserCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Connect_DeleteDeviceId(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Connect_DeleteDeviceId(IntPtr handle, IntPtr options, IntPtr clientData, Connect.OnDeleteDeviceIdCallbackpublic completionDelegate)
 		{
 			var _DeleteDeviceIdOptionspublic = Marshal.PtrToStructure<DeleteDeviceIdOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Connect.OnDeleteDeviceIdCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -406,31 +663,27 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Connect_LinkAccount(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Connect_LinkAccount(IntPtr handle, IntPtr options, IntPtr clientData, Connect.OnLinkAccountCallbackpublic completionDelegate)
 		{
 			var _LinkAccountOptionspublic = Marshal.PtrToStructure<LinkAccountOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Connect.OnLinkAccountCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Connect_Login(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Connect_Login(IntPtr handle, IntPtr options, IntPtr clientData, Connect.OnLoginCallbackpublic completionDelegate)
 		{
 			var _LoginOptionspublic = Marshal.PtrToStructure<LoginOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Connect.OnLoginCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Connect_QueryExternalAccountMappings(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Connect_QueryExternalAccountMappings(IntPtr handle, IntPtr options, IntPtr clientData, Connect.OnQueryExternalAccountMappingsCallbackpublic completionDelegate)
 		{
 			var _QueryExternalAccountMappingsOptionspublic = Marshal.PtrToStructure<QueryExternalAccountMappingsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Connect.OnQueryExternalAccountMappingsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Connect_QueryProductUserIdMappings(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Connect_QueryProductUserIdMappings(IntPtr handle, IntPtr options, IntPtr clientData, Connect.OnQueryProductUserIdMappingsCallbackpublic completionDelegate)
 		{
 			var _QueryProductUserIdMappingsOptionspublic = Marshal.PtrToStructure<QueryProductUserIdMappingsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Connect.OnQueryProductUserIdMappingsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -444,24 +697,21 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Connect_TransferDeviceIdAccount(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Connect_TransferDeviceIdAccount(IntPtr handle, IntPtr options, IntPtr clientData, Connect.OnTransferDeviceIdAccountCallbackpublic completionDelegate)
 		{
 			var _TransferDeviceIdAccountOptionspublic = Marshal.PtrToStructure<TransferDeviceIdAccountOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Connect.OnTransferDeviceIdAccountCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Connect_UnlinkAccount(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Connect_UnlinkAccount(IntPtr handle, IntPtr options, IntPtr clientData, Connect.OnUnlinkAccountCallbackpublic completionDelegate)
 		{
 			var _UnlinkAccountOptionspublic = Marshal.PtrToStructure<UnlinkAccountOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Connect.OnUnlinkAccountCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Connect_VerifyIdToken(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Connect_VerifyIdToken(IntPtr handle, IntPtr options, IntPtr clientData, Connect.OnVerifyIdTokenCallbackpublic completionDelegate)
 		{
 			var _VerifyIdTokenOptionspublic = Marshal.PtrToStructure<VerifyIdTokenOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Connect.OnVerifyIdTokenCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -470,66 +720,57 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_CustomInvites_AcceptRequestToJoin(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_CustomInvites_AcceptRequestToJoin(IntPtr handle, IntPtr options, IntPtr clientData, CustomInvites.OnAcceptRequestToJoinCallbackpublic completionDelegate)
 		{
 			var _AcceptRequestToJoinOptionspublic = Marshal.PtrToStructure<AcceptRequestToJoinOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: CustomInvites.OnAcceptRequestToJoinCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_CustomInvites_AddNotifyCustomInviteAccepted(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_CustomInvites_AddNotifyCustomInviteAccepted(IntPtr handle, IntPtr options, IntPtr clientData, CustomInvites.OnCustomInviteAcceptedCallbackpublic notificationFn)
 		{
 			var _AddNotifyCustomInviteAcceptedOptionspublic = Marshal.PtrToStructure<AddNotifyCustomInviteAcceptedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: CustomInvites.OnCustomInviteAcceptedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_CustomInvites_AddNotifyCustomInviteReceived(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_CustomInvites_AddNotifyCustomInviteReceived(IntPtr handle, IntPtr options, IntPtr clientData, CustomInvites.OnCustomInviteReceivedCallbackpublic notificationFn)
 		{
 			var _AddNotifyCustomInviteReceivedOptionspublic = Marshal.PtrToStructure<AddNotifyCustomInviteReceivedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: CustomInvites.OnCustomInviteReceivedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_CustomInvites_AddNotifyCustomInviteRejected(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_CustomInvites_AddNotifyCustomInviteRejected(IntPtr handle, IntPtr options, IntPtr clientData, CustomInvites.OnCustomInviteRejectedCallbackpublic notificationFn)
 		{
 			var _AddNotifyCustomInviteRejectedOptionspublic = Marshal.PtrToStructure<AddNotifyCustomInviteRejectedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: CustomInvites.OnCustomInviteRejectedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_CustomInvites_AddNotifyRequestToJoinAccepted(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_CustomInvites_AddNotifyRequestToJoinAccepted(IntPtr handle, IntPtr options, IntPtr clientData, CustomInvites.OnRequestToJoinAcceptedCallbackpublic notificationFn)
 		{
 			var _AddNotifyRequestToJoinAcceptedOptionspublic = Marshal.PtrToStructure<AddNotifyRequestToJoinAcceptedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: CustomInvites.OnRequestToJoinAcceptedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_CustomInvites_AddNotifyRequestToJoinReceived(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_CustomInvites_AddNotifyRequestToJoinReceived(IntPtr handle, IntPtr options, IntPtr clientData, CustomInvites.OnRequestToJoinReceivedCallbackpublic notificationFn)
 		{
 			var _AddNotifyRequestToJoinReceivedOptionspublic = Marshal.PtrToStructure<AddNotifyRequestToJoinReceivedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: CustomInvites.OnRequestToJoinReceivedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_CustomInvites_AddNotifyRequestToJoinRejected(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_CustomInvites_AddNotifyRequestToJoinRejected(IntPtr handle, IntPtr options, IntPtr clientData, CustomInvites.OnRequestToJoinRejectedCallbackpublic notificationFn)
 		{
 			var _AddNotifyRequestToJoinRejectedOptionspublic = Marshal.PtrToStructure<AddNotifyRequestToJoinRejectedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: CustomInvites.OnRequestToJoinRejectedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_CustomInvites_AddNotifyRequestToJoinResponseReceived(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_CustomInvites_AddNotifyRequestToJoinResponseReceived(IntPtr handle, IntPtr options, IntPtr clientData, CustomInvites.OnRequestToJoinResponseReceivedCallbackpublic notificationFn)
 		{
 			var _AddNotifyRequestToJoinResponseReceivedOptionspublic = Marshal.PtrToStructure<AddNotifyRequestToJoinResponseReceivedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: CustomInvites.OnRequestToJoinResponseReceivedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_CustomInvites_AddNotifySendCustomNativeInviteRequested(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_CustomInvites_AddNotifySendCustomNativeInviteRequested(IntPtr handle, IntPtr options, IntPtr clientData, CustomInvites.OnSendCustomNativeInviteRequestedCallbackpublic notificationFn)
 		{
 			var _AddNotifySendCustomNativeInviteRequestedOptionspublic = Marshal.PtrToStructure<AddNotifySendCustomNativeInviteRequestedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: CustomInvites.OnSendCustomNativeInviteRequestedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -539,10 +780,9 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_CustomInvites_RejectRequestToJoin(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_CustomInvites_RejectRequestToJoin(IntPtr handle, IntPtr options, IntPtr clientData, CustomInvites.OnRejectRequestToJoinCallbackpublic completionDelegate)
 		{
 			var _RejectRequestToJoinOptionspublic = Marshal.PtrToStructure<RejectRequestToJoinOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: CustomInvites.OnRejectRequestToJoinCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -586,17 +826,15 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_CustomInvites_SendCustomInvite(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_CustomInvites_SendCustomInvite(IntPtr handle, IntPtr options, IntPtr clientData, CustomInvites.OnSendCustomInviteCallbackpublic completionDelegate)
 		{
 			var _SendCustomInviteOptionspublic = Marshal.PtrToStructure<SendCustomInviteOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: CustomInvites.OnSendCustomInviteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_CustomInvites_SendRequestToJoin(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_CustomInvites_SendRequestToJoin(IntPtr handle, IntPtr options, IntPtr clientData, CustomInvites.OnSendRequestToJoinCallbackpublic completionDelegate)
 		{
 			var _SendRequestToJoinOptionspublic = Marshal.PtrToStructure<SendRequestToJoinOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: CustomInvites.OnSendRequestToJoinCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -641,10 +879,9 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Ecom_Checkout(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Ecom_Checkout(IntPtr handle, IntPtr options, IntPtr clientData, Ecom.OnCheckoutCallbackpublic completionDelegate)
 		{
 			var _CheckoutOptionspublic = Marshal.PtrToStructure<CheckoutOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Ecom.OnCheckoutCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -790,52 +1027,45 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Ecom_QueryEntitlementToken(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Ecom_QueryEntitlementToken(IntPtr handle, IntPtr options, IntPtr clientData, Ecom.OnQueryEntitlementTokenCallbackpublic completionDelegate)
 		{
 			var _QueryEntitlementTokenOptionspublic = Marshal.PtrToStructure<QueryEntitlementTokenOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Ecom.OnQueryEntitlementTokenCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Ecom_QueryEntitlements(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Ecom_QueryEntitlements(IntPtr handle, IntPtr options, IntPtr clientData, Ecom.OnQueryEntitlementsCallbackpublic completionDelegate)
 		{
 			var _QueryEntitlementsOptionspublic = Marshal.PtrToStructure<QueryEntitlementsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Ecom.OnQueryEntitlementsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Ecom_QueryOffers(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Ecom_QueryOffers(IntPtr handle, IntPtr options, IntPtr clientData, Ecom.OnQueryOffersCallbackpublic completionDelegate)
 		{
 			var _QueryOffersOptionspublic = Marshal.PtrToStructure<QueryOffersOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Ecom.OnQueryOffersCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Ecom_QueryOwnership(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Ecom_QueryOwnership(IntPtr handle, IntPtr options, IntPtr clientData, Ecom.OnQueryOwnershipCallbackpublic completionDelegate)
 		{
 			var _QueryOwnershipOptionspublic = Marshal.PtrToStructure<QueryOwnershipOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Ecom.OnQueryOwnershipCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Ecom_QueryOwnershipBySandboxIds(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Ecom_QueryOwnershipBySandboxIds(IntPtr handle, IntPtr options, IntPtr clientData, Ecom.OnQueryOwnershipBySandboxIdsCallbackpublic completionDelegate)
 		{
 			var _QueryOwnershipBySandboxIdsOptionspublic = Marshal.PtrToStructure<QueryOwnershipBySandboxIdsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Ecom.OnQueryOwnershipBySandboxIdsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Ecom_QueryOwnershipToken(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Ecom_QueryOwnershipToken(IntPtr handle, IntPtr options, IntPtr clientData, Ecom.OnQueryOwnershipTokenCallbackpublic completionDelegate)
 		{
 			var _QueryOwnershipTokenOptionspublic = Marshal.PtrToStructure<QueryOwnershipTokenOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Ecom.OnQueryOwnershipTokenCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Ecom_RedeemEntitlements(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Ecom_RedeemEntitlements(IntPtr handle, IntPtr options, IntPtr clientData, Ecom.OnRedeemEntitlementsCallbackpublic completionDelegate)
 		{
 			var _RedeemEntitlementsOptionspublic = Marshal.PtrToStructure<RedeemEntitlementsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Ecom.OnRedeemEntitlementsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -876,24 +1106,21 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Friends_AcceptInvite(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Friends_AcceptInvite(IntPtr handle, IntPtr options, IntPtr clientData, Friends.OnAcceptInviteCallbackpublic completionDelegate)
 		{
 			var _AcceptInviteOptionspublic = Marshal.PtrToStructure<AcceptInviteOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Friends.OnAcceptInviteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Friends_AddNotifyBlockedUsersUpdate(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr blockedUsersUpdateHandler)
+        public static ulong EOS_Friends_AddNotifyBlockedUsersUpdate(IntPtr handle, IntPtr options, IntPtr clientData, Friends.OnBlockedUsersUpdateCallbackpublic blockedUsersUpdateHandler)
 		{
 			var _AddNotifyBlockedUsersUpdateOptionspublic = Marshal.PtrToStructure<AddNotifyBlockedUsersUpdateOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)blockedUsersUpdateHandler; //Delegate Class was: Friends.OnBlockedUsersUpdateCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Friends_AddNotifyFriendsUpdate(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr friendsUpdateHandler)
+        public static ulong EOS_Friends_AddNotifyFriendsUpdate(IntPtr handle, IntPtr options, IntPtr clientData, Friends.OnFriendsUpdateCallbackpublic friendsUpdateHandler)
 		{
 			var _AddNotifyFriendsUpdateOptionspublic = Marshal.PtrToStructure<AddNotifyFriendsUpdateOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)friendsUpdateHandler; //Delegate Class was: Friends.OnFriendsUpdateCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -927,17 +1154,15 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Friends_QueryFriends(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Friends_QueryFriends(IntPtr handle, IntPtr options, IntPtr clientData, Friends.OnQueryFriendsCallbackpublic completionDelegate)
 		{
 			var _QueryFriendsOptionspublic = Marshal.PtrToStructure<QueryFriendsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Friends.OnQueryFriendsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Friends_RejectInvite(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Friends_RejectInvite(IntPtr handle, IntPtr options, IntPtr clientData, Friends.OnRejectInviteCallbackpublic completionDelegate)
 		{
 			var _RejectInviteOptionspublic = Marshal.PtrToStructure<RejectInviteOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Friends.OnRejectInviteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -951,10 +1176,9 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Friends_SendInvite(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Friends_SendInvite(IntPtr handle, IntPtr options, IntPtr clientData, Friends.OnSendInviteCallbackpublic completionDelegate)
 		{
 			var _SendInviteOptionspublic = Marshal.PtrToStructure<SendInviteOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Friends.OnSendInviteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -980,10 +1204,9 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_IntegratedPlatform_AddNotifyUserLoginStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr callbackFunction)
+        public static ulong EOS_IntegratedPlatform_AddNotifyUserLoginStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntegratedPlatform.OnUserLoginStatusChangedCallbackpublic callbackFunction)
 		{
 			var _AddNotifyUserLoginStatusChangedOptionspublic = Marshal.PtrToStructure<AddNotifyUserLoginStatusChangedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)callbackFunction; //Delegate Class was: IntegratedPlatform.OnUserLoginStatusChangedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1016,17 +1239,15 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static Result EOS_IntegratedPlatform_SetUserPreLogoutCallback(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr callbackFunction)
+        public static Result EOS_IntegratedPlatform_SetUserPreLogoutCallback(IntPtr handle, IntPtr options, IntPtr clientData, IntegratedPlatform.OnUserPreLogoutCallbackpublic callbackFunction)
 		{
 			var _SetUserPreLogoutCallbackOptionspublic = Marshal.PtrToStructure<SetUserPreLogoutCallbackOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)callbackFunction; //Delegate Class was: IntegratedPlatform.OnUserPreLogoutCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_KWS_AddNotifyPermissionsUpdateReceived(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_KWS_AddNotifyPermissionsUpdateReceived(IntPtr handle, IntPtr options, IntPtr clientData, KWS.OnPermissionsUpdateReceivedCallbackpublic notificationFn)
 		{
 			var _AddNotifyPermissionsUpdateReceivedOptionspublic = Marshal.PtrToStructure<AddNotifyPermissionsUpdateReceivedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: KWS.OnPermissionsUpdateReceivedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1036,10 +1257,9 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_KWS_CreateUser(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_KWS_CreateUser(IntPtr handle, IntPtr options, IntPtr clientData, KWS.OnCreateUserCallbackpublic completionDelegate)
 		{
 			var _CreateUserOptionspublic = Marshal.PtrToStructure<CreateUserOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: KWS.OnCreateUserCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1061,17 +1281,15 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_KWS_QueryAgeGate(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_KWS_QueryAgeGate(IntPtr handle, IntPtr options, IntPtr clientData, KWS.OnQueryAgeGateCallbackpublic completionDelegate)
 		{
 			var _QueryAgeGateOptionspublic = Marshal.PtrToStructure<QueryAgeGateOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: KWS.OnQueryAgeGateCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_KWS_QueryPermissions(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_KWS_QueryPermissions(IntPtr handle, IntPtr options, IntPtr clientData, KWS.OnQueryPermissionsCallbackpublic completionDelegate)
 		{
 			var _QueryPermissionsOptionspublic = Marshal.PtrToStructure<QueryPermissionsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: KWS.OnQueryPermissionsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1080,17 +1298,15 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_KWS_RequestPermissions(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_KWS_RequestPermissions(IntPtr handle, IntPtr options, IntPtr clientData, KWS.OnRequestPermissionsCallbackpublic completionDelegate)
 		{
 			var _RequestPermissionsOptionspublic = Marshal.PtrToStructure<RequestPermissionsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: KWS.OnRequestPermissionsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_KWS_UpdateParentEmail(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_KWS_UpdateParentEmail(IntPtr handle, IntPtr options, IntPtr clientData, KWS.OnUpdateParentEmailCallbackpublic completionDelegate)
 		{
 			var _UpdateParentEmailOptionspublic = Marshal.PtrToStructure<UpdateParentEmailOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: KWS.OnUpdateParentEmailCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1168,24 +1384,21 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Leaderboards_QueryLeaderboardDefinitions(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Leaderboards_QueryLeaderboardDefinitions(IntPtr handle, IntPtr options, IntPtr clientData, Leaderboards.OnQueryLeaderboardDefinitionsCompleteCallbackpublic completionDelegate)
 		{
 			var _QueryLeaderboardDefinitionsOptionspublic = Marshal.PtrToStructure<QueryLeaderboardDefinitionsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Leaderboards.OnQueryLeaderboardDefinitionsCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Leaderboards_QueryLeaderboardRanks(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Leaderboards_QueryLeaderboardRanks(IntPtr handle, IntPtr options, IntPtr clientData, Leaderboards.OnQueryLeaderboardRanksCompleteCallbackpublic completionDelegate)
 		{
 			var _QueryLeaderboardRanksOptionspublic = Marshal.PtrToStructure<QueryLeaderboardRanksOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Leaderboards.OnQueryLeaderboardRanksCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Leaderboards_QueryLeaderboardUserScores(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Leaderboards_QueryLeaderboardUserScores(IntPtr handle, IntPtr options, IntPtr clientData, Leaderboards.OnQueryLeaderboardUserScoresCompleteCallbackpublic completionDelegate)
 		{
 			var _QueryLeaderboardUserScoresOptionspublic = Marshal.PtrToStructure<QueryLeaderboardUserScoresOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Leaderboards.OnQueryLeaderboardUserScoresCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1335,10 +1548,9 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_LobbySearch_Find(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_LobbySearch_Find(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.LobbySearchOnFindCallbackpublic completionDelegate)
 		{
 			var _LobbySearchFindOptionspublic = Marshal.PtrToStructure<LobbySearchFindOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.LobbySearchOnFindCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1383,73 +1595,63 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Lobby_AddNotifyJoinLobbyAccepted(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Lobby_AddNotifyJoinLobbyAccepted(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnJoinLobbyAcceptedCallbackpublic notificationFn)
 		{
 			var _AddNotifyJoinLobbyAcceptedOptionspublic = Marshal.PtrToStructure<AddNotifyJoinLobbyAcceptedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Lobby.OnJoinLobbyAcceptedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Lobby_AddNotifyLeaveLobbyRequested(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Lobby_AddNotifyLeaveLobbyRequested(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnLeaveLobbyRequestedCallbackpublic notificationFn)
 		{
 			var _AddNotifyLeaveLobbyRequestedOptionspublic = Marshal.PtrToStructure<AddNotifyLeaveLobbyRequestedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Lobby.OnLeaveLobbyRequestedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Lobby_AddNotifyLobbyInviteAccepted(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Lobby_AddNotifyLobbyInviteAccepted(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnLobbyInviteAcceptedCallbackpublic notificationFn)
 		{
 			var _AddNotifyLobbyInviteAcceptedOptionspublic = Marshal.PtrToStructure<AddNotifyLobbyInviteAcceptedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Lobby.OnLobbyInviteAcceptedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Lobby_AddNotifyLobbyInviteReceived(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Lobby_AddNotifyLobbyInviteReceived(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnLobbyInviteReceivedCallbackpublic notificationFn)
 		{
 			var _AddNotifyLobbyInviteReceivedOptionspublic = Marshal.PtrToStructure<AddNotifyLobbyInviteReceivedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Lobby.OnLobbyInviteReceivedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Lobby_AddNotifyLobbyInviteRejected(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Lobby_AddNotifyLobbyInviteRejected(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnLobbyInviteRejectedCallbackpublic notificationFn)
 		{
 			var _AddNotifyLobbyInviteRejectedOptionspublic = Marshal.PtrToStructure<AddNotifyLobbyInviteRejectedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Lobby.OnLobbyInviteRejectedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Lobby_AddNotifyLobbyMemberStatusReceived(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Lobby_AddNotifyLobbyMemberStatusReceived(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnLobbyMemberStatusReceivedCallbackpublic notificationFn)
 		{
 			var _AddNotifyLobbyMemberStatusReceivedOptionspublic = Marshal.PtrToStructure<AddNotifyLobbyMemberStatusReceivedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Lobby.OnLobbyMemberStatusReceivedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Lobby_AddNotifyLobbyMemberUpdateReceived(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Lobby_AddNotifyLobbyMemberUpdateReceived(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnLobbyMemberUpdateReceivedCallbackpublic notificationFn)
 		{
 			var _AddNotifyLobbyMemberUpdateReceivedOptionspublic = Marshal.PtrToStructure<AddNotifyLobbyMemberUpdateReceivedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Lobby.OnLobbyMemberUpdateReceivedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Lobby_AddNotifyLobbyUpdateReceived(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Lobby_AddNotifyLobbyUpdateReceived(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnLobbyUpdateReceivedCallbackpublic notificationFn)
 		{
 			var _AddNotifyLobbyUpdateReceivedOptionspublic = Marshal.PtrToStructure<AddNotifyLobbyUpdateReceivedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Lobby.OnLobbyUpdateReceivedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Lobby_AddNotifyRTCRoomConnectionChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Lobby_AddNotifyRTCRoomConnectionChanged(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnRTCRoomConnectionChangedCallbackpublic notificationFn)
 		{
 			var _AddNotifyRTCRoomConnectionChangedOptionspublic = Marshal.PtrToStructure<AddNotifyRTCRoomConnectionChangedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Lobby.OnRTCRoomConnectionChangedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Lobby_AddNotifySendLobbyNativeInviteRequested(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Lobby_AddNotifySendLobbyNativeInviteRequested(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnSendLobbyNativeInviteRequestedCallbackpublic notificationFn)
 		{
 			var _AddNotifySendLobbyNativeInviteRequestedOptionspublic = Marshal.PtrToStructure<AddNotifySendLobbyNativeInviteRequestedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Lobby.OnSendLobbyNativeInviteRequestedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1476,10 +1678,9 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Lobby_CreateLobby(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Lobby_CreateLobby(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnCreateLobbyCallbackpublic completionDelegate)
 		{
 			var _CreateLobbyOptionspublic = Marshal.PtrToStructure<CreateLobbyOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.OnCreateLobbyCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1489,10 +1690,9 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Lobby_DestroyLobby(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Lobby_DestroyLobby(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnDestroyLobbyCallbackpublic completionDelegate)
 		{
 			var _DestroyLobbyOptionspublic = Marshal.PtrToStructure<DestroyLobbyOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.OnDestroyLobbyCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1520,10 +1720,9 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Lobby_HardMuteMember(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Lobby_HardMuteMember(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnHardMuteMemberCallbackpublic completionDelegate)
 		{
 			var _HardMuteMemberOptionspublic = Marshal.PtrToStructure<HardMuteMemberOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.OnHardMuteMemberCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1533,31 +1732,27 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Lobby_JoinLobby(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Lobby_JoinLobby(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnJoinLobbyCallbackpublic completionDelegate)
 		{
 			var _JoinLobbyOptionspublic = Marshal.PtrToStructure<JoinLobbyOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.OnJoinLobbyCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Lobby_JoinLobbyById(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Lobby_JoinLobbyById(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnJoinLobbyByIdCallbackpublic completionDelegate)
 		{
 			var _JoinLobbyByIdOptionspublic = Marshal.PtrToStructure<JoinLobbyByIdOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.OnJoinLobbyByIdCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Lobby_KickMember(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Lobby_KickMember(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnKickMemberCallbackpublic completionDelegate)
 		{
 			var _KickMemberOptionspublic = Marshal.PtrToStructure<KickMemberOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.OnKickMemberCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Lobby_LeaveLobby(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Lobby_LeaveLobby(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnLeaveLobbyCallbackpublic completionDelegate)
 		{
 			var _LeaveLobbyOptionspublic = Marshal.PtrToStructure<LeaveLobbyOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.OnLeaveLobbyCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1567,24 +1762,21 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Lobby_PromoteMember(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Lobby_PromoteMember(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnPromoteMemberCallbackpublic completionDelegate)
 		{
 			var _PromoteMemberOptionspublic = Marshal.PtrToStructure<PromoteMemberOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.OnPromoteMemberCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Lobby_QueryInvites(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Lobby_QueryInvites(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnQueryInvitesCallbackpublic completionDelegate)
 		{
 			var _QueryInvitesOptionspublic = Marshal.PtrToStructure<QueryInvitesOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.OnQueryInvitesCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Lobby_RejectInvite(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Lobby_RejectInvite(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnRejectInviteCallbackpublic completionDelegate)
 		{
 			var _RejectInviteOptionspublic = Marshal.PtrToStructure<RejectInviteOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.OnRejectInviteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1638,17 +1830,15 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Lobby_SendInvite(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Lobby_SendInvite(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnSendInviteCallbackpublic completionDelegate)
 		{
 			var _SendInviteOptionspublic = Marshal.PtrToStructure<SendInviteOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.OnSendInviteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Lobby_UpdateLobby(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Lobby_UpdateLobby(IntPtr handle, IntPtr options, IntPtr clientData, Lobby.OnUpdateLobbyCallbackpublic completionDelegate)
 		{
 			var _UpdateLobbyOptionspublic = Marshal.PtrToStructure<UpdateLobbyOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Lobby.OnUpdateLobbyCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1658,10 +1848,9 @@ namespace EOS_SDK
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-IntPtr IntPtr IntPtr IntPtr IntPtr IntPtr IntPtr IntPtr IntPtrpIntPtruIntPtrbIntPtrlIntPtriIntPtrcIntPtr IntPtrsIntPtrtIntPtraIntPtrtIntPtriIntPtrcIntPtr IntPtrRIntPtreIntPtrsIntPtruIntPtrlIntPtrtIntPtr IntPtrEIntPtrOIntPtrSIntPtr_IntPtrLIntPtroIntPtrgIntPtrgIntPtriIntPtrnIntPtrgIntPtr_IntPtrSIntPtreIntPtrtIntPtrCIntPtraIntPtrlIntPtrlIntPtrbIntPtraIntPtrcIntPtrkIntPtr(IntPtrLIntPtroIntPtrgIntPtrgIntPtriIntPtrnIntPtrgIntPtr.IntPtrLIntPtroIntPtrgIntPtrMIntPtreIntPtrsIntPtrsIntPtraIntPtrgIntPtreIntPtrFIntPtruIntPtrnIntPtrcIntPtrIIntPtrnIntPtrtIntPtreIntPtrrIntPtrnIntPtraIntPtrlIntPtr IntPtrcIntPtraIntPtrlIntPtrlIntPtrbIntPtraIntPtrcIntPtrkIntPtr)IntPtr
-IntPtr        {
+        public static Result EOS_Logging_SetCallback(Logging.LogMessageFuncpublic callback)
+        {
         }
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>); //Delegate Class was: 
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static Result EOS_Logging_SetLogLevel(Logging.LogCategory logCategory, Logging.LogLevel logLevel)
@@ -1687,17 +1876,15 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Mods_EnumerateMods(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Mods_EnumerateMods(IntPtr handle, IntPtr options, IntPtr clientData, Mods.OnEnumerateModsCallbackpublic completionDelegate)
 		{
 			var _EnumerateModsOptionspublic = Marshal.PtrToStructure<EnumerateModsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Mods.OnEnumerateModsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Mods_InstallMod(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Mods_InstallMod(IntPtr handle, IntPtr options, IntPtr clientData, Mods.OnInstallModCallbackpublic completionDelegate)
 		{
 			var _InstallModOptionspublic = Marshal.PtrToStructure<InstallModOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Mods.OnInstallModCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1706,17 +1893,15 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Mods_UninstallMod(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Mods_UninstallMod(IntPtr handle, IntPtr options, IntPtr clientData, Mods.OnUninstallModCallbackpublic completionDelegate)
 		{
 			var _UninstallModOptionspublic = Marshal.PtrToStructure<UninstallModOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Mods.OnUninstallModCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Mods_UpdateMod(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Mods_UpdateMod(IntPtr handle, IntPtr options, IntPtr clientData, Mods.OnUpdateModCallbackpublic completionDelegate)
 		{
 			var _UpdateModOptionspublic = Marshal.PtrToStructure<UpdateModOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Mods.OnUpdateModCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1726,38 +1911,33 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_P2P_AddNotifyIncomingPacketQueueFull(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr incomingPacketQueueFullHandler)
+        public static ulong EOS_P2P_AddNotifyIncomingPacketQueueFull(IntPtr handle, IntPtr options, IntPtr clientData, P2P.OnIncomingPacketQueueFullCallbackpublic incomingPacketQueueFullHandler)
 		{
 			var _AddNotifyIncomingPacketQueueFullOptionspublic = Marshal.PtrToStructure<AddNotifyIncomingPacketQueueFullOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)incomingPacketQueueFullHandler; //Delegate Class was: P2P.OnIncomingPacketQueueFullCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_P2P_AddNotifyPeerConnectionClosed(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr connectionClosedHandler)
+        public static ulong EOS_P2P_AddNotifyPeerConnectionClosed(IntPtr handle, IntPtr options, IntPtr clientData, P2P.OnRemoteConnectionClosedCallbackpublic connectionClosedHandler)
 		{
 			var _AddNotifyPeerConnectionClosedOptionspublic = Marshal.PtrToStructure<AddNotifyPeerConnectionClosedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)connectionClosedHandler; //Delegate Class was: P2P.OnRemoteConnectionClosedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_P2P_AddNotifyPeerConnectionEstablished(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr connectionEstablishedHandler)
+        public static ulong EOS_P2P_AddNotifyPeerConnectionEstablished(IntPtr handle, IntPtr options, IntPtr clientData, P2P.OnPeerConnectionEstablishedCallbackpublic connectionEstablishedHandler)
 		{
 			var _AddNotifyPeerConnectionEstablishedOptionspublic = Marshal.PtrToStructure<AddNotifyPeerConnectionEstablishedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)connectionEstablishedHandler; //Delegate Class was: P2P.OnPeerConnectionEstablishedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_P2P_AddNotifyPeerConnectionInterrupted(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr connectionInterruptedHandler)
+        public static ulong EOS_P2P_AddNotifyPeerConnectionInterrupted(IntPtr handle, IntPtr options, IntPtr clientData, P2P.OnPeerConnectionInterruptedCallbackpublic connectionInterruptedHandler)
 		{
 			var _AddNotifyPeerConnectionInterruptedOptionspublic = Marshal.PtrToStructure<AddNotifyPeerConnectionInterruptedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)connectionInterruptedHandler; //Delegate Class was: P2P.OnPeerConnectionInterruptedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_P2P_AddNotifyPeerConnectionRequest(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr connectionRequestHandler)
+        public static ulong EOS_P2P_AddNotifyPeerConnectionRequest(IntPtr handle, IntPtr options, IntPtr clientData, P2P.OnIncomingConnectionRequestCallbackpublic connectionRequestHandler)
 		{
 			var _AddNotifyPeerConnectionRequestOptionspublic = Marshal.PtrToStructure<AddNotifyPeerConnectionRequestOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)connectionRequestHandler; //Delegate Class was: P2P.OnIncomingConnectionRequestCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1791,10 +1971,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static Result EOS_P2P_GetPacketQueueInfo(IntPtr handle, IntPtr options, IntPtr P2P.PacketQueueInfopublic outPacketQueueInfo)
+        public static Result EOS_P2P_GetPacketQueueInfo(IntPtr handle, IntPtr options, [Out] P2P.PacketQueueInfopublic outPacketQueueInfo)
 		{
 			var _GetPacketQueueInfoOptionspublic = Marshal.PtrToStructure<GetPacketQueueInfoOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)P2P.PacketQueueInfopublic; //Delegate Class was: [Out]
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1810,17 +1989,15 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_P2P_QueryNATType(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_P2P_QueryNATType(IntPtr handle, IntPtr options, IntPtr clientData, P2P.OnQueryNATTypeCompleteCallbackpublic completionDelegate)
 		{
 			var _QueryNATTypeOptionspublic = Marshal.PtrToStructure<QueryNATTypeOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: P2P.OnQueryNATTypeCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static Result EOS_P2P_ReceivePacket(IntPtr handle, IntPtr options, IntPtr outPeerId, IntPtr P2P.SocketIdpublic outSocketId, IntPtr byte outChannel, IntPtr outData, IntPtr uint outBytesWritten)
+        public static Result EOS_P2P_ReceivePacket(IntPtr handle, IntPtr options, IntPtr outPeerId, [Out] P2P.SocketIdpublic outSocketId, [Out] byte outChannel, IntPtr outData, [Out] uint outBytesWritten)
 		{
 			var _ReceivePacketOptionspublic = Marshal.PtrToStructure<ReceivePacketOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)P2P.SocketIdpublic; //Delegate Class was: [Out]
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -1929,10 +2106,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static Result EOS_Platform_GetDesktopCrossplayStatus(IntPtr handle, IntPtr options, IntPtr Platform.DesktopCrossplayStatusInfopublic outDesktopCrossplayStatusInfo)
+        public static Result EOS_Platform_GetDesktopCrossplayStatus(IntPtr handle, IntPtr options, [Out] Platform.DesktopCrossplayStatusInfopublic outDesktopCrossplayStatusInfo)
 		{
 			var _GetDesktopCrossplayStatusOptionspublic = Marshal.PtrToStructure<GetDesktopCrossplayStatusOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)Platform.DesktopCrossplayStatusInfopublic; //Delegate Class was: [Out]
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2118,24 +2294,21 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static Result EOS_PlayerDataStorage_DeleteCache(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionCallback)
+        public static Result EOS_PlayerDataStorage_DeleteCache(IntPtr handle, IntPtr options, IntPtr clientData, PlayerDataStorage.OnDeleteCacheCompleteCallbackpublic completionCallback)
 		{
 			var _DeleteCacheOptionspublic = Marshal.PtrToStructure<DeleteCacheOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: PlayerDataStorage.OnDeleteCacheCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_PlayerDataStorage_DeleteFile(IntPtr handle, IntPtr deleteOptions, IntPtr clientData, IntPtr completionCallback)
+        public static void EOS_PlayerDataStorage_DeleteFile(IntPtr handle, IntPtr deleteOptions, IntPtr clientData, PlayerDataStorage.OnDeleteFileCompleteCallbackpublic completionCallback)
 		{
 			var _DeleteFileOptionspublic = Marshal.PtrToStructure<DeleteFileOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: PlayerDataStorage.OnDeleteFileCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_PlayerDataStorage_DuplicateFile(IntPtr handle, IntPtr duplicateOptions, IntPtr clientData, IntPtr completionCallback)
+        public static void EOS_PlayerDataStorage_DuplicateFile(IntPtr handle, IntPtr duplicateOptions, IntPtr clientData, PlayerDataStorage.OnDuplicateFileCompleteCallbackpublic completionCallback)
 		{
 			var _DuplicateFileOptionspublic = Marshal.PtrToStructure<DuplicateFileOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: PlayerDataStorage.OnDuplicateFileCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2150,31 +2323,27 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_PlayerDataStorage_QueryFile(IntPtr handle, IntPtr queryFileOptions, IntPtr clientData, IntPtr completionCallback)
+        public static void EOS_PlayerDataStorage_QueryFile(IntPtr handle, IntPtr queryFileOptions, IntPtr clientData, PlayerDataStorage.OnQueryFileCompleteCallbackpublic completionCallback)
 		{
 			var _QueryFileOptionspublic = Marshal.PtrToStructure<QueryFileOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: PlayerDataStorage.OnQueryFileCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_PlayerDataStorage_QueryFileList(IntPtr handle, IntPtr queryFileListOptions, IntPtr clientData, IntPtr completionCallback)
+        public static void EOS_PlayerDataStorage_QueryFileList(IntPtr handle, IntPtr queryFileListOptions, IntPtr clientData, PlayerDataStorage.OnQueryFileListCompleteCallbackpublic completionCallback)
 		{
 			var _QueryFileListOptionspublic = Marshal.PtrToStructure<QueryFileListOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: PlayerDataStorage.OnQueryFileListCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static IntPtr EOS_PlayerDataStorage_ReadFile(IntPtr handle, IntPtr readOptions, IntPtr clientData, IntPtr completionCallback)
+        public static IntPtr EOS_PlayerDataStorage_ReadFile(IntPtr handle, IntPtr readOptions, IntPtr clientData, PlayerDataStorage.OnReadFileCompleteCallbackpublic completionCallback)
 		{
 			var _ReadFileOptionspublic = Marshal.PtrToStructure<ReadFileOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: PlayerDataStorage.OnReadFileCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static IntPtr EOS_PlayerDataStorage_WriteFile(IntPtr handle, IntPtr writeOptions, IntPtr clientData, IntPtr completionCallback)
+        public static IntPtr EOS_PlayerDataStorage_WriteFile(IntPtr handle, IntPtr writeOptions, IntPtr clientData, PlayerDataStorage.OnWriteFileCompleteCallbackpublic completionCallback)
 		{
 			var _WriteFileOptionspublic = Marshal.PtrToStructure<WriteFileOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: PlayerDataStorage.OnWriteFileCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2213,17 +2382,15 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Presence_AddNotifyJoinGameAccepted(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Presence_AddNotifyJoinGameAccepted(IntPtr handle, IntPtr options, IntPtr clientData, Presence.OnJoinGameAcceptedCallbackpublic notificationFn)
 		{
 			var _AddNotifyJoinGameAcceptedOptionspublic = Marshal.PtrToStructure<AddNotifyJoinGameAcceptedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Presence.OnJoinGameAcceptedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Presence_AddNotifyOnPresenceChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationHandler)
+        public static ulong EOS_Presence_AddNotifyOnPresenceChanged(IntPtr handle, IntPtr options, IntPtr clientData, Presence.OnPresenceChangedCallbackpublic notificationHandler)
 		{
 			var _AddNotifyOnPresenceChangedOptionspublic = Marshal.PtrToStructure<AddNotifyOnPresenceChangedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationHandler; //Delegate Class was: Presence.OnPresenceChangedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2256,10 +2423,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Presence_QueryPresence(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Presence_QueryPresence(IntPtr handle, IntPtr options, IntPtr clientData, Presence.OnQueryPresenceCompleteCallbackpublic completionDelegate)
 		{
 			var _QueryPresenceOptionspublic = Marshal.PtrToStructure<QueryPresenceOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Presence.OnQueryPresenceCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2273,10 +2439,24 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Presence_SetPresence(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Presence_SetPresence(IntPtr handle, IntPtr options, IntPtr clientData, Presence.SetPresenceCompleteCallbackpublic completionDelegate)
 		{
 			var _SetPresenceOptionspublic = Marshal.PtrToStructure<SetPresenceOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Presence.SetPresenceCompleteCallbackpublic
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static IntPtr EOS_ProductUserId_FromString(IntPtr productUserIdString)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static int EOS_ProductUserId_IsValid(IntPtr accountId)
+        {
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static Result EOS_ProductUserId_ToString(IntPtr accountId, IntPtr outBuffer, [Out] int inOutBufferLength)
+        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2292,10 +2472,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_ProgressionSnapshot_DeleteSnapshot(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_ProgressionSnapshot_DeleteSnapshot(IntPtr handle, IntPtr options, IntPtr clientData, ProgressionSnapshot.OnDeleteSnapshotCallbackpublic completionDelegate)
 		{
 			var _DeleteSnapshotOptionspublic = Marshal.PtrToStructure<DeleteSnapshotOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: ProgressionSnapshot.OnDeleteSnapshotCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2305,10 +2484,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_ProgressionSnapshot_SubmitSnapshot(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_ProgressionSnapshot_SubmitSnapshot(IntPtr handle, IntPtr options, IntPtr clientData, ProgressionSnapshot.OnSubmitSnapshotCallbackpublic completionDelegate)
 		{
 			var _SubmitSnapshotOptionspublic = Marshal.PtrToStructure<SubmitSnapshotOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: ProgressionSnapshot.OnSubmitSnapshotCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2324,24 +2502,21 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAdmin_Kick(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAdmin_Kick(IntPtr handle, IntPtr options, IntPtr clientData, RTCAdmin.OnKickCompleteCallbackpublic completionDelegate)
 		{
 			var _KickOptionspublic = Marshal.PtrToStructure<KickOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAdmin.OnKickCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAdmin_QueryJoinRoomToken(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAdmin_QueryJoinRoomToken(IntPtr handle, IntPtr options, IntPtr clientData, RTCAdmin.OnQueryJoinRoomTokenCompleteCallbackpublic completionDelegate)
 		{
 			var _QueryJoinRoomTokenOptionspublic = Marshal.PtrToStructure<QueryJoinRoomTokenOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAdmin.OnQueryJoinRoomTokenCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAdmin_SetParticipantHardMute(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAdmin_SetParticipantHardMute(IntPtr handle, IntPtr options, IntPtr clientData, RTCAdmin.OnSetParticipantHardMuteCompleteCallbackpublic completionDelegate)
 		{
 			var _SetParticipantHardMuteOptionspublic = Marshal.PtrToStructure<SetParticipantHardMuteOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAdmin.OnSetParticipantHardMuteCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2350,45 +2525,39 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_RTCAudio_AddNotifyAudioBeforeRender(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static ulong EOS_RTCAudio_AddNotifyAudioBeforeRender(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnAudioBeforeRenderCallbackpublic completionDelegate)
 		{
 			var _AddNotifyAudioBeforeRenderOptionspublic = Marshal.PtrToStructure<AddNotifyAudioBeforeRenderOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnAudioBeforeRenderCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_RTCAudio_AddNotifyAudioBeforeSend(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static ulong EOS_RTCAudio_AddNotifyAudioBeforeSend(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnAudioBeforeSendCallbackpublic completionDelegate)
 		{
 			var _AddNotifyAudioBeforeSendOptionspublic = Marshal.PtrToStructure<AddNotifyAudioBeforeSendOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnAudioBeforeSendCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_RTCAudio_AddNotifyAudioDevicesChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static ulong EOS_RTCAudio_AddNotifyAudioDevicesChanged(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnAudioDevicesChangedCallbackpublic completionDelegate)
 		{
 			var _AddNotifyAudioDevicesChangedOptionspublic = Marshal.PtrToStructure<AddNotifyAudioDevicesChangedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnAudioDevicesChangedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_RTCAudio_AddNotifyAudioInputState(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static ulong EOS_RTCAudio_AddNotifyAudioInputState(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnAudioInputStateCallbackpublic completionDelegate)
 		{
 			var _AddNotifyAudioInputStateOptionspublic = Marshal.PtrToStructure<AddNotifyAudioInputStateOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnAudioInputStateCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_RTCAudio_AddNotifyAudioOutputState(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static ulong EOS_RTCAudio_AddNotifyAudioOutputState(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnAudioOutputStateCallbackpublic completionDelegate)
 		{
 			var _AddNotifyAudioOutputStateOptionspublic = Marshal.PtrToStructure<AddNotifyAudioOutputStateOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnAudioOutputStateCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_RTCAudio_AddNotifyParticipantUpdated(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static ulong EOS_RTCAudio_AddNotifyParticipantUpdated(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnParticipantUpdatedCallbackpublic completionDelegate)
 		{
 			var _AddNotifyParticipantUpdatedOptionspublic = Marshal.PtrToStructure<AddNotifyParticipantUpdatedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnParticipantUpdatedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2450,17 +2619,15 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAudio_QueryInputDevicesInformation(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAudio_QueryInputDevicesInformation(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnQueryInputDevicesInformationCallbackpublic completionDelegate)
 		{
 			var _QueryInputDevicesInformationOptionspublic = Marshal.PtrToStructure<QueryInputDevicesInformationOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnQueryInputDevicesInformationCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAudio_QueryOutputDevicesInformation(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAudio_QueryOutputDevicesInformation(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnQueryOutputDevicesInformationCallbackpublic completionDelegate)
 		{
 			var _QueryOutputDevicesInformationOptionspublic = Marshal.PtrToStructure<QueryOutputDevicesInformationOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnQueryOutputDevicesInformationCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2470,10 +2637,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAudio_RegisterPlatformUser(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAudio_RegisterPlatformUser(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnRegisterPlatformUserCallbackpublic completionDelegate)
 		{
 			var _RegisterPlatformUserOptionspublic = Marshal.PtrToStructure<RegisterPlatformUserOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnRegisterPlatformUserCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2525,17 +2691,15 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAudio_SetInputDeviceSettings(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAudio_SetInputDeviceSettings(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnSetInputDeviceSettingsCallbackpublic completionDelegate)
 		{
 			var _SetInputDeviceSettingsOptionspublic = Marshal.PtrToStructure<SetInputDeviceSettingsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnSetInputDeviceSettingsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAudio_SetOutputDeviceSettings(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAudio_SetOutputDeviceSettings(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnSetOutputDeviceSettingsCallbackpublic completionDelegate)
 		{
 			var _SetOutputDeviceSettingsOptionspublic = Marshal.PtrToStructure<SetOutputDeviceSettingsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnSetOutputDeviceSettingsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2545,73 +2709,63 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAudio_UnregisterPlatformUser(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAudio_UnregisterPlatformUser(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnUnregisterPlatformUserCallbackpublic completionDelegate)
 		{
 			var _UnregisterPlatformUserOptionspublic = Marshal.PtrToStructure<UnregisterPlatformUserOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnUnregisterPlatformUserCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAudio_UpdateParticipantVolume(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAudio_UpdateParticipantVolume(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnUpdateParticipantVolumeCallbackpublic completionDelegate)
 		{
 			var _UpdateParticipantVolumeOptionspublic = Marshal.PtrToStructure<UpdateParticipantVolumeOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnUpdateParticipantVolumeCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAudio_UpdateReceiving(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAudio_UpdateReceiving(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnUpdateReceivingCallbackpublic completionDelegate)
 		{
 			var _UpdateReceivingOptionspublic = Marshal.PtrToStructure<UpdateReceivingOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnUpdateReceivingCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAudio_UpdateReceivingVolume(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAudio_UpdateReceivingVolume(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnUpdateReceivingVolumeCallbackpublic completionDelegate)
 		{
 			var _UpdateReceivingVolumeOptionspublic = Marshal.PtrToStructure<UpdateReceivingVolumeOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnUpdateReceivingVolumeCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAudio_UpdateSending(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAudio_UpdateSending(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnUpdateSendingCallbackpublic completionDelegate)
 		{
 			var _UpdateSendingOptionspublic = Marshal.PtrToStructure<UpdateSendingOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnUpdateSendingCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTCAudio_UpdateSendingVolume(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTCAudio_UpdateSendingVolume(IntPtr handle, IntPtr options, IntPtr clientData, RTCAudio.OnUpdateSendingVolumeCallbackpublic completionDelegate)
 		{
 			var _UpdateSendingVolumeOptionspublic = Marshal.PtrToStructure<UpdateSendingVolumeOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTCAudio.OnUpdateSendingVolumeCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_RTC_AddNotifyDisconnected(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static ulong EOS_RTC_AddNotifyDisconnected(IntPtr handle, IntPtr options, IntPtr clientData, RTC.OnDisconnectedCallbackpublic completionDelegate)
 		{
 			var _AddNotifyDisconnectedOptionspublic = Marshal.PtrToStructure<AddNotifyDisconnectedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTC.OnDisconnectedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_RTC_AddNotifyParticipantStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static ulong EOS_RTC_AddNotifyParticipantStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, RTC.OnParticipantStatusChangedCallbackpublic completionDelegate)
 		{
 			var _AddNotifyParticipantStatusChangedOptionspublic = Marshal.PtrToStructure<AddNotifyParticipantStatusChangedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTC.OnParticipantStatusChangedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_RTC_AddNotifyRoomStatisticsUpdated(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr statisticsUpdateHandler)
+        public static ulong EOS_RTC_AddNotifyRoomStatisticsUpdated(IntPtr handle, IntPtr options, IntPtr clientData, RTC.OnRoomStatisticsUpdatedCallbackpublic statisticsUpdateHandler)
 		{
 			var _AddNotifyRoomStatisticsUpdatedOptionspublic = Marshal.PtrToStructure<AddNotifyRoomStatisticsUpdatedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)statisticsUpdateHandler; //Delegate Class was: RTC.OnRoomStatisticsUpdatedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTC_BlockParticipant(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTC_BlockParticipant(IntPtr handle, IntPtr options, IntPtr clientData, RTC.OnBlockParticipantCallbackpublic completionDelegate)
 		{
 			var _BlockParticipantOptionspublic = Marshal.PtrToStructure<BlockParticipantOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTC.OnBlockParticipantCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2620,17 +2774,15 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTC_JoinRoom(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTC_JoinRoom(IntPtr handle, IntPtr options, IntPtr clientData, RTC.OnJoinRoomCallbackpublic completionDelegate)
 		{
 			var _JoinRoomOptionspublic = Marshal.PtrToStructure<JoinRoomOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTC.OnJoinRoomCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_RTC_LeaveRoom(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_RTC_LeaveRoom(IntPtr handle, IntPtr options, IntPtr clientData, RTC.OnLeaveRoomCallbackpublic completionDelegate)
 		{
 			var _LeaveRoomOptionspublic = Marshal.PtrToStructure<LeaveRoomOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: RTC.OnLeaveRoomCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2661,10 +2813,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Reports_SendPlayerBehaviorReport(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Reports_SendPlayerBehaviorReport(IntPtr handle, IntPtr options, IntPtr clientData, Reports.OnSendPlayerBehaviorReportCompleteCallbackpublic completionDelegate)
 		{
 			var _SendPlayerBehaviorReportOptionspublic = Marshal.PtrToStructure<SendPlayerBehaviorReportOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Reports.OnSendPlayerBehaviorReportCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2685,10 +2836,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Sanctions_QueryActivePlayerSanctions(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Sanctions_QueryActivePlayerSanctions(IntPtr handle, IntPtr options, IntPtr clientData, Sanctions.OnQueryActivePlayerSanctionsCallbackpublic completionDelegate)
 		{
 			var _QueryActivePlayerSanctionsOptionspublic = Marshal.PtrToStructure<QueryActivePlayerSanctionsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sanctions.OnQueryActivePlayerSanctionsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2796,10 +2946,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_SessionSearch_Find(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_SessionSearch_Find(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.SessionSearchOnFindCallbackpublic completionDelegate)
 		{
 			var _SessionSearchFindOptionspublic = Marshal.PtrToStructure<SessionSearchFindOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sessions.SessionSearchOnFindCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2844,45 +2993,39 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Sessions_AddNotifyJoinSessionAccepted(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Sessions_AddNotifyJoinSessionAccepted(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnJoinSessionAcceptedCallbackpublic notificationFn)
 		{
 			var _AddNotifyJoinSessionAcceptedOptionspublic = Marshal.PtrToStructure<AddNotifyJoinSessionAcceptedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Sessions.OnJoinSessionAcceptedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Sessions_AddNotifyLeaveSessionRequested(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Sessions_AddNotifyLeaveSessionRequested(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnLeaveSessionRequestedCallbackpublic notificationFn)
 		{
 			var _AddNotifyLeaveSessionRequestedOptionspublic = Marshal.PtrToStructure<AddNotifyLeaveSessionRequestedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Sessions.OnLeaveSessionRequestedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Sessions_AddNotifySendSessionNativeInviteRequested(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Sessions_AddNotifySendSessionNativeInviteRequested(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnSendSessionNativeInviteRequestedCallbackpublic notificationFn)
 		{
 			var _AddNotifySendSessionNativeInviteRequestedOptionspublic = Marshal.PtrToStructure<AddNotifySendSessionNativeInviteRequestedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Sessions.OnSendSessionNativeInviteRequestedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Sessions_AddNotifySessionInviteAccepted(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Sessions_AddNotifySessionInviteAccepted(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnSessionInviteAcceptedCallbackpublic notificationFn)
 		{
 			var _AddNotifySessionInviteAcceptedOptionspublic = Marshal.PtrToStructure<AddNotifySessionInviteAcceptedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Sessions.OnSessionInviteAcceptedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Sessions_AddNotifySessionInviteReceived(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Sessions_AddNotifySessionInviteReceived(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnSessionInviteReceivedCallbackpublic notificationFn)
 		{
 			var _AddNotifySessionInviteReceivedOptionspublic = Marshal.PtrToStructure<AddNotifySessionInviteReceivedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Sessions.OnSessionInviteReceivedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Sessions_AddNotifySessionInviteRejected(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_Sessions_AddNotifySessionInviteRejected(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnSessionInviteRejectedCallbackpublic notificationFn)
 		{
 			var _AddNotifySessionInviteRejectedOptionspublic = Marshal.PtrToStructure<AddNotifySessionInviteRejectedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Sessions.OnSessionInviteRejectedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2922,10 +3065,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Sessions_DestroySession(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Sessions_DestroySession(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnDestroySessionCallbackpublic completionDelegate)
 		{
 			var _DestroySessionOptionspublic = Marshal.PtrToStructure<DestroySessionOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sessions.OnDestroySessionCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2935,10 +3077,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Sessions_EndSession(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Sessions_EndSession(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnEndSessionCallbackpublic completionDelegate)
 		{
 			var _EndSessionOptionspublic = Marshal.PtrToStructure<EndSessionOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sessions.OnEndSessionCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -2960,31 +3101,27 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Sessions_JoinSession(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Sessions_JoinSession(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnJoinSessionCallbackpublic completionDelegate)
 		{
 			var _JoinSessionOptionspublic = Marshal.PtrToStructure<JoinSessionOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sessions.OnJoinSessionCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Sessions_QueryInvites(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Sessions_QueryInvites(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnQueryInvitesCallbackpublic completionDelegate)
 		{
 			var _QueryInvitesOptionspublic = Marshal.PtrToStructure<QueryInvitesOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sessions.OnQueryInvitesCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Sessions_RegisterPlayers(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Sessions_RegisterPlayers(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnRegisterPlayersCallbackpublic completionDelegate)
 		{
 			var _RegisterPlayersOptionspublic = Marshal.PtrToStructure<RegisterPlayersOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sessions.OnRegisterPlayersCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Sessions_RejectInvite(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Sessions_RejectInvite(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnRejectInviteCallbackpublic completionDelegate)
 		{
 			var _RejectInviteOptionspublic = Marshal.PtrToStructure<RejectInviteOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sessions.OnRejectInviteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -3018,31 +3155,27 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Sessions_SendInvite(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Sessions_SendInvite(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnSendInviteCallbackpublic completionDelegate)
 		{
 			var _SendInviteOptionspublic = Marshal.PtrToStructure<SendInviteOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sessions.OnSendInviteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Sessions_StartSession(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Sessions_StartSession(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnStartSessionCallbackpublic completionDelegate)
 		{
 			var _StartSessionOptionspublic = Marshal.PtrToStructure<StartSessionOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sessions.OnStartSessionCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Sessions_UnregisterPlayers(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Sessions_UnregisterPlayers(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnUnregisterPlayersCallbackpublic completionDelegate)
 		{
 			var _UnregisterPlayersOptionspublic = Marshal.PtrToStructure<UnregisterPlayersOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sessions.OnUnregisterPlayersCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Sessions_UpdateSession(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Sessions_UpdateSession(IntPtr handle, IntPtr options, IntPtr clientData, Sessions.OnUpdateSessionCallbackpublic completionDelegate)
 		{
 			var _UpdateSessionOptionspublic = Marshal.PtrToStructure<UpdateSessionOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sessions.OnUpdateSessionCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -3075,17 +3208,15 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Stats_IngestStat(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Stats_IngestStat(IntPtr handle, IntPtr options, IntPtr clientData, Stats.OnIngestStatCompleteCallbackpublic completionDelegate)
 		{
 			var _IngestStatOptionspublic = Marshal.PtrToStructure<IngestStatOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Stats.OnIngestStatCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Stats_QueryStats(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_Stats_QueryStats(IntPtr handle, IntPtr options, IntPtr clientData, Stats.OnQueryStatsCompleteCallbackpublic completionDelegate)
 		{
 			var _QueryStatsOptionspublic = Marshal.PtrToStructure<QueryStatsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Stats.OnQueryStatsCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -3126,10 +3257,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static Result EOS_TitleStorage_DeleteCache(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionCallback)
+        public static Result EOS_TitleStorage_DeleteCache(IntPtr handle, IntPtr options, IntPtr clientData, TitleStorage.OnDeleteCacheCompleteCallbackpublic completionCallback)
 		{
 			var _DeleteCacheOptionspublic = Marshal.PtrToStructure<DeleteCacheOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: TitleStorage.OnDeleteCacheCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -3144,24 +3274,21 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_TitleStorage_QueryFile(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionCallback)
+        public static void EOS_TitleStorage_QueryFile(IntPtr handle, IntPtr options, IntPtr clientData, TitleStorage.OnQueryFileCompleteCallbackpublic completionCallback)
 		{
 			var _QueryFileOptionspublic = Marshal.PtrToStructure<QueryFileOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: TitleStorage.OnQueryFileCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_TitleStorage_QueryFileList(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionCallback)
+        public static void EOS_TitleStorage_QueryFileList(IntPtr handle, IntPtr options, IntPtr clientData, TitleStorage.OnQueryFileListCompleteCallbackpublic completionCallback)
 		{
 			var _QueryFileListOptionspublic = Marshal.PtrToStructure<QueryFileListOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: TitleStorage.OnQueryFileListCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static IntPtr EOS_TitleStorage_ReadFile(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionCallback)
+        public static IntPtr EOS_TitleStorage_ReadFile(IntPtr handle, IntPtr options, IntPtr clientData, TitleStorage.OnReadFileCompleteCallbackpublic completionCallback)
 		{
 			var _ReadFileOptionspublic = Marshal.PtrToStructure<ReadFileOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: TitleStorage.OnReadFileCompleteCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -3171,17 +3298,15 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_UI_AddNotifyDisplaySettingsUpdated(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_UI_AddNotifyDisplaySettingsUpdated(IntPtr handle, IntPtr options, IntPtr clientData, UI.OnDisplaySettingsUpdatedCallbackpublic notificationFn)
 		{
 			var _AddNotifyDisplaySettingsUpdatedOptionspublic = Marshal.PtrToStructure<AddNotifyDisplaySettingsUpdatedOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: UI.OnDisplaySettingsUpdatedCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_UI_AddNotifyMemoryMonitor(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
+        public static ulong EOS_UI_AddNotifyMemoryMonitor(IntPtr handle, IntPtr options, IntPtr clientData, UI.OnMemoryMonitorCallbackpublic notificationFn)
 		{
 			var _AddNotifyMemoryMonitorOptionspublic = Marshal.PtrToStructure<AddNotifyMemoryMonitorOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: UI.OnMemoryMonitorCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -3214,10 +3339,9 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_UI_HideFriends(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_UI_HideFriends(IntPtr handle, IntPtr options, IntPtr clientData, UI.OnHideFriendsCallbackpublic completionDelegate)
 		{
 			var _HideFriendsOptionspublic = Marshal.PtrToStructure<HideFriendsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnHideFriendsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -3283,31 +3407,27 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_UI_ShowBlockPlayer(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_UI_ShowBlockPlayer(IntPtr handle, IntPtr options, IntPtr clientData, UI.OnShowBlockPlayerCallbackpublic completionDelegate)
 		{
 			var _ShowBlockPlayerOptionspublic = Marshal.PtrToStructure<ShowBlockPlayerOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnShowBlockPlayerCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_UI_ShowFriends(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_UI_ShowFriends(IntPtr handle, IntPtr options, IntPtr clientData, UI.OnShowFriendsCallbackpublic completionDelegate)
 		{
 			var _ShowFriendsOptionspublic = Marshal.PtrToStructure<ShowFriendsOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnShowFriendsCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_UI_ShowNativeProfile(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_UI_ShowNativeProfile(IntPtr handle, IntPtr options, IntPtr clientData, UI.OnShowNativeProfileCallbackpublic completionDelegate)
 		{
 			var _ShowNativeProfileOptionspublic = Marshal.PtrToStructure<ShowNativeProfileOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnShowNativeProfileCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_UI_ShowReportPlayer(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_UI_ShowReportPlayer(IntPtr handle, IntPtr options, IntPtr clientData, UI.OnShowReportPlayerCallbackpublic completionDelegate)
 		{
 			var _ShowReportPlayerOptionspublic = Marshal.PtrToStructure<ShowReportPlayerOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnShowReportPlayerCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -3369,24 +3489,21 @@ IntPtr        {
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_UserInfo_QueryUserInfo(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_UserInfo_QueryUserInfo(IntPtr handle, IntPtr options, IntPtr clientData, UserInfo.OnQueryUserInfoCallbackpublic completionDelegate)
 		{
 			var _QueryUserInfoOptionspublic = Marshal.PtrToStructure<QueryUserInfoOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UserInfo.OnQueryUserInfoCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_UserInfo_QueryUserInfoByDisplayName(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_UserInfo_QueryUserInfoByDisplayName(IntPtr handle, IntPtr options, IntPtr clientData, UserInfo.OnQueryUserInfoByDisplayNameCallbackpublic completionDelegate)
 		{
 			var _QueryUserInfoByDisplayNameOptionspublic = Marshal.PtrToStructure<QueryUserInfoByDisplayNameOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UserInfo.OnQueryUserInfoByDisplayNameCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_UserInfo_QueryUserInfoByExternalAccount(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void EOS_UserInfo_QueryUserInfoByExternalAccount(IntPtr handle, IntPtr options, IntPtr clientData, UserInfo.OnQueryUserInfoByExternalAccountCallbackpublic completionDelegate)
 		{
 			var _QueryUserInfoByExternalAccountOptionspublic = Marshal.PtrToStructure<QueryUserInfoByExternalAccountOptionspublic>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UserInfo.OnQueryUserInfoByExternalAccountCallbackpublic
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]

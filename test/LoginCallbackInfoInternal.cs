@@ -1,14 +1,19 @@
-﻿namespace test
+﻿using System.Runtime.InteropServices;
+
+namespace test
 {
-    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential, Pack = 8)]
-    internal struct TESTInternal
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    internal struct TESTInternalInput
     {
         public int Result;
     }
 
-    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential, Pack = 8)]
-    internal struct TESTInternalInput
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    internal struct TESTInternal
     {
         public int Result;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string Str;
+        public IntPtr Str2;
     }
 }
