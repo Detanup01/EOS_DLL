@@ -3,7 +3,7 @@ namespace EOS_SDK.AntiCheatCommon
 {
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct OnClientActionRequiredCallbackInfopublic
+    public struct OnClientActionRequiredCallbackInfo
     {
         public IntPtr m_ClientData;
         public IntPtr m_ClientHandle;

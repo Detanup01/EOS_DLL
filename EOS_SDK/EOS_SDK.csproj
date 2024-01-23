@@ -13,6 +13,16 @@
     <PackageReference Include="DNNE" Version="2.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Sessions\" />
+    <Folder Include="Stats\" />
+    <Folder Include="TitleStorage\" />
+    <Folder Include="UI\" />
+    <Folder Include="UserInfo\" />
+    <Folder Include="Windows\" />
+    <Folder Include="Version\" />
+  </ItemGroup>
+
 	<PropertyGroup Condition="'$(Platform)'=='x64' And ('$(RuntimeIdentifier)'=='win' or '$(RuntimeIdentifier)'=='win-x64')">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
 		<DnneGenerateExports>true</DnneGenerateExports>
@@ -23,6 +33,7 @@
 		<AssemblyName>EOSSDK-Win64-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<DefineConstants>WIN_X64</DefineConstants>
+		<DnneLinkerUserFlags>G:\VS\EPIC\EOS_DLL_git\EOS_SDK\_native\file.res</DnneLinkerUserFlags>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Platform)'=='x86' And ('$(RuntimeIdentifier)'=='win' or '$(RuntimeIdentifier)'=='win-x86')">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
@@ -49,4 +60,7 @@
 		<AssemblyName>libEOSSDK-Mac-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
 	</PropertyGroup>
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	  <Exec Command="call _native/compile.bat" />
+	</Target>
 </Project>

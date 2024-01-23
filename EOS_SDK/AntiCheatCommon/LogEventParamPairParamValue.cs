@@ -4,7 +4,7 @@ namespace EOS_SDK.AntiCheatCommon
 {
 
     [StructLayout(LayoutKind.Explicit, Pack = 8)]
-    public struct LogEventParamPairParamValuepublic
+    public struct LogEventParamPairParamValue
     {
         [FieldOffset(0)]
         public AntiCheatCommonEventParamType m_ParamValueType;
@@ -21,8 +21,8 @@ namespace EOS_SDK.AntiCheatCommon
         [FieldOffset(8)]
         public long m_Int64;
         [FieldOffset(8)]
-        public Vec3fpublic m_Vec3f;
+        public Vec3f m_Vec3f;
         [FieldOffset(8)]
-        public Quatpublic m_Quat;
+        public Quat m_Quat;
     }
 }

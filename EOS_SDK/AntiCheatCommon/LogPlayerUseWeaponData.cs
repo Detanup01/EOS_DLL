@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace EOS_SDK.AntiCheatCommon
 {
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct LogPlayerUseWeaponDatapublic
+    public struct LogPlayerUseWeaponData
     {
         public IntPtr m_PlayerHandle;
         public IntPtr m_PlayerPosition;

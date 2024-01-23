@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace EOS_SDK.AntiCheatCommon
 {
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct SetClientDetailsOptionspublic
+    public struct SetClientDetailsOptions
     {
         public int m_ApiVersion;
         public IntPtr m_ClientHandle;

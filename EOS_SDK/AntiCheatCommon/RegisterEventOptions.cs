@@ -4,7 +4,7 @@ namespace EOS_SDK.AntiCheatCommon
 {
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct RegisterEventOptionspublic
+    public struct RegisterEventOptions
     {
         public int m_ApiVersion;
         public uint m_EventId;

@@ -4,8 +4,8 @@ namespace EOS_SDK.AntiCheatCommon
 {
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct LogEventParamPairpublic
+    public struct LogEventParamPair
     {
-        public LogEventParamPairParamValuepublic m_ParamValue;
+        public LogEventParamPairParamValue m_ParamValue;
     }
 }

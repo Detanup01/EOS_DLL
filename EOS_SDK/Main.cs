@@ -38,10 +38,10 @@ namespace EOS_SDK
         public static unsafe void TEST(IntPtr handle, IntPtr input, IntPtr clientData, IntPtr onTESTpublic)
         {
             Console.WriteLine("TEST");
-            var _TESTpublicInput = Marshal.PtrToStructure<TESTpublicInput>(input);
-            Console.WriteLine(_TESTpublicInput.Result);
+            var _TESTInput = Marshal.PtrToStructure<TESTInput>(input);
+            Console.WriteLine(_TESTInput.Result);
             var str_ptr = MakeString("yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeet");
-            TESTpublic tESTpublic = new()
+            TEST_Struct tEST = new()
             {
                 Result = 222,
                 Str = "LOOOOOOOOOONG string",
@@ -49,12 +49,12 @@ namespace EOS_SDK
             };
 
             delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)onTESTpublic;
-            var ptr = Marshal.AllocHGlobal(Marshal.SizeOf<TESTpublic>());
-            Marshal.StructureToPtr<TESTpublic>(tESTpublic, ptr, false);
+            var ptr = Marshal.AllocHGlobal(Marshal.SizeOf<TEST_Struct>());
+            Marshal.StructureToPtr<TEST_Struct>(tEST, ptr, false);
             @delegate(ptr);
         }
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct TESTpublic
+        public struct TEST_Struct
         {
             public int Result;
             [MarshalAs(UnmanagedType.LPStr)]
@@ -63,7 +63,7 @@ namespace EOS_SDK
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct TESTpublicInput
+        public struct TESTInput
         {
             public int Result;
         }

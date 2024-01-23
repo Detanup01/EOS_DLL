@@ -8,72 +8,72 @@ namespace EOS_SDK.Achievements
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_Achievements_AddNotifyAchievementsUnlocked(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
-            var _AddNotifyAchievementsUnlockedOptionspublic = Marshal.PtrToStructure<AddNotifyAchievementsUnlockedOptionspublic>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: OnAchievementsUnlockedCallbackpublic
+            var _AddNotifyAchievementsUnlockedOptions = Marshal.PtrToStructure<AddNotifyAchievementsUnlockedOptions>(options);
+            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: OnAchievementsUnlockedCallback
             return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_Achievements_AddNotifyAchievementsUnlockedV2(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
-            var _AddNotifyAchievementsUnlockedV2Optionspublic = Marshal.PtrToStructure<AddNotifyAchievementsUnlockedV2Optionspublic>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: OnAchievementsUnlockedCallbackV2public
+            var _AddNotifyAchievementsUnlockedV2Options = Marshal.PtrToStructure<AddNotifyAchievementsUnlockedV2Options>(options);
+            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: OnAchievementsUnlockedCallbackV2
             return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Achievements_CopyAchievementDefinitionByAchievementId(IntPtr handle, IntPtr options, IntPtr outDefinition)
         {
-            var _CopyAchievementDefinitionByAchievementIdOptionspublic = Marshal.PtrToStructure<CopyAchievementDefinitionByAchievementIdOptionspublic>(options);
+            var _CopyAchievementDefinitionByAchievementIdOptions = Marshal.PtrToStructure<CopyAchievementDefinitionByAchievementIdOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Achievements_CopyAchievementDefinitionByIndex(IntPtr handle, IntPtr options, IntPtr outDefinition)
         {
-            var _CopyAchievementDefinitionByIndexOptionspublic = Marshal.PtrToStructure<CopyAchievementDefinitionByIndexOptionspublic>(options);
+            var _CopyAchievementDefinitionByIndexOptions = Marshal.PtrToStructure<CopyAchievementDefinitionByIndexOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Achievements_CopyAchievementDefinitionV2ByAchievementId(IntPtr handle, IntPtr options, IntPtr outDefinition)
         {
-            var _CopyAchievementDefinitionV2ByAchievementIdOptionspublic = Marshal.PtrToStructure<CopyAchievementDefinitionV2ByAchievementIdOptionspublic>(options);
+            var _CopyAchievementDefinitionV2ByAchievementIdOptions = Marshal.PtrToStructure<CopyAchievementDefinitionV2ByAchievementIdOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Achievements_CopyAchievementDefinitionV2ByIndex(IntPtr handle, IntPtr options, IntPtr outDefinition)
         {
-            var _CopyAchievementDefinitionV2ByIndexOptionspublic = Marshal.PtrToStructure<CopyAchievementDefinitionV2ByIndexOptionspublic>(options);
+            var _CopyAchievementDefinitionV2ByIndexOptions = Marshal.PtrToStructure<CopyAchievementDefinitionV2ByIndexOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Achievements_CopyPlayerAchievementByAchievementId(IntPtr handle, IntPtr options, IntPtr outAchievement)
         {
-            var _CopyPlayerAchievementByAchievementIdOptionspublic = Marshal.PtrToStructure<CopyPlayerAchievementByAchievementIdOptionspublic>(options);
+            var _CopyPlayerAchievementByAchievementIdOptions = Marshal.PtrToStructure<CopyPlayerAchievementByAchievementIdOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Achievements_CopyPlayerAchievementByIndex(IntPtr handle, IntPtr options, IntPtr outAchievement)
         {
-            var _CopyPlayerAchievementByIndexOptionspublic = Marshal.PtrToStructure<CopyPlayerAchievementByIndexOptionspublic>(options);
+            var _CopyPlayerAchievementByIndexOptions = Marshal.PtrToStructure<CopyPlayerAchievementByIndexOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Achievements_CopyUnlockedAchievementByAchievementId(IntPtr handle, IntPtr options, IntPtr outAchievement)
         {
-            var _CopyUnlockedAchievementByAchievementIdOptionspublic = Marshal.PtrToStructure<CopyUnlockedAchievementByAchievementIdOptionspublic>(options);
+            var _CopyUnlockedAchievementByAchievementIdOptions = Marshal.PtrToStructure<CopyUnlockedAchievementByAchievementIdOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Achievements_CopyUnlockedAchievementByIndex(IntPtr handle, IntPtr options, IntPtr outAchievement)
         {
-            var _CopyUnlockedAchievementByIndexOptionspublic = Marshal.PtrToStructure<CopyUnlockedAchievementByIndexOptionspublic>(options);
+            var _CopyUnlockedAchievementByIndexOptions = Marshal.PtrToStructure<CopyUnlockedAchievementByIndexOptions>(options);
             return (int)Result.Success;
         }
 
@@ -90,21 +90,21 @@ namespace EOS_SDK.Achievements
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static uint EOS_Achievements_GetAchievementDefinitionCount(IntPtr handle, IntPtr options)
         {
-            var _GetAchievementDefinitionCountOptionspublic = Marshal.PtrToStructure<GetAchievementDefinitionCountOptionspublic>(options);
+            var _GetAchievementDefinitionCountOptions = Marshal.PtrToStructure<GetAchievementDefinitionCountOptions>(options);
             return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static uint EOS_Achievements_GetPlayerAchievementCount(IntPtr handle, IntPtr options)
         {
-            var _GetPlayerAchievementCountOptionspublic = Marshal.PtrToStructure<GetPlayerAchievementCountOptionspublic>(options);
+            var _GetPlayerAchievementCountOptions = Marshal.PtrToStructure<GetPlayerAchievementCountOptions>(options);
             return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static uint EOS_Achievements_GetUnlockedAchievementCount(IntPtr handle, IntPtr options)
         {
-            var _GetUnlockedAchievementCountOptionspublic = Marshal.PtrToStructure<GetUnlockedAchievementCountOptionspublic>(options);
+            var _GetUnlockedAchievementCountOptions = Marshal.PtrToStructure<GetUnlockedAchievementCountOptions>(options);
             return 0;
         }
 
@@ -116,15 +116,15 @@ namespace EOS_SDK.Achievements
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_Achievements_QueryDefinitions(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
-            var _QueryDefinitionsOptionspublic = Marshal.PtrToStructure<QueryDefinitionsOptionspublic>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: OnQueryDefinitionsCompleteCallbackpublic
+            var _QueryDefinitionsOptions = Marshal.PtrToStructure<QueryDefinitionsOptions>(options);
+            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: OnQueryDefinitionsCompleteCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_Achievements_QueryPlayerAchievements(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
-            var _QueryPlayerAchievementsOptionspublic = Marshal.PtrToStructure<QueryPlayerAchievementsOptionspublic>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: OnQueryPlayerAchievementsCompleteCallbackpublic
+            var _QueryPlayerAchievementsOptions = Marshal.PtrToStructure<QueryPlayerAchievementsOptions>(options);
+            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: OnQueryPlayerAchievementsCompleteCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -135,8 +135,8 @@ namespace EOS_SDK.Achievements
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_Achievements_UnlockAchievements(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
-            var _UnlockAchievementsOptionspublic = Marshal.PtrToStructure<UnlockAchievementsOptionspublic>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: OnUnlockAchievementsCompleteCallbackpublic
+            var _UnlockAchievementsOptions = Marshal.PtrToStructure<UnlockAchievementsOptions>(options);
+            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: OnUnlockAchievementsCompleteCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]

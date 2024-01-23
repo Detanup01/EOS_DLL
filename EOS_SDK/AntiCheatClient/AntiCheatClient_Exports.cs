@@ -8,75 +8,75 @@ namespace EOS_SDK.AntiCheatClient
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_AntiCheatClient_AddExternalIntegrityCatalog(IntPtr handle, IntPtr options)
         {
-            var _AddExternalIntegrityCatalogOptionspublic = Marshal.PtrToStructure<AddExternalIntegrityCatalogOptionspublic>(options);
+            var _AddExternalIntegrityCatalogOptions = Marshal.PtrToStructure<AddExternalIntegrityCatalogOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_AntiCheatClient_AddNotifyClientIntegrityViolated(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
-            var _AddNotifyClientIntegrityViolatedOptionspublic = Marshal.PtrToStructure<AddNotifyClientIntegrityViolatedOptionspublic>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnClientIntegrityViolatedCallbackpublic
+            var _AddNotifyClientIntegrityViolatedOptions = Marshal.PtrToStructure<AddNotifyClientIntegrityViolatedOptions>(options);
+            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnClientIntegrityViolatedCallback
             return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_AntiCheatClient_AddNotifyMessageToPeer(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
-            var _AddNotifyMessageToPeerOptionspublic = Marshal.PtrToStructure<AddNotifyMessageToPeerOptionspublic>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnMessageToPeerCallbackpublic
+            var _AddNotifyMessageToPeerOptions = Marshal.PtrToStructure<AddNotifyMessageToPeerOptions>(options);
+            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnMessageToPeerCallback
             return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_AntiCheatClient_AddNotifyMessageToServer(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
-            var _AddNotifyMessageToServerOptionspublic = Marshal.PtrToStructure<AddNotifyMessageToServerOptionspublic>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnMessageToServerCallbackpublic
+            var _AddNotifyMessageToServerOptions = Marshal.PtrToStructure<AddNotifyMessageToServerOptions>(options);
+            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnMessageToServerCallback
             return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_AntiCheatClient_AddNotifyPeerActionRequired(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
-            var _AddNotifyPeerActionRequiredOptionspublic = Marshal.PtrToStructure<AddNotifyPeerActionRequiredOptionspublic>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnPeerActionRequiredCallbackpublic
+            var _AddNotifyPeerActionRequiredOptions = Marshal.PtrToStructure<AddNotifyPeerActionRequiredOptions>(options);
+            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnPeerActionRequiredCallback
             return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_AntiCheatClient_AddNotifyPeerAuthStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
-            var _AddNotifyPeerAuthStatusChangedOptionspublic = Marshal.PtrToStructure<AddNotifyPeerAuthStatusChangedOptionspublic>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnPeerAuthStatusChangedCallbackpublic
+            var _AddNotifyPeerAuthStatusChangedOptions = Marshal.PtrToStructure<AddNotifyPeerAuthStatusChangedOptions>(options);
+            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnPeerAuthStatusChangedCallback
             return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_AntiCheatClient_BeginSession(IntPtr handle, IntPtr options)
         {
-            var _BeginSessionOptionspublic = Marshal.PtrToStructure<BeginSessionOptionspublic>(options);
+            var _BeginSessionOptions = Marshal.PtrToStructure<BeginSessionOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_AntiCheatClient_EndSession(IntPtr handle, IntPtr options)
         {
-            var _EndSessionOptionspublic = Marshal.PtrToStructure<EndSessionOptionspublic>(options);
+            var _EndSessionOptions = Marshal.PtrToStructure<EndSessionOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_AntiCheatClient_GetProtectMessageOutputLength(IntPtr handle, IntPtr options, [Out] uint outBufferSizeBytes)
         {
-            var _GetProtectMessageOutputLengthOptionspublic = Marshal.PtrToStructure<GetProtectMessageOutputLengthOptionspublic>(options);
+            var _GetProtectMessageOutputLengthOptions = Marshal.PtrToStructure<GetProtectMessageOutputLengthOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_AntiCheatClient_PollStatus(IntPtr handle, IntPtr options, int outViolationType, IntPtr outMessage)
         {
-            var _PollStatusOptionspublic = Marshal.PtrToStructure<PollStatusOptionspublic>(options);
+            var _PollStatusOptions = Marshal.PtrToStructure<PollStatusOptions>(options);
             outViolationType = (int)AntiCheatClientViolationType.Invalid;
             return (int)Result.Success;
         }
@@ -84,28 +84,28 @@ namespace EOS_SDK.AntiCheatClient
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_AntiCheatClient_ProtectMessage(IntPtr handle, IntPtr options, IntPtr outBuffer, [Out] uint outBytesWritten)
         {
-            var _ProtectMessageOptionspublic = Marshal.PtrToStructure<ProtectMessageOptionspublic>(options);
+            var _ProtectMessageOptions = Marshal.PtrToStructure<ProtectMessageOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_AntiCheatClient_ReceiveMessageFromPeer(IntPtr handle, IntPtr options)
         {
-            var _ReceiveMessageFromPeerOptionspublic = Marshal.PtrToStructure<ReceiveMessageFromPeerOptionspublic>(options);
+            var _ReceiveMessageFromPeerOptions = Marshal.PtrToStructure<ReceiveMessageFromPeerOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_AntiCheatClient_ReceiveMessageFromServer(IntPtr handle, IntPtr options)
         {
-            var _ReceiveMessageFromServerOptionspublic = Marshal.PtrToStructure<ReceiveMessageFromServerOptionspublic>(options);
+            var _ReceiveMessageFromServerOptions = Marshal.PtrToStructure<ReceiveMessageFromServerOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_AntiCheatClient_RegisterPeer(IntPtr handle, IntPtr options)
         {
-            var _RegisterPeerOptionspublic = Marshal.PtrToStructure<RegisterPeerOptionspublic>(options);
+            var _RegisterPeerOptions = Marshal.PtrToStructure<RegisterPeerOptions>(options);
             return (int)Result.Success;
         }
 
@@ -137,14 +137,14 @@ namespace EOS_SDK.AntiCheatClient
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_AntiCheatClient_UnprotectMessage(IntPtr handle, IntPtr options, IntPtr outBuffer, [Out] uint outBytesWritten)
         {
-            var _UnprotectMessageOptionspublic = Marshal.PtrToStructure<UnprotectMessageOptionspublic>(options);
+            var _UnprotectMessageOptions = Marshal.PtrToStructure<UnprotectMessageOptions>(options);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_AntiCheatClient_UnregisterPeer(IntPtr handle, IntPtr options)
         {
-            var _UnregisterPeerOptionspublic = Marshal.PtrToStructure<UnregisterPeerOptionspublic>(options);
+            var _UnregisterPeerOptions = Marshal.PtrToStructure<UnregisterPeerOptions>(options);
             return (int)Result.Success;
         }
     }

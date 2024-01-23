@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace EOS_SDK.AntiCheatCommon
 {
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct Quatpublic
+    public struct Quat
     {
         public float m_w;
         public float m_x;

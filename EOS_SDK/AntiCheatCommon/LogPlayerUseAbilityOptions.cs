@@ -3,7 +3,7 @@ namespace EOS_SDK.AntiCheatCommon
 {
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct LogPlayerUseAbilityOptionspubli
+    public struct LogPlayerUseAbilityOptions
     {
         public int m_ApiVersion;
         public IntPtr m_PlayerHandle;

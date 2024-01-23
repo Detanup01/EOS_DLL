@@ -3,44 +3,44 @@
 namespace EOS_SDK.AntiCheatClient
 {
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct AddExternalIntegrityCatalogOptionspublic
+    public struct AddExternalIntegrityCatalogOptions
     {
         public int m_ApiVersion { get => 1; }
         public IntPtr m_PathToBinFile; // UTF-8 path to the .bin catalog file to add
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct AddNotifyClientIntegrityViolatedOptionspublic
+    public struct AddNotifyClientIntegrityViolatedOptions
     {
         public int m_ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct AddNotifyMessageToPeerOptionspublic
+    public struct AddNotifyMessageToPeerOptions
     {
         public int m_ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct AddNotifyMessageToServerOptionspublic
+    public struct AddNotifyMessageToServerOptions
     {
         public int m_ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct AddNotifyPeerActionRequiredOptionspublic
+    public struct AddNotifyPeerActionRequiredOptions
     {
         public int m_ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct AddNotifyPeerAuthStatusChangedOptionspublic
+    public struct AddNotifyPeerAuthStatusChangedOptions
     {
         public int m_ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct BeginSessionOptionspublic
+    public struct BeginSessionOptions
     {
         public int m_ApiVersion { get => 3; }
         public IntPtr m_LocalUserId; //ProductUserId
@@ -48,27 +48,27 @@ namespace EOS_SDK.AntiCheatClient
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct EndSessionOptionspublic
+    public struct EndSessionOptions
     {
         public int m_ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct GetProtectMessageOutputLengthOptionspublic
+    public struct GetProtectMessageOutputLengthOptions
     {
         public int m_ApiVersion { get => 1; }
         public uint m_DataLengthBytes;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct PollStatusOptionspublic
+    public struct PollStatusOptions
     {
         public int m_ApiVersion { get => 1; }
         public uint m_OutMessageLength;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct ProtectMessageOptionspublic
+    public struct ProtectMessageOptions
     {
         public int m_ApiVersion { get => 1; }
         public uint m_DataLengthBytes;
@@ -83,7 +83,7 @@ namespace EOS_SDK.AntiCheatClient
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct ReceiveMessageFromPeerOptionspublic
+    public struct ReceiveMessageFromPeerOptions
     {
         public int m_ApiVersion { get => 1; }
         /// <summary>
@@ -98,7 +98,7 @@ namespace EOS_SDK.AntiCheatClient
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct ReceiveMessageFromServerOptionspublic
+    public struct ReceiveMessageFromServerOptions
     {
         public int m_ApiVersion { get => 1; }
         public uint m_DataLengthBytes;
@@ -109,7 +109,7 @@ namespace EOS_SDK.AntiCheatClient
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct RegisterPeerOptionspublic
+    public struct RegisterPeerOptions
     {
         public int m_ApiVersion { get => 1; }
         /// <summary>
@@ -145,7 +145,7 @@ namespace EOS_SDK.AntiCheatClient
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct UnprotectMessageOptionspublic
+    public struct UnprotectMessageOptions
     {
         public int m_ApiVersion { get => 1; }
         public uint m_DataLengthBytes;
@@ -160,7 +160,7 @@ namespace EOS_SDK.AntiCheatClient
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct UnregisterPeerOptionspublic
+    public struct UnregisterPeerOptions
     {
         public int m_ApiVersion { get => 1; }
         /// <summary>
@@ -170,7 +170,7 @@ namespace EOS_SDK.AntiCheatClient
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct OnClientIntegrityViolatedCallbackInfopublic
+    public struct OnClientIntegrityViolatedCallbackInfo
     {
         public IntPtr m_ClientData;
         public AntiCheatClientViolationType m_ViolationType;
@@ -178,7 +178,7 @@ namespace EOS_SDK.AntiCheatClient
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct OnMessageToServerCallbackInfopublic
+    public struct OnMessageToServerCallbackInfo
     {
         public IntPtr m_ClientData;
         public IntPtr m_MessageData;

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace EOS_SDK.AntiCheatCommon
 {
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct Vec3fpublic
+    public struct Vec3f
     {
         public float m_x;
         public float m_y;

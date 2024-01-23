@@ -3,26 +3,26 @@
 namespace EOS_SDK.ActiveSession
 {
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct ActiveSessionCopyInfoOptionspublic
+    public struct ActiveSessionCopyInfoOptions
     {
         public int m_ApiVersion;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct ActiveSessionGetRegisteredPlayerByIndexOptionspublic
+    public struct ActiveSessionGetRegisteredPlayerByIndexOptions
     {
         public int m_ApiVersion;
         public uint m_PlayerIndex;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct ActiveSessionGetRegisteredPlayerCountOptionspublic
+    public struct ActiveSessionGetRegisteredPlayerCountOptions
     {
         public int m_ApiVersion;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct ActiveSessionInfopublic
+    public struct ActiveSessionInfo
     {
         public int m_ApiVersion;
         public IntPtr m_SessionName; //string
