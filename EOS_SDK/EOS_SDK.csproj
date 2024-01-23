@@ -33,7 +33,7 @@
 		<AssemblyName>EOSSDK-Win64-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<DefineConstants>WIN_X64</DefineConstants>
-		<DnneLinkerUserFlags>G:\VS\EPIC\EOS_DLL_git\EOS_SDK\_native\file.res</DnneLinkerUserFlags>
+		<DnneLinkerUserFlags>$(SolutionDir)\EOS_SDK\_native\file.res</DnneLinkerUserFlags>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Platform)'=='x86' And ('$(RuntimeIdentifier)'=='win' or '$(RuntimeIdentifier)'=='win-x86')">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
@@ -43,6 +43,7 @@
 		<AssemblyName>EOSSDK-Win32-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>win-x86</RuntimeIdentifier>
 		<DefineConstants>WIN_X86</DefineConstants>
+		<DnneLinkerUserFlags>$(SolutionDir)\EOS_SDK\_native\file.res</DnneLinkerUserFlags>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(RuntimeIdentifier)'=='linux-x64'">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
@@ -58,9 +59,9 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<AssemblyName>libEOSSDK-Mac-Shipping_cs</AssemblyName>
-		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+		<RuntimeIdentifier>mac-x64</RuntimeIdentifier>
 	</PropertyGroup>
-	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="('$(RuntimeIdentifier)'=='win-x64' or '$(RuntimeIdentifier)'=='win-x86')">
 	  <Exec Command="call _native/compile.bat" />
 	</Target>
 </Project>
