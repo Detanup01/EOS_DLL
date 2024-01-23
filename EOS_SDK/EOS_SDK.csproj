@@ -11,16 +11,8 @@
 
   <ItemGroup>
     <PackageReference Include="DNNE" Version="2.0.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Sessions\" />
-    <Folder Include="Stats\" />
-    <Folder Include="TitleStorage\" />
-    <Folder Include="UI\" />
-    <Folder Include="UserInfo\" />
-    <Folder Include="Windows\" />
-    <Folder Include="Version\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	<PackageReference Include="L" Version="5.0.0" />
   </ItemGroup>
 
 	<PropertyGroup Condition="'$(Platform)'=='x64' And ('$(RuntimeIdentifier)'=='win' or '$(RuntimeIdentifier)'=='win-x64')">
