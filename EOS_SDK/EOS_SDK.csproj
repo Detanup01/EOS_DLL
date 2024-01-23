@@ -33,7 +33,7 @@
 		<AssemblyName>EOSSDK-Win64-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<DefineConstants>WIN_X64</DefineConstants>
-		<DnneLinkerUserFlags>$(SolutionDir)\EOS_SDK\_native\file.res</DnneLinkerUserFlags>
+		<DnneLinkerUserFlags>$(MSBuildProjectDirectory)\_native\file.res</DnneLinkerUserFlags>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Platform)'=='x86' And ('$(RuntimeIdentifier)'=='win' or '$(RuntimeIdentifier)'=='win-x86')">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
@@ -43,7 +43,7 @@
 		<AssemblyName>EOSSDK-Win32-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>win-x86</RuntimeIdentifier>
 		<DefineConstants>WIN_X86</DefineConstants>
-		<DnneLinkerUserFlags>$(SolutionDir)\EOS_SDK\_native\file.res</DnneLinkerUserFlags>
+		<DnneLinkerUserFlags>$(MSBuildProjectDirectory)\_native\file.res</DnneLinkerUserFlags>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(RuntimeIdentifier)'=='linux-x64'">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
