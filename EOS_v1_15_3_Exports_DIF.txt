@@ -1,0 +1,4 @@
+From 1.15.3 to 1.15.5:
+
+Added:
+private const string EOS_Ecom_QueryEntitlementTokenName = "EOS_Ecom_QueryEntitlementToken";

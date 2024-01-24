@@ -138,7 +138,7 @@ namespace EOS_SDK.AntiCheatServer
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_AntiCheatServer_RegisterClient(IntPtr handle, IntPtr options)
         {
-            var _RegisterClientOptions = Marshal.PtrToStructure<RegisterClientOptions>(options);
+            var _RegisterClientOptions = Marshal.PtrToStructure<RegisterClientOptionsV2>(options);
             return (int)Result.Success;
         }
 

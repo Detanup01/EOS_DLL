@@ -1,0 +1,8 @@
+From 1.15.1 to 1.15.3:
+
+Added:
+private const string EOS_Ecom_CopyLastRedeemedEntitlementByIndexName = "EOS_Ecom_CopyLastRedeemedEntitlementByIndex";
+private const string EOS_Ecom_GetLastRedeemedEntitlementsCountName = "EOS_Ecom_GetLastRedeemedEntitlementsCount";
+private const string EOS_P2P_AddNotifyPeerConnectionInterruptedName = "EOS_P2P_AddNotifyPeerConnectionInterrupted";
+private const string EOS_P2P_RemoveNotifyPeerConnectionInterruptedName = "EOS_P2P_RemoveNotifyPeerConnectionInterrupted";
+

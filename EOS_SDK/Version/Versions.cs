@@ -69,7 +69,7 @@
         public const int SetgamesessionidApiLatest = 1;
         #endregion
         #region AntiCheatServer
-        public const int AddnotifyclientactionrequiredApiLatest = 1;
+        public const int AddNotifyClientActionRequiredApiLatest = 1;
         public const int AddnotifyclientauthstatuschangedApiLatest = 1;
         public const int AddnotifymessagetoclientApiLatest = 1;
         public const int BeginsessionApiLatest_AntiCheatServer = 3;

@@ -1,4 +1,5 @@
-﻿using EOS_SDK.Windows;
+﻿using EOS_SDK._Data;
+using EOS_SDK.Windows;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -16,12 +17,15 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static IntPtr EOS_Platform_Create(IntPtr options)
         {
+            IntPtr pointer = 0;
 #if WIN_X64 || WIN_X86
             var _Options = Marshal.PtrToStructure<WindowsOptions>(options);
+            pointer = Platform_Hander.Create(_Options);
 #else
             var _Options = Marshal.PtrToStructure<Options>(options);
+            pointer = Platform_Hander.Create(_Options);
 #endif
-            return 0;
+            return pointer;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -269,6 +273,7 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_Platform_Tick(IntPtr handle)
         {
+            CallbackManager.Update();
         }
     }
 }

@@ -1,11 +1,13 @@
-﻿using System.Runtime.InteropServices;
+﻿using EOS_SDK._Data;
+using System.Runtime.InteropServices;
+using EOS_SDK.Version;
 
 namespace EOS_SDK.AntiCheatServer
 {
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyClientActionRequiredOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int m_ApiVersion { get => Versions.AddNotifyClientActionRequiredApiLatest; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -63,8 +65,9 @@ namespace EOS_SDK.AntiCheatServer
         public IntPtr m_Data;
     }
 
+    [APIVersion(2)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct RegisterClientOptions
+    public struct RegisterClientOptionsV2
     {
         public int m_ApiVersion { get => 2; }
         public IntPtr m_ClientHandle;
@@ -73,6 +76,18 @@ namespace EOS_SDK.AntiCheatServer
         public IntPtr m_AccountId_DEPRECATED;
         public IntPtr m_IpAddress;
         public IntPtr m_UserId;
+    }
+
+    [APIVersion(1)]
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    public struct RegisterClientOptionsV1
+    {
+        public int m_ApiVersion { get => 1; }
+        public IntPtr m_ClientHandle;
+        public AntiCheatCommon.AntiCheatCommonClientType m_ClientType;
+        public AntiCheatCommon.AntiCheatCommonClientPlatform m_ClientPlatform;
+        public IntPtr m_AccountId;
+        public IntPtr m_IpAddress;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]

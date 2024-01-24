@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using EOS_SDK._Data;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace EOS_SDK.Achievements
@@ -117,7 +118,16 @@ namespace EOS_SDK.Achievements
         public static void EOS_Achievements_QueryDefinitions(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
             var _QueryDefinitionsOptions = Marshal.PtrToStructure<QueryDefinitionsOptions>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: OnQueryDefinitionsCompleteCallback
+
+            if (completionDelegate != IntPtr.Zero)
+            {
+                OnQueryDefinitionsCompleteCallbackInfo info = new OnQueryDefinitionsCompleteCallbackInfo()
+                {
+                    m_ClientData = clientData,
+                    m_ResultCode = Result.Success
+                };
+                CallbackManager.AddCallback(completionDelegate, info, nameof(EOS_Achievements_QueryDefinitions));
+            }
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]

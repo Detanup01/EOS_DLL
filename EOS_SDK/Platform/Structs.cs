@@ -26,6 +26,7 @@ namespace EOS_SDK.Platform
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct Options
     {
+        public int m_ApiVersion;
         public IntPtr m_Reserved;
         public IntPtr m_ProductId;
         public IntPtr m_SandboxId;
