@@ -1,22 +1,16 @@
-﻿using EOS_SDK.Auth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;;
 
 namespace EOS_SDK.Connect
 {
     public unsafe class Connect_Exports
     {
-#if false
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_Connect_AddNotifyAuthExpiration(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notification)
         {
             var _AddNotifyAuthExpirationOptions = Marshal.PtrToStructure<AddNotifyAuthExpirationOptions>(options);
             delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notification; //Delegate Class was: Connect.OnAuthExpirationCallback
+            return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -24,36 +18,42 @@ namespace EOS_SDK.Connect
         {
             var _AddNotifyLoginStatusChangedOptions = Marshal.PtrToStructure<AddNotifyLoginStatusChangedOptions>(options);
             delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notification; //Delegate Class was: Connect.OnLoginStatusChangedCallback
+            return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static Result EOS_Connect_CopyIdToken(IntPtr handle, IntPtr options, IntPtr outIdToken)
+        public static int EOS_Connect_CopyIdToken(IntPtr handle, IntPtr options, IntPtr outIdToken)
         {
             var _CopyIdTokenOptions = Marshal.PtrToStructure<CopyIdTokenOptions>(options);
+            return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static Result EOS_Connect_CopyProductUserExternalAccountByAccountId(IntPtr handle, IntPtr options, IntPtr outExternalAccountInfo)
+        public static int EOS_Connect_CopyProductUserExternalAccountByAccountId(IntPtr handle, IntPtr options, IntPtr outExternalAccountInfo)
         {
             var _CopyProductUserExternalAccountByAccountIdOptions = Marshal.PtrToStructure<CopyProductUserExternalAccountByAccountIdOptions>(options);
+            return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static Result EOS_Connect_CopyProductUserExternalAccountByAccountType(IntPtr handle, IntPtr options, IntPtr outExternalAccountInfo)
+        public static int EOS_Connect_CopyProductUserExternalAccountByAccountType(IntPtr handle, IntPtr options, IntPtr outExternalAccountInfo)
         {
             var _CopyProductUserExternalAccountByAccountTypeOptions = Marshal.PtrToStructure<CopyProductUserExternalAccountByAccountTypeOptions>(options);
+            return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static Result EOS_Connect_CopyProductUserExternalAccountByIndex(IntPtr handle, IntPtr options, IntPtr outExternalAccountInfo)
+        public static int EOS_Connect_CopyProductUserExternalAccountByIndex(IntPtr handle, IntPtr options, IntPtr outExternalAccountInfo)
         {
             var _CopyProductUserExternalAccountByIndexOptions = Marshal.PtrToStructure<CopyProductUserExternalAccountByIndexOptions>(options);
+            return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static Result EOS_Connect_CopyProductUserInfo(IntPtr handle, IntPtr options, IntPtr outExternalAccountInfo)
+        public static int EOS_Connect_CopyProductUserInfo(IntPtr handle, IntPtr options, IntPtr outExternalAccountInfo)
         {
             var _CopyProductUserInfoOptions = Marshal.PtrToStructure<CopyProductUserInfoOptions>(options);
+            return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -86,33 +86,39 @@ namespace EOS_SDK.Connect
         public static IntPtr EOS_Connect_GetExternalAccountMapping(IntPtr handle, IntPtr options)
         {
             var _GetExternalAccountMappingsOptions = Marshal.PtrToStructure<GetExternalAccountMappingsOptions>(options);
+            return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static IntPtr EOS_Connect_GetLoggedInUserByIndex(IntPtr handle, int index)
         {
+            return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Connect_GetLoggedInUsersCount(IntPtr handle)
         {
+            return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static LoginStatus EOS_Connect_GetLoginStatus(IntPtr handle, IntPtr localUserId)
+        public static int EOS_Connect_GetLoginStatus(IntPtr handle, IntPtr localUserId)
         {
+            return (int)LoginStatus.NotLoggedIn;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static uint EOS_Connect_GetProductUserExternalAccountCount(IntPtr handle, IntPtr options)
         {
             var _GetProductUserExternalAccountCountOptions = Marshal.PtrToStructure<GetProductUserExternalAccountCountOptions>(options);
+            return 0;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static Result EOS_Connect_GetProductUserIdMapping(IntPtr handle, IntPtr options, IntPtr outBuffer, [Out] int inOutBufferLength)
+        public static int EOS_Connect_GetProductUserIdMapping(IntPtr handle, IntPtr options, IntPtr outBuffer, int inOutBufferLength)
         {
             var _GetProductUserIdMappingOptions = Marshal.PtrToStructure<GetProductUserIdMappingOptions>(options);
+            return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -178,6 +184,5 @@ namespace EOS_SDK.Connect
             var _VerifyIdTokenOptions = Marshal.PtrToStructure<VerifyIdTokenOptions>(options);
             delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Connect.OnVerifyIdTokenCallback
         }
-#endif
     }
 }
