@@ -6,7 +6,7 @@ namespace EOS_SDK.Windows
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct WindowsOptions
     {
-        public int m_ApiVersion { get => 13; }
+        public int m_ApiVersion;
         public IntPtr m_Reserved;
         public IntPtr m_ProductId;
         public IntPtr m_SandboxId;
@@ -27,7 +27,7 @@ namespace EOS_SDK.Windows
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct WindowsRTCOptions
     {
-        public int m_ApiVersion { get => 2; }
+        public int m_ApiVersion;
         public IntPtr m_PlatformSpecificOptions;
         public RTCBackgroundMode m_BackgroundMode;
     }
@@ -35,7 +35,7 @@ namespace EOS_SDK.Windows
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct WindowsRTCOptionsPlatformSpecificOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int m_ApiVersion;
         public IntPtr m_XAudio29DllPath;
     }
 }

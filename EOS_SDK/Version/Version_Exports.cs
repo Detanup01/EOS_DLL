@@ -8,7 +8,7 @@ namespace EOS_SDK.Version
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static IntPtr EOS_GetVersion()
         {
-            return Functions.FromString(_Data.SDK.Version);
+            return Helpers.FromString(_Data.SDK.Version);
         }
     }
 }

@@ -6,6 +6,15 @@ namespace test
     internal struct TESTInternalInput
     {
         public int Result;
+        public int data;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    internal struct TESTInternalInputv2
+    {
+        public int Result;
+        public int data;
+        public int value;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]

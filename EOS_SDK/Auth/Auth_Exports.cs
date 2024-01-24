@@ -85,7 +85,7 @@ namespace EOS_SDK.Auth
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_Auth_Login(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
-            var _LoginOptions = Marshal.PtrToStructure<LoginOptions>(options);
+            var _LoginOptions = Marshal.PtrToStructure<LoginOptionsV3>(options);
             delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Auth.OnLoginCallback
         }
 

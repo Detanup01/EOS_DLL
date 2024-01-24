@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using EOS_SDK._Data;
+using System.Runtime.InteropServices;
 
 namespace EOS_SDK.Auth
 {
@@ -37,13 +38,23 @@ namespace EOS_SDK.Auth
         public IntPtr m_LocalUserId;
     }
 
+    [APIVersion(3)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct LoginOptions
+    public struct LoginOptionsV3
     {
         public int m_ApiVersion;
         public IntPtr m_Credentials;
         public AuthScopeFlags m_ScopeFlags;
         public LoginFlags m_LoginFlags;
+    }
+
+    [APIVersion(2)]
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    public struct LoginOptionsV2
+    {
+        public int m_ApiVersion;
+        public IntPtr m_Credentials;
+        public AuthScopeFlags m_ScopeFlags;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]

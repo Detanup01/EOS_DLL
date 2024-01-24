@@ -5,47 +5,47 @@ namespace EOS_SDK.Achievements
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyAchievementsUnlockedOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int m_ApiVersion;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyAchievementsUnlockedV2Options
     {
-        public int m_ApiVersion { get => 2; }
+        public int m_ApiVersion;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyAchievementDefinitionByAchievementIdOptions
     {
-        public int m_ApiVersion { get => 2; }
+        public int m_ApiVersion;
         public IntPtr m_AchievementId; //string
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyAchievementDefinitionByIndexOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int m_ApiVersion;
         public uint m_AchievementIndex;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyAchievementDefinitionV2ByAchievementIdOptions
     {
-        public int m_ApiVersion { get => 2; }
+        public int m_ApiVersion;
         public IntPtr m_AchievementId; //string
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyAchievementDefinitionV2ByIndexOptions
     {
-        public int m_ApiVersion { get => 2; }
+        public int m_ApiVersion;
         public uint m_AchievementIndex;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyPlayerAchievementByAchievementIdOptions
     {
-        public int m_ApiVersion { get => 2; }
+        public int m_ApiVersion;
         public IntPtr m_TargetUserId; //ProductUserId
         public IntPtr m_AchievementId; //string
         public IntPtr m_LocalUserId; //ProductUserId

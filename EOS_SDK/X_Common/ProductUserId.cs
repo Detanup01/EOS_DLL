@@ -13,16 +13,16 @@ namespace EOS_SDK.Others
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static IntPtr EOS_ProductUserId_FromString(IntPtr productUserIdString)
         {
-            string UserID = Functions.ToString(productUserIdString);
+            string UserID = Helpers.ToString(productUserIdString);
             if (UserID.Length == ProductuseridMaxLength && Regex.Match(UserID, "[a-fA-F0-9]{32}").Success)
                 Static_ProductUserId = UserID;
-            return Functions.FromString(Static_ProductUserId);
+            return Helpers.FromString(Static_ProductUserId);
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_ProductUserId_IsValid(IntPtr accountId)
         {
-            var UserId = Functions.ToString(accountId);
+            var UserId = Helpers.ToString(accountId);
             if (UserId == Static_ProductUserId)
                 return 1;
             if (UserId.Length == ProductuseridMaxLength)
@@ -35,14 +35,14 @@ namespace EOS_SDK.Others
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_ProductUserId_ToString(IntPtr accountId, IntPtr outBuffer, int inOutBufferLength)
         {
-            string UserID = Functions.ToString(accountId);
+            string UserID = Helpers.ToString(accountId);
             if (UserID.Length == ProductuseridMaxLength && Regex.Match(UserID, "[a-fA-F0-9]{32}").Success)
                 Static_ProductUserId = UserID;
             else
                 return (int)Result.InvalidUser;
             if (inOutBufferLength != ProductuseridMaxLength + 1)
                 return (int)Result.InvalidParameters;
-            var ptr = Functions.FromString(Static_ProductUserId);
+            var ptr = Helpers.FromString(Static_ProductUserId);
             Marshal.WriteIntPtr(outBuffer, 0, ptr);
             return (int)Result.Success;
         }

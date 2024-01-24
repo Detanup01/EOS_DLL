@@ -10,10 +10,26 @@ namespace test
             Console.WriteLine("Hello, World!");
             TESTInternalInput tESTInternal = new()
             {
-                Result = 112
+                Result = 1
             };
             Console.WriteLine("before test!");
             TEST(IntPtr.Zero, ref tESTInternal, IntPtr.Zero, OnLoginCallbackInternalImplementation);
+            Console.WriteLine("after test!");
+            //2
+            TESTInternalInput tESTInternal2 = new()
+            {
+                Result = 2
+            };
+            Console.WriteLine("before test!");
+            TEST(IntPtr.Zero, ref tESTInternal2, IntPtr.Zero, OnLoginCallbackInternalImplementation);
+            Console.WriteLine("after test!");
+            //other
+            TESTInternalInput other = new()
+            {
+                Result = 2131323
+            };
+            Console.WriteLine("before test!");
+            TEST(IntPtr.Zero, ref other, IntPtr.Zero, OnLoginCallbackInternalImplementation);
             Console.WriteLine("after test!");
         }
 

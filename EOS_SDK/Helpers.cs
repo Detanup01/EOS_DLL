@@ -1,9 +1,11 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Drawing;
+using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace EOS_SDK
 {
-    public class Functions
+    public class Helpers
     {
         public static IntPtr FromString(string str)
         {
@@ -110,6 +112,32 @@ namespace EOS_SDK
                 items.Add(item);
             }
             return items.ToArray();
+        }
+
+        public static IntPtr StructToPtr<T>(T _struct)
+        {
+            var itemSize = Marshal.SizeOf(typeof(T));
+            IntPtr address = Marshal.AllocHGlobal(itemSize);
+            Marshal.StructureToPtr(_struct, address, false);
+            return address;
+        }
+
+        public static void StructWriteOut<T>(T _struct, IntPtr outPtr)
+        {
+            var ptr = StructToPtr(_struct);
+            Marshal.WriteIntPtr(outPtr, ptr);
+        }
+
+        public static int GetVersionFromStructPTR(IntPtr struct_ptr)
+        {
+            var vers_struct = Marshal.PtrToStructure<VersionStruct>(struct_ptr);
+            return vers_struct.version;
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
+        internal struct VersionStruct
+        {
+            public int version;
         }
     }
 }
