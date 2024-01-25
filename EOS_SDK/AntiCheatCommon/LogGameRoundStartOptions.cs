@@ -5,10 +5,10 @@ namespace EOS_SDK.AntiCheatCommon
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LogGameRoundStartOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_SessionIdentifier;
-        public IntPtr m_LevelName;
-        public IntPtr m_ModeName;
-        public uint m_RoundTimeSeconds;
+        public int ApiVersion;
+        public IntPtr SessionIdentifier;
+        public IntPtr LevelName;
+        public IntPtr ModeName;
+        public uint RoundTimeSeconds;
     }
 }

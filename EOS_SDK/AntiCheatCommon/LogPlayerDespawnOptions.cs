@@ -6,7 +6,7 @@ namespace EOS_SDK.AntiCheatCommon
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LogPlayerDespawnOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_DespawnedPlayerHandle;
+        public int ApiVersion;
+        public IntPtr DespawnedPlayerHandle;
     }
 }

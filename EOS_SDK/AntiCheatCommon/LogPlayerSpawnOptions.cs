@@ -5,9 +5,9 @@ namespace EOS_SDK.AntiCheatCommon
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LogPlayerSpawnOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_SpawnedPlayerHandle;
-        public uint m_TeamId;
-        public uint m_CharacterId;
+        public int ApiVersion;
+        public IntPtr SpawnedPlayerHandle;
+        public uint TeamId;
+        public uint CharacterId;
     }
 }

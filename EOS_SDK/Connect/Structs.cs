@@ -6,302 +6,302 @@ namespace EOS_SDK.Connect
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyAuthExpirationOptions
     {
-        public int m_ApiVersion;
+        public int ApiVersion;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyLoginStatusChangedOptions
     {
-        public int m_ApiVersion;
+        public int ApiVersion;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AuthExpirationCallbackInfo
     {
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyIdTokenOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_LocalUserId;
+        public int ApiVersion;
+        public IntPtr LocalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyProductUserExternalAccountByAccountIdOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_TargetUserId;
-        public IntPtr m_AccountId;
+        public int ApiVersion;
+        public IntPtr TargetUserId;
+        public IntPtr AccountId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyProductUserExternalAccountByAccountTypeOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_TargetUserId;
-        public ExternalAccountType m_AccountIdType;
+        public int ApiVersion;
+        public IntPtr TargetUserId;
+        public ExternalAccountType AccountIdType;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyProductUserExternalAccountByIndexOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_TargetUserId;
-        public uint m_ExternalAccountInfoIndex;
+        public int ApiVersion;
+        public IntPtr TargetUserId;
+        public uint ExternalAccountInfoIndex;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyProductUserInfoOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_TargetUserId;
+        public int ApiVersion;
+        public IntPtr TargetUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CreateDeviceIdCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
+        public Result ResultCode;
+        public IntPtr ClientData;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CreateDeviceIdOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_DeviceModel;
+        public int ApiVersion;
+        public IntPtr DeviceModel;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CreateUserCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CreateUserOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_ContinuanceToken;
+        public int ApiVersion;
+        public IntPtr ContinuanceToken;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct Credentials
     {
-        public int m_ApiVersion;
-        public IntPtr m_Token;
-        public ExternalCredentialType m_Type;
+        public int ApiVersion;
+        public IntPtr Token;
+        public ExternalCredentialType Type;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct DeleteDeviceIdCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
+        public Result ResultCode;
+        public IntPtr ClientData;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct DeleteDeviceIdOptions
     {
-        public int m_ApiVersion;
+        public int ApiVersion;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct ExternalAccountInfo
     {
-        public int m_ApiVersion;
-        public IntPtr m_ProductUserId;
-        public IntPtr m_DisplayName;
-        public IntPtr m_AccountId;
-        public ExternalAccountType m_AccountIdType;
-        public long m_LastLoginTime;
+        public int ApiVersion;
+        public IntPtr ProductUserId;
+        public IntPtr DisplayName;
+        public IntPtr AccountId;
+        public ExternalAccountType AccountIdType;
+        public long LastLoginTime;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct GetExternalAccountMappingsOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_LocalUserId;
-        public ExternalAccountType m_AccountIdType;
-        public IntPtr m_TargetExternalUserId;
+        public int ApiVersion;
+        public IntPtr LocalUserId;
+        public ExternalAccountType AccountIdType;
+        public IntPtr TargetExternalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct GetProductUserExternalAccountCountOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_TargetUserId;
+        public int ApiVersion;
+        public IntPtr TargetUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct GetProductUserIdMappingOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_LocalUserId;
-        public ExternalAccountType m_AccountIdType;
-        public IntPtr m_TargetExternalUserId;
+        public int ApiVersion;
+        public IntPtr LocalUserId;
+        public ExternalAccountType AccountIdType;
+        public IntPtr TargetExternalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct IdToken
     {
-        public int m_ApiVersion;
-        public IntPtr m_ProductUserId;
-        public IntPtr m_JsonWebToken;
+        public int ApiVersion;
+        public IntPtr ProductUserId;
+        public IntPtr JsonWebToken;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LinkAccountCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LinkAccountOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_LocalUserId;
-        public IntPtr m_ContinuanceToken;
+        public int ApiVersion;
+        public IntPtr LocalUserId;
+        public IntPtr ContinuanceToken;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LoginCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
-        public IntPtr m_ContinuanceToken;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
+        public IntPtr ContinuanceToken;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LoginOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_Credentials;
-        public IntPtr m_UserLoginInfo;
+        public int ApiVersion;
+        public IntPtr Credentials;
+        public IntPtr UserLoginInfo;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LoginStatusChangedCallbackInfo
     {
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
-        public LoginStatus m_PreviousStatus;
-        public LoginStatus m_CurrentStatus;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
+        public LoginStatus PreviousStatus;
+        public LoginStatus CurrentStatus;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct QueryExternalAccountMappingsCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct QueryExternalAccountMappingsOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_LocalUserId;
-        public ExternalAccountType m_AccountIdType;
-        public IntPtr m_ExternalAccountIds;
-        public uint m_ExternalAccountIdCount;
+        public int ApiVersion;
+        public IntPtr LocalUserId;
+        public ExternalAccountType AccountIdType;
+        public IntPtr ExternalAccountIds;
+        public uint ExternalAccountIdCount;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct QueryProductUserIdMappingsCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct QueryProductUserIdMappingsOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_LocalUserId;
-        public ExternalAccountType m_AccountIdType_DEPRECATED;
-        public IntPtr m_ProductUserIds;
-        public uint m_ProductUserIdCount;
+        public int ApiVersion;
+        public IntPtr LocalUserId;
+        public ExternalAccountType AccountIdType_DEPRECATED;
+        public IntPtr ProductUserIds;
+        public uint ProductUserIdCount;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct TransferDeviceIdAccountCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct TransferDeviceIdAccountOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_PrimaryLocalUserId;
-        public IntPtr m_LocalDeviceUserId;
-        public IntPtr m_ProductUserIdToPreserve;
+        public int ApiVersion;
+        public IntPtr PrimaryLocalUserId;
+        public IntPtr LocalDeviceUserId;
+        public IntPtr ProductUserIdToPreserve;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct UnlinkAccountCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct UnlinkAccountOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_LocalUserId;
+        public int ApiVersion;
+        public IntPtr LocalUserId;
     }
 
     [APIVersion(2)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct UserLoginInfoV2
     {
-        public int m_ApiVersion;
-        public IntPtr m_DisplayName;
-        public IntPtr m_NsaIdToken;
+        public int ApiVersion;
+        public IntPtr DisplayName;
+        public IntPtr NsaIdToken;
     }
 
     [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct UserLoginInfoV1
     {
-        public int m_ApiVersion;
-        public IntPtr m_DisplayName;
+        public int ApiVersion;
+        public IntPtr DisplayName;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct VerifyIdTokenCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_ProductUserId;
-        public int m_IsAccountInfoPresent;
-        public ExternalAccountType m_AccountIdType;
-        public IntPtr m_AccountId;
-        public IntPtr m_Platform;
-        public IntPtr m_DeviceType;
-        public IntPtr m_ClientId;
-        public IntPtr m_ProductId;
-        public IntPtr m_SandboxId;
-        public IntPtr m_DeploymentId;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr ProductUserId;
+        public int IsAccountInfoPresent;
+        public ExternalAccountType AccountIdType;
+        public IntPtr AccountId;
+        public IntPtr Platform;
+        public IntPtr DeviceType;
+        public IntPtr ClientId;
+        public IntPtr ProductId;
+        public IntPtr SandboxId;
+        public IntPtr DeploymentId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct VerifyIdTokenOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_IdToken;
+        public int ApiVersion;
+        public IntPtr IdToken;
     }
 }

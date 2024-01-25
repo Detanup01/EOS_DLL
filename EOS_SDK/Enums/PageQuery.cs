@@ -6,8 +6,8 @@ namespace EOS_SDK
 	[StructLayout(LayoutKind.Sequential, Pack = 8)]
 	public struct PageQuery
 	{
-        public int m_ApiVersion;
-        public int m_StartIndex;
-        public int m_MaxCount;
+        public int ApiVersion;
+        public int StartIndex;
+        public int MaxCount;
 	}
 }

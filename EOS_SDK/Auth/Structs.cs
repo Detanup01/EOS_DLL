@@ -6,218 +6,218 @@ namespace EOS_SDK.Auth
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyLoginStatusChangedOptions
     {
-        public int m_ApiVersion;
+        public int ApiVersion;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyIdTokenOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_AccountId;
+        public int ApiVersion;
+        public IntPtr AccountId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyUserAuthTokenOptions
     {
-        public int m_ApiVersion;
+        public int ApiVersion;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct DeletePersistentAuthOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_RefreshToken;
+        public int ApiVersion;
+        public IntPtr RefreshToken;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LinkAccountOptions
     {
-        public int m_ApiVersion;
-        public LinkAccountFlags m_LinkAccountFlags;
-        public IntPtr m_ContinuanceToken;
-        public IntPtr m_LocalUserId;
+        public int ApiVersion;
+        public LinkAccountFlags LinkAccountFlags;
+        public IntPtr ContinuanceToken;
+        public IntPtr LocalUserId;
     }
 
     [APIVersion(3)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LoginOptionsV3
     {
-        public int m_ApiVersion;
-        public IntPtr m_Credentials;
-        public AuthScopeFlags m_ScopeFlags;
-        public LoginFlags m_LoginFlags;
+        public int ApiVersion;
+        public IntPtr Credentials;
+        public AuthScopeFlags ScopeFlags;
+        public LoginFlags LoginFlags;
     }
 
     [APIVersion(2)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LoginOptionsV2
     {
-        public int m_ApiVersion;
-        public IntPtr m_Credentials;
-        public AuthScopeFlags m_ScopeFlags;
+        public int ApiVersion;
+        public IntPtr Credentials;
+        public AuthScopeFlags ScopeFlags;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LogoutOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_LocalUserId;
+        public int ApiVersion;
+        public IntPtr LocalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct QueryIdTokenOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_LocalUserId;
-        public IntPtr m_TargetAccountId;
+        public int ApiVersion;
+        public IntPtr LocalUserId;
+        public IntPtr TargetAccountId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct VerifyIdTokenOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_IdToken;
+        public int ApiVersion;
+        public IntPtr IdToken;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct VerifyUserAuthOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_AuthToken;
+        public int ApiVersion;
+        public IntPtr AuthToken;
     }
 
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AccountFeatureRestrictedInfo
     {
-        public int m_ApiVersion;
-        public IntPtr m_VerificationURI;
+        public int ApiVersion;
+        public IntPtr VerificationURI;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct Credentials
     {
-        public int m_ApiVersion;
-        public IntPtr m_Id;
-        public IntPtr m_Token;
-        public LoginCredentialType m_Type;
-        public IntPtr m_SystemAuthCredentialsOptions;
-        public ExternalCredentialType m_ExternalType;
+        public int ApiVersion;
+        public IntPtr Id;
+        public IntPtr Token;
+        public LoginCredentialType Type;
+        public IntPtr SystemAuthCredentialsOptions;
+        public ExternalCredentialType ExternalType;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct DeletePersistentAuthCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
+        public Result ResultCode;
+        public IntPtr ClientData;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct IdToken
     {
-        public int m_ApiVersion;
-        public IntPtr m_AccountId;
-        public IntPtr m_JsonWebToken;
+        public int ApiVersion;
+        public IntPtr AccountId;
+        public IntPtr JsonWebToken;
     }
 
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LinkAccountCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
-        public IntPtr m_PinGrantInfo;
-        public IntPtr m_SelectedAccountId;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
+        public IntPtr PinGrantInfo;
+        public IntPtr SelectedAccountId;
     }
 
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LoginCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
-        public IntPtr m_PinGrantInfo;
-        public IntPtr m_ContinuanceToken;
-        public IntPtr m_AccountFeatureRestrictedInfo_DEPRECATED;
-        public IntPtr m_SelectedAccountId;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
+        public IntPtr PinGrantInfo;
+        public IntPtr ContinuanceToken;
+        public IntPtr AccountFeatureRestrictedInfo_DEPRECATED;
+        public IntPtr SelectedAccountId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LoginStatusChangedCallbackInfo
     {
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
-        public LoginStatus m_PrevStatus;
-        public LoginStatus m_CurrentStatus;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
+        public LoginStatus PrevStatus;
+        public LoginStatus CurrentStatus;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LogoutCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct PinGrantInfo
     {
-        public int m_ApiVersion;
-        public IntPtr m_UserCode;
-        public IntPtr m_VerificationURI;
-        public IntPtr m_ExpiresIn;
-        public IntPtr m_VerificationURIComplete;
+        public int ApiVersion;
+        public IntPtr UserCode;
+        public IntPtr VerificationURI;
+        public IntPtr ExpiresIn;
+        public IntPtr VerificationURIComplete;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct QueryIdTokenCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_LocalUserId;
-        public IntPtr m_TargetAccountId;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr LocalUserId;
+        public IntPtr TargetAccountId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct Token
     {
-        public int m_ApiVersion;
-        public IntPtr m_App;
-        public IntPtr m_ClientId;
-        public IntPtr m_AccountId;
-        public IntPtr m_AccessToken;
-        public double m_ExpiresIn;
-        public IntPtr m_ExpiresAt;
-        public AuthTokenType m_AuthType;
-        public IntPtr m_RefreshToken;
-        public double m_RefreshExpiresIn;
-        public IntPtr m_RefreshExpiresAt;
+        public int ApiVersion;
+        public IntPtr App;
+        public IntPtr ClientId;
+        public IntPtr AccountId;
+        public IntPtr AccessToken;
+        public double ExpiresIn;
+        public IntPtr ExpiresAt;
+        public AuthTokenType AuthType;
+        public IntPtr RefreshToken;
+        public double RefreshExpiresIn;
+        public IntPtr RefreshExpiresAt;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct VerifyIdTokenCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
-        public IntPtr m_ApplicationId;
-        public IntPtr m_ClientId;
-        public IntPtr m_ProductId;
-        public IntPtr m_SandboxId;
-        public IntPtr m_DeploymentId;
-        public IntPtr m_DisplayName;
-        public int m_IsExternalAccountInfoPresent;
-        public ExternalAccountType m_ExternalAccountIdType;
-        public IntPtr m_ExternalAccountId;
-        public IntPtr m_ExternalAccountDisplayName;
-        public IntPtr m_Platform;
+        public Result ResultCode;
+        public IntPtr ClientData;
+        public IntPtr ApplicationId;
+        public IntPtr ClientId;
+        public IntPtr ProductId;
+        public IntPtr SandboxId;
+        public IntPtr DeploymentId;
+        public IntPtr DisplayName;
+        public int IsExternalAccountInfoPresent;
+        public ExternalAccountType ExternalAccountIdType;
+        public IntPtr ExternalAccountId;
+        public IntPtr ExternalAccountDisplayName;
+        public IntPtr Platform;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct VerifyUserAuthCallbackInfo
     {
-        public Result m_ResultCode;
-        public IntPtr m_ClientData;
+        public Result ResultCode;
+        public IntPtr ClientData;
     }
 }

@@ -7,111 +7,111 @@ namespace EOS_SDK.AntiCheatServer
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyClientActionRequiredOptions
     {
-        public int m_ApiVersion { get => Versions.AddNotifyClientActionRequiredApiLatest; }
+        public int ApiVersion { get => Versions.AddNotifyClientActionRequiredApiLatest; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyClientAuthStatusChangedOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int ApiVersion { get => 1; }
     }
 
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyMessageToClientOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct BeginSessionOptions
     {
-        public int m_ApiVersion { get => 3; }
-        public uint m_RegisterTimeoutSeconds;
-        public IntPtr m_ServerName;
-        public int m_EnableGameplayData;
-        public IntPtr m_LocalUserId;
+        public int ApiVersion { get => 3; }
+        public uint RegisterTimeoutSeconds;
+        public IntPtr ServerName;
+        public int EnableGameplayData;
+        public IntPtr LocalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct EndSessionOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct GetProtectMessageOutputLengthOptions
     {
-        public int m_ApiVersion { get => 1; }
-        public uint m_DataLengthBytes;
+        public int ApiVersion { get => 1; }
+        public uint DataLengthBytes;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct ProtectMessageOptions
     {
-        public int m_ApiVersion { get => 1; }
-        public IntPtr m_ClientHandle;
-        public uint m_DataLengthBytes;
-        public IntPtr m_Data;
-        public uint m_OutBufferSizeBytes;
+        public int ApiVersion { get => 1; }
+        public IntPtr ClientHandle;
+        public uint DataLengthBytes;
+        public IntPtr Data;
+        public uint OutBufferSizeBytes;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct ReceiveMessageFromClientOptions
     {
-        public int m_ApiVersion { get => 1; }
-        public IntPtr m_ClientHandle;
-        public uint m_DataLengthBytes;
-        public IntPtr m_Data;
+        public int ApiVersion { get => 1; }
+        public IntPtr ClientHandle;
+        public uint DataLengthBytes;
+        public IntPtr Data;
     }
 
     [APIVersion(2)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct RegisterClientOptionsV2
     {
-        public int m_ApiVersion { get => 2; }
-        public IntPtr m_ClientHandle;
-        public AntiCheatCommon.AntiCheatCommonClientType m_ClientType;
-        public AntiCheatCommon.AntiCheatCommonClientPlatform m_ClientPlatform;
-        public IntPtr m_AccountId_DEPRECATED;
-        public IntPtr m_IpAddress;
-        public IntPtr m_UserId;
+        public int ApiVersion { get => 2; }
+        public IntPtr ClientHandle;
+        public AntiCheatCommon.AntiCheatCommonClientType ClientType;
+        public AntiCheatCommon.AntiCheatCommonClientPlatform ClientPlatform;
+        public IntPtr AccountId_DEPRECATED;
+        public IntPtr IpAddress;
+        public IntPtr UserId;
     }
 
     [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct RegisterClientOptionsV1
     {
-        public int m_ApiVersion { get => 1; }
-        public IntPtr m_ClientHandle;
-        public AntiCheatCommon.AntiCheatCommonClientType m_ClientType;
-        public AntiCheatCommon.AntiCheatCommonClientPlatform m_ClientPlatform;
-        public IntPtr m_AccountId;
-        public IntPtr m_IpAddress;
+        public int ApiVersion { get => 1; }
+        public IntPtr ClientHandle;
+        public AntiCheatCommon.AntiCheatCommonClientType ClientType;
+        public AntiCheatCommon.AntiCheatCommonClientPlatform ClientPlatform;
+        public IntPtr AccountId;
+        public IntPtr IpAddress;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct SetClientNetworkStateOptions
     {
-        public int m_ApiVersion { get => 1; }
-        public IntPtr m_ClientHandle;
-        public int m_IsNetworkActive;
+        public int ApiVersion { get => 1; }
+        public IntPtr ClientHandle;
+        public int IsNetworkActive;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct UnprotectMessageOptions
     {
-        public int m_ApiVersion { get => 1; }
-        public IntPtr m_ClientHandle;
-        public uint m_DataLengthBytes;
-        public IntPtr m_Data;
-        public uint m_OutBufferSizeBytes;
+        public int ApiVersion { get => 1; }
+        public IntPtr ClientHandle;
+        public uint DataLengthBytes;
+        public IntPtr Data;
+        public uint OutBufferSizeBytes;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct UnregisterClientOptions
     {
-        public int m_ApiVersion { get => 1; }
-        public IntPtr m_ClientHandle;
+        public int ApiVersion { get => 1; }
+        public IntPtr ClientHandle;
     }
 }

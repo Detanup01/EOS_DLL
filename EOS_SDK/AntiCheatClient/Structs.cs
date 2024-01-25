@@ -5,183 +5,183 @@ namespace EOS_SDK.AntiCheatClient
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddExternalIntegrityCatalogOptions
     {
-        public int m_ApiVersion { get => 1; }
-        public IntPtr m_PathToBinFile; // UTF-8 path to the .bin catalog file to add
+        public int ApiVersion { get => 1; }
+        public IntPtr PathToBinFile; // UTF-8 path to the .bin catalog file to add
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyClientIntegrityViolatedOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyMessageToPeerOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyMessageToServerOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyPeerActionRequiredOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyPeerAuthStatusChangedOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct BeginSessionOptions
     {
-        public int m_ApiVersion { get => 3; }
-        public IntPtr m_LocalUserId; //ProductUserId
-        public AntiCheatClientMode m_Mode;
+        public int ApiVersion { get => 3; }
+        public IntPtr LocalUserId; //ProductUserId
+        public AntiCheatClientMode Mode;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct EndSessionOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int ApiVersion { get => 1; }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct GetProtectMessageOutputLengthOptions
     {
-        public int m_ApiVersion { get => 1; }
-        public uint m_DataLengthBytes;
+        public int ApiVersion { get => 1; }
+        public uint DataLengthBytes;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct PollStatusOptions
     {
-        public int m_ApiVersion { get => 1; }
-        public uint m_OutMessageLength;
+        public int ApiVersion { get => 1; }
+        public uint OutMessageLength;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct ProtectMessageOptions
     {
-        public int m_ApiVersion { get => 1; }
-        public uint m_DataLengthBytes;
+        public int ApiVersion { get => 1; }
+        public uint DataLengthBytes;
         /// <summary>
         /// The data to encrypt
         /// </summary>
-        public IntPtr m_Data;
+        public IntPtr Data;
         /// <summary>
         /// The size in bytes of OutBuffer
         /// </summary>
-        public uint m_OutBufferSizeBytes;
+        public uint OutBufferSizeBytes;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct ReceiveMessageFromPeerOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int ApiVersion { get => 1; }
         /// <summary>
         /// The handle describing the sender of this message
         /// </summary>
-        public IntPtr m_PeerHandle;
-        public uint m_DataLengthBytes;
+        public IntPtr PeerHandle;
+        public uint DataLengthBytes;
         /// <summary>
         /// The data received
         /// </summary>
-        public IntPtr m_Data;
+        public IntPtr Data;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct ReceiveMessageFromServerOptions
     {
-        public int m_ApiVersion { get => 1; }
-        public uint m_DataLengthBytes;
+        public int ApiVersion { get => 1; }
+        public uint DataLengthBytes;
         /// <summary>
         /// The data received
         /// </summary>
-        public IntPtr m_Data;
+        public IntPtr Data;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct RegisterPeerOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int ApiVersion { get => 1; }
         /// <summary>
         /// Locally unique value describing the remote user (e.g. a player object pointer)
         /// </summary>
-        public IntPtr m_PeerHandle;
+        public IntPtr PeerHandle;
         /// <summary>
         /// Type of remote user being registered
         /// </summary>
-        public AntiCheatCommon.AntiCheatCommonClientType m_ClientType;
+        public AntiCheatCommon.AntiCheatCommonClientType ClientType;
         /// <summary>
         /// Remote user's platform, if known
         /// </summary>
-        public AntiCheatCommon.AntiCheatCommonClientPlatform m_ClientPlatform;
+        public AntiCheatCommon.AntiCheatCommonClientPlatform ClientPlatform;
         /// <summary>
         /// Time in seconds to allow newly registered peers to send the initial message containing their token.
         /// </summary>
-        public uint m_AuthenticationTimeout;
+        public uint AuthenticationTimeout;
         /// <summary>
         /// Deprecated - use PeerProductUserId instead
         /// </summary>
-        public IntPtr m_AccountId_DEPRECATED;
+        public IntPtr AccountId_DEPRECATED;
         /// <summary>
         /// Optional IP address for the remote user. May be null if not available.
         /// IPv4 format: "0.0.0.0"
         /// IPv6 format: "0:0:0:0:0:0:0:0"
         /// </summary>
-        public IntPtr m_IpAddress;
+        public IntPtr IpAddress;
         /// <summary>
         /// Identifier for the remote user
         /// </summary>
-        public IntPtr m_PeerProductUserId;
+        public IntPtr PeerProductUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct UnprotectMessageOptions
     {
-        public int m_ApiVersion { get => 1; }
-        public uint m_DataLengthBytes;
+        public int ApiVersion { get => 1; }
+        public uint DataLengthBytes;
         /// <summary>
         /// The data to decrypt
         /// </summary>
-        public IntPtr m_Data;
+        public IntPtr Data;
         /// <summary>
         /// The size in bytes of OutBuffer
         /// </summary>
-        public uint m_OutBufferSizeBytes;
+        public uint OutBufferSizeBytes;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct UnregisterPeerOptions
     {
-        public int m_ApiVersion { get => 1; }
+        public int ApiVersion { get => 1; }
         /// <summary>
         /// Locally unique value describing the remote user, as previously passed to RegisterPeer
         /// </summary>
-        public IntPtr m_PeerHandle;
+        public IntPtr PeerHandle;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct OnClientIntegrityViolatedCallbackInfo
     {
-        public IntPtr m_ClientData;
-        public AntiCheatClientViolationType m_ViolationType;
-        public IntPtr m_ViolationMessage;
+        public IntPtr ClientData;
+        public AntiCheatClientViolationType ViolationType;
+        public IntPtr ViolationMessage;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct OnMessageToServerCallbackInfo
     {
-        public IntPtr m_ClientData;
-        public IntPtr m_MessageData;
-        public uint m_MessageDataSizeBytes;
+        public IntPtr ClientData;
+        public IntPtr MessageData;
+        public uint MessageDataSizeBytes;
     }
 }

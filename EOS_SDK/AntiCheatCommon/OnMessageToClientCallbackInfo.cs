@@ -6,9 +6,9 @@ namespace EOS_SDK.AntiCheatCommon
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct OnMessageToClientCallbackInfo
     {
-        public IntPtr m_ClientData;
-        public IntPtr m_ClientHandle;
-        public IntPtr m_MessageData;
-        public uint m_MessageDataSizeBytes;
+        public IntPtr ClientData;
+        public IntPtr ClientHandle;
+        public IntPtr MessageData;
+        public uint MessageDataSizeBytes;
     }
 }

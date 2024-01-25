@@ -5,8 +5,8 @@ namespace EOS_SDK
 	[StructLayout(LayoutKind.Sequential, Pack = 8)]
 	public struct PageResult
 	{
-        public int m_StartIndex;
-        public int m_Count;
-        public int m_TotalCount;
+        public int StartIndex;
+        public int Count;
+        public int TotalCount;
 	}
 }

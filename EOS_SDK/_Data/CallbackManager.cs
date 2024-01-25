@@ -10,7 +10,7 @@ namespace EOS_SDK._Data
         public static void AddCallback<T>(IntPtr ptr, T callbackStruct, string name)
         {
             Callbacks.Add(ptr, (Helpers.StructToPtr(callbackStruct), nameof(callbackStruct)));
-            Logger.WriteMessage($"Callback Added {name} | {nameof(callbackStruct)}");
+            Logger.Write($"Callback Added {name} | {nameof(callbackStruct)}");
         }
 
         public static unsafe void Update() //Or Tick
@@ -19,9 +19,9 @@ namespace EOS_SDK._Data
             {
                 delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)item.Key;
                 @delegate(item.Value.stuct_ptr);
-                Logger.WriteMessage($"Callback Called {item.Value.name}");
+                Logger.Write($"Callback Called {item.Value.name}");
                 Callbacks.Remove(item.Key);
-                Logger.WriteMessage($"Callback removed {item.Value.name}");
+                Logger.Write($"Callback removed {item.Value.name}");
             }
         }
     }

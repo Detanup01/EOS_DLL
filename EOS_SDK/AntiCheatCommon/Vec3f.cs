@@ -5,8 +5,8 @@ namespace EOS_SDK.AntiCheatCommon
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct Vec3f
     {
-        public float m_x;
-        public float m_y;
-        public float m_z;
+        public float x;
+        public float y;
+        public float z;
     }
 }

@@ -17,23 +17,27 @@ namespace EOS_SDK.Platform
             public IntPtr OverrideCountryCode;
             public IntPtr OverrideLocaleCode;
             public IntPtr DeploymentId;
+            public NetworkStatus NetworkStatus;
+            public ApplicationStatus ApplicationStatus;
         }
-        static Handler InternalHandler;
-        static IntPtr HandlerPointer;
+        public static Handler InternalHandler;
+        static IntPtr HandlerPointer = IntPtr.Zero;
 
         public static IntPtr Create(WindowsOptions windowsOptions)
         {
             InternalHandler = new()
             {
                 CurrentVersion = Helpers.FromString(_Data.SDK.Version),
-                SandboxId = windowsOptions.m_SandboxId,
-                DeploymentId = windowsOptions.m_DeploymentId,
-                ClientCredentials = windowsOptions.m_ClientCredentials,
-                EncryptionKey = windowsOptions.m_EncryptionKey,
-                IsServer = windowsOptions.m_IsServer,
-                OverrideCountryCode = windowsOptions.m_OverrideCountryCode,
-                OverrideLocaleCode = windowsOptions.m_OverrideLocaleCode,
-                ProductId = windowsOptions.m_ProductId
+                SandboxId = windowsOptions.SandboxId,
+                DeploymentId = windowsOptions.DeploymentId,
+                ClientCredentials = windowsOptions.ClientCredentials,
+                EncryptionKey = windowsOptions.EncryptionKey,
+                IsServer = windowsOptions.IsServer,
+                OverrideCountryCode = windowsOptions.OverrideCountryCode,
+                OverrideLocaleCode = windowsOptions.OverrideLocaleCode,
+                ProductId = windowsOptions.ProductId,
+                NetworkStatus = NetworkStatus.Offline,
+                ApplicationStatus = ApplicationStatus.Foreground
             };
             HandlerPointer = Helpers.StructToPtr(InternalHandler);
             return HandlerPointer;
@@ -44,14 +48,16 @@ namespace EOS_SDK.Platform
             InternalHandler = new()
             {
                 CurrentVersion = Helpers.FromString(_Data.SDK.Version),
-                SandboxId = options.m_SandboxId,
-                DeploymentId = options.m_DeploymentId,
-                ClientCredentials = options.m_ClientCredentials,
-                EncryptionKey = options.m_EncryptionKey,
-                IsServer = options.m_IsServer,
-                OverrideCountryCode = options.m_OverrideCountryCode,
-                OverrideLocaleCode = options.m_OverrideLocaleCode,
-                ProductId = options.m_ProductId
+                SandboxId = options.SandboxId,
+                DeploymentId = options.DeploymentId,
+                ClientCredentials = options.ClientCredentials,
+                EncryptionKey = options.EncryptionKey,
+                IsServer = options.IsServer,
+                OverrideCountryCode = options.OverrideCountryCode,
+                OverrideLocaleCode = options.OverrideLocaleCode,
+                ProductId = options.ProductId,
+                NetworkStatus = NetworkStatus.Offline,
+                ApplicationStatus = ApplicationStatus.Foreground
             };
             HandlerPointer = Helpers.StructToPtr(InternalHandler);
             return HandlerPointer;

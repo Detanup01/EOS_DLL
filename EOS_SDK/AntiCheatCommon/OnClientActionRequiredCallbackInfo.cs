@@ -5,10 +5,10 @@ namespace EOS_SDK.AntiCheatCommon
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct OnClientActionRequiredCallbackInfo
     {
-        public IntPtr m_ClientData;
-        public IntPtr m_ClientHandle;
-        public AntiCheatCommonClientAction m_ClientAction;
-        public AntiCheatCommonClientActionReason m_ActionReasonCode;
-        public IntPtr m_ActionReasonDetailsString;
+        public IntPtr ClientData;
+        public IntPtr ClientHandle;
+        public AntiCheatCommonClientAction ClientAction;
+        public AntiCheatCommonClientActionReason ActionReasonCode;
+        public IntPtr ActionReasonDetailsString;
     }
 }

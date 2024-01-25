@@ -1,67 +1,82 @@
-﻿using System.Runtime.CompilerServices;
+﻿using EOS_SDK._Data;
+using EOS_SDK._log;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 
 namespace EOS_SDK._test
 {
     public unsafe class test_exports
     {
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void TEST(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static int TESTAddNotify(IntPtr completionDelegate)
         {
-            var version = Helpers.GetVersionFromStructPTR(options);
-            if (version == 1)
-            {
-                var input_v1 = Marshal.PtrToStructure<TESTInternalInput>(options);
-                Console.WriteLine("Version 1");
-                Console.WriteLine(input_v1.Result);
-                Console.WriteLine(input_v1.data);
-            }
-            else if (version == 2)
-            {
-                var input_v2 = Marshal.PtrToStructure<TESTInternalInputv2>(options);
-                Console.WriteLine("Version 2");
-                Console.WriteLine(input_v2.Result);
-                Console.WriteLine(input_v2.data);
-                Console.WriteLine(input_v2.value);
-            }
-            else
-            {
-                Console.WriteLine("Unrecognised version : " + version);
-            }
+            AddNotifyResult notifyResult = new()
+            { dasda = 23232 };
+            return NotifyManager.AddNotify(nameof(TESTTriggerNotify), completionDelegate, notifyResult);
+        }
 
-            TESTInternal tESTInternal = new()
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void TESTRemoveNotify(int id)
+        {
+            NotifyManager.RemoveNotify(id);
+        }
+
+        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        public static void TESTTriggerNotify(IntPtr completionDelegate)
+        {
+            TriggerNotifyResult triggerNotifyResult = new()
             { 
-                Result = 2342432,
-                Str = "yeet",
-                Str2 = Helpers.FromString("yeeet")
+                data = 342342,
+                Result = 555
             };
+            NotifyManager.TriggerNotify(nameof(TESTTriggerNotify), triggerNotifyResult);
             delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate;
-            var ptr = Helpers.StructToPtr(tESTInternal);
+            var ptr = Helpers.StructToPtr(triggerNotifyResult);
             @delegate(ptr);
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        internal struct TESTInternalInput
+        internal struct AddNotifyResult
         {
-            public int Result;
+            public int dasda;
             public int data;
+            public int result;
+
+            public override string ToString()
+            {
+                return $"dasda: {dasda} | data: {data} | result: {result}";
+            }
+
+            public static TriggerNotifyResult Set(AddNotifyResult notif)
+            {
+                return new()
+                { 
+                    data = notif.data,
+                    Result = notif.result
+                };
+            }
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        internal struct TESTInternalInputv2
+        internal struct TriggerNotifyResult
         {
             public int Result;
             public int data;
-            public int value;
-        }
 
-        [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        internal struct TESTInternal
-        {
-            public int Result;
-            [MarshalAs(UnmanagedType.LPStr)]
-            public string Str;
-            public IntPtr Str2;
+            public override string ToString()
+            {
+                return $"Result: {Result} | data: {data}";
+            }
+
+            public static AddNotifyResult Set(TriggerNotifyResult result)
+            {
+                return new()
+                {
+                    data = result.data,
+                    result = result.Result
+                };
+            }
         }
     }
 }

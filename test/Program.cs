@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace test
@@ -8,76 +9,61 @@ namespace test
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-            TESTInternalInput tESTInternal = new()
-            {
-                Result = 1
-            };
-            Console.WriteLine("before test!");
-            TEST(IntPtr.Zero, ref tESTInternal, IntPtr.Zero, OnLoginCallbackInternalImplementation);
-            Console.WriteLine("after test!");
-            //2
-            TESTInternalInput tESTInternal2 = new()
-            {
-                Result = 2
-            };
-            Console.WriteLine("before test!");
-            TEST(IntPtr.Zero, ref tESTInternal2, IntPtr.Zero, OnLoginCallbackInternalImplementation);
-            Console.WriteLine("after test!");
-            //other
-            TESTInternalInput other = new()
-            {
-                Result = 2131323
-            };
-            Console.WriteLine("before test!");
-            TEST(IntPtr.Zero, ref other, IntPtr.Zero, OnLoginCallbackInternalImplementation);
-            Console.WriteLine("after test!");
+            var id = TESTAddNotify(OnOnAddNotifyResultImplementation);
+            Console.WriteLine("TESTAddNotify added!  " + id);
+            TESTTriggerNotify(OnTriggerNotifyResultImplementation);
+            Console.WriteLine("TESTTriggerNotify triggered!");
+            TESTRemoveNotify(id);
+            Console.WriteLine("TESTRemoveNotify removed!  " + id);
         }
+
 
         [DllImport("EOSSDK-Win64-Shipping")]
-        internal static extern void TEST(System.IntPtr handle, ref TESTInternalInput options, System.IntPtr clientData, OnTESTInternal completionDelegate);
+        public static extern int TESTAddNotify(OnAddNotifyResult completionDelegate);
 
-        [System.Runtime.InteropServices.UnmanagedFunctionPointer( System.Runtime.InteropServices.CallingConvention.Cdecl)]
-        internal delegate void OnTESTInternal(ref TESTInternal data);
+        [DllImport("EOSSDK-Win64-Shipping")]
+        public static extern void TESTRemoveNotify(int id);
 
-        [MonoPInvokeCallback(typeof(OnTESTInternal))]
-        internal static void OnLoginCallbackInternalImplementation(ref TESTInternal data)
+        [DllImport("EOSSDK-Win64-Shipping")]
+        public static extern void TESTTriggerNotify(OnTriggerNotifyResult completionDelegate);
+
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
+        internal struct AddNotifyResult
         {
-            Console.WriteLine("OnLoginCallbackInternalImplementation!");
+            public int dasda;
+            public int data;
+            public int result;
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack = 8)]
+        internal struct TriggerNotifyResult
+        {
+            public int Result;
+            public int data;
+        }
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate void OnAddNotifyResult(ref AddNotifyResult data);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        internal delegate void OnTriggerNotifyResult(ref TriggerNotifyResult data);
+
+        [MonoPInvokeCallback(typeof(OnAddNotifyResult))]
+        internal static void OnOnAddNotifyResultImplementation(ref AddNotifyResult data)
+        {
+            Console.WriteLine("OnOnAddNotifyResultImplementation!");
+            Console.WriteLine(data.dasda);
+            Console.WriteLine(data.data);
+            Console.WriteLine(data.result);
+        }
+
+        [MonoPInvokeCallback(typeof(OnAddNotifyResult))]
+        internal static void OnTriggerNotifyResultImplementation(ref TriggerNotifyResult data)
+        {
+            Console.WriteLine("OnTriggerNotifyResultImplementation!");
+            Console.WriteLine(data.data);
             Console.WriteLine(data.Result);
-            Console.WriteLine(data.Str);
-            string str;
-            GetAllocation(data.Str2, out str);
-            Console.WriteLine(str);
         }
 
-        private static int GetAnsiStringLength(IntPtr address)
-        {
-            int length = 0;
-            while (Marshal.ReadByte(address, length) != 0)
-            {
-                ++length;
-            }
-
-            return length;
-        }
-
-        private static void GetAllocation(IntPtr source, out string target)
-        {
-            target = null;
-
-            if (source == IntPtr.Zero)
-            {
-                return;
-            }
-
-            // C style strlen
-            int length = GetAnsiStringLength(source);
-
-            // +1 byte for the null terminator.
-            byte[] bytes = new byte[length + 1];
-            Marshal.Copy(source, bytes, 0, length + 1);
-
-            target = Encoding.UTF8.GetString(bytes);
-        }
     }
 }

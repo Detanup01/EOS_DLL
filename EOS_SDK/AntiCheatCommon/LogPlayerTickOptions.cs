@@ -6,12 +6,12 @@ namespace EOS_SDK.AntiCheatCommon
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LogPlayerTickOptions
     {
-        public int m_ApiVersion;
-        public IntPtr m_PlayerHandle;
-        public IntPtr m_PlayerPosition;
-        public IntPtr m_PlayerViewRotation;
-        public int m_IsPlayerViewZoomed;
-        public float m_PlayerHealth;
-        public AntiCheatCommonPlayerMovementState m_PlayerMovementState;
+        public int ApiVersion;
+        public IntPtr PlayerHandle;
+        public IntPtr PlayerPosition;
+        public IntPtr PlayerViewRotation;
+        public int IsPlayerViewZoomed;
+        public float PlayerHealth;
+        public AntiCheatCommonPlayerMovementState PlayerMovementState;
     }
 }

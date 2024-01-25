@@ -128,6 +128,11 @@ namespace EOS_SDK
             Marshal.WriteIntPtr(outPtr, ptr);
         }
 
+        public static void StringWriteOut(string str, IntPtr outPtr)
+        {
+            Marshal.WriteIntPtr(outPtr, FromString(str));
+        }
+
         public static int GetVersionFromStructPTR(IntPtr struct_ptr)
         {
             var vers_struct = Marshal.PtrToStructure<VersionStruct>(struct_ptr);

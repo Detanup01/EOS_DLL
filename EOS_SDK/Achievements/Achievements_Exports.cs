@@ -123,8 +123,8 @@ namespace EOS_SDK.Achievements
             {
                 OnQueryDefinitionsCompleteCallbackInfo info = new OnQueryDefinitionsCompleteCallbackInfo()
                 {
-                    m_ClientData = clientData,
-                    m_ResultCode = Result.Success
+                    ClientData = clientData,
+                    ResultCode = Result.Success
                 };
                 CallbackManager.AddCallback(completionDelegate, info, nameof(EOS_Achievements_QueryDefinitions));
             }
