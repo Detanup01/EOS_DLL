@@ -138,6 +138,21 @@ namespace EOS_SDK.Achievements
         public IntPtr UserId; //ProductUserId
         public uint AchievementsCount;
         public IntPtr AchievementIds; //string[]
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public static OnAchievementsUnlockedCallbackInfo Set(OnAchievementsUnlockedCallbackInfo main, UnlockAchievementsOptions unlockAchievements)
+        {
+            var ret = new OnAchievementsUnlockedCallbackInfo();
+            ret = main;
+            ret.UserId = unlockAchievements.UserId;
+            ret.AchievementIds = unlockAchievements.AchievementIds;
+            ret.AchievementsCount = unlockAchievements.AchievementsCount;
+            return ret;
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]

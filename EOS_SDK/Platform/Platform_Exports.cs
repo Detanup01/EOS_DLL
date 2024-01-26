@@ -1,4 +1,5 @@
 ﻿using EOS_SDK._Data;
+using EOS_SDK.Achievements;
 using EOS_SDK.Windows;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -31,7 +32,7 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static IntPtr EOS_Platform_GetAchievementsInterface(IntPtr handle)
         {
-            return 0;
+            return Achievement_Handler.Create();
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -267,6 +268,7 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_Platform_Release(IntPtr handle)
         {
+            Platform_Hander.Free(handle);
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]

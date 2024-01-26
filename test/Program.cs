@@ -9,17 +9,17 @@ namespace test
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-            var id = TESTAddNotify(OnOnAddNotifyResultImplementation);
-            Console.WriteLine("TESTAddNotify added!  " + id);
+            var id = TESTAddNotify(666,OnOnAddNotifyResultImplementation);
+            Console.WriteLine("TESTAddNotifyID:  " + id);
             TESTTriggerNotify(OnTriggerNotifyResultImplementation);
             Console.WriteLine("TESTTriggerNotify triggered!");
             TESTRemoveNotify(id);
-            Console.WriteLine("TESTRemoveNotify removed!  " + id);
+            Console.WriteLine("TESTRemoveNotify removed: " + id);
         }
 
 
         [DllImport("EOSSDK-Win64-Shipping")]
-        public static extern int TESTAddNotify(OnAddNotifyResult completionDelegate);
+        public static extern int TESTAddNotify(int dataToPass ,OnAddNotifyResult completionDelegate);
 
         [DllImport("EOSSDK-Win64-Shipping")]
         public static extern void TESTRemoveNotify(int id);
@@ -30,7 +30,7 @@ namespace test
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         internal struct AddNotifyResult
         {
-            public int dasda;
+            public int dataPassed;
             public int data;
             public int result;
         }
@@ -52,7 +52,7 @@ namespace test
         internal static void OnOnAddNotifyResultImplementation(ref AddNotifyResult data)
         {
             Console.WriteLine("OnOnAddNotifyResultImplementation!");
-            Console.WriteLine(data.dasda);
+            Console.WriteLine(data.dataPassed);
             Console.WriteLine(data.data);
             Console.WriteLine(data.result);
         }

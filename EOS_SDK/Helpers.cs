@@ -62,8 +62,17 @@ namespace EOS_SDK
                 T item = array[itemIndex];
                 if (IsNotValueType)
                 {
-                    IntPtr address_item = Marshal.AllocHGlobal(SizeOfT);
-                    Marshal.StructureToPtr(item, address, false);
+                    IntPtr address_item;
+                    if (typeof(T) == typeof(string))
+                    {
+                        address_item = FromString((string)(object)item);
+                    }
+                    else
+                    {
+                        address_item = Marshal.AllocHGlobal(SizeOfT);
+                        Marshal.StructureToPtr(item, address, false);
+                    }
+
 
                     IntPtr itemAddress = new IntPtr(address_item.ToInt64() + itemIndex * SizeOfT);
                     Marshal.StructureToPtr(address_item, itemAddress, false);
@@ -117,6 +126,14 @@ namespace EOS_SDK
         public static IntPtr StructToPtr<T>(T _struct)
         {
             var itemSize = Marshal.SizeOf(typeof(T));
+            IntPtr address = Marshal.AllocHGlobal(itemSize);
+            Marshal.StructureToPtr(_struct, address, false);
+            return address;
+        }
+
+        public static IntPtr StructToPtr(object _struct, Type type)
+        {
+            var itemSize = Marshal.SizeOf(type);
             IntPtr address = Marshal.AllocHGlobal(itemSize);
             Marshal.StructureToPtr(_struct, address, false);
             return address;

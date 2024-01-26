@@ -69,5 +69,14 @@ namespace EOS_SDK.Platform
                 return false;
             return ptr == HandlerPointer;
         }
+
+
+        public static void Free(IntPtr ptr)
+        {
+            if (CheckIfPointerValid(HandlerPointer))
+                Marshal.FreeHGlobal(HandlerPointer);
+            Marshal.FreeHGlobal(ptr);
+
+        }
     }
 }
