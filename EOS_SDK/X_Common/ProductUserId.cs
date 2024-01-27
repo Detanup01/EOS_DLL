@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
 namespace EOS_SDK.Others
@@ -45,6 +46,11 @@ namespace EOS_SDK.Others
             var ptr = Helpers.FromString(Static_ProductUserId);
             Marshal.WriteIntPtr(outBuffer, 0, ptr);
             return (int)Result.Success;
+        }
+        public static string Generate()
+        {
+            var byets = RandomNumberGenerator.GetBytes(ProductuseridMaxLength / 2);
+            return Convert.ToHexString(byets).ToLower();
         }
     }
 }

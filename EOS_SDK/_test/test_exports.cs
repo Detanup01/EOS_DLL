@@ -1,5 +1,6 @@
 ﻿using EOS_SDK._Data;
 using EOS_SDK._log;
+using EOS_SDK.Others;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -12,6 +13,7 @@ namespace EOS_SDK._test
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong TESTAddNotify(int number, IntPtr completionDelegate)
         {
+            Console.WriteLine(EpicAccountId.Generate());
             AddNotifyResult notifyResult = new()
             { dataPassed = number };
             Console.WriteLine("DLL_TESTAddNotify");
