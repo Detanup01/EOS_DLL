@@ -10,7 +10,7 @@ namespace EOS_SDK.AntiCheatServer
         public static ulong EOS_AntiCheatServer_AddNotifyClientActionRequired(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
             var _AddNotifyClientActionRequiredOptions = Marshal.PtrToStructure<AddNotifyClientActionRequiredOptions>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatServer.OnClientActionRequiredCallback
+            delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatServer.OnClientActionRequiredCallback
             return 0;
         }
 
@@ -18,7 +18,7 @@ namespace EOS_SDK.AntiCheatServer
         public static ulong EOS_AntiCheatServer_AddNotifyClientAuthStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
             var _AddNotifyClientAuthStatusChangedOptions = Marshal.PtrToStructure<AddNotifyClientAuthStatusChangedOptions>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatServer.OnClientAuthStatusChangedCallback
+            delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatServer.OnClientAuthStatusChangedCallback
             return 0;
         }
 
@@ -26,7 +26,7 @@ namespace EOS_SDK.AntiCheatServer
         public static ulong EOS_AntiCheatServer_AddNotifyMessageToClient(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
             var _AddNotifyMessageToClientOptions = Marshal.PtrToStructure<AddNotifyMessageToClientOptions>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatServer.OnMessageToClientCallback
+            delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatServer.OnMessageToClientCallback
             return 0;
         }
 

@@ -26,7 +26,7 @@ namespace EOS_SDK.ProgressionSnapshot
         public static void EOS_ProgressionSnapshot_DeleteSnapshot(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _DeleteSnapshotOptions = Marshal.PtrToStructure<DeleteSnapshotOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: ProgressionSnapshot.OnDeleteSnapshotCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: ProgressionSnapshot.OnDeleteSnapshotCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -39,7 +39,7 @@ namespace EOS_SDK.ProgressionSnapshot
         public static void EOS_ProgressionSnapshot_SubmitSnapshot(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _SubmitSnapshotOptions = Marshal.PtrToStructure<SubmitSnapshotOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: ProgressionSnapshot.OnSubmitSnapshotCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: ProgressionSnapshot.OnSubmitSnapshotCallback
         }
 #endif
     }

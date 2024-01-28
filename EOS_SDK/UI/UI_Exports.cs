@@ -20,14 +20,14 @@ namespace EOS_SDK.UI
         public static ulong EOS_UI_AddNotifyDisplaySettingsUpdated(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
 		{
 			var _AddNotifyDisplaySettingsUpdatedOptions = Marshal.PtrToStructure<AddNotifyDisplaySettingsUpdatedOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: UI.OnDisplaySettingsUpdatedCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notificationFn; //Delegate Class was: UI.OnDisplaySettingsUpdatedCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_UI_AddNotifyMemoryMonitor(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
 		{
 			var _AddNotifyMemoryMonitorOptions = Marshal.PtrToStructure<AddNotifyMemoryMonitorOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: UI.OnMemoryMonitorCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notificationFn; //Delegate Class was: UI.OnMemoryMonitorCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -63,7 +63,7 @@ namespace EOS_SDK.UI
         public static void EOS_UI_HideFriends(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _HideFriendsOptions = Marshal.PtrToStructure<HideFriendsOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnHideFriendsCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnHideFriendsCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -132,28 +132,28 @@ namespace EOS_SDK.UI
         public static void EOS_UI_ShowBlockPlayer(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _ShowBlockPlayerOptions = Marshal.PtrToStructure<ShowBlockPlayerOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnShowBlockPlayerCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnShowBlockPlayerCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_UI_ShowFriends(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _ShowFriendsOptions = Marshal.PtrToStructure<ShowFriendsOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnShowFriendsCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnShowFriendsCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_UI_ShowNativeProfile(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _ShowNativeProfileOptions = Marshal.PtrToStructure<ShowNativeProfileOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnShowNativeProfileCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnShowNativeProfileCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_UI_ShowReportPlayer(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _ShowReportPlayerOptions = Marshal.PtrToStructure<ShowReportPlayerOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnShowReportPlayerCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: UI.OnShowReportPlayerCallback
         }
 #endif
     }

@@ -32,14 +32,14 @@ namespace EOS_SDK.Stats
         public static void EOS_Stats_IngestStat(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _IngestStatOptions = Marshal.PtrToStructure<IngestStatOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Stats.OnIngestStatCompleteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Stats.OnIngestStatCompleteCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_Stats_QueryStats(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _QueryStatsOptions = Marshal.PtrToStructure<QueryStatsOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Stats.OnQueryStatsCompleteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Stats.OnQueryStatsCompleteCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]

@@ -13,7 +13,7 @@ namespace EOS_SDK.Reports
         public static void EOS_Reports_SendPlayerBehaviorReport(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _SendPlayerBehaviorReportOptions = Marshal.PtrToStructure<SendPlayerBehaviorReportOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Reports.OnSendPlayerBehaviorReportCompleteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Reports.OnSendPlayerBehaviorReportCompleteCallback
         }
 #endif
     }

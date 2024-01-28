@@ -46,7 +46,7 @@ namespace EOS_SDK.TitleStorage
         public static Result EOS_TitleStorage_DeleteCache(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionCallback)
 		{
 			var _DeleteCacheOptions = Marshal.PtrToStructure<DeleteCacheOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: TitleStorage.OnDeleteCacheCompleteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionCallback; //Delegate Class was: TitleStorage.OnDeleteCacheCompleteCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -64,21 +64,21 @@ namespace EOS_SDK.TitleStorage
         public static void EOS_TitleStorage_QueryFile(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionCallback)
 		{
 			var _QueryFileOptions = Marshal.PtrToStructure<QueryFileOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: TitleStorage.OnQueryFileCompleteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionCallback; //Delegate Class was: TitleStorage.OnQueryFileCompleteCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_TitleStorage_QueryFileList(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionCallback)
 		{
 			var _QueryFileListOptions = Marshal.PtrToStructure<QueryFileListOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: TitleStorage.OnQueryFileListCompleteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionCallback; //Delegate Class was: TitleStorage.OnQueryFileListCompleteCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static IntPtr EOS_TitleStorage_ReadFile(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionCallback)
 		{
 			var _ReadFileOptions = Marshal.PtrToStructure<ReadFileOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionCallback; //Delegate Class was: TitleStorage.OnReadFileCompleteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionCallback; //Delegate Class was: TitleStorage.OnReadFileCompleteCallback
         }
 #endif
     }

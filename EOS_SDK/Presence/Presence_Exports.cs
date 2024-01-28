@@ -49,14 +49,14 @@ namespace EOS_SDK.Presence
         public static ulong EOS_Presence_AddNotifyJoinGameAccepted(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
 		{
 			var _AddNotifyJoinGameAcceptedOptions = Marshal.PtrToStructure<AddNotifyJoinGameAcceptedOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: Presence.OnJoinGameAcceptedCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notificationFn; //Delegate Class was: Presence.OnJoinGameAcceptedCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_Presence_AddNotifyOnPresenceChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationHandler)
 		{
 			var _AddNotifyOnPresenceChangedOptions = Marshal.PtrToStructure<AddNotifyOnPresenceChangedOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationHandler; //Delegate Class was: Presence.OnPresenceChangedCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notificationHandler; //Delegate Class was: Presence.OnPresenceChangedCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -92,7 +92,7 @@ namespace EOS_SDK.Presence
         public static void EOS_Presence_QueryPresence(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _QueryPresenceOptions = Marshal.PtrToStructure<QueryPresenceOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Presence.OnQueryPresenceCompleteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Presence.OnQueryPresenceCompleteCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -109,7 +109,7 @@ namespace EOS_SDK.Presence
         public static void EOS_Presence_SetPresence(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _SetPresenceOptions = Marshal.PtrToStructure<SetPresenceOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Presence.SetPresenceCompleteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Presence.SetPresenceCompleteCallback
         }
 #endif
     }

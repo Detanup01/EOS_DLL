@@ -20,35 +20,35 @@ namespace EOS_SDK.P2P
         public static ulong EOS_P2P_AddNotifyIncomingPacketQueueFull(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr incomingPacketQueueFullHandler)
 		{
 			var _AddNotifyIncomingPacketQueueFullOptions = Marshal.PtrToStructure<AddNotifyIncomingPacketQueueFullOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)incomingPacketQueueFullHandler; //Delegate Class was: P2P.OnIncomingPacketQueueFullCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)incomingPacketQueueFullHandler; //Delegate Class was: P2P.OnIncomingPacketQueueFullCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_P2P_AddNotifyPeerConnectionClosed(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr connectionClosedHandler)
 		{
 			var _AddNotifyPeerConnectionClosedOptions = Marshal.PtrToStructure<AddNotifyPeerConnectionClosedOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)connectionClosedHandler; //Delegate Class was: P2P.OnRemoteConnectionClosedCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)connectionClosedHandler; //Delegate Class was: P2P.OnRemoteConnectionClosedCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_P2P_AddNotifyPeerConnectionEstablished(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr connectionEstablishedHandler)
 		{
 			var _AddNotifyPeerConnectionEstablishedOptions = Marshal.PtrToStructure<AddNotifyPeerConnectionEstablishedOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)connectionEstablishedHandler; //Delegate Class was: P2P.OnPeerConnectionEstablishedCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)connectionEstablishedHandler; //Delegate Class was: P2P.OnPeerConnectionEstablishedCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_P2P_AddNotifyPeerConnectionInterrupted(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr connectionInterruptedHandler)
 		{
 			var _AddNotifyPeerConnectionInterruptedOptions = Marshal.PtrToStructure<AddNotifyPeerConnectionInterruptedOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)connectionInterruptedHandler; //Delegate Class was: P2P.OnPeerConnectionInterruptedCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)connectionInterruptedHandler; //Delegate Class was: P2P.OnPeerConnectionInterruptedCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_P2P_AddNotifyPeerConnectionRequest(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr connectionRequestHandler)
 		{
 			var _AddNotifyPeerConnectionRequestOptions = Marshal.PtrToStructure<AddNotifyPeerConnectionRequestOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)connectionRequestHandler; //Delegate Class was: P2P.OnIncomingConnectionRequestCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)connectionRequestHandler; //Delegate Class was: P2P.OnIncomingConnectionRequestCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -85,7 +85,7 @@ namespace EOS_SDK.P2P
         public static Result EOS_P2P_GetPacketQueueInfo(IntPtr handle, IntPtr options, IntPtr P2P.PacketQueueInfo outPacketQueueInfo)
 		{
 			var _GetPacketQueueInfoOptions = Marshal.PtrToStructure<GetPacketQueueInfoOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)P2P.PacketQueueInfo; //Delegate Class was: [Out]
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)P2P.PacketQueueInfo; //Delegate Class was: [Out]
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -104,14 +104,14 @@ namespace EOS_SDK.P2P
         public static void EOS_P2P_QueryNATType(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _QueryNATTypeOptions = Marshal.PtrToStructure<QueryNATTypeOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: P2P.OnQueryNATTypeCompleteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: P2P.OnQueryNATTypeCompleteCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static Result EOS_P2P_ReceivePacket(IntPtr handle, IntPtr options, IntPtr outPeerId, IntPtr P2P.SocketIdpublic outSocketId, IntPtr byte outChannel, IntPtr outData, IntPtr uint outBytesWritten)
 		{
 			var _ReceivePacketOptions = Marshal.PtrToStructure<ReceivePacketOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)P2P.SocketIdpublic; //Delegate Class was: [Out]
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)P2P.SocketIdpublic; //Delegate Class was: [Out]
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]

@@ -13,21 +13,21 @@ namespace EOS_SDK.Friends
         public static void EOS_Friends_AcceptInvite(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _AcceptInviteOptions = Marshal.PtrToStructure<AcceptInviteOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Friends.OnAcceptInviteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Friends.OnAcceptInviteCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_Friends_AddNotifyBlockedUsersUpdate(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr blockedUsersUpdateHandler)
 		{
 			var _AddNotifyBlockedUsersUpdateOptions = Marshal.PtrToStructure<AddNotifyBlockedUsersUpdateOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)blockedUsersUpdateHandler; //Delegate Class was: Friends.OnBlockedUsersUpdateCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)blockedUsersUpdateHandler; //Delegate Class was: Friends.OnBlockedUsersUpdateCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_Friends_AddNotifyFriendsUpdate(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr friendsUpdateHandler)
 		{
 			var _AddNotifyFriendsUpdateOptions = Marshal.PtrToStructure<AddNotifyFriendsUpdateOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)friendsUpdateHandler; //Delegate Class was: Friends.OnFriendsUpdateCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)friendsUpdateHandler; //Delegate Class was: Friends.OnFriendsUpdateCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -64,14 +64,14 @@ namespace EOS_SDK.Friends
         public static void EOS_Friends_QueryFriends(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _QueryFriendsOptions = Marshal.PtrToStructure<QueryFriendsOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Friends.OnQueryFriendsCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Friends.OnQueryFriendsCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_Friends_RejectInvite(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _RejectInviteOptions = Marshal.PtrToStructure<RejectInviteOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Friends.OnRejectInviteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Friends.OnRejectInviteCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -88,7 +88,7 @@ namespace EOS_SDK.Friends
         public static void EOS_Friends_SendInvite(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _SendInviteOptions = Marshal.PtrToStructure<SendInviteOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Friends.OnSendInviteCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Friends.OnSendInviteCallback
         }
 #endif
     }

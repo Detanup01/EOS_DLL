@@ -151,6 +151,15 @@ namespace EOS_SDK.Auth
         public IntPtr LocalUserId;
         public LoginStatus PrevStatus;
         public LoginStatus CurrentStatus;
+
+        public LoginStatusChangedCallbackInfo Set(LoginStatusChangedCallbackInfo main, LoginStatusChangedCallbackInfo setter)
+        {
+            var loginStatusChangedCallbackInfo = new LoginStatusChangedCallbackInfo();
+            loginStatusChangedCallbackInfo = main;
+            loginStatusChangedCallbackInfo.CurrentStatus = setter.CurrentStatus;
+            loginStatusChangedCallbackInfo.LocalUserId = setter.LocalUserId;
+            return loginStatusChangedCallbackInfo;
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]

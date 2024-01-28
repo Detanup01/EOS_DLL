@@ -16,7 +16,7 @@ namespace EOS_SDK.AntiCheatClient
         public static ulong EOS_AntiCheatClient_AddNotifyClientIntegrityViolated(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
             var _AddNotifyClientIntegrityViolatedOptions = Marshal.PtrToStructure<AddNotifyClientIntegrityViolatedOptions>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnClientIntegrityViolatedCallback
+            delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnClientIntegrityViolatedCallback
             return 0;
         }
 
@@ -24,7 +24,7 @@ namespace EOS_SDK.AntiCheatClient
         public static ulong EOS_AntiCheatClient_AddNotifyMessageToPeer(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
             var _AddNotifyMessageToPeerOptions = Marshal.PtrToStructure<AddNotifyMessageToPeerOptions>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnMessageToPeerCallback
+            delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnMessageToPeerCallback
             return 0;
         }
 
@@ -32,7 +32,7 @@ namespace EOS_SDK.AntiCheatClient
         public static ulong EOS_AntiCheatClient_AddNotifyMessageToServer(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
             var _AddNotifyMessageToServerOptions = Marshal.PtrToStructure<AddNotifyMessageToServerOptions>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnMessageToServerCallback
+            delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnMessageToServerCallback
             return 0;
         }
 
@@ -40,7 +40,7 @@ namespace EOS_SDK.AntiCheatClient
         public static ulong EOS_AntiCheatClient_AddNotifyPeerActionRequired(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
             var _AddNotifyPeerActionRequiredOptions = Marshal.PtrToStructure<AddNotifyPeerActionRequiredOptions>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnPeerActionRequiredCallback
+            delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnPeerActionRequiredCallback
             return 0;
         }
 
@@ -48,7 +48,7 @@ namespace EOS_SDK.AntiCheatClient
         public static ulong EOS_AntiCheatClient_AddNotifyPeerAuthStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notificationFn)
         {
             var _AddNotifyPeerAuthStatusChangedOptions = Marshal.PtrToStructure<AddNotifyPeerAuthStatusChangedOptions>(options);
-            delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnPeerAuthStatusChangedCallback
+            delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notificationFn; //Delegate Class was: AntiCheatClient.OnPeerAuthStatusChangedCallback
             return 0;
         }
 

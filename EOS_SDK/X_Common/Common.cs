@@ -11,11 +11,19 @@ namespace EOS_SDK.Others
         public static int EOS_ByteArray_ToString(IntPtr byteArray, uint length, IntPtr outBuffer, uint inOutBufferLength)
         {
             List<byte> bytes = new List<byte>();
-            for (int i = 0; i <= length; i++ )
+            try
             {
-                byte readed = Marshal.ReadByte(byteArray, i);
-                bytes.Add(readed);
+                for (int i = 0; i <= length; i++)
+                {
+                    byte readed = Marshal.ReadByte(byteArray, i);
+                    bytes.Add(readed);
+                }
             }
+            catch 
+            {
+                _log.Logger.WriteWarn("EOS_ByteArray_ToString Error, cannot read more bytes.");
+            }
+
             var str = Convert.ToHexString(bytes.ToArray());
             if (str.Length > inOutBufferLength)
                 return (int)Result.InvalidParameters;

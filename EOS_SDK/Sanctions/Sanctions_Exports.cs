@@ -31,7 +31,7 @@ namespace EOS_SDK.Sanctions
         public static void EOS_Sanctions_QueryActivePlayerSanctions(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _QueryActivePlayerSanctionsOptions = Marshal.PtrToStructure<QueryActivePlayerSanctionsOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)completionDelegate; //Delegate Class was: Sanctions.OnQueryActivePlayerSanctionsCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Sanctions.OnQueryActivePlayerSanctionsCallback
         }
 #endif
     }

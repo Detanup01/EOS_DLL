@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace EOS_SDK.Others
@@ -52,6 +53,16 @@ namespace EOS_SDK.Others
         {
             var byets = RandomNumberGenerator.GetBytes(EpicaccountidMaxLength / 2);
             return Convert.ToHexString(byets).ToLower();
+        }
+
+        public static string Generator(string productId, string username)
+        {
+            byte[] bytes = new byte[EpicaccountidMaxLength / 2];
+
+            for (int i = 0; i < EpicaccountidMaxLength / 2; ++i)
+                bytes[i] = (byte)(productId[i] ^ username[i % username.Length] ^ 0xEA); // EA aka EpicAccound
+
+            return Convert.ToHexString(bytes).ToLower();
         }
     }
 }

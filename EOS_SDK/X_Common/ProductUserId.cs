@@ -52,5 +52,15 @@ namespace EOS_SDK.Others
             var byets = RandomNumberGenerator.GetBytes(ProductuseridMaxLength / 2);
             return Convert.ToHexString(byets).ToLower();
         }
+
+        public static string Generator(string productId, string username)
+        {
+            byte[] bytes = new byte[ProductuseridMaxLength / 2];
+
+            for (int i = 0; i < ProductuseridMaxLength / 2; ++i)
+                bytes[i] = (byte)(productId[i] ^ username[i % username.Length] ^ 0x666); // for productUser
+
+            return Convert.ToHexString(bytes).ToLower();
+        }
     }
 }

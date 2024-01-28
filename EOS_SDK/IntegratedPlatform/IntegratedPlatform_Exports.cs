@@ -25,7 +25,7 @@ namespace EOS_SDK.IntegratedPlatform
         public static ulong EOS_IntegratedPlatform_AddNotifyUserLoginStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr callbackFunction)
 		{
 			var _AddNotifyUserLoginStatusChangedOptions = Marshal.PtrToStructure<AddNotifyUserLoginStatusChangedOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)callbackFunction; //Delegate Class was: IntegratedPlatform.OnUserLoginStatusChangedCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)callbackFunction; //Delegate Class was: IntegratedPlatform.OnUserLoginStatusChangedCallback
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -61,7 +61,7 @@ namespace EOS_SDK.IntegratedPlatform
         public static Result EOS_IntegratedPlatform_SetUserPreLogoutCallback(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr callbackFunction)
 		{
 			var _SetUserPreLogoutCallbackOptions = Marshal.PtrToStructure<SetUserPreLogoutCallbackOptions>(options);
-			delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void> @delegate = (delegate* unmanaged[Cdecl, Stdcall]<IntPtr, void>)callbackFunction; //Delegate Class was: IntegratedPlatform.OnUserPreLogoutCallback
+			delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)callbackFunction; //Delegate Class was: IntegratedPlatform.OnUserPreLogoutCallback
         }
 #endif
     }
