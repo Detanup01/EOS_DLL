@@ -1,0 +1,17 @@
+This describe what is what in the eos.json file.
+
+IsLogEnabled: It enables or disables logging to a directory named eos_log
+
+GenerateNewIds: This generate new ID based on UserName and AppId
+
+UserName: Your account name.
+
+AppId: Epic's Application Id
+
+AccountId: EpicAccountId, not much to say. (Be different than EpicProductUserId!)
+
+EpicProductUserId: EpicProductUserId, not much to say. (Be different than AccountId!)
+
+RSA_Private: RSA Private Base64 XML. If none it will generate new.
+
+RSA_Public: RSA Public Base64 XML. If none it will generate new.

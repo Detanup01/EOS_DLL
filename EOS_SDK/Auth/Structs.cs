@@ -7,6 +7,11 @@ namespace EOS_SDK.Auth
     public struct AddNotifyLoginStatusChangedOptions
     {
         public int ApiVersion;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -14,12 +19,22 @@ namespace EOS_SDK.Auth
     {
         public int ApiVersion;
         public IntPtr AccountId;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}, AccountId: {Helpers.ToString(AccountId)}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyUserAuthTokenOptions
     {
         public int ApiVersion;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -27,6 +42,11 @@ namespace EOS_SDK.Auth
     {
         public int ApiVersion;
         public IntPtr RefreshToken;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}, RefreshToken: {Helpers.ToString(RefreshToken)}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -36,6 +56,11 @@ namespace EOS_SDK.Auth
         public LinkAccountFlags LinkAccountFlags;
         public IntPtr ContinuanceToken;
         public IntPtr LocalUserId;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}, LinkAccountFlags: {LinkAccountFlags}, ContinuanceToken: {ContinuanceToken}, LocalUserId: {Helpers.ToString(LocalUserId)}";
+        }
     }
 
     [APIVersion(3)]
@@ -46,6 +71,11 @@ namespace EOS_SDK.Auth
         public IntPtr Credentials;
         public AuthScopeFlags ScopeFlags;
         public LoginFlags LoginFlags;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}, Credentials: {Credentials}, ScopeFlags: {ScopeFlags}, LoginFlags: {LoginFlags}";
+        }
     }
 
     [APIVersion(2)]
@@ -55,6 +85,11 @@ namespace EOS_SDK.Auth
         public int ApiVersion;
         public IntPtr Credentials;
         public AuthScopeFlags ScopeFlags;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}, Credentials: {Credentials}, ScopeFlags: {ScopeFlags}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -62,6 +97,11 @@ namespace EOS_SDK.Auth
     {
         public int ApiVersion;
         public IntPtr LocalUserId;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}, LocalUserId: {Helpers.ToString(LocalUserId)}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -70,6 +110,11 @@ namespace EOS_SDK.Auth
         public int ApiVersion;
         public IntPtr LocalUserId;
         public IntPtr TargetAccountId;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}, LocalUserId: {Helpers.ToString(LocalUserId)}, TargetAccountId: {Helpers.ToString(TargetAccountId)}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -77,6 +122,11 @@ namespace EOS_SDK.Auth
     {
         public int ApiVersion;
         public IntPtr IdToken;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}, IdToken: {IdToken}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -84,6 +134,11 @@ namespace EOS_SDK.Auth
     {
         public int ApiVersion;
         public IntPtr AuthToken;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}, AuthToken: {AuthToken}";
+        }
     }
 
 
@@ -92,6 +147,11 @@ namespace EOS_SDK.Auth
     {
         public int ApiVersion;
         public IntPtr VerificationURI;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}, VerificationURI: {VerificationURI}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -103,6 +163,11 @@ namespace EOS_SDK.Auth
         public LoginCredentialType Type;
         public IntPtr SystemAuthCredentialsOptions;
         public ExternalCredentialType ExternalType;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -118,6 +183,11 @@ namespace EOS_SDK.Auth
         public int ApiVersion;
         public IntPtr AccountId;
         public IntPtr JsonWebToken;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}, AccountId: {Helpers.ToString(AccountId)}, JsonWebToken: {Helpers.ToString(JsonWebToken)}";
+        }
     }
 
 
@@ -178,6 +248,11 @@ namespace EOS_SDK.Auth
         public IntPtr VerificationURI;
         public IntPtr ExpiresIn;
         public IntPtr VerificationURIComplete;
+
+        public override string ToString()
+        {
+            return $"ApiVersion: {ApiVersion}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]

@@ -7,6 +7,11 @@ namespace EOS_SDK.Platform
     {
         public IntPtr ClientId;
         public IntPtr ClientSecret;
+
+        public override string ToString()
+        {
+            return $"ClientId: {Helpers.ToString(ClientId)}, ClientSecret: {Helpers.ToString(ClientSecret)}";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]

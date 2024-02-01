@@ -5,8 +5,8 @@ namespace EOS_SDK._Data
 {
     public class Config
     {
-        public static Config GetConfig() 
-        { 
+        public static Config GetConfig()
+        {
             if (File.Exists("eos.json"))
             {
                 var config = JsonConvert.DeserializeObject<Config>(File.ReadAllText("eos.json"));
@@ -25,11 +25,18 @@ namespace EOS_SDK._Data
             return config;
         }
 
+        public static void Save(Config config)
+        {
+            File.WriteAllText("eos.json", JsonConvert.SerializeObject(config));
+        }
+
         public bool IsLogEnabled = false;
         public bool GenerateNewIds = true;
         public string UserName = "DefaultName";
         public string AppId = "b4a0d2d15acb4db894a599b810297543";
         public string AccountId = "ffaabbccddeeff0123456789deadc0de";
         public string EpicProductUserId = "deadc0deffaabbccddeeff0123456789";
+        public string RSA_Private = "";
+        public string RSA_Public = "";
     }
 }

@@ -1,5 +1,4 @@
 ﻿using EOS_SDK.Platform;
-using EOS_SDK.Windows;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 

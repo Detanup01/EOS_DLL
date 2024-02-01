@@ -1,4 +1,5 @@
-﻿using EOS_SDK._Data.Models;
+﻿using EOS_SDK._Data;
+using EOS_SDK._Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace EOS_SDK.Achievements
             //  Load achivements
             // struct to PTR | or just send random ptr?
 
-            return IntPtr.Zero;
+            return IntPtr.CreateChecked(SDK.AchivementPTR);
 
         }
 

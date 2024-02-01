@@ -1,4 +1,8 @@
 ﻿using EOS_SDK._Data;
+using EOS_SDK.Connect;
+using EOS_SDK.Platform;
+using EOS_SDK.Version;
+using Newtonsoft.Json.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -38,6 +42,14 @@ namespace EOS_SDK.Auth
             if (outIdToken == IntPtr.Zero)
                 return (int)Result.InvalidParameters;
             var _CopyIdTokenOptions = Marshal.PtrToStructure<CopyIdTokenOptions>(options);
+            _log.Logger.WriteDebug($"{nameof(CopyIdTokenOptions)}: {_CopyIdTokenOptions.ToString()}", Logging.LogCategory.Auth);
+            IdToken idToken = new()
+            { 
+                ApiVersion = Versions.IdtokenApiLatest_Auth,
+                AccountId = Helpers.FromString(Auth_Handler.GetAccountId()),
+                JsonWebToken = Helpers.FromString(Auth_Handler.CreateToken())
+            };
+            Helpers.StructWriteOut(idToken, outIdToken);
             return (int)Result.Success;
         }
 
@@ -48,7 +60,16 @@ namespace EOS_SDK.Auth
             if (completionDelegate == IntPtr.Zero)
                 return;
             var _QueryIdTokenOptions = Marshal.PtrToStructure<QueryIdTokenOptions>(options);
+            _log.Logger.WriteDebug($"{nameof(QueryIdTokenOptions)}: {_QueryIdTokenOptions.ToString()}", Logging.LogCategory.Auth);
             delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Auth.OnQueryIdTokenCallback
+            QueryIdTokenCallbackInfo queryIdTokenCallbackInfo = new()
+            { 
+                ClientData = clientData,
+                LocalUserId = _QueryIdTokenOptions.LocalUserId,
+                ResultCode = Result.Success,
+                TargetAccountId = Helpers.FromString(Auth_Handler.GetAccountId()),
+            };
+            @delegate(Helpers.StructToPtr(queryIdTokenCallbackInfo));
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -68,6 +89,18 @@ namespace EOS_SDK.Auth
             if (outUserAuthToken == IntPtr.Zero)
                 return (int)Result.InvalidParameters;
             var _CopyUserAuthTokenOptions = Marshal.PtrToStructure<CopyUserAuthTokenOptions>(options);
+            var auth_refresh = Auth_Handler.CreateAuthRefresh();
+            Token token = new()
+            {
+                AccessToken = Helpers.FromString(auth_refresh.Auth),
+                AccountId = Helpers.FromString(Auth_Handler.GetAccountId()),
+                ApiVersion = Versions.CopyuserauthtokenApiLatest,
+                AuthType = AuthTokenType.User,
+                App = Helpers.FromString(""),
+                ClientId = Platform_Handler.PlatformHandler.ClientCredentials.ClientId,
+                RefreshToken = Helpers.FromString(auth_refresh.Refresh),
+            };
+            Helpers.StructWriteOut(token, outUserAuthToken);
             return (int)Result.Success;
         }
 
@@ -77,6 +110,7 @@ namespace EOS_SDK.Auth
             _log.Logger.WriteDebug($"{nameof(EOS_Auth_Token_Release)} Called", Logging.LogCategory.Auth);
             if (authToken == IntPtr.Zero)
                 return;
+            Marshal.DestroyStructure<Token>(authToken);
 
         }
         #endregion
@@ -119,7 +153,7 @@ namespace EOS_SDK.Auth
                 return;
             var _LinkAccountOptions = Marshal.PtrToStructure<LinkAccountOptions>(options);
             delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Auth.OnLinkAccountCallback
-            var userid_ = Helpers.FromString(Auth_Handler.GetUserId());
+            var userid_ = Helpers.FromString(Auth_Handler.GetAccountId());
             LinkAccountCallbackInfo linkAccountCallbackInfo = new()
             { 
                 ClientData = clientData,
@@ -152,7 +186,7 @@ namespace EOS_SDK.Auth
             */
             delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: OnLoginCallback
 
-            var userid_ = Helpers.FromString(Auth_Handler.GetUserId());
+            var userid_ = Helpers.FromString(Auth_Handler.GetAccountId());
             LoginCallbackInfo loginCallbackInfo = new()
             {
                 ClientData = clientData,
@@ -223,7 +257,7 @@ namespace EOS_SDK.Auth
             _log.Logger.WriteDebug($"{nameof(EOS_Auth_GetSelectedAccountId)} Called", Logging.LogCategory.Auth);
             if (outSelectedAccountId == IntPtr.Zero)
                 return (int)Result.InvalidParameters;
-            Helpers.StringWriteOut(Auth_Handler.GetUserId(), outSelectedAccountId);
+            Helpers.StringWriteOut(Auth_Handler.GetAccountId(), outSelectedAccountId);
             return (int)Result.Success;
         }
 

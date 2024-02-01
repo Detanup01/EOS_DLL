@@ -24,8 +24,6 @@ namespace EOS_SDK.Others
         public static int EOS_ProductUserId_IsValid(IntPtr accountId)
         {
             var UserId = Helpers.ToString(accountId);
-            if (UserId == Static_ProductUserId)
-                return 1;
             if (UserId.Length == ProductuseridMaxLength)
                 return 1;
             if (Regex.Match(UserId, "[a-fA-F0-9]{32}").Success)

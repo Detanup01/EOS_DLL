@@ -10,7 +10,7 @@ namespace test
         static string productid = "d0864e41284a4c30926a6953b8e77422";
         static void Main(string[] args)
         {
-            var ptr = IntPtr.CreateChecked(22);
+            var ptr = IntPtr.CreateChecked(0xABFD3700);
             Console.WriteLine(ptr);
             Console.WriteLine(productid);
             var ret = Generator(productid, "yeet");

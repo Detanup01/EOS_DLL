@@ -1,5 +1,6 @@
 ﻿using EOS_SDK._Data;
 using EOS_SDK.Achievements;
+using EOS_SDK.Auth;
 using EOS_SDK.Windows;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -21,7 +22,7 @@ namespace EOS_SDK.Platform
             IntPtr pointer = 0;
 #if WIN_X64 || WIN_X86
             var _Options = Marshal.PtrToStructure<WindowsOptions>(options);
-            pointer = Platform_Hander.Create(_Options);
+            pointer = Platform_Handler.Create(_Options);
 #else
             var _Options = Marshal.PtrToStructure<Options>(options);
             pointer = Platform_Hander.Create(_Options);
@@ -62,15 +63,15 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Platform_GetApplicationStatus(IntPtr handle)
         {
-            if (Platform_Hander.CheckIfPointerValid(handle))
-                return (int)Platform_Hander.InternalHandler.ApplicationStatus;
+            if (Platform_Handler.CheckIfPointerValid(handle))
+                return (int)Platform_Handler.PlatformHandler.ApplicationStatus;
             return (int)ApplicationStatus.Foreground;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static IntPtr EOS_Platform_GetAuthInterface(IntPtr handle)
         {
-            return 0;
+            return Auth_Handler.Create();
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -149,8 +150,8 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Platform_GetNetworkStatus(IntPtr handle)
         {
-            if (Platform_Hander.CheckIfPointerValid(handle))
-                return (int)Platform_Hander.InternalHandler.NetworkStatus;
+            if (Platform_Handler.CheckIfPointerValid(handle))
+                return (int)Platform_Handler.PlatformHandler.NetworkStatus;
 
             return (int)NetworkStatus.Disabled;
         }
@@ -158,14 +159,14 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Platform_GetOverrideCountryCode(IntPtr handle, IntPtr outBuffer, int inOutBufferLength)
         {
-            if (Platform_Hander.CheckIfPointerValid(handle))
+            if (Platform_Handler.CheckIfPointerValid(handle))
             {
-                var ptr = Platform_Hander.InternalHandler.OverrideCountryCode;
+                var ptr = Platform_Handler.PlatformHandler.OverrideCountryCode;
                 if (outBuffer == IntPtr.Zero)
                     return (int)Result.InvalidParameters;
                 if (inOutBufferLength != 5)
                     return (int)Result.InvalidParameters;
-                Helpers.StringWriteOut(Helpers.ToString(ptr), outBuffer);
+                Helpers.StringWriteOut(ptr, outBuffer);
             }
                 
             return (int)Result.Success;
@@ -174,14 +175,14 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Platform_GetOverrideLocaleCode(IntPtr handle, IntPtr outBuffer, int inOutBufferLength)
         {
-            if (Platform_Hander.CheckIfPointerValid(handle))
+            if (Platform_Handler.CheckIfPointerValid(handle))
             {
-                var ptr = Platform_Hander.InternalHandler.OverrideLocaleCode;
+                var ptr = Platform_Handler.PlatformHandler.OverrideLocaleCode;
                 if (outBuffer == IntPtr.Zero)
                     return (int)Result.InvalidParameters;
                 if (inOutBufferLength != 10)
                     return (int)Result.InvalidParameters;
-                Helpers.StringWriteOut(Helpers.ToString(ptr), outBuffer);
+                Helpers.StringWriteOut(ptr, outBuffer);
             }
 
             return (int)Result.Success;
@@ -268,38 +269,38 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_Platform_Release(IntPtr handle)
         {
-            Platform_Hander.Free(handle);
+            Platform_Handler.Free(handle);
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Platform_SetApplicationStatus(IntPtr handle, int newStatus)
         {
-            if (Platform_Hander.CheckIfPointerValid(handle))
-                Platform_Hander.InternalHandler.ApplicationStatus = (ApplicationStatus)newStatus;
+            if (Platform_Handler.CheckIfPointerValid(handle))
+                Platform_Handler.PlatformHandler.ApplicationStatus = (ApplicationStatus)newStatus;
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Platform_SetNetworkStatus(IntPtr handle, int newStatus)
         {
-            if (Platform_Hander.CheckIfPointerValid(handle))
-                Platform_Hander.InternalHandler.NetworkStatus = (NetworkStatus)newStatus;
+            if (Platform_Handler.CheckIfPointerValid(handle))
+                Platform_Handler.PlatformHandler.NetworkStatus = (NetworkStatus)newStatus;
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Platform_SetOverrideCountryCode(IntPtr handle, IntPtr newCountryCode)
         {
-            if (Platform_Hander.CheckIfPointerValid(handle))
-                Platform_Hander.InternalHandler.OverrideCountryCode = newCountryCode;
+            if (Platform_Handler.CheckIfPointerValid(handle))
+                Platform_Handler.PlatformHandler.OverrideCountryCode = Helpers.ToString(newCountryCode);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Platform_SetOverrideLocaleCode(IntPtr handle, IntPtr newLocaleCode)
         {
-            if (Platform_Hander.CheckIfPointerValid(handle))
-                Platform_Hander.InternalHandler.OverrideLocaleCode = newLocaleCode;
+            if (Platform_Handler.CheckIfPointerValid(handle))
+                Platform_Handler.PlatformHandler.OverrideLocaleCode = Helpers.ToString(newLocaleCode);
             return (int)Result.Success;
         }
 
