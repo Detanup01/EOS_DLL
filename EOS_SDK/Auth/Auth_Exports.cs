@@ -96,9 +96,13 @@ namespace EOS_SDK.Auth
                 AccountId = Helpers.FromString(Auth_Handler.GetAccountId()),
                 ApiVersion = Versions.CopyuserauthtokenApiLatest,
                 AuthType = AuthTokenType.User,
-                App = Helpers.FromString(""),
+                App = Helpers.FromString(Config.GetConfig().AppId),
                 ClientId = Platform_Handler.PlatformHandler.ClientCredentials.ClientId,
                 RefreshToken = Helpers.FromString(auth_refresh.Refresh),
+                ExpiresIn = Auth_Handler.GetEpochTime(auth_refresh.now.AddSeconds(7200)),
+                ExpiresAt = Helpers.FromString(auth_refresh.now.AddSeconds(7200).ToUniversalTime().ToString("o")),
+                RefreshExpiresAt = Auth_Handler.GetEpochTime(auth_refresh.now.AddSeconds(28800)),
+                RefreshExpiresIn = Helpers.FromString(auth_refresh.now.AddSeconds(28800).ToUniversalTime().ToString("o"))
             };
             Helpers.StructWriteOut(token, outUserAuthToken);
             return (int)Result.Success;

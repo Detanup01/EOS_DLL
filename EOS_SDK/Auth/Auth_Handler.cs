@@ -144,7 +144,7 @@ namespace EOS_SDK.Auth
                 .Encode();
         }
 
-        static int GetEpochTime(DateTime time) 
+        public static int GetEpochTime(DateTime time) 
         {
             TimeSpan t = time - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             int secondsSinceEpoch = (int)t.TotalSeconds;

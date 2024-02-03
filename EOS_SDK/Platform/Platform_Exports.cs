@@ -25,7 +25,7 @@ namespace EOS_SDK.Platform
             pointer = Platform_Handler.Create(_Options);
 #else
             var _Options = Marshal.PtrToStructure<Options>(options);
-            pointer = Platform_Hander.Create(_Options);
+            pointer = Platform_Handler.Create(_Options);
 #endif
             return pointer;
         }
