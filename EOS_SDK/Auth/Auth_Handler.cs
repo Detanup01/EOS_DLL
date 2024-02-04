@@ -89,8 +89,8 @@ namespace EOS_SDK.Auth
                 .AddClaim("t", "epic_id")
                 .AddClaim("scope", "basic_profile friends_list openid presence")
                 .AddClaim("appid", Config.GetConfig().AppId)
-                .AddClaim("exp", GetEpochTime(now.AddSeconds(7200)))
-                .AddClaim("iat", GetEpochTime(now))
+                .AddClaim("exp", TimeHelper.GetEpochTime(now.AddSeconds(7200)))
+                .AddClaim("iat", TimeHelper.GetEpochTime(now))
                 .AddClaim("jti", EpicAccountId.Generate())
                 .WithAlgorithm(rS256Algorithm)
                 .Encode();
@@ -109,8 +109,8 @@ namespace EOS_SDK.Auth
                 .AddClaim("t", "epic_id")
                 .AddClaim("appid", Config.GetConfig().AppId)
                 .AddClaim("scope", "basic_profile friends_list openid presence")
-                .AddClaim("exp", GetEpochTime(now.AddSeconds(28800)))
-                .AddClaim("iat", GetEpochTime(now))
+                .AddClaim("exp", TimeHelper.GetEpochTime(now.AddSeconds(28800)))
+                .AddClaim("iat", TimeHelper.GetEpochTime(now))
                 .AddClaim("jti", EpicAccountId.Generate())
                 .WithAlgorithm(rS256Algorithm)
                 .Encode();
@@ -137,18 +137,13 @@ namespace EOS_SDK.Auth
                 .AddClaim("pfdid", Platform_Handler.PlatformHandler.DeploymentId)
                 .AddClaim("t", "epic_id")
                 .AddClaim("appid", Config.GetConfig().AppId)
-                .AddClaim("exp", GetEpochTime(now.AddSeconds(7200)))
-                .AddClaim("iat", GetEpochTime(now))
+                .AddClaim("exp", TimeHelper.GetEpochTime(now.AddSeconds(7200)))
+                .AddClaim("iat", TimeHelper.GetEpochTime(now))
                 .AddClaim("jti", EpicAccountId.Generate())
                 .WithAlgorithm(rS256Algorithm)
                 .Encode();
         }
 
-        public static int GetEpochTime(DateTime time) 
-        {
-            TimeSpan t = time - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            int secondsSinceEpoch = (int)t.TotalSeconds;
-            return secondsSinceEpoch;
-        }
+
     }
 }

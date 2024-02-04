@@ -156,7 +156,12 @@ namespace EOS_SDK.Achievements
         public static void EOS_Achievements_UnlockAchievements(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
             var _UnlockAchievementsOptions = Marshal.PtrToStructure<UnlockAchievementsOptions>(options);
+            _UnlockAchievementsOptions = Achievement_Handler.UnlockAchievements(_UnlockAchievementsOptions);
+
             NotifyManager.TriggerNotify(nameof(EOS_Achievements_UnlockAchievements), _UnlockAchievementsOptions);
+            if (completionDelegate == IntPtr.Zero)
+                return;
+
             OnUnlockAchievementsCompleteCallbackInfo onUnlockAchievementsCompleteCallbackInfo = new()
             {
                 ClientData = clientData,
@@ -164,8 +169,8 @@ namespace EOS_SDK.Achievements
                 AchievementsCount = _UnlockAchievementsOptions.AchievementsCount,
                 UserId = _UnlockAchievementsOptions.UserId
             };
-
             delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: OnUnlockAchievementsCompleteCallback
+            @delegate(Helpers.StructToPtr(onUnlockAchievementsCompleteCallbackInfo));
         }
         #endregion
         #region UnlockedAchievement

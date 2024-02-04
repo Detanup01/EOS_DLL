@@ -1,8 +1,6 @@
 ﻿using EOS_SDK._Data;
-using EOS_SDK.Connect;
 using EOS_SDK.Platform;
 using EOS_SDK.Version;
-using Newtonsoft.Json.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -99,9 +97,9 @@ namespace EOS_SDK.Auth
                 App = Helpers.FromString(Config.GetConfig().AppId),
                 ClientId = Platform_Handler.PlatformHandler.ClientCredentials.ClientId,
                 RefreshToken = Helpers.FromString(auth_refresh.Refresh),
-                ExpiresIn = Auth_Handler.GetEpochTime(auth_refresh.now.AddSeconds(7200)),
+                ExpiresIn = TimeHelper.GetEpochTime(auth_refresh.now.AddSeconds(7200)),
                 ExpiresAt = Helpers.FromString(auth_refresh.now.AddSeconds(7200).ToUniversalTime().ToString("o")),
-                RefreshExpiresAt = Auth_Handler.GetEpochTime(auth_refresh.now.AddSeconds(28800)),
+                RefreshExpiresAt = TimeHelper.GetEpochTime(auth_refresh.now.AddSeconds(28800)),
                 RefreshExpiresIn = Helpers.FromString(auth_refresh.now.AddSeconds(28800).ToUniversalTime().ToString("o"))
             };
             Helpers.StructWriteOut(token, outUserAuthToken);
@@ -123,13 +121,17 @@ namespace EOS_SDK.Auth
         public static IntPtr EOS_Auth_GetLoggedInAccountByIndex(IntPtr handle, int index)
         {
             _log.Logger.WriteDebug($"{nameof(EOS_Auth_GetLoggedInAccountByIndex)} Called", Logging.LogCategory.Auth);
-            return 0;
+            if (Auth_Handler.GetLoginStatus() == LoginStatus.LoggedIn)
+                return Helpers.FromString(Auth_Handler.GetAccountId());
+            return IntPtr.Zero;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Auth_GetLoggedInAccountsCount(IntPtr handle)
         {
             _log.Logger.WriteDebug($"{nameof(EOS_Auth_GetLoggedInAccountsCount)} Called", Logging.LogCategory.Auth);
+            if (Auth_Handler.GetLoginStatus() == LoginStatus.LoggedIn)
+                return 1;
             return 0;
         }
         #endregion
@@ -233,7 +235,8 @@ namespace EOS_SDK.Auth
 
             VerifyIdTokenCallbackInfo verifyIdTokenCallbackInfo = new()
             { 
-            
+                ResultCode = Result.Success,
+                ClientData = clientData,
             };
             @delegate(Helpers.StructToPtr(verifyIdTokenCallbackInfo));
         }
@@ -248,8 +251,9 @@ namespace EOS_SDK.Auth
             delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Auth.OnVerifyUserAuthCallback
 
             VerifyUserAuthCallbackInfo verifyUserAuthCallbackInfo = new() 
-            { 
-            
+            {
+                ResultCode = Result.Success,
+                ClientData = clientData,
             };
             @delegate(Helpers.StructToPtr(verifyUserAuthCallbackInfo));
         }
