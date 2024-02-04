@@ -5,6 +5,7 @@ namespace EOS_SDK.Connect
 {
     public unsafe class Connect_Exports
     {
+
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static ulong EOS_Connect_AddNotifyAuthExpiration(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notification)
         {
@@ -20,6 +21,8 @@ namespace EOS_SDK.Connect
             delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)notification; //Delegate Class was: Connect.OnLoginStatusChangedCallback
             return 0;
         }
+
+
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int EOS_Connect_CopyIdToken(IntPtr handle, IntPtr options, IntPtr outIdToken)
