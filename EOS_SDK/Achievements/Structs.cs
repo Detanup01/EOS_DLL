@@ -139,11 +139,6 @@ namespace EOS_SDK.Achievements
         public uint AchievementsCount;
         public IntPtr AchievementIds; //string[]
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-
         public static OnAchievementsUnlockedCallbackInfo Set(OnAchievementsUnlockedCallbackInfo main, UnlockAchievementsOptions unlockAchievements)
         {
             var ret = new OnAchievementsUnlockedCallbackInfo();
@@ -162,6 +157,15 @@ namespace EOS_SDK.Achievements
         public IntPtr UserId; //ProductUserId
         public IntPtr AchievementId; //string
         public long UnlockTime; //System.DateTimeOffset
+        public static OnAchievementsUnlockedCallbackV2Info Set(OnAchievementsUnlockedCallbackV2Info main, OnAchievementsUnlockedCallbackV2Info unlockAchievements)
+        {
+            var ret = new OnAchievementsUnlockedCallbackV2Info();
+            ret = main;
+            ret.UserId = unlockAchievements.UserId;
+            ret.AchievementId = unlockAchievements.AchievementId;
+            ret.UnlockTime = unlockAchievements.UnlockTime;
+            return ret;
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]

@@ -1,4 +1,4 @@
-namespace EOS_SDK.Auth
+namespace EOS_SDK.Enums
 {
 
     [Flags]

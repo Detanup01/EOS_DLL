@@ -1,7 +1,7 @@
 ﻿using EOS_SDK._Data;
+using EOS_SDK.Enums;
 using EOS_SDK.Others;
 using EOS_SDK.Platform;
-using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 

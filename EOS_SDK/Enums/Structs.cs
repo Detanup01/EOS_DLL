@@ -1,7 +1,7 @@
 ﻿using EOS_SDK._Data;
 using System.Runtime.InteropServices;
 
-namespace EOS_SDK.Auth
+namespace EOS_SDK.Enums
 {
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyLoginStatusChangedOptions
@@ -18,7 +18,7 @@ namespace EOS_SDK.Auth
     public struct CopyIdTokenOptions
     {
         public int ApiVersion;
-        public IntPtr AccountId;
+        public nint AccountId;
 
         public override string ToString()
         {
@@ -41,7 +41,7 @@ namespace EOS_SDK.Auth
     public struct DeletePersistentAuthOptions
     {
         public int ApiVersion;
-        public IntPtr RefreshToken;
+        public nint RefreshToken;
 
         public override string ToString()
         {
@@ -54,8 +54,8 @@ namespace EOS_SDK.Auth
     {
         public int ApiVersion;
         public LinkAccountFlags LinkAccountFlags;
-        public IntPtr ContinuanceToken;
-        public IntPtr LocalUserId;
+        public nint ContinuanceToken;
+        public nint LocalUserId;
 
         public override string ToString()
         {
@@ -68,7 +68,7 @@ namespace EOS_SDK.Auth
     public struct LoginOptionsV3
     {
         public int ApiVersion;
-        public IntPtr Credentials;
+        public nint Credentials;
         public AuthScopeFlags ScopeFlags;
         public LoginFlags LoginFlags;
 
@@ -83,7 +83,7 @@ namespace EOS_SDK.Auth
     public struct LoginOptionsV2
     {
         public int ApiVersion;
-        public IntPtr Credentials;
+        public nint Credentials;
         public AuthScopeFlags ScopeFlags;
 
         public override string ToString()
@@ -96,7 +96,7 @@ namespace EOS_SDK.Auth
     public struct LogoutOptions
     {
         public int ApiVersion;
-        public IntPtr LocalUserId;
+        public nint LocalUserId;
 
         public override string ToString()
         {
@@ -108,8 +108,8 @@ namespace EOS_SDK.Auth
     public struct QueryIdTokenOptions
     {
         public int ApiVersion;
-        public IntPtr LocalUserId;
-        public IntPtr TargetAccountId;
+        public nint LocalUserId;
+        public nint TargetAccountId;
 
         public override string ToString()
         {
@@ -121,7 +121,7 @@ namespace EOS_SDK.Auth
     public struct VerifyIdTokenOptions
     {
         public int ApiVersion;
-        public IntPtr IdToken;
+        public nint IdToken;
 
         public override string ToString()
         {
@@ -133,7 +133,7 @@ namespace EOS_SDK.Auth
     public struct VerifyUserAuthOptions
     {
         public int ApiVersion;
-        public IntPtr AuthToken;
+        public nint AuthToken;
 
         public override string ToString()
         {
@@ -146,7 +146,7 @@ namespace EOS_SDK.Auth
     public struct AccountFeatureRestrictedInfo
     {
         public int ApiVersion;
-        public IntPtr VerificationURI;
+        public nint VerificationURI;
 
         public override string ToString()
         {
@@ -158,10 +158,10 @@ namespace EOS_SDK.Auth
     public struct Credentials
     {
         public int ApiVersion;
-        public IntPtr Id;
-        public IntPtr Token;
+        public nint Id;
+        public nint Token;
         public LoginCredentialType Type;
-        public IntPtr SystemAuthCredentialsOptions;
+        public nint SystemAuthCredentialsOptions;
         public ExternalCredentialType ExternalType;
 
         public override string ToString()
@@ -174,15 +174,15 @@ namespace EOS_SDK.Auth
     public struct DeletePersistentAuthCallbackInfo
     {
         public Result ResultCode;
-        public IntPtr ClientData;
+        public nint ClientData;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct IdToken
     {
         public int ApiVersion;
-        public IntPtr AccountId;
-        public IntPtr JsonWebToken;
+        public nint AccountId;
+        public nint JsonWebToken;
 
         public override string ToString()
         {
@@ -195,10 +195,10 @@ namespace EOS_SDK.Auth
     public struct LinkAccountCallbackInfo
     {
         public Result ResultCode;
-        public IntPtr ClientData;
-        public IntPtr LocalUserId;
-        public IntPtr PinGrantInfo;
-        public IntPtr SelectedAccountId;
+        public nint ClientData;
+        public nint LocalUserId;
+        public nint PinGrantInfo;
+        public nint SelectedAccountId;
     }
 
 
@@ -206,19 +206,19 @@ namespace EOS_SDK.Auth
     public struct LoginCallbackInfo
     {
         public Result ResultCode;
-        public IntPtr ClientData;
-        public IntPtr LocalUserId;
-        public IntPtr PinGrantInfo;
-        public IntPtr ContinuanceToken;
-        public IntPtr AccountFeatureRestrictedInfo_DEPRECATED;
-        public IntPtr SelectedAccountId;
+        public nint ClientData;
+        public nint LocalUserId;
+        public nint PinGrantInfo;
+        public nint ContinuanceToken;
+        public nint AccountFeatureRestrictedInfo_DEPRECATED;
+        public nint SelectedAccountId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct LoginStatusChangedCallbackInfo
     {
-        public IntPtr ClientData;
-        public IntPtr LocalUserId;
+        public nint ClientData;
+        public nint LocalUserId;
         public LoginStatus PrevStatus;
         public LoginStatus CurrentStatus;
 
@@ -236,18 +236,18 @@ namespace EOS_SDK.Auth
     public struct LogoutCallbackInfo
     {
         public Result ResultCode;
-        public IntPtr ClientData;
-        public IntPtr LocalUserId;
+        public nint ClientData;
+        public nint LocalUserId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct PinGrantInfo
     {
         public int ApiVersion;
-        public IntPtr UserCode;
-        public IntPtr VerificationURI;
-        public IntPtr ExpiresIn;
-        public IntPtr VerificationURIComplete;
+        public nint UserCode;
+        public nint VerificationURI;
+        public nint ExpiresIn;
+        public nint VerificationURIComplete;
 
         public override string ToString()
         {
@@ -259,49 +259,49 @@ namespace EOS_SDK.Auth
     public struct QueryIdTokenCallbackInfo
     {
         public Result ResultCode;
-        public IntPtr ClientData;
-        public IntPtr LocalUserId;
-        public IntPtr TargetAccountId;
+        public nint ClientData;
+        public nint LocalUserId;
+        public nint TargetAccountId;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct Token
     {
         public int ApiVersion;
-        public IntPtr App;
-        public IntPtr ClientId;
-        public IntPtr AccountId;
-        public IntPtr AccessToken;
+        public nint App;
+        public nint ClientId;
+        public nint AccountId;
+        public nint AccessToken;
         public double ExpiresIn;
-        public IntPtr ExpiresAt;
+        public nint ExpiresAt;
         public AuthTokenType AuthType;
-        public IntPtr RefreshToken;
+        public nint RefreshToken;
         public double RefreshExpiresIn;
-        public IntPtr RefreshExpiresAt;
+        public nint RefreshExpiresAt;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct VerifyIdTokenCallbackInfo
     {
         public Result ResultCode;
-        public IntPtr ClientData;
-        public IntPtr ApplicationId;
-        public IntPtr ClientId;
-        public IntPtr ProductId;
-        public IntPtr SandboxId;
-        public IntPtr DeploymentId;
-        public IntPtr DisplayName;
+        public nint ClientData;
+        public nint ApplicationId;
+        public nint ClientId;
+        public nint ProductId;
+        public nint SandboxId;
+        public nint DeploymentId;
+        public nint DisplayName;
         public int IsExternalAccountInfoPresent;
         public ExternalAccountType ExternalAccountIdType;
-        public IntPtr ExternalAccountId;
-        public IntPtr ExternalAccountDisplayName;
-        public IntPtr Platform;
+        public nint ExternalAccountId;
+        public nint ExternalAccountDisplayName;
+        public nint Platform;
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct VerifyUserAuthCallbackInfo
     {
         public Result ResultCode;
-        public IntPtr ClientData;
+        public nint ClientData;
     }
 }

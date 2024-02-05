@@ -33,7 +33,7 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static IntPtr EOS_Platform_GetAchievementsInterface(IntPtr handle)
         {
-            return Achievement_Handler.Create();
+            return Achievements_Handler.Create();
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]

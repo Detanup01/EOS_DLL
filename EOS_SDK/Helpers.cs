@@ -123,6 +123,44 @@ namespace EOS_SDK
             return items.ToArray();
         }
 
+        public static void DestroyStructArray<T>(IntPtr from, int arrayLength)
+        {
+            var IsNotValueType = !typeof(T).IsValueType;
+            int itemSize;
+            if (IsNotValueType)
+            {
+                itemSize = Marshal.SizeOf(typeof(IntPtr));
+            }
+            else
+            {
+                itemSize = Marshal.SizeOf(typeof(T));
+            }
+            for (int itemIndex = 0; itemIndex < arrayLength; ++itemIndex)
+            {
+                IntPtr itemAddress = new IntPtr(from.ToInt64() + itemIndex * itemSize);
+
+                if (IsNotValueType)
+                {
+                    itemAddress = Marshal.ReadIntPtr(itemAddress);
+                }
+
+                if (typeof(T) == typeof(string))
+                {
+                    Marshal.FreeHGlobal(itemAddress);
+                }
+                else
+                {
+                    Destroy<T>(itemAddress);
+                }
+            }
+        }
+
+        public static void Destroy<T>(IntPtr itemAddress)
+        {
+            Marshal.DestroyStructure<T>(itemAddress);
+            Marshal.FreeHGlobal(itemAddress);
+        }
+
         public static IntPtr StructToPtr<T>(T _struct)
         {
             var itemSize = Marshal.SizeOf(typeof(T));

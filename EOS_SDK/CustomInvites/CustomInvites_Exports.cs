@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,7 +10,7 @@ namespace EOS_SDK.CustomInvites
 {
     public unsafe class CustomInvites_Exports
     {
-#if false
+#if CUSTOMINVITES
        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void EOS_CustomInvites_AcceptRequestToJoin(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{

@@ -1,4 +1,5 @@
 ﻿using EOS_SDK._Data;
+using EOS_SDK.Enums;
 using EOS_SDK.Platform;
 using EOS_SDK.Version;
 using System.Runtime.CompilerServices;
