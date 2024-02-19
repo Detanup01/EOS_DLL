@@ -21,7 +21,8 @@ namespace EOS_SDK.Auth
         public static IntPtr Create()
         {
             Auth_Struct = new AuthStruct();
-            RSA_Config();
+            RSA_Config(); 
+            _log.Logger.WriteDebug("Auth Created", Logging.LogCategory.Auth);
             return IntPtr.CreateChecked(SDK.AuthPTR);
         }
 

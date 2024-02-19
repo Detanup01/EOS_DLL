@@ -16,7 +16,7 @@ namespace EOS_SDK.Connect
             {
 
             };
-            _log.Logger.WriteDebug("", Logging.LogCategory.Connect);
+            _log.Logger.WriteDebug("Connect Created", Logging.LogCategory.Connect);
             return IntPtr.CreateChecked(SDK.ConnectPTR);
         }
     }
