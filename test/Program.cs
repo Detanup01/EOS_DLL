@@ -10,6 +10,7 @@ namespace test
         static string productid = "d0864e41284a4c30926a6953b8e77422";
         static void Main(string[] args)
         {
+            /*
             var ptr = IntPtr.CreateChecked(0xABFD3700);
             Console.WriteLine(ptr);
             Console.WriteLine(productid);
@@ -21,8 +22,8 @@ namespace test
             Console.WriteLine(ret);
             Console.WriteLine(Generator2(productid, ret));
             ptr = IntPtr.CreateChecked(22);
-            Console.WriteLine(ptr);
-            /*
+            Console.WriteLine(ptr);*/
+            
             Console.WriteLine("Hello, World!");
             var id = TESTAddNotify(666,OnOnAddNotifyResultImplementation);
             Console.WriteLine("TESTAddNotifyID:  " + id);
@@ -30,7 +31,7 @@ namespace test
             Console.WriteLine("TESTTriggerNotify triggered!");
             TESTRemoveNotify(id);
             Console.WriteLine("TESTRemoveNotify removed: " + id);
-            */
+            
         }
 
 

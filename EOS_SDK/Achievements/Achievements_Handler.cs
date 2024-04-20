@@ -44,7 +44,7 @@ namespace EOS_SDK.Achievements
                     UnlockTime = item._Data.UnlockedTime,
                     UserId = options.UserId
                 };
-                NotifyManager.TriggerNotify(nameof(Achievements_Exports.EOS_Achievements_AddNotifyAchievementsUnlockedV2), info);
+                NotifyManager.TriggerNotify(nameof(Achievements_Exports._EOS_Achievements_AddNotifyAchievementsUnlockedV2), info);
             }
             var ptr = Helpers.FromStructArray(UnlockedAchis.ToArray());
             UnlockAchievementsOptions unlockAchievementsOptions = new()

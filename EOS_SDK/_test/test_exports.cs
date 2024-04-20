@@ -11,31 +11,31 @@ namespace EOS_SDK._test
     public unsafe class test_exports
     {
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong TESTAddNotify(int number, IntPtr completionDelegate)
+        public static ulong _TESTAddNotify(int number, IntPtr completionDelegate)
         {
             Console.WriteLine(EpicAccountId.Generate());
             AddNotifyResult notifyResult = new()
             { dataPassed = number };
             Console.WriteLine("DLL_TESTAddNotify");
             Console.WriteLine(notifyResult.ToString());
-            return NotifyManager.AddNotify(nameof(TESTTriggerNotify), completionDelegate, notifyResult);
+            return NotifyManager.AddNotify(nameof(_TESTTriggerNotify), completionDelegate, notifyResult);
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void TESTRemoveNotify(ulong id)
+        public static void _TESTRemoveNotify(ulong id)
         {
             NotifyManager.RemoveNotify(id);
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void TESTTriggerNotify(IntPtr completionDelegate)
+        public static void _TESTTriggerNotify(IntPtr completionDelegate)
         {
             TriggerNotifyResult triggerNotifyResult = new()
             { 
                 data = 342342,
                 Result = 555
             };
-            NotifyManager.TriggerNotify(nameof(TESTTriggerNotify), triggerNotifyResult);
+            NotifyManager.TriggerNotify(nameof(_TESTTriggerNotify), triggerNotifyResult);
             delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate;
             var ptr = Helpers.StructToPtr(triggerNotifyResult);
             @delegate(ptr);

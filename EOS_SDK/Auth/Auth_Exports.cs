@@ -11,9 +11,9 @@ namespace EOS_SDK.Auth
     {
         #region Notify
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong EOS_Auth_AddNotifyLoginStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notification)
+        public static ulong _EOS_Auth_AddNotifyLoginStatusChanged(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr notification)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_AddNotifyLoginStatusChanged)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_AddNotifyLoginStatusChanged)} Called", Logging.LogCategory.Auth);
             if (notification == IntPtr.Zero)
                 return 0;
             //var _AddNotifyLoginStatusChangedOptions = Marshal.PtrToStructure<AddNotifyLoginStatusChangedOptions>(options);
@@ -23,21 +23,21 @@ namespace EOS_SDK.Auth
                 PrevStatus = Auth_Handler.GetLoginStatus()
             };
 
-            return NotifyManager.AddNotify("AuthNotifyLoginStatus",notification, loginStatusChangedCallbackInfo);
+            return NotifyManager.AddNotify("AuthNotifyLoginStatus", notification, loginStatusChangedCallbackInfo);
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_RemoveNotifyLoginStatusChanged(IntPtr handle, ulong inId)
+        public static void _EOS_Auth_RemoveNotifyLoginStatusChanged(IntPtr handle, ulong inId)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_RemoveNotifyLoginStatusChanged)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_RemoveNotifyLoginStatusChanged)} Called", Logging.LogCategory.Auth);
             NotifyManager.RemoveNotify(inId);
         }
         #endregion
         #region IdToken
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int EOS_Auth_CopyIdToken(IntPtr handle, IntPtr options, IntPtr outIdToken)
+        public static int _EOS_Auth_CopyIdToken(IntPtr handle, IntPtr options, IntPtr outIdToken)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_CopyIdToken)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_CopyIdToken)} Called", Logging.LogCategory.Auth);
             if (outIdToken == IntPtr.Zero)
                 return (int)Result.InvalidParameters;
             var _CopyIdTokenOptions = Marshal.PtrToStructure<CopyIdTokenOptions>(options);
@@ -53,9 +53,9 @@ namespace EOS_SDK.Auth
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_QueryIdToken(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void _EOS_Auth_QueryIdToken(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_QueryIdToken)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_QueryIdToken)} Called", Logging.LogCategory.Auth);
             if (completionDelegate == IntPtr.Zero)
                 return;
             var _QueryIdTokenOptions = Marshal.PtrToStructure<QueryIdTokenOptions>(options);
@@ -72,9 +72,9 @@ namespace EOS_SDK.Auth
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_IdToken_Release(IntPtr idToken)
+        public static void _EOS_Auth_IdToken_Release(IntPtr idToken)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_IdToken_Release)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_IdToken_Release)} Called", Logging.LogCategory.Auth);
             if (idToken == IntPtr.Zero)
                 return;
             Marshal.DestroyStructure<IdToken>(idToken);
@@ -82,9 +82,9 @@ namespace EOS_SDK.Auth
         #endregion
         #region AuthToken
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int EOS_Auth_CopyUserAuthToken(IntPtr handle, IntPtr options, IntPtr localUserId, IntPtr outUserAuthToken)
+        public static int _EOS_Auth_CopyUserAuthToken(IntPtr handle, IntPtr options, IntPtr localUserId, IntPtr outUserAuthToken)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_CopyUserAuthToken)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_CopyUserAuthToken)} Called", Logging.LogCategory.Auth);
             if (outUserAuthToken == IntPtr.Zero)
                 return (int)Result.InvalidParameters;
             var _CopyUserAuthTokenOptions = Marshal.PtrToStructure<CopyUserAuthTokenOptions>(options);
@@ -108,9 +108,9 @@ namespace EOS_SDK.Auth
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_Token_Release(IntPtr authToken)
+        public static void _EOS_Auth_Token_Release(IntPtr authToken)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_Token_Release)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_Token_Release)} Called", Logging.LogCategory.Auth);
             if (authToken == IntPtr.Zero)
                 return;
             Marshal.DestroyStructure<Token>(authToken);
@@ -119,18 +119,18 @@ namespace EOS_SDK.Auth
         #endregion
         #region LoggedInAccount
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static IntPtr EOS_Auth_GetLoggedInAccountByIndex(IntPtr handle, int index)
+        public static IntPtr _EOS_Auth_GetLoggedInAccountByIndex(IntPtr handle, int index)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_GetLoggedInAccountByIndex)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_GetLoggedInAccountByIndex)} Called", Logging.LogCategory.Auth);
             if (Auth_Handler.GetLoginStatus() == LoginStatus.LoggedIn)
                 return Helpers.FromString(Auth_Handler.GetAccountId());
             return IntPtr.Zero;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int EOS_Auth_GetLoggedInAccountsCount(IntPtr handle)
+        public static int _EOS_Auth_GetLoggedInAccountsCount(IntPtr handle)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_GetLoggedInAccountsCount)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_GetLoggedInAccountsCount)} Called", Logging.LogCategory.Auth);
             if (Auth_Handler.GetLoginStatus() == LoginStatus.LoggedIn)
                 return 1;
             return 0;
@@ -138,24 +138,24 @@ namespace EOS_SDK.Auth
         #endregion
         #region MergedAccount
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static IntPtr EOS_Auth_GetMergedAccountByIndex(IntPtr handle, IntPtr localUserId, uint index)
+        public static IntPtr _EOS_Auth_GetMergedAccountByIndex(IntPtr handle, IntPtr localUserId, uint index)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_GetMergedAccountByIndex)} Called", Logging.LogCategory.Auth);
-            return IntPtr.Zero;
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_GetMergedAccountByIndex)} Called", Logging.LogCategory.Auth);
+            return Helpers.FromString(Auth_Handler.GetAccountId());
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static uint EOS_Auth_GetMergedAccountsCount(IntPtr handle, IntPtr localUserId)
+        public static uint _EOS_Auth_GetMergedAccountsCount(IntPtr handle, IntPtr localUserId)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_GetMergedAccountsCount)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_GetMergedAccountsCount)} Called", Logging.LogCategory.Auth);
             return 0;
         }
         #endregion
         #region Link, Login , LogOut
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_LinkAccount(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void _EOS_Auth_LinkAccount(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_LinkAccount)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_LinkAccount)} Called", Logging.LogCategory.Auth);
             if (completionDelegate == IntPtr.Zero)
                 return;
             var _LinkAccountOptions = Marshal.PtrToStructure<LinkAccountOptions>(options);
@@ -172,9 +172,9 @@ namespace EOS_SDK.Auth
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_Login(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void _EOS_Auth_Login(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_Login)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_Login)} Called", Logging.LogCategory.Auth);
             if (completionDelegate == IntPtr.Zero)
                 return;
             /*
@@ -206,9 +206,9 @@ namespace EOS_SDK.Auth
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_Logout(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void _EOS_Auth_Logout(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_Logout)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_Logout)} Called", Logging.LogCategory.Auth);
             if (completionDelegate == IntPtr.Zero)
                 return;
             var _LogoutOptions = Marshal.PtrToStructure<LogoutOptions>(options);
@@ -226,9 +226,9 @@ namespace EOS_SDK.Auth
         #endregion
         #region Verify
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_VerifyIdToken(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void _EOS_Auth_VerifyIdToken(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_VerifyIdToken)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_VerifyIdToken)} Called", Logging.LogCategory.Auth);
             if (completionDelegate == IntPtr.Zero)
                 return;
             var _VerifyIdTokenOptions = Marshal.PtrToStructure<VerifyIdTokenOptions>(options);
@@ -243,9 +243,9 @@ namespace EOS_SDK.Auth
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_VerifyUserAuth(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void _EOS_Auth_VerifyUserAuth(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_VerifyUserAuth)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_VerifyUserAuth)} Called", Logging.LogCategory.Auth);
             if (completionDelegate == IntPtr.Zero)
                 return;
             var _VerifyUserAuthOptions = Marshal.PtrToStructure<VerifyUserAuthOptions>(options);
@@ -261,9 +261,9 @@ namespace EOS_SDK.Auth
         #endregion
         #region Etc
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int EOS_Auth_GetSelectedAccountId(IntPtr handle, IntPtr localUserId, IntPtr outSelectedAccountId)
+        public static int _EOS_Auth_GetSelectedAccountId(IntPtr handle, IntPtr localUserId, IntPtr outSelectedAccountId)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_GetSelectedAccountId)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_GetSelectedAccountId)} Called", Logging.LogCategory.Auth);
             if (outSelectedAccountId == IntPtr.Zero)
                 return (int)Result.InvalidParameters;
             Helpers.StringWriteOut(Auth_Handler.GetAccountId(), outSelectedAccountId);
@@ -271,16 +271,16 @@ namespace EOS_SDK.Auth
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int EOS_Auth_GetLoginStatus(IntPtr handle, IntPtr localUserId)
+        public static int _EOS_Auth_GetLoginStatus(IntPtr handle, IntPtr localUserId)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_GetLoginStatus)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_GetLoginStatus)} Called", Logging.LogCategory.Auth);
             return (int)Auth_Handler.GetLoginStatus();
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void EOS_Auth_DeletePersistentAuth(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
+        public static void _EOS_Auth_DeletePersistentAuth(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
         {
-            _log.Logger.WriteDebug($"{nameof(EOS_Auth_DeletePersistentAuth)} Called", Logging.LogCategory.Auth);
+            _log.Logger.WriteDebug($"{nameof(_EOS_Auth_DeletePersistentAuth)} Called", Logging.LogCategory.Auth);
             if (completionDelegate == IntPtr.Zero)
                 return;
             //var _DeletePersistentAuthOptions = Marshal.PtrToStructure<DeletePersistentAuthOptions>(options);

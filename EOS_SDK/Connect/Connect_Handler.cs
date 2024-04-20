@@ -6,6 +6,7 @@ namespace EOS_SDK.Connect
     {
         public struct Handler
         {
+            public Dictionary<string /* LocalUserId */, IdToken> c;
         }
 
         static Handler Instance;
