@@ -6,19 +6,19 @@ namespace EOS_SDK.Platform
 {
     public class Platform_Handler : IHandler
     {
-        public string ProductId;
-        public string SandboxId;
+        public string ProductId = string.Empty;
+        public string SandboxId = string.Empty;
         public ClientCredentials ClientCredentials;
         public int IsServer;
-        public string EncryptionKey;
-        public string OverrideCountryCode;
-        public string OverrideLocaleCode;
-        public string DeploymentId;
+        public string EncryptionKey = string.Empty;
+        public string OverrideCountryCode = string.Empty;
+        public string OverrideLocaleCode = string.Empty;
+        public string DeploymentId = string.Empty;
         public NetworkStatus NetworkStatus;
         public ApplicationStatus ApplicationStatus;
-        public Dictionary<uint, IHandler> Handlers;
+        public Dictionary<uint, IHandler> Handlers = new();
         public IntPtr MyDummyPtr;
-        public Dictionary<IntPtr, uint> DummyPtrToHandler;
+        public Dictionary<IntPtr, uint> DummyPtrToHandler = new();
 
         public override string ToString()
         {

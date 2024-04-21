@@ -7,12 +7,12 @@ namespace EOS_SDK.Achievements
 {
     public class Achievements_Handler : IHandler
     {
-        public List<Achievement_Model> Achievements;
-        public Dictionary<string, List<Achievement_Model>> AchiKVs; //support for servers/multiple users.
+        public List<Achievement_Model> Achievements = new();
+        public Dictionary<string, List<Achievement_Model>> AchiKVs = new(); //support for servers/multiple users.
         IntPtr MyDummyPtr;
         public IntPtr CreateHandler()
         {
-            Achievements = JsonConvert.DeserializeObject<List<Achievement_Model>>("achievements.json");
+            Achievements = JsonConvert.DeserializeObject<List<Achievement_Model>>("achievements.json")!;
             AchiKVs = new();
             _log.Logger.WriteDebug("", Logging.LogCategory.Achievements);
             return Create();

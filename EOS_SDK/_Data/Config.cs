@@ -10,7 +10,7 @@ namespace EOS_SDK._Data
             if (File.Exists("eos.json"))
             {
                 var config = JsonConvert.DeserializeObject<Config>(File.ReadAllText("eos.json"));
-                return ApplyConfig(config);
+                return ApplyConfig(config!);
             }
             return ApplyConfig(new());
         }
