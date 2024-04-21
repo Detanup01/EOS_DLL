@@ -5,33 +5,25 @@ using Newtonsoft.Json;
 
 namespace EOS_SDK.Achievements
 {
-    internal class Achievements_Handler
+    public class Achievements_Handler : IHandler
     {
-        public struct Handler
+        public List<Achievement_Model> Achievements;
+        public Dictionary<string, List<Achievement_Model>> AchiKVs; //support for servers/multiple users.
+        IntPtr MyDummyPtr;
+        public IntPtr CreateHandler()
         {
-            public List<Achievement_Model> Achievements;
-            public Dictionary<string, List<Achievement_Model>> AchiKVs; //support for servers/multiple users.
-        }
-
-        static Handler Instance;
-
-        public static IntPtr Create()
-        {
-            Instance = new()
-            {
-                Achievements = JsonConvert.DeserializeObject<List<Achievement_Model>>("achievements.json"),
-                AchiKVs = new()
-            };
+            Achievements = JsonConvert.DeserializeObject<List<Achievement_Model>>("achievements.json");
+            AchiKVs = new();
             _log.Logger.WriteDebug("", Logging.LogCategory.Achievements);
-            return IntPtr.CreateChecked(SDK.AchivementPTR);
+            return Create();
         }
 
-        public static UnlockAchievementsOptions UnlockAchievements(UnlockAchievementsOptions options)
+        public UnlockAchievementsOptions UnlockAchievements(UnlockAchievementsOptions options)
         {
             var achis = Helpers.ToStructArray<string>(options.AchievementIds, (int)options.AchievementsCount);
             _log.Logger.WriteDebug("Achi IDs to Unlock:" + JsonConvert.SerializeObject(achis), Logging.LogCategory.Achievements);
 
-            var achiv = Instance.Achievements.Where(x => achis.Contains(x.AchievementId)).ToList();
+            var achiv = Achievements.Where(x => achis.Contains(x.AchievementId)).ToList();
             List<string> UnlockedAchis = new();
             foreach (var item in achiv)
             {
@@ -54,24 +46,25 @@ namespace EOS_SDK.Achievements
                 AchievementIds = ptr,
                 AchievementsCount = (uint)UnlockedAchis.Count
             };
+            SaveAchis();
             return unlockAchievementsOptions;
         }
 
-        public static bool IsAchiExist(IntPtr ptr)
+        public bool IsAchiExist(IntPtr ptr)
         {
             string achi = Helpers.ToString(ptr);
-            return Instance.Achievements.Where(x=>x.AchievementId == achi).Any();
+            return Achievements.Where(x=>x.AchievementId == achi).Any();
         }
 
-        public static bool IsAchiExistIndex(uint index)
+        public bool IsAchiExistIndex(uint index)
         {
-            return Instance.Achievements.Count > index;
+            return Achievements.Count > index;
         }
 
-        public static Definition GetDefinition(IntPtr ptr)
+        public Definition GetDefinition(IntPtr ptr)
         {
             string achi = Helpers.ToString(ptr);
-            var achiv = Instance.Achievements.Where(x => x.AchievementId == achi).First();
+            var achiv = Achievements.Where(x => x.AchievementId == achi).First();
 
             List<StatThresholds> thresholds = new();
             foreach (var item in achiv.StatsThresholds)
@@ -103,9 +96,12 @@ namespace EOS_SDK.Achievements
             };
         }
 
-        public static Definition GetDefinitionIndex(uint index)
+        public Definition GetDefinitionIndex(uint index)
         {
-            var achiv = Instance.Achievements[(int)index];
+            if (Achievements.Count >= index)
+                return new();
+
+            var achiv = Achievements[(int)index];
 
             List<StatThresholds> thresholds = new();
             foreach (var item in achiv.StatsThresholds)
@@ -135,6 +131,38 @@ namespace EOS_SDK.Achievements
                 StatThresholdsCount = thresholds.Count,
                 UnlockedIconId = Helpers.FromString(achiv.UnlockedIconUrl)
             };
+        }
+
+        public void SaveAchis()
+        {
+            File.WriteAllText("achievements.json", JsonConvert.SerializeObject(Achievements));
+            
+        }
+
+        public bool CheckIfPointerValid(IntPtr ptr)
+        {
+            if (ptr == IntPtr.Zero)
+                return false;
+            return ptr == MyDummyPtr;
+        }
+
+        public IntPtr Create()
+        {
+            DummyStruct dummyStruct = new();
+            var retptr = Helpers.StructToPtr(dummyStruct);
+            _log.Logger.WriteInfo("Achievements_Handler.Create Pointer: " + retptr);
+            MyDummyPtr = retptr;
+            return retptr;
+        }
+
+        public void Tick()
+        {
+            
+        }
+
+        public void Close()
+        {
+            SaveAchis();
         }
     }
 }

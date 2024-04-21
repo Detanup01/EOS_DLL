@@ -46,7 +46,7 @@ namespace EOS_SDK.Auth
             { 
                 ApiVersion = Versions.IdtokenApiLatest_Auth,
                 AccountId = Helpers.FromString(Auth_Handler.GetAccountId()),
-                JsonWebToken = Helpers.FromString(Auth_Handler.CreateToken())
+                JsonWebToken = Helpers.FromString(JWTHelper.CreateToken())
             };
             Helpers.StructWriteOut(idToken, outIdToken);
             return (int)Result.Success;
@@ -88,7 +88,7 @@ namespace EOS_SDK.Auth
             if (outUserAuthToken == IntPtr.Zero)
                 return (int)Result.InvalidParameters;
             var _CopyUserAuthTokenOptions = Marshal.PtrToStructure<CopyUserAuthTokenOptions>(options);
-            var auth_refresh = Auth_Handler.CreateAuthRefresh();
+            var auth_refresh = JWTHelper.CreateAuthRefresh();
             Token token = new()
             {
                 AccessToken = Helpers.FromString(auth_refresh.Auth),
@@ -96,7 +96,7 @@ namespace EOS_SDK.Auth
                 ApiVersion = Versions.CopyuserauthtokenApiLatest,
                 AuthType = AuthTokenType.User,
                 App = Helpers.FromString(Config.GetConfig().AppId),
-                ClientId = Platform_Handler.PlatformHandler.ClientCredentials.ClientId,
+                ClientId = EOS_Main.GetPlatform().ClientCredentials.ClientId,
                 RefreshToken = Helpers.FromString(auth_refresh.Refresh),
                 ExpiresIn = TimeHelper.GetEpochTime(auth_refresh.now.AddSeconds(7200)),
                 ExpiresAt = Helpers.FromString(auth_refresh.now.AddSeconds(7200).ToUniversalTime().ToString("o")),

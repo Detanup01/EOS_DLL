@@ -22,10 +22,10 @@ namespace EOS_SDK.Platform
             IntPtr pointer = 0;
 #if WIN_X64 || WIN_X86
             var _Options = Marshal.PtrToStructure<WindowsOptions>(options);
-            pointer = Platform_Handler.Create(_Options);
+            pointer = EOS_Main.GetPlatform().Create(_Options);
 #else
             var _Options = Marshal.PtrToStructure<Options>(options);
-            pointer = Platform_Handler.Create(_Options);
+            pointer = EOS_Main.GetPlatform().Create(_Options);
 #endif
             return pointer;
         }
@@ -33,7 +33,9 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static IntPtr _EOS_Platform_GetAchievementsInterface(IntPtr handle)
         {
-            return Achievements_Handler.Create();
+            if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
+                return EOS_Main.GetPlatform().CreateHandler(SDK.AchivementPTR);
+            return IntPtr.Zero;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -63,21 +65,25 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int _EOS_Platform_GetApplicationStatus(IntPtr handle)
         {
-            if (Platform_Handler.CheckIfPointerValid(handle))
-                return (int)Platform_Handler.PlatformHandler.ApplicationStatus;
+            if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
+                return (int)EOS_Main.GetPlatform().ApplicationStatus;
             return (int)ApplicationStatus.Foreground;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static IntPtr _EOS_Platform_GetAuthInterface(IntPtr handle)
         {
-            return Auth_Handler.Create();
+            if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
+                return EOS_Main.GetPlatform().CreateHandler(SDK.AuthPTR);
+            return IntPtr.Zero;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static IntPtr _EOS_Platform_GetConnectInterface(IntPtr handle)
         {
-            return 0;
+            if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
+                return EOS_Main.GetPlatform().CreateHandler(SDK.ConnectPTR);
+            return IntPtr.Zero;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -89,7 +95,7 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int _EOS_Platform_GetDesktopCrossplayStatus(IntPtr handle, IntPtr options, IntPtr outDesktopCrossplayStatusInfo)
 		{
-			var _GetDesktopCrossplayStatusOptions = Marshal.PtrToStructure<GetDesktopCrossplayStatusOptions>(options);
+#if WIN_X64 || WIN_X86
             DesktopCrossplayStatusInfo statusInfo = new()
             { 
                 Status = DesktopCrossplayStatus.Ok,
@@ -97,6 +103,17 @@ namespace EOS_SDK.Platform
             };
             Helpers.StructWriteOut(statusInfo, outDesktopCrossplayStatusInfo);
             return (int)Result.Success;
+#else
+            DesktopCrossplayStatusInfo statusInfo = new()
+            { 
+                Status = DesktopCrossplayStatus.ServiceStartFailed,
+                ServiceInitResult = 2
+            };
+            Helpers.StructWriteOut(statusInfo, outDesktopCrossplayStatusInfo);
+            return (int)Result.Success;
+            return (int)Result.NotImplemented;
+#endif
+
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -150,8 +167,8 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int _EOS_Platform_GetNetworkStatus(IntPtr handle)
         {
-            if (Platform_Handler.CheckIfPointerValid(handle))
-                return (int)Platform_Handler.PlatformHandler.NetworkStatus;
+            if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
+                return (int)EOS_Main.GetPlatform().NetworkStatus;
 
             return (int)NetworkStatus.Disabled;
         }
@@ -159,33 +176,35 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int _EOS_Platform_GetOverrideCountryCode(IntPtr handle, IntPtr outBuffer, int inOutBufferLength)
         {
-            if (Platform_Handler.CheckIfPointerValid(handle))
+            if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
             {
-                var ptr = Platform_Handler.PlatformHandler.OverrideCountryCode;
+                var ptr = EOS_Main.GetPlatform().OverrideCountryCode;
                 if (outBuffer == IntPtr.Zero)
                     return (int)Result.InvalidParameters;
                 if (inOutBufferLength != 5)
                     return (int)Result.InvalidParameters;
                 Helpers.StringWriteOut(ptr, outBuffer);
+                return (int)Result.Success;
             }
                 
-            return (int)Result.Success;
+            return (int)Result.UnexpectedError;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int _EOS_Platform_GetOverrideLocaleCode(IntPtr handle, IntPtr outBuffer, int inOutBufferLength)
         {
-            if (Platform_Handler.CheckIfPointerValid(handle))
+            if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
             {
-                var ptr = Platform_Handler.PlatformHandler.OverrideLocaleCode;
+                var ptr = EOS_Main.GetPlatform().OverrideLocaleCode;
                 if (outBuffer == IntPtr.Zero)
                     return (int)Result.InvalidParameters;
                 if (inOutBufferLength != 10)
                     return (int)Result.InvalidParameters;
                 Helpers.StringWriteOut(ptr, outBuffer);
+                return (int)Result.Success;
             }
-
-            return (int)Result.Success;
+            return (int)Result.UnexpectedError;
+           
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -269,45 +288,59 @@ namespace EOS_SDK.Platform
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void _EOS_Platform_Release(IntPtr handle)
         {
-            Platform_Handler.Free(handle);
+            EOS_Main.GetPlatform().Free(handle);
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int _EOS_Platform_SetApplicationStatus(IntPtr handle, int newStatus)
         {
-            if (Platform_Handler.CheckIfPointerValid(handle))
-                Platform_Handler.PlatformHandler.ApplicationStatus = (ApplicationStatus)newStatus;
-            return (int)Result.Success;
+            if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
+            {
+                EOS_Main.GetPlatform().ApplicationStatus = (ApplicationStatus)newStatus;
+                return (int)Result.Success;
+            }
+            return (int)Result.UnexpectedError;
+
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int _EOS_Platform_SetNetworkStatus(IntPtr handle, int newStatus)
         {
-            if (Platform_Handler.CheckIfPointerValid(handle))
-                Platform_Handler.PlatformHandler.NetworkStatus = (NetworkStatus)newStatus;
-            return (int)Result.Success;
+            if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
+            {
+                EOS_Main.GetPlatform().NetworkStatus = (NetworkStatus)newStatus;
+                return (int)Result.Success;
+            }
+            return (int)Result.UnexpectedError;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int _EOS_Platform_SetOverrideCountryCode(IntPtr handle, IntPtr newCountryCode)
         {
-            if (Platform_Handler.CheckIfPointerValid(handle))
-                Platform_Handler.PlatformHandler.OverrideCountryCode = Helpers.ToString(newCountryCode);
-            return (int)Result.Success;
+            if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
+            {
+                EOS_Main.GetPlatform().OverrideCountryCode = Helpers.ToString(newCountryCode);
+                return (int)Result.Success;
+            }
+            return (int)Result.UnexpectedError;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int _EOS_Platform_SetOverrideLocaleCode(IntPtr handle, IntPtr newLocaleCode)
         {
-            if (Platform_Handler.CheckIfPointerValid(handle))
-                Platform_Handler.PlatformHandler.OverrideLocaleCode = Helpers.ToString(newLocaleCode);
-            return (int)Result.Success;
+            if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
+            {
+                EOS_Main.GetPlatform().OverrideLocaleCode = Helpers.ToString(newLocaleCode);
+                return (int)Result.Success;
+            }
+            return (int)Result.UnexpectedError;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static void _EOS_Platform_Tick(IntPtr handle)
         {
-            CallbackManager.Update();
+            if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
+                EOS_Main.GetPlatform().Update();
         }
     }
 }

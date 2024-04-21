@@ -1,4 +1,7 @@
-﻿using EOS_SDK.Platform;
+﻿using EOS_SDK._Data;
+using EOS_SDK._log;
+using EOS_SDK.Platform;
+using EOS_SDK.Version;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -70,13 +73,24 @@ namespace EOS_SDK.Others
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int _EOS_Initialize(IntPtr options)
         {
-			var _InitializeOptions = Marshal.PtrToStructure<InitializeOptions>(options);
+            if (EOS_Main.IsInited())
+                return (int)Result.AlreadyConfigured;
+            if (options == nint.Zero)
+                return (int)Result.InvalidParameters; 
+
+            var ver = Helpers.GetVersionFromStructPTR(options);
+            if (ver > Versions.InitializeApiLatest)
+                Logger.WriteError("_EOS_Initialize trying to Initialize version " + ver);
+            // always fallback to 0
+            var _InitializeOptions = Marshal.PtrToStructure<InitializeOptionsV1>(options);
+            EOS_Main.Create(_InitializeOptions);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static int _EOS_Shutdown()
         {
+            EOS_Main.Shutdown();
             return (int)Result.Success;
         }
     }

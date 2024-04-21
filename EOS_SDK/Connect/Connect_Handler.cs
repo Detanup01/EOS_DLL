@@ -2,11 +2,11 @@
 
 namespace EOS_SDK.Connect
 {
-    internal class Connect_Handler
+    public class Connect_Handler
     {
         public struct Handler
         {
-            public Dictionary<string /* LocalUserId */, IdToken> c;
+            public Dictionary<string /* LocalUserId */, IdToken> UserIds;
         }
 
         static Handler Instance;
@@ -15,10 +15,15 @@ namespace EOS_SDK.Connect
         {
             Instance = new()
             {
-
+                UserIds = new()
             };
             _log.Logger.WriteDebug("Connect Created", Logging.LogCategory.Connect);
             return IntPtr.CreateChecked(SDK.ConnectPTR);
+        }
+
+        public static void Tick()
+        {
+
         }
     }
 }

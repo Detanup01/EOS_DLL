@@ -2,14 +2,71 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using test.HandlerTest;
 
 namespace test
 {
     internal class Program
     {
+        public static string ToString(IntPtr source)
+        {
+            if (source == IntPtr.Zero)
+            {
+                return string.Empty;
+            }
+
+            // C style strlen
+            int length = GetAnsiStringLength(source);
+
+            // +1 byte for the null terminator.
+            byte[] bytes = new byte[length + 1];
+            Marshal.Copy(source, bytes, 0, length + 1);
+            return Encoding.UTF8.GetString(bytes);
+        }
+        public static int GetAnsiStringLength(IntPtr address)
+        {
+            int length = 0;
+            while (Marshal.ReadByte(address, length) != 0)
+            {
+                ++length;
+            }
+
+            return length;
+        }
+        public static IntPtr FromString(string str)
+        {
+            var bytes = Encoding.UTF8.GetBytes(str);
+            var result_bytes = bytes.Concat(new byte[] { 0x00 }).ToArray();
+            var PTR = Marshal.AllocHGlobal(bytes.Length + 1);
+            Marshal.Copy(result_bytes, 0, PTR, result_bytes.Length);
+            return PTR;
+        }
+        public static IntPtr StructToPtr<T>(T _struct)
+        {
+            var itemSize = Marshal.SizeOf(typeof(T));
+            IntPtr address = Marshal.AllocHGlobal(itemSize);
+            Marshal.StructureToPtr(_struct, address, false);
+            return address;
+        }
+
         static string productid = "d0864e41284a4c30926a6953b8e77422";
         static void Main(string[] args)
         {
+            MainHandler mainHandler = new();
+            var myPointer = mainHandler.Create();
+            var ptr = mainHandler.CreateHandler(0x2);
+
+            var sub = mainHandler.GetHandler<SubHandler>(ptr);
+            sub.Print();
+
+            ptr = mainHandler.CreateHandler(0x3);
+            Console.WriteLine(ptr + " sshould be 0");
+
+            sub = mainHandler.GetHandler<SubHandler>(ptr);
+            Console.WriteLine((sub == null) + " sshould be true");
+
+            mainHandler.Interfaces.sub.Print();
+            Console.WriteLine(" Interfaces.sub");
             /*
             var ptr = IntPtr.CreateChecked(0xABFD3700);
             Console.WriteLine(ptr);
@@ -23,15 +80,15 @@ namespace test
             Console.WriteLine(Generator2(productid, ret));
             ptr = IntPtr.CreateChecked(22);
             Console.WriteLine(ptr);*/
-            
+            /*
             Console.WriteLine("Hello, World!");
             var id = TESTAddNotify(666,OnOnAddNotifyResultImplementation);
             Console.WriteLine("TESTAddNotifyID:  " + id);
             TESTTriggerNotify(OnTriggerNotifyResultImplementation);
             Console.WriteLine("TESTTriggerNotify triggered!");
             TESTRemoveNotify(id);
-            Console.WriteLine("TESTRemoveNotify removed: " + id);
-            
+            Console.WriteLine("TESTRemoveNotify removed: " + id);*/
+
         }
 
 

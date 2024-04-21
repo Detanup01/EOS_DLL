@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -60,6 +59,10 @@ namespace EOS_SDK
             for (int itemIndex = 0; itemIndex < array.Length; ++itemIndex)
             {
                 T item = array[itemIndex];
+
+                if (item == null)
+                    continue;
+
                 if (IsNotValueType)
                 {
                     IntPtr address_item;
@@ -116,7 +119,7 @@ namespace EOS_SDK
                 }
                 else
                 {
-                    item = (T)Marshal.PtrToStructure(itemAddress, typeof(T));
+                    item = (T)Marshal.PtrToStructure(itemAddress, typeof(T))!;
                 }
                 items.Add(item);
             }
@@ -161,7 +164,7 @@ namespace EOS_SDK
             Marshal.FreeHGlobal(itemAddress);
         }
 
-        public static IntPtr StructToPtr<T>(T _struct)
+        public static IntPtr StructToPtr<T>([DisallowNull] T _struct)
         {
             var itemSize = Marshal.SizeOf(typeof(T));
             IntPtr address = Marshal.AllocHGlobal(itemSize);
@@ -177,7 +180,7 @@ namespace EOS_SDK
             return address;
         }
 
-        public static void StructWriteOut<T>(T _struct, IntPtr outPtr)
+        public static void StructWriteOut<T>([DisallowNull] T _struct, IntPtr outPtr)
         {
             var ptr = StructToPtr(_struct);
             Marshal.WriteIntPtr(outPtr, ptr);

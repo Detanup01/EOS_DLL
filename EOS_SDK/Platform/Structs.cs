@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using EOS_SDK._Data;
+using System.Runtime.InteropServices;
 
 namespace EOS_SDK.Platform
 {
@@ -13,7 +14,46 @@ namespace EOS_SDK.Platform
             return $"ClientId: {Helpers.ToString(ClientId)}, ClientSecret: {Helpers.ToString(ClientSecret)}";
         }
     }
+    [APIVersion(1)]
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    public struct InitializeOptionsV1
+    {
+        public int ApiVersion;
+        public IntPtr AllocateMemoryFunction;
+        public IntPtr ReallocateMemoryFunction;
+        public IntPtr ReleaseMemoryFunction;
+        public IntPtr ProductName;
+        public IntPtr ProductVersion;
+    }
 
+    [APIVersion(2)]
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    public struct InitializeOptionsV2
+    {
+        public int ApiVersion;
+        public IntPtr AllocateMemoryFunction;
+        public IntPtr ReallocateMemoryFunction;
+        public IntPtr ReleaseMemoryFunction;
+        public IntPtr ProductName;
+        public IntPtr ProductVersion;
+        public IntPtr Reserved;
+    }
+
+    [APIVersion(3)]
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    public struct InitializeOptionsV3
+    {
+        public int ApiVersion;
+        public IntPtr AllocateMemoryFunction;
+        public IntPtr ReallocateMemoryFunction;
+        public IntPtr ReleaseMemoryFunction;
+        public IntPtr ProductName;
+        public IntPtr ProductVersion;
+        public IntPtr Reserved;
+        public IntPtr SystemInitializeOptions;
+    }
+
+    [APIVersion(4)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct InitializeOptions
     {

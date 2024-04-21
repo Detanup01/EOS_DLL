@@ -1,4 +1,5 @@
 ﻿using EOS_SDK._log;
+using System.Diagnostics.CodeAnalysis;
 
 namespace EOS_SDK._Data
 {
@@ -21,9 +22,9 @@ namespace EOS_SDK._Data
 
         static ulong NotifyNext = 1;
 
-        public static void PrintConvertStructs<T,B>(T struct_a, B struct_b)
+        public static void PrintConvertStructs<T,B>([DisallowNull] T struct_a, [DisallowNull] B struct_b)
         {
-            Logger.WriteDebug(struct_a.ToString());
+            Logger.WriteDebug(struct_a.ToString()!);
             Logger.WriteDebug("StructA Type Name: " + struct_a.GetType().Name + "\n");
             Logger.WriteDebug("Getting Struct Set method:");
 
@@ -39,28 +40,29 @@ namespace EOS_SDK._Data
                 Logger.WriteDebug("Set Should be invoked NOW!");
                 var will_be_struct_b = method1_.Invoke(struct_a, [struct_a, struct_b]);
                 Logger.WriteDebug("Returned Struct is null?: "+(will_be_struct_b == null));
-                Logger.WriteDebug("Returned struct Type Name" + will_be_struct_b.GetType().Name);
-                Logger.WriteDebug(will_be_struct_b.ToString());
+                Logger.WriteDebug("Returned struct Type Name" + will_be_struct_b?.GetType().Name);
+                Logger.WriteDebug(will_be_struct_b?.ToString()!);
 
             }
         }
 
-        public static IntPtr ConvertStruct<T, B>(T struct_base, B struct_helper)
+        public static IntPtr ConvertStruct<T, B>([DisallowNull] T struct_base, [DisallowNull] B struct_helper)
         {
-            IntPtr ptr = IntPtr.Zero;
             var method = struct_base.GetType().GetMethods().Where(x=>x.Name == "Set" && x.GetParameters().Where(param=>param.ParameterType == struct_helper.GetType()).Any()).FirstOrDefault();
             if (method != null)
             {
                 var will_be_struct_b = method.Invoke(struct_base, [struct_base, struct_helper]);
+                if (will_be_struct_b == null)
+                    return IntPtr.Zero;
                 return Helpers.StructToPtr(will_be_struct_b, will_be_struct_b.GetType());
             }
-            return ptr;
+            return IntPtr.Zero;
         }
 
 
         static Dictionary<ulong, Notify> Notifies = new();
 
-        public static ulong AddNotify<T>(string nametotrigger, IntPtr delegator, T struct_to_send)
+        public static ulong AddNotify<T>(string nametotrigger, IntPtr delegator, [DisallowNull] T struct_to_send)
         {
             var id = NotifyNext++;
             Notify notify = new()
@@ -82,7 +84,7 @@ namespace EOS_SDK._Data
             Logger.WriteDebug($"[NotifyManager] Removed Notify with ID: {id}");
             Notifies.Remove(id);
         }
-        public static unsafe void TriggerNotify<T>(string name, T struct_from_notfiy)
+        public static unsafe void TriggerNotify<T>(string name, [DisallowNull] T struct_from_notfiy)
         {
             var notifyDict = Notifies.Where(n => n.Value.nameTrigger == name).ToDictionary();
             if (notifyDict == null)

@@ -27,8 +27,10 @@ namespace EOS_SDK._log
             Callback = callback;
         }
 
-        static unsafe void WriteToEPIC(string message, Logging.LogCategory category, Logging.LogLevel logLevel)
+        static unsafe void WriteToEPIC(string? message, Logging.LogCategory category, Logging.LogLevel logLevel)
         {
+            if (message == null)
+                return;
             if (Callback == IntPtr.Zero)
                 return;
             if (!(LogLevel <= logLevel))

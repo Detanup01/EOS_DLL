@@ -1,13 +1,13 @@
 ﻿using EOS_SDK._log;
+using System.Diagnostics.CodeAnalysis;
 
 namespace EOS_SDK._Data
 {
     public class CallbackManager
     {
-        //CallbackDelege | CallbackStruct
-        static Dictionary<IntPtr, (IntPtr stuct_ptr, string name)> Callbacks = new();
+        static Dictionary<IntPtr /* CallbackDelege */, (IntPtr stuct_ptr, string name) /* CallbackStruct */> Callbacks = new();
 
-        public static void AddCallback<T>(IntPtr ptr, T callbackStruct, string name)
+        public static void AddCallback<T>(IntPtr ptr, [DisallowNull] T callbackStruct, string name)
         {
             Callbacks.Add(ptr, (Helpers.StructToPtr(callbackStruct), nameof(callbackStruct)));
             Logger.Write($"Callback Added {name} | {nameof(callbackStruct)}");
@@ -24,5 +24,10 @@ namespace EOS_SDK._Data
                 Logger.Write($"Callback removed {item.Value.name}");
             }
         }
+
+        public static void CleanCallbacks()
+        {
+            Callbacks.Clear();
+        }       
     }
 }

@@ -1,92 +1,171 @@
 ﻿using EOS_SDK._Data;
 using EOS_SDK.Windows;
+using System.Runtime.InteropServices;
 
 namespace EOS_SDK.Platform
 {
-    public class Platform_Handler
+    public class Platform_Handler : IHandler
     {
-        public struct Handler
-        {
-            public string ProductId;
-            public string SandboxId;
-            public ClientCredentials ClientCredentials;
-            public int IsServer;
-            public string EncryptionKey;
-            public string OverrideCountryCode;
-            public string OverrideLocaleCode;
-            public string DeploymentId;
-            public NetworkStatus NetworkStatus;
-            public ApplicationStatus ApplicationStatus;
+        public string ProductId;
+        public string SandboxId;
+        public ClientCredentials ClientCredentials;
+        public int IsServer;
+        public string EncryptionKey;
+        public string OverrideCountryCode;
+        public string OverrideLocaleCode;
+        public string DeploymentId;
+        public NetworkStatus NetworkStatus;
+        public ApplicationStatus ApplicationStatus;
+        public Dictionary<uint, IHandler> Handlers;
+        public IntPtr MyDummyPtr;
+        public Dictionary<IntPtr, uint> DummyPtrToHandler;
 
-            public override string ToString()
-            {
-                return $"ProductId: {ProductId}, SandboxId: {SandboxId}, ClientCredentials: ({ClientCredentials.ToString()}), IsServer: {IsServer}, EncryptionKey: {EncryptionKey}\n" +
-                    $"OverrideCountryCode {OverrideCountryCode}, OverrideLocaleCode {OverrideLocaleCode}, DeploymentId {DeploymentId}\n" +
-                    $"NetworkStatus: {NetworkStatus}, ApplicationStatus: {ApplicationStatus}";
-            }
+        public override string ToString()
+        {
+            return $"ProductId: {ProductId}, SandboxId: {SandboxId}, ClientCredentials: ({ClientCredentials.ToString()}), IsServer: {IsServer}, EncryptionKey: {EncryptionKey}\n" +
+                $"OverrideCountryCode {OverrideCountryCode}, OverrideLocaleCode {OverrideLocaleCode}, DeploymentId {DeploymentId}\n" +
+                $"NetworkStatus: {NetworkStatus}, ApplicationStatus: {ApplicationStatus}";
         }
-        public static Handler PlatformHandler;
-
-        public static IntPtr Create(WindowsOptions windowsOptions)
+        public IntPtr Create(WindowsOptions windowsOptions)
         {
-
-            PlatformHandler = new()
-            {
-                SandboxId = Helpers.ToString(windowsOptions.SandboxId),
-                DeploymentId = Helpers.ToString(windowsOptions.DeploymentId),
-                ClientCredentials = windowsOptions.ClientCredentials,
-                EncryptionKey = Helpers.ToString(windowsOptions.EncryptionKey),
-                IsServer = windowsOptions.IsServer,
-                OverrideCountryCode = Helpers.ToString(windowsOptions.OverrideCountryCode),
-                OverrideLocaleCode = Helpers.ToString(windowsOptions.OverrideLocaleCode),
-                ProductId = Helpers.ToString(windowsOptions.ProductId),
-                NetworkStatus = NetworkStatus.Offline,
-                ApplicationStatus = ApplicationStatus.Foreground
-            };
-            var conf = Config.GetConfig();
-            Config.Save(conf);
-            _log.Logger.WriteInfo("Platform_Handler.Create Windows: " + PlatformHandler.ToString());
-            return IntPtr.CreateChecked(SDK.PlatformPTR);
+            SandboxId = Helpers.ToString(windowsOptions.SandboxId);
+            DeploymentId = Helpers.ToString(windowsOptions.DeploymentId);
+            ClientCredentials = windowsOptions.ClientCredentials;
+            EncryptionKey = Helpers.ToString(windowsOptions.EncryptionKey);
+            IsServer = windowsOptions.IsServer;
+            OverrideCountryCode = Helpers.ToString(windowsOptions.OverrideCountryCode);
+            OverrideLocaleCode = Helpers.ToString(windowsOptions.OverrideLocaleCode);
+            ProductId = Helpers.ToString(windowsOptions.ProductId);
+            NetworkStatus = NetworkStatus.Offline;
+            ApplicationStatus = ApplicationStatus.Foreground;
+            Handlers = new();
+            DummyPtrToHandler = new();
+            MyDummyPtr = 0;
+            _log.Logger.WriteInfo("Platform_Handler.Create Windows: " + ToString());
+            return Create();
         }
 
-        public static IntPtr Create(Options options)
+        public IntPtr Create(Options options)
         {
-            PlatformHandler = new()
-            {
-                SandboxId = Helpers.ToString(options.SandboxId),
-                DeploymentId = Helpers.ToString(options.DeploymentId),
-                ClientCredentials = options.ClientCredentials,
-                EncryptionKey = Helpers.ToString(options.EncryptionKey),
-                IsServer = options.IsServer,
-                OverrideCountryCode = Helpers.ToString(options.OverrideCountryCode),
-                OverrideLocaleCode = Helpers.ToString(options.OverrideLocaleCode),
-                ProductId = Helpers.ToString(options.ProductId),
-                NetworkStatus = NetworkStatus.Offline,
-                ApplicationStatus = ApplicationStatus.Foreground
-            };
-            var conf = Config.GetConfig();
-            Config.Save(conf);
-            _log.Logger.WriteInfo("Platform_Handler.Create Options: " + PlatformHandler.ToString());
-            return IntPtr.CreateChecked(SDK.PlatformPTR);
+            SandboxId = Helpers.ToString(options.SandboxId);
+            DeploymentId = Helpers.ToString(options.DeploymentId);
+            ClientCredentials = options.ClientCredentials;
+            EncryptionKey = Helpers.ToString(options.EncryptionKey);
+            IsServer = options.IsServer;
+            OverrideCountryCode = Helpers.ToString(options.OverrideCountryCode);
+            OverrideLocaleCode = Helpers.ToString(options.OverrideLocaleCode);
+            ProductId = Helpers.ToString(options.ProductId);
+            NetworkStatus = NetworkStatus.Offline;
+            ApplicationStatus = ApplicationStatus.Foreground;
+            Handlers = new();
+            DummyPtrToHandler = new();
+            MyDummyPtr = 0;
+            _log.Logger.WriteInfo("Platform_Handler.Create Options: " + ToString());
+            return Create();
         }
 
-        public static bool CheckIfPointerValid(IntPtr ptr)
+        public bool CheckIfPointerValid(IntPtr ptr)
         {
             if (ptr == IntPtr.Zero)
                 return false;
-            return ptr == IntPtr.CreateChecked(SDK.PlatformPTR);
+            return ptr == MyDummyPtr;
         }
 
 
-        public static void Free(IntPtr ptr)
+        public void Free(IntPtr ptr)
         {
+            foreach (var handler in Handlers.Values)
+            {
+                handler.Close();
+            }
+            Close();
             _log.Logger.WriteDebug("Platform try Free-ing PTR: " + ptr.ToString());
-            /*
-            if (CheckIfPointerValid(HandlerPointer))
-                
             Marshal.FreeHGlobal(ptr);
-            */
+        }
 
+        public void Update()
+        {
+            CallbackManager.Update();
+            Tick();
+
+        }
+
+
+        public IntPtr Create()
+        {
+            DummyStruct dummyStruct = new();
+            var retptr = Helpers.StructToPtr(dummyStruct);
+            _log.Logger.WriteInfo("Platform_Handler.Create Pointer: " + retptr);
+            MyDummyPtr = retptr;
+            Handlers.Add(SDK.PlatformPTR, this);
+            DummyPtrToHandler.Add(retptr, SDK.PlatformPTR);
+            return retptr;
+        }
+
+        public void Tick()
+        {
+            foreach (var handler in Handlers.Values)
+            {
+                handler.Tick();
+            }
+        }
+
+        public void Close()
+        {
+            _log.Logger.WriteInfo("Platform_Handler.Close: ");
+        }
+
+        public IntPtr CreateHandler(uint handlerCRC)
+        {
+            IHandler? handler = null;
+            switch (handlerCRC)
+            {
+                case SDK.AchivementPTR:
+                    handler = new Achievements.Achievements_Handler();
+                    break;
+                default:
+                    break;
+            }
+            var ptr = IntPtr.Zero;
+            if (handler != null)
+            {
+                ptr = handler.Create(); 
+                Handlers.Add(handlerCRC, handler);
+                DummyPtrToHandler.Add(ptr, handlerCRC);
+            }
+            return ptr;
+        }
+
+        /// <summary>
+        /// Check if the argument is valid.
+        /// </summary>
+        /// <param name="handle">Handle of the function</param>
+        /// <param name="completionDelegate">Delegate for functions</param>
+        /// <returns>True if valid</returns>
+        public bool CheckArgs(IntPtr handle, IntPtr completionDelegate)
+        {
+            if (handle == IntPtr.Zero)
+                return false;
+            if (completionDelegate == IntPtr.Zero)
+                return false;
+            if (!DummyPtrToHandler.ContainsKey(handle))
+                return false;
+            return true;
+        }
+
+        public T? GetHandler<T>(IntPtr ptr_handle) where T : class
+        {
+            if (!DummyPtrToHandler.TryGetValue(ptr_handle, out uint hex))
+            {
+                return default;
+            }
+            if (!Handlers.TryGetValue(hex, out IHandler? handler))
+            {
+                return default;
+            }
+            if (handler == null)
+                return default;
+            return (T)handler;
         }
     }
 }
