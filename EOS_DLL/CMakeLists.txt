@@ -28,6 +28,12 @@ if(WIN32) # Setup some variables for Windows build
     libs/Detours/modules.cpp
     dllmain.cpp
     )
+    target_link_libraries(${EPIC_API}
+      PRIVATE
+
+      ${CMAKE_SOURCE_DIR}/${EPIC_API}_native.lib
+      Shlwapi.lib
+    )
   elseif(X86)
     set(EPIC_API EOSSDK-Win32-Shipping)
     set(OUT_DIR win32)
@@ -43,6 +49,12 @@ if(WIN32) # Setup some variables for Windows build
     libs/Detours/image.cpp
     libs/Detours/modules.cpp
     dllmain.cpp
+    )
+    target_link_libraries(${EPIC_API}
+      PRIVATE
+
+      ${CMAKE_SOURCE_DIR}/${EPIC_API}_native.lib
+      Shlwapi.lib
     )
   else()
     message(FATAL_ERROR "Arch unknown")
@@ -66,6 +78,11 @@ elseif(APPLE)
   dllmain.cpp
   )
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
+  target_link_libraries(${EPIC_API}
+      PRIVATE
+
+      ${CMAKE_SOURCE_DIR}/${EPIC_API}_native.dynlib
+    )
 
 elseif(UNIX)
   if(X64)
@@ -88,6 +105,11 @@ elseif(UNIX)
   libEOSSDK-Linux-Shipping_native.cpp
   dllmain.cpp
   )
+    target_link_libraries(${EPIC_API}
+      PRIVATE
+
+      ${CMAKE_SOURCE_DIR}/${EPIC_API}_native.so
+    )
   else()
     message(FATAL_ERROR "No CMake for other platforms")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
@@ -123,12 +145,6 @@ if(UNIX)
   set_target_properties(${EPIC_API} PROPERTIES PREFIX "")
 endif()
 
-target_link_libraries(${EPIC_API}
-  PRIVATE
-
-  ${CMAKE_SOURCE_DIR}/${EPIC_API}_native.lib
-  Shlwapi.lib
-)
 
 target_include_directories(${EPIC_API}
   PRIVATE
