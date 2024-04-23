@@ -14,14 +14,9 @@ jobs:
     strategy:
       matrix:
         builds: [ 'Debug', 'Release' ]
-        arch: ['x32', 'x64']
     steps:
-    - name: Win X32
-      if: matrix.arch == 'x32'
-      run: bash ${{ github.workspace }}\windows_x32_cmake.bat
-    - name: Win X64
-      if: matrix.arch == 'x64'
-      run: bash ${{ github.workspace }}\windows_x64_cmake.bat
+    - name: Win
+      run: bash ${{ github.workspace }}\windows_all.sh
     - name: Upload artifact (Win)
       uses: actions/upload-artifact@v3
       with:
