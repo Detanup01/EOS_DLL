@@ -1,0 +1,29 @@
+# This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
+# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
+name: CMake on multiple platforms
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+ windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        builds: [ 'Debug', 'Release' ]
+        arch: ['x32', 'x64']
+    steps:
+    - name: checkout
+    - uses: actions/checkout@v4
+    - name: Win X32
+      if: $({ contains(matrix.arch, "x32") })
+      run: EOS_DLL/windows_x32_cmake.bat
+    - name: Upload artifact (Win)
+      uses: actions/upload-artifact@v3
+      with:
+        name: DLL-Win
+        path: EOS_DLL
+        if-no-files-found: error
