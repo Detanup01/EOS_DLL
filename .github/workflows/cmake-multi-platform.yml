@@ -91,7 +91,7 @@ jobs:
       if: matrix.os == 'windows-latest'
       uses: actions/upload-artifact@v3
       with:
-        name: DLL-${{ matrix.os }}
+        name: Win64
         path: ${{ steps.strings.outputs.build-output-dir }}/Release
         if-no-files-found: error
 
@@ -99,7 +99,7 @@ jobs:
       uses: actions/upload-artifact@v3
       if: matrix.os == 'windows-latest'
       with:
-        name: DLL-${{ matrix.os }}-x32
+        name: Win32
         path: ${{ steps.strings.outputs.build-output-dir }}/x32/Release
         if-no-files-found: error
 
@@ -107,6 +107,6 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       uses: actions/upload-artifact@v3
       with:
-        name: DLL-${{ matrix.os }}
+        name: Linux
         path: ${{ steps.strings.outputs.build-output-dir }}/libEOSSDK-Linux-Shipping.so
         if-no-files-found: error
