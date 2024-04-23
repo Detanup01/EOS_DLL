@@ -23,7 +23,8 @@ jobs:
       #
       # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest]
+        # os: [ubuntu-latest, windows-latest, macos-latest]
         build_type: [Release]
         arch: [win]
         c_compiler: [gcc, clang, cl]
@@ -34,18 +35,11 @@ jobs:
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
-          - os: macos-latest
-            c_compiler: clang
-            cpp_compiler: clang++
         exclude:
           - os: windows-latest
             c_compiler: gcc
           - os: windows-latest
             c_compiler: clang
-          - os: macos-latest
-            c_compiler: cl
-          - os: macos-latest
-            c_compiler: gcc
           - os: ubuntu-latest
             c_compiler: clang
           - os: ubuntu-latest
@@ -93,9 +87,26 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }}/x32 --config ${{ matrix.build_type }} --verbose
 
-    - name: Upload artifact 
+    - name: Upload artifact win
+      if: matrix.os == 'windows-latest'
       uses: actions/upload-artifact@v3
       with:
-        name: DLL-${{ matrix.os }}
-        path: ${{ steps.strings.outputs.build-output-dir }}
+        name: Win64
+        path: ${{ steps.strings.outputs.build-output-dir }}/Release
+        if-no-files-found: error
+
+    - name: Upload artifact win32
+      uses: actions/upload-artifact@v3
+      if: matrix.os == 'windows-latest'
+      with:
+        name: Win32
+        path: ${{ steps.strings.outputs.build-output-dir }}/x32/Release
+        if-no-files-found: error
+
+    - name: Upload artifact linux
+      if: matrix.os == 'ubuntu-latest'
+      uses: actions/upload-artifact@v3
+      with:
+        name: Linux
+        path: ${{ steps.strings.outputs.build-output-dir }}/libEOSSDK-Linux-Shipping.so
         if-no-files-found: error
