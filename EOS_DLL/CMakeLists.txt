@@ -117,8 +117,13 @@ target_link_libraries(${EPIC_API}
 
   $<$<BOOL:${WIN32}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.lib>
   $<$<BOOL:${WIN32}>:Shlwapi.lib>
-  $<$<BOOL:${UNIX}>:../${EPIC_API}_native.so>
-  $<$<BOOL:${APPLE}>:../${EPIC_API}_native.dynlib>
+  $<$<BOOL:${UNIX}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.so>
+  $<$<BOOL:${APPLE}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.dynlib>
+)
+
+target_link_directories(${EPIC_API}
+  PRIVATE
+  ${CMAKE_SOURCE_DIR}
 )
 
 set_target_properties(${EPIC_API} PROPERTIES
