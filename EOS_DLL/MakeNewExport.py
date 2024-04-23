@@ -107,6 +107,6 @@ def run(filename):
     f2.close()
 
 if __name__ == "__main__":
-    runners = ["EOSSDK-Win32-Shipping_native", "EOSSDK-Win64-Shipping_native", "libEOSSDK-Linux-Shipping_native"]
+    runners = ["EOSSDK-Win32-Shipping_native", "EOSSDK-Win64-Shipping_native", "libEOSSDK-Linux-Shipping_native", "libEOSSDK-Mac-Shipping_native"]
     for run_this in runners:
         run(run_this)
