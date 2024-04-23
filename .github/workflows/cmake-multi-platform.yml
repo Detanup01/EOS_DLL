@@ -16,8 +16,6 @@ jobs:
         builds: [ 'Debug', 'Release' ]
         arch: ['x32', 'x64']
     steps:
-    - name: checkout
-    - uses: actions/checkout@v4
     - name: Win X32
       if: $({ contains(matrix.arch, "x32") })
       run: EOS_DLL/windows_x32_cmake.bat
