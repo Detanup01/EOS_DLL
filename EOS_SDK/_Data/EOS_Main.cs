@@ -62,5 +62,13 @@ namespace EOS_SDK._Data
             }
             return _Config;
         }
+
+        public static bool IsMyUser(IntPtr ptr)
+        {
+            string str = Helpers.ToString(ptr);
+            if (GetConfig().AccountId == str || GetConfig().EpicProductUserId == str)
+                return true;
+            return false;
+        }
     }
 }

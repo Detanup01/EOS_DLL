@@ -36,7 +36,7 @@ namespace EOS_SDK.Achievements
                     UnlockTime = item._Data.UnlockedTime,
                     UserId = options.UserId
                 };
-                NotifyManager.TriggerNotify(nameof(Achievements_Exports._EOS_Achievements_AddNotifyAchievementsUnlockedV2), info);
+                NotifyManager.TriggerNotify("Ach_UnlockedV2", info);
             }
             var ptr = Helpers.FromStructArray(UnlockedAchis.ToArray());
             UnlockAchievementsOptions unlockAchievementsOptions = new()
@@ -64,36 +64,8 @@ namespace EOS_SDK.Achievements
         public Definition GetDefinition(IntPtr ptr)
         {
             string achi = Helpers.ToString(ptr);
-            var achiv = Achievements.Where(x => x.AchievementId == achi).First();
-
-            List<StatThresholds> thresholds = new();
-            foreach (var item in achiv.StatsThresholds)
-            {
-                StatThresholds statThresholds = new StatThresholds()
-                {
-                    ApiVersion = Versions.StatthresholdsApiLatest,
-                    Name = Helpers.FromString(item.Name),
-                    Threshold = item.Threshold
-                };
-                thresholds.Add(statThresholds);
-            }
-
-            return new()
-            {
-                ApiVersion = Versions.DefinitionApiLatest_Achievements,
-                AchievementId = ptr,
-                Description = Helpers.FromString(achiv.UnlockedDescription.Default),
-                DisplayName = Helpers.FromString(achiv.UnlockedDisplayName.Default),
-                CompletionDescription = Helpers.FromString(achiv.UnlockedDisplayName.Default),
-                HiddenDescription = Helpers.FromString(achiv.UnlockedDescription.Default),
-                LockedDescription = Helpers.FromString(achiv.LockedDescription.Default),
-                LockedDisplayName = Helpers.FromString(achiv.LockedDisplayName.Default),
-                IsHidden = Convert.ToInt32(achiv.IsHidden),
-                LockedIconId = Helpers.FromString(achiv.LockedIconUrl),
-                StatThresholds = Helpers.FromStructArray(thresholds.ToArray()),
-                StatThresholdsCount = thresholds.Count,
-                UnlockedIconId = Helpers.FromString(achiv.UnlockedIconUrl)
-            };
+            var indx = Achievements.FindIndex(0, x => x.AchievementId == achi);
+            return GetDefinitionIndex((uint)indx);
         }
 
         public Definition GetDefinitionIndex(uint index)
@@ -131,6 +103,29 @@ namespace EOS_SDK.Achievements
                 StatThresholdsCount = thresholds.Count,
                 UnlockedIconId = Helpers.FromString(achiv.UnlockedIconUrl)
             };
+        }
+
+        public UnlockedAchievement GetUnlockedAchievement(IntPtr ptr)
+        {
+            string achi = Helpers.ToString(ptr);
+            var indx = Achievements.FindIndex(0, x => x.AchievementId == achi);
+            return GetUnlockedAchievementIndex((uint)indx);
+        }
+
+        public UnlockedAchievement GetUnlockedAchievementIndex(uint index)
+        {
+            if (Achievements.Count >= index)
+                return new();
+
+            var achiv = Achievements[(int)index];
+
+            return new()
+            {
+                ApiVersion = Versions.UnlockedachievementApiLatest,
+                AchievementId = Helpers.FromString(achiv.AchievementId),
+                UnlockTime = achiv._Data.UnlockedTime,
+            };
+
         }
 
         public void SaveAchis()

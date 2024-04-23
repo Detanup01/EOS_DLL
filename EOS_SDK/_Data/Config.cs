@@ -38,5 +38,6 @@ namespace EOS_SDK._Data
         public string EpicProductUserId = "deadc0deffaabbccddeeff0123456789";
         public string RSA_Private = "";
         public string RSA_Public = "";
+        public List<string> BannedNetworkUsers = new List<string>();
     }
 }

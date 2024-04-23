@@ -20,7 +20,7 @@ namespace EOS_SDK.Achievements
             { 
                 ClientData = clientData
             };
-            var id = NotifyManager.AddNotify(nameof(_EOS_Achievements_AddNotifyAchievementsUnlocked), notificationFn, callbackInfo);
+            var id = NotifyManager.AddNotify("Ach_Unlocked", notificationFn, callbackInfo);
             return id;
         }
 
@@ -37,7 +37,7 @@ namespace EOS_SDK.Achievements
             {
                 ClientData = clientData
             };
-            var id = NotifyManager.AddNotify(nameof(_EOS_Achievements_AddNotifyAchievementsUnlockedV2), notificationFn, callbackInfo);
+            var id = NotifyManager.AddNotify("Ach_UnlockedV2", notificationFn, callbackInfo);
             return id;
         }
 
@@ -45,8 +45,8 @@ namespace EOS_SDK.Achievements
         public static void _EOS_Achievements_RemoveNotifyAchievementsUnlocked(IntPtr handle, ulong inId)
         {
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_RemoveNotifyAchievementsUnlocked)} Called", Logging.LogCategory.Achievements);
-            var handler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
-            if (handler == null)
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
                 return;
             NotifyManager.RemoveNotify(inId);
         }
@@ -57,14 +57,14 @@ namespace EOS_SDK.Achievements
         {
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_CopyAchievementDefinitionByAchievementId)} Called", Logging.LogCategory.Achievements);
             if (!EOS_Main.GetPlatform().CheckArgs(handle, outDefinition))
-                return 0;
-            var handler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
-            if (handler == null)
-                return (int)Result.NotImplemented;
-            var _CopyAchievementDefinitionByAchievementIdOptions = Marshal.PtrToStructure<CopyAchievementDefinitionByAchievementIdOptions>(options);
-            if (!handler.IsAchiExist(_CopyAchievementDefinitionByAchievementIdOptions.AchievementId))
                 return (int)Result.InvalidParameters;
-            Definition definition = handler.GetDefinition(_CopyAchievementDefinitionByAchievementIdOptions.AchievementId);
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
+                return (int)Result.InvalidParameters;
+            var _CopyAchievementDefinitionByAchievementIdOptions = Marshal.PtrToStructure<CopyAchievementDefinitionByAchievementIdOptions>(options);
+            if (!phandler.IsAchiExist(_CopyAchievementDefinitionByAchievementIdOptions.AchievementId))
+                return (int)Result.InvalidParameters;
+            Definition definition = phandler.GetDefinition(_CopyAchievementDefinitionByAchievementIdOptions.AchievementId);
             Helpers.StructWriteOut(definition, outDefinition);
             return (int)Result.Success;
         }
@@ -75,13 +75,13 @@ namespace EOS_SDK.Achievements
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_CopyAchievementDefinitionByIndex)} Called", Logging.LogCategory.Achievements);
             if (!EOS_Main.GetPlatform().CheckArgs(handle, outDefinition))
                 return (int)Result.InvalidParameters;
-            var handler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
-            if (handler == null)
-                return (int)Result.NotImplemented;
-            var _CopyAchievementDefinitionByIndexOptions = Marshal.PtrToStructure<CopyAchievementDefinitionByIndexOptions>(options);
-            if (!handler.IsAchiExistIndex(_CopyAchievementDefinitionByIndexOptions.AchievementIndex))
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
                 return (int)Result.InvalidParameters;
-            Definition definition = handler.GetDefinitionIndex(_CopyAchievementDefinitionByIndexOptions.AchievementIndex);
+            var _CopyAchievementDefinitionByIndexOptions = Marshal.PtrToStructure<CopyAchievementDefinitionByIndexOptions>(options);
+            if (!phandler.IsAchiExistIndex(_CopyAchievementDefinitionByIndexOptions.AchievementIndex))
+                return (int)Result.InvalidParameters;
+            Definition definition = phandler.GetDefinitionIndex(_CopyAchievementDefinitionByIndexOptions.AchievementIndex);
             Helpers.StructWriteOut(definition, outDefinition);
             return (int)Result.Success;
         }
@@ -101,10 +101,10 @@ namespace EOS_SDK.Achievements
         {
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_CopyAchievementDefinitionV2ByAchievementId)} Called", Logging.LogCategory.Achievements);
             if (!EOS_Main.GetPlatform().CheckArgs(handle, outDefinition))
-                return 0;
-            var handler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
-            if (handler == null)
-                return (int)Result.NotImplemented;
+                return (int)Result.InvalidParameters;
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
+                return (int)Result.InvalidParameters;
             var _CopyAchievementDefinitionV2ByAchievementIdOptions = Marshal.PtrToStructure<CopyAchievementDefinitionV2ByAchievementIdOptions>(options);
             return (int)Result.Success;
         }
@@ -114,10 +114,10 @@ namespace EOS_SDK.Achievements
         {
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_CopyAchievementDefinitionV2ByIndex)} Called", Logging.LogCategory.Achievements);
             if (!EOS_Main.GetPlatform().CheckArgs(handle, outDefinition))
-                return 0;
-            var handler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
-            if (handler == null)
-                return (int)Result.NotImplemented;
+                return (int)Result.InvalidParameters;
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
+                return (int)Result.InvalidParameters;
             var _CopyAchievementDefinitionV2ByIndexOptions = Marshal.PtrToStructure<CopyAchievementDefinitionV2ByIndexOptions>(options);
             return (int)Result.Success;
         }
@@ -136,10 +136,10 @@ namespace EOS_SDK.Achievements
         {
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_CopyPlayerAchievementByAchievementId)} Called", Logging.LogCategory.Achievements);
             if (!EOS_Main.GetPlatform().CheckArgs(handle, outAchievement))
-                return 0;
-            var handler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
-            if (handler == null)
-                return (int)Result.NotImplemented;
+                return (int)Result.InvalidParameters;
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
+                return (int)Result.InvalidParameters;
             var _CopyPlayerAchievementByAchievementIdOptions = Marshal.PtrToStructure<CopyPlayerAchievementByAchievementIdOptions>(options);
             return (int)Result.Success;
         }
@@ -149,10 +149,10 @@ namespace EOS_SDK.Achievements
         {
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_CopyPlayerAchievementByIndex)} Called", Logging.LogCategory.Achievements);
             if (!EOS_Main.GetPlatform().CheckArgs(handle, outAchievement))
-                return 0;
-            var handler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
-            if (handler == null)
-                return (int)Result.NotImplemented;
+                return (int)Result.InvalidParameters;
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
+                return (int)Result.InvalidParameters;
             var _CopyPlayerAchievementByIndexOptions = Marshal.PtrToStructure<CopyPlayerAchievementByIndexOptions>(options);
             return (int)Result.Success;
         }
@@ -169,6 +169,9 @@ namespace EOS_SDK.Achievements
         public static uint _EOS_Achievements_GetAchievementDefinitionCount(IntPtr handle, IntPtr options)
         {
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_GetAchievementDefinitionCount)} Called", Logging.LogCategory.Achievements);
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
+                return (int)Result.InvalidParameters;
             var _GetAchievementDefinitionCountOptions = Marshal.PtrToStructure<GetAchievementDefinitionCountOptions>(options);
             return 0;
         }
@@ -177,6 +180,9 @@ namespace EOS_SDK.Achievements
         public static uint _EOS_Achievements_GetPlayerAchievementCount(IntPtr handle, IntPtr options)
         {
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_GetPlayerAchievementCount)} Called", Logging.LogCategory.Achievements);
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
+                return (int)Result.InvalidParameters;
             var _GetPlayerAchievementCountOptions = Marshal.PtrToStructure<GetPlayerAchievementCountOptions>(options);
             return 0;
         }
@@ -185,6 +191,9 @@ namespace EOS_SDK.Achievements
         public static uint _EOS_Achievements_GetUnlockedAchievementCount(IntPtr handle, IntPtr options)
         {
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_GetUnlockedAchievementCount)} Called", Logging.LogCategory.Achievements);
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
+                return (int)Result.InvalidParameters;
             var _GetUnlockedAchievementCountOptions = Marshal.PtrToStructure<GetUnlockedAchievementCountOptions>(options);
             return 0;
         }
@@ -196,8 +205,8 @@ namespace EOS_SDK.Achievements
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_QueryDefinitions)} Called", Logging.LogCategory.Achievements);
             if (!EOS_Main.GetPlatform().CheckArgs(handle, completionDelegate))
                 return;
-            var handler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
-            if (handler == null)
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
                 return;
             var _QueryDefinitionsOptions = Marshal.PtrToStructure<QueryDefinitionsOptions>(options);
             OnQueryDefinitionsCompleteCallbackInfo info = new OnQueryDefinitionsCompleteCallbackInfo()
@@ -214,8 +223,8 @@ namespace EOS_SDK.Achievements
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_QueryPlayerAchievements)} Called", Logging.LogCategory.Achievements);
             if (!EOS_Main.GetPlatform().CheckArgs(handle, completionDelegate))
                 return;
-            var handler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
-            if (handler == null)
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
                 return;
 
             var _QueryPlayerAchievementsOptions = Marshal.PtrToStructure<QueryPlayerAchievementsOptions>(options);
@@ -240,14 +249,14 @@ namespace EOS_SDK.Achievements
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_UnlockAchievements)} Called", Logging.LogCategory.Achievements);
             if (!EOS_Main.GetPlatform().CheckArgs(handle, completionDelegate))
                 return;
-            var handler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
-            if (handler == null)
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
                 return;
 
             var _UnlockAchievementsOptions = Marshal.PtrToStructure<UnlockAchievementsOptions>(options);
-            _UnlockAchievementsOptions = handler.UnlockAchievements(_UnlockAchievementsOptions);
+            _UnlockAchievementsOptions = phandler.UnlockAchievements(_UnlockAchievementsOptions);
 
-            NotifyManager.TriggerNotify(nameof(_EOS_Achievements_AddNotifyAchievementsUnlocked), _UnlockAchievementsOptions);
+            NotifyManager.TriggerNotify("Ach_Unlocked", _UnlockAchievementsOptions);
 
             OnUnlockAchievementsCompleteCallbackInfo onUnlockAchievementsCompleteCallbackInfo = new()
             {
@@ -256,7 +265,6 @@ namespace EOS_SDK.Achievements
                 AchievementsCount = _UnlockAchievementsOptions.AchievementsCount,
                 UserId = _UnlockAchievementsOptions.UserId
             };
-            delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: OnUnlockAchievementsCompleteCallback
             CallbackManager.AddCallback(completionDelegate, onUnlockAchievementsCompleteCallbackInfo, nameof(_EOS_Achievements_QueryDefinitions));
         }
         #endregion
@@ -266,7 +274,13 @@ namespace EOS_SDK.Achievements
         public static int _EOS_Achievements_CopyUnlockedAchievementByAchievementId(IntPtr handle, IntPtr options, IntPtr outAchievement)
         {
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_CopyUnlockedAchievementByAchievementId)} Called", Logging.LogCategory.Achievements);
+            if (!EOS_Main.GetPlatform().CheckArgs(handle, outAchievement))
+                return (int)Result.InvalidParameters;
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
+                return (int)Result.InvalidParameters;
             var _CopyUnlockedAchievementByAchievementIdOptions = Marshal.PtrToStructure<CopyUnlockedAchievementByAchievementIdOptions>(options);
+
             return (int)Result.Success;
         }
 
@@ -274,7 +288,18 @@ namespace EOS_SDK.Achievements
         public static int _EOS_Achievements_CopyUnlockedAchievementByIndex(IntPtr handle, IntPtr options, IntPtr outAchievement)
         {
             _log.Logger.WriteDebug($"{nameof(_EOS_Achievements_CopyUnlockedAchievementByIndex)} Called", Logging.LogCategory.Achievements);
+            if (!EOS_Main.GetPlatform().CheckArgs(handle, outAchievement))
+                return (int)Result.InvalidParameters;
+            var phandler = EOS_Main.GetPlatform().GetHandler<Achievements_Handler>(handle);
+            if (phandler == null)
+                return (int)Result.InvalidParameters;
             var _CopyUnlockedAchievementByIndexOptions = Marshal.PtrToStructure<CopyUnlockedAchievementByIndexOptions>(options);
+
+            if (EOS_Main.IsMyUser(_CopyUnlockedAchievementByIndexOptions.TargetUserId))
+            {
+                phandler.GetUnlockedAchievementIndex(_CopyUnlockedAchievementByIndexOptions.AchievementIndex);
+            }
+
             return (int)Result.Success;
         }
 
