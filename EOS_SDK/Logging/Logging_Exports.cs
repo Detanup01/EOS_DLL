@@ -8,14 +8,14 @@ namespace EOS_SDK.Logging
     {
 #if true
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int EOS_Logging_SetCallback(IntPtr callback)
+        public static int _EOS_Logging_SetCallback(IntPtr callback)
         {
             Logger.AddCallback(callback);
             return (int)Result.Success;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int EOS_Logging_SetLogLevel(int logCategory, int logLevel)
+        public static int _EOS_Logging_SetLogLevel(int logCategory, int logLevel)
         {
             Logger.SetLogLevel((LogCategory)logCategory, (LogLevel)logLevel);
             return (int)Result.Success;

@@ -22,8 +22,6 @@ namespace EOS_SDK._log
         }
         public static void AddCallback(IntPtr callback)
         {
-            if (callback == IntPtr.Zero)
-                return;
             Callback = callback;
         }
 
