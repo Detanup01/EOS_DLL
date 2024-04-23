@@ -23,7 +23,7 @@ jobs:
       #
       # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         build_type: [Release]
         arch: [win]
         c_compiler: [gcc, clang, cl]
@@ -34,7 +34,7 @@ jobs:
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
-          - os: ubuntu-latest
+          - os: macos-latest
             c_compiler: clang
             cpp_compiler: clang++
         exclude:
@@ -42,7 +42,7 @@ jobs:
             c_compiler: gcc
           - os: windows-latest
             c_compiler: clang
-          - os: ubuntu-latest
+          - os: macos-latest
             c_compiler: cl
 
     steps:
@@ -55,7 +55,7 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/EOS_DLL/build" >> "$GITHUB_OUTPUT"
 
-    - name: Hello World
+    - name: Generating exports
       run: cd ${{ github.workspace }}//EOS_DLL && python MakeNewExport.py
 
     - name: Configure CMake
@@ -67,13 +67,6 @@ jobs:
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -S ${{ github.workspace }}/EOS_DLL
-
-    - name: Upload artifact 
-      uses: actions/upload-artifact@v3
-      with:
-        name: BuildPlace-${{ matrix.os }}
-        path: ${{ steps.strings.outputs.build-output-dir }}
-        if-no-files-found: error
 
     - name: Build
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
