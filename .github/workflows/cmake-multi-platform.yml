@@ -19,7 +19,6 @@ jobs:
       run: |
           dir 
           dir ${{ github.workspace }}
-          bash ${{ github.workspace }}\windows_all.sh
     - name: Upload artifact (Win)
       uses: actions/upload-artifact@v3
       with:
