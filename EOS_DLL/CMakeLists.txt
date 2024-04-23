@@ -47,6 +47,7 @@ if(WIN32) # Setup some variables for Windows build
   else()
     message(FATAL_ERROR "Arch unknown")
   endif()
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++latest")
 
 elseif(APPLE)
   if(X64)
@@ -64,6 +65,7 @@ elseif(APPLE)
   libEOSSDK-Mac-Shipping_native.cpp
   dllmain.cpp
   )
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
 
 elseif(UNIX)
   if(X64)
@@ -86,12 +88,14 @@ elseif(UNIX)
   libEOSSDK-Linux-Shipping_native.cpp
   dllmain.cpp
   )
-else()
-  message(FATAL_ERROR "No CMake for other platforms")
-
+  else()
+    message(FATAL_ERROR "No CMake for other platforms")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
 endif()
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std:c++latest")
+
+
+
 
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Debug or Release")
 
