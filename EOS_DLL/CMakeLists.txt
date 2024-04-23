@@ -28,12 +28,6 @@ if(WIN32) # Setup some variables for Windows build
     libs/Detours/modules.cpp
     dllmain.cpp
     )
-    target_link_libraries(${EPIC_API}
-      PRIVATE
-
-      ${CMAKE_SOURCE_DIR}/${EPIC_API}_native.lib
-      Shlwapi.lib
-    )
   elseif(X86)
     set(EPIC_API EOSSDK-Win32-Shipping)
     set(OUT_DIR win32)
@@ -50,15 +44,14 @@ if(WIN32) # Setup some variables for Windows build
     libs/Detours/modules.cpp
     dllmain.cpp
     )
-    target_link_libraries(${EPIC_API}
-      PRIVATE
-
-      ${CMAKE_SOURCE_DIR}/${EPIC_API}_native.lib
-      Shlwapi.lib
-    )
   else()
     message(FATAL_ERROR "Arch unknown")
   endif()
+  
+  set(custom_headers
+    libs/Detours/
+    libs
+  )
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++latest")
 
 elseif(APPLE)
@@ -74,15 +67,10 @@ elseif(APPLE)
 
   set(EPIC_API libEOSSDK-Mac-Shipping)
   file(GLOB emu_sources
-  libEOSSDK-Mac-Shipping_native.cpp
-  dllmain.cpp
+    libEOSSDK-Mac-Shipping_native.cpp
+    dllmain.cpp
   )
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
-  target_link_libraries(${EPIC_API}
-      PRIVATE
-
-      ${CMAKE_SOURCE_DIR}/${EPIC_API}_native.dynlib
-    )
 
 elseif(UNIX)
   if(X64)
@@ -96,23 +84,17 @@ elseif(UNIX)
     set(CMAKE_CXX_FLAGS           "${CMAKE_CXX_FLAGS} -m32")
     set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS} -m32")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -m32")
-	set(OUT_DIR linux32)
+	    set(OUT_DIR linux32)
   else()
     message(FATAL_ERROR "Arch unknown")
   endif()
   set(EPIC_API libEOSSDK-Linux-Shipping)
   file(GLOB emu_sources
-  libEOSSDK-Linux-Shipping_native.cpp
-  dllmain.cpp
+    libEOSSDK-Linux-Shipping_native.cpp
+    dllmain.cpp
   )
-    target_link_libraries(${EPIC_API}
-      PRIVATE
-
-      ${CMAKE_SOURCE_DIR}/${EPIC_API}_native.so
-    )
-  else()
+else()
     message(FATAL_ERROR "No CMake for other platforms")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
 endif()
 
 
@@ -121,9 +103,12 @@ endif()
 
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Debug or Release")
 
-set(custom_headers
- libs/Detours/
- libs
+target_link_libraries(${EPIC_API}
+  PRIVATE
+  $<BOOL:${UNIX}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.so
+  $<BOOL:${WIN32}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.lib
+  $<BOOL:${WIN32}>:Shlwapi.lib
+  $<BOOL:${APPLE}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.dynlib
 )
 
 add_library(${EPIC_API}
