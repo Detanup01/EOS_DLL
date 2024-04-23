@@ -70,6 +70,26 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\OBJ\</IntDir>
+    <TargetName>EOSSDK_Win32_Shipping</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>$(Platform)\$(Configuration)\OBJ\</IntDir>
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <TargetName>EOSSDK_Win32_Shipping</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\OBJ\</IntDir>
+    <TargetName>EOSSDK_Win64_Shipping</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\OBJ\</IntDir>
+    <TargetName>EOSSDK_Win64_Shipping</TargetName>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -143,17 +163,19 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Shlwapi.lib;EOSSDK-Win64-Shipping_native.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="dnne.h" />
+    <ClInclude Include="EOSSDK-Win32-Shipping_native.h" />
     <ClInclude Include="EOSSDK-Win64-Shipping_native.h" />
     <ClInclude Include="libs\Detours\detours.h" />
     <ClInclude Include="libs\Detours\detver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EOSSDK-Win64-Shipping_Export.cpp" />
+    <ClCompile Include="EOSSDK-Win32-Shipping_native.cpp" />
+    <ClCompile Include="EOSSDK-Win64-Shipping_native.cpp" />
     <ClCompile Include="libs\Detours\creatwth.cpp" />
     <ClCompile Include="libs\Detours\detours.cpp" />
     <ClCompile Include="libs\Detours\disasm.cpp" />

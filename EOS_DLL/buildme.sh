@@ -1,0 +1,3 @@
+g++ -c -x c++ -std=c++latest -fvisibility=hidden -fexceptions -fno-jump-tables -fno-char8_t -fPIC -Og -g3 -Wno-switch -DGNUC dllmain.cpp -o dllmain.o
+g++ -c -x c++ -std=c++latest -fvisibility=hidden -fexceptions -fno-jump-tables -fno-char8_t -fPIC -Og -g3 -Wno-switch -DGNUC libEOSSDK-Linux-Shipping_native.cpp -o libEOSSDK-Linux-Shipping_native.o
+g++ -std=c++17 -fvisibility=hidden -fexceptions -fno-jump-tables -fno-char8_t -fPIC -m32 -Og -g3 -shared  -o EOS_DLL.so libEOSSDK-Linux-Shipping_native.o dllmain.o -LlibEOSSDK-Linux-Shipping_native.so -Wl,--whole-archive -Wl,-Bstatic -lpthread -ldl -lssq -lz -lcurl -lprotobuf-lite -lmbedcrypto -Wl,-Bdynamic -Wl,--no-whole-archive -Wl,--exclude-libs,ALL

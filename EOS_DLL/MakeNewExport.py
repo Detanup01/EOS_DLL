@@ -9,15 +9,15 @@ def run(filename):
     eos_native_h = open(filename+ ".h", "r")
 
     toreplace = """_REPLACEME_
-    {
-        return _REPLACEMENOFN
-    }
+{
+    return _REPLACEMENOFN
+}
     """
 
     toreplace_void = """_REPLACEME_
-    {
-        _REPLACEMENOFN
-    }
+{
+    _REPLACEMENOFN
+}
     """
 
     towrite = []
@@ -59,11 +59,54 @@ def run(filename):
 
     f = open(filename + ".cpp", "w")
     f.write("#include \""+ filename + ".h\"\n\n")
+
+    if filename.__contains__("Win32"):
+        f.write("#ifdef WIN_32_ONLY\n\n")
+    elif filename.__contains__("Win64"):
+        f.write("#ifndef WIN_32_ONLY\n\n")
     for w in towrite:
         f.write(w)
+    if filename.__contains__("Win"):
+        f.write("#endif")
     f.close()
 
+    writer = ""
+    if filename.__contains__("Win32"):
+        writer = """
+#ifdef _WIN32
+    #ifdef WIN32
+        #define WIN_32_ONLY
+    #endif
+#endif
+
+#ifdef WIN_32_ONLY
+
+"""
+    elif filename.__contains__("Win64"):
+        writer = """
+#ifdef _WIN32
+    #ifdef WIN32
+        #define WIN_32_ONLY
+    #endif
+#endif
+
+#ifndef WIN_32_ONLY
+
+"""
+    if writer == "":
+        return
+    
+    readed = open(filename + ".h", "r").readlines()
+    if "WIN_32_ONLY" in readed:
+        return
+    f2 = open(filename + ".h", "w")
+    f2.write(writer)
+    for w in readed:
+        f2.write(w)
+    f2.write("\n#endif\n")
+    f2.close()
+
 if __name__ == "__main__":
-    runners = ["EOSSDK-Win32-Shipping_native", "EOSSDK-Win64-Shipping_native", ""]
+    runners = ["EOSSDK-Win32-Shipping_native", "EOSSDK-Win64-Shipping_native", "libEOSSDK-Linux-Shipping_native"]
     for run_this in runners:
         run(run_this)

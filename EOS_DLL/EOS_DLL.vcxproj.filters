@@ -27,12 +27,12 @@
     <ClInclude Include="libs\Detours\detver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EOSSDK-Win32-Shipping_native.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EOSSDK-Win64-Shipping_Export.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="libs\Detours\creatwth.cpp">
@@ -66,6 +66,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="libs\Detours\uimports.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EOSSDK-Win64-Shipping_native.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EOSSDK-Win32-Shipping_native.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
