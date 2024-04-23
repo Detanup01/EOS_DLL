@@ -57,6 +57,7 @@ if(WIN32) # Setup some variables for Windows build
 elseif(APPLE)
   if(X64)
 	  set(OUT_DIR macosx64)
+
   elseif(X86)
 	  set(OUT_DIR macosx32)
   else()
@@ -64,35 +65,39 @@ elseif(APPLE)
   endif()
 
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
-
   set(EPIC_API libEOSSDK-Mac-Shipping)
   file(GLOB emu_sources
     libEOSSDK-Mac-Shipping_native.cpp
     dllmain.cpp
   )
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
 
 elseif(UNIX)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
   if(X64)
     set(CMAKE_C_FLAGS             "${CMAKE_C_FLAGS} -m64")
     set(CMAKE_CXX_FLAGS           "${CMAKE_CXX_FLAGS} -m64")
     set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS} -m64")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -m64")
-	set(OUT_DIR linux64)
+	  set(OUT_DIR linux64)
+    set(EPIC_API libEOSSDK-Linux-Shipping)
+    file(GLOB emu_sources
+    libEOSSDK-Linux-Shipping_native.cpp
+    dllmain.cpp
+    )
   elseif(X86)
     set(CMAKE_C_FLAGS             "${CMAKE_C_FLAGS} -m32")
     set(CMAKE_CXX_FLAGS           "${CMAKE_CXX_FLAGS} -m32")
     set(CMAKE_EXE_LINKER_FLAGS    "${CMAKE_EXE_LINKER_FLAGS} -m32")
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -m32")
-	    set(OUT_DIR linux32)
+	  set(OUT_DIR linux32)
+    file(GLOB emu_sources
+    libEOSSDK-Linux-Shipping_native.cpp
+    dllmain.cpp
+    )
   else()
     message(FATAL_ERROR "Arch unknown")
   endif()
-  set(EPIC_API libEOSSDK-Linux-Shipping)
-  file(GLOB emu_sources
-    libEOSSDK-Linux-Shipping_native.cpp
-    dllmain.cpp
-  )
+  
 
 else()
     message(FATAL_ERROR "No CMake for other platforms")
@@ -112,8 +117,8 @@ target_link_libraries(${EPIC_API}
 
   $<$<BOOL:${WIN32}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.lib>
   $<$<BOOL:${WIN32}>:Shlwapi.lib>
-  $<$<BOOL:${UNIX}>:{CMAKE_SOURCE_DIR}/${EPIC_API}_native.so>
-  $<$<BOOL:${APPLE}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.dynlib>
+  $<$<BOOL:${UNIX}>:../../${EPIC_API}_native.so>
+  $<$<BOOL:${APPLE}>:../../${EPIC_API}_native.dynlib>
 )
 
 set_target_properties(${EPIC_API} PROPERTIES
