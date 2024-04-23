@@ -18,10 +18,12 @@ jobs:
     steps:
     - name: Win X32
       if: matrix.arch == 'x32'
-      run: EOS_DLL/windows_x32_cmake.bat
+      run: | 
+          call EOS_DLL/windows_x32_cmake.bat
     - name: Win X64
       if: matrix.arch == 'x64'
-      run: EOS_DLL/windows_x64_cmake.bat
+      run: | 
+          call EOS_DLL/windows_x64_cmake.bat
     - name: Upload artifact (Win)
       uses: actions/upload-artifact@v3
       with:
