@@ -51,7 +51,7 @@ if(WIN32) # Setup some variables for Windows build
   set(custom_headers
     libs/Detours/
     libs
-  )
+    )
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++latest")
 
 elseif(APPLE)
@@ -93,27 +93,27 @@ elseif(UNIX)
     libEOSSDK-Linux-Shipping_native.cpp
     dllmain.cpp
   )
+
 else()
     message(FATAL_ERROR "No CMake for other platforms")
 endif()
 
 
-
-
-
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Debug or Release")
-
-target_link_libraries(${EPIC_API}
-  PRIVATE
-  $<BOOL:${UNIX}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.so
-  $<BOOL:${WIN32}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.lib
-  $<BOOL:${WIN32}>:Shlwapi.lib
-  $<BOOL:${APPLE}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.dynlib
-)
 
 add_library(${EPIC_API}
   SHARED
   ${emu_sources}
+)
+
+
+target_link_libraries(${EPIC_API}
+  PRIVATE
+
+  $<$<BOOL:${WIN32}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.lib>
+  $<$<BOOL:${WIN32}>:Shlwapi.lib>
+  $<$<BOOL:${UNIX}>:{CMAKE_SOURCE_DIR}/${EPIC_API}_native.so>
+  $<$<BOOL:${APPLE}>:${CMAKE_SOURCE_DIR}/${EPIC_API}_native.dynlib>
 )
 
 set_target_properties(${EPIC_API} PROPERTIES
