@@ -59,11 +59,4 @@ static void Initializer(int argc, char** argv, char** envp)
 {
     preload_runtime();
 }
-#elif DNNE_LINUX
-// -init elf_init on gcc
-int elf_init(void)
-{
-    preload_runtime();
-    return 1;
-}
 #endif
