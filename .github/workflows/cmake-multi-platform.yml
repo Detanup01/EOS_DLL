@@ -87,17 +87,26 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }}/x32 --config ${{ matrix.build_type }} --verbose
 
-    - name: Upload artifact 
+    - name: Upload artifact win
+      if: matrix.os == 'windows-latest'
       uses: actions/upload-artifact@v3
       with:
         name: DLL-${{ matrix.os }}
         path: ${{ steps.strings.outputs.build-output-dir }}/Release
         if-no-files-found: error
 
-    - name: Upload artifact 
+    - name: Upload artifact win32
       uses: actions/upload-artifact@v3
       if: matrix.os == 'windows-latest'
       with:
         name: DLL-${{ matrix.os }}-x32
         path: ${{ steps.strings.outputs.build-output-dir }}/x32/Release
+        if-no-files-found: error
+
+    - name: Upload artifact linux
+      if: matrix.os == 'ubuntu-latest'
+      uses: actions/upload-artifact@v3
+      with:
+        name: DLL-${{ matrix.os }}
+        path: ${{ steps.strings.outputs.build-output-dir }}/libEOSSDK-Linux-Shipping.so
         if-no-files-found: error
