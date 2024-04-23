@@ -173,9 +173,9 @@ target_link_options(${EPIC_API}
 set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR})
 
 if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-  set(OUT_DIR debug/${OUT_DIR})
+  set(OUT_DIR out/debug/${OUT_DIR})
 else()
-  set(OUT_DIR release/${OUT_DIR})
+  set(OUT_DIR out/release/${OUT_DIR})
 endif()
 
 install(
