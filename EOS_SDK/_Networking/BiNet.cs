@@ -4,6 +4,8 @@ using System.Net.Sockets;
 using System.Net;
 using EOS_SDK._Networking.Packets;
 using EOS_SDK._Data;
+using EOS_SDK._log;
+using EOS_SDK._Networking.Packets.Ach;
 
 namespace EOS_SDK._Networking
 {
@@ -20,8 +22,12 @@ namespace EOS_SDK._Networking
         {
             NetPacketProcessor.RegisterNestedType<DiscoveryRequestPacket>();
             NetPacketProcessor.RegisterNestedType<DiscoveryResponsePacket>();
+            NetPacketProcessor.RegisterNestedType<GetPlayerAchReqPacket>();
+            NetPacketProcessor.RegisterNestedType<GetPlayerAchRspPacket>();
             NetPacketProcessor.SubscribeNetSerializable<DiscoveryResponsePacket, IPEndPoint>(DiscoveryResponse);
             NetPacketProcessor.SubscribeNetSerializable<DiscoveryRequestPacket, IPEndPoint>(DiscoveryRequest);
+            NetPacketProcessor.SubscribeNetSerializable<GetPlayerAchReqPacket, IPEndPoint>(AchPacketWorker.PlayerAchGet_Send);
+            NetPacketProcessor.SubscribeNetSerializable<GetPlayerAchRspPacket, IPEndPoint>(AchPacketWorker.PlayerAchGet_Recv);
         }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -30,30 +36,30 @@ namespace EOS_SDK._Networking
         #region Interface Implementation
         public void OnPeerConnected(NetPeer peer)
         {
-            Console.WriteLine("[BiNet] Peer Id: " + peer.Id + " Peer RemoteId: " + peer.RemoteId);
-            Console.WriteLine("[BiNet {0}] connected to: {1}:{2}", Net.LocalPort, peer.Address, peer.Port);
-            Console.WriteLine("[BiNet] Peer connected: " + peer);
+            Logger.WriteDebug($"[BiNet] Peer Id: {peer.Id} Peer RemoteId: {peer.RemoteId}");
+            Logger.WriteDebug($"[BiNet {Net.LocalPort}] connected to: {peer.Address}:{peer.Port}");
+            Logger.WriteDebug($"[BiNet] Peer connected: {peer}");
             var peers = Net.ConnectedPeerList;
             foreach (var netPeer in peers)
             {
-                Console.WriteLine("ConnectedPeersList: id={0}, ep={1}", netPeer.Id, netPeer);
+                Logger.WriteDebug($"ConnectedPeersList: id={netPeer.Id}, ep={netPeer}");
             }
             /*
             UserPacket userPacket = GetMyUserPacket();
             NetDataWriter writer = new NetDataWriter();
             NetPacketProcessor.WriteNetSerializable(writer, ref userPacket);
             peer.Send(writer, 1, DeliveryMethod.ReliableOrdered);
-            Console.WriteLine("[BiNet] Sending My UserPacket " + userPacket.UserId);*/
+            Logger.WriteDebug("[BiNet] Sending My UserPacket " + userPacket.UserId);*/
         }
 
         public void OnPeerDisconnected(NetPeer peer, DisconnectInfo disconnectInfo)
         {
-            Console.WriteLine("[BiNet] disconnected: " + disconnectInfo.Reason);
+            Logger.WriteDebug("[BiNet] disconnected: " + disconnectInfo.Reason);
         }
 
         public void OnNetworkError(IPEndPoint endPoint, SocketError error)
         {
-            Console.WriteLine("[BiNet] error! " + error);
+            Logger.WriteDebug("[BiNet] error! " + error);
         }
 
         public void OnNetworkReceive(NetPeer peer, NetPacketReader reader, byte channel, DeliveryMethod deliveryMethod)
@@ -80,7 +86,7 @@ namespace EOS_SDK._Networking
         #region Packet Stuff
         private void DiscoveryResponse(DiscoveryResponsePacket packet, IPEndPoint remoteEndPoint)
         {
-            Console.WriteLine($"DiscoveryResponsePacket: {packet} from: {remoteEndPoint.Address}");
+            Logger.WriteDebug($"DiscoveryResponsePacket: {packet} from: {remoteEndPoint.Address}");
             if (packet.CanConnect)
                 Net.Connect(remoteEndPoint, EOS_Main.GetConfig().AppId);
         }
@@ -92,7 +98,7 @@ namespace EOS_SDK._Networking
                 CanConnect = true,
                 DenyReason =  DiscoveryDenyEnums.None
             };
-            Console.WriteLine($"{packet} from: {endPoint.Address}");
+            Logger.WriteDebug($"{packet} from: {endPoint.Address}");
             if (packet.AppId != EOS_Main.GetConfig().AppId)
             {
                 discoveryResponsePacket.CanConnect = false;
@@ -120,7 +126,7 @@ namespace EOS_SDK._Networking
             };
             NetDataWriter writer = new NetDataWriter();
             NetPacketProcessor.WriteNetSerializable(writer, ref discovery);
-            Console.WriteLine("sending broadcast");
+            Logger.WriteDebug("sending broadcast");
             Net.SendBroadcast(writer, 5555);
         }
         #endregion

@@ -14,6 +14,8 @@ namespace EOS_SDK._Data.Models
         public string LockedIconUrl { get; set; } = string.Empty;
         public bool IsHidden { get; set; }
         public List<StatThresholds> StatsThresholds { get; set; } = new();
+
+        [JsonIgnore]
         public Data _Data { get; set; } = new();
 
         public class StatThresholds
