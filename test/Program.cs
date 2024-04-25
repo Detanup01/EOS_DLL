@@ -52,6 +52,7 @@ namespace test
         static string productid = "d0864e41284a4c30926a6953b8e77422";
         static void Main(string[] args)
         {
+            /*
             MainHandler mainHandler = new();
             var myPointer = mainHandler.Create();
             var ptr = mainHandler.CreateHandler(0x2);
@@ -66,7 +67,7 @@ namespace test
             Console.WriteLine((sub == null) + " sshould be true");
 
             mainHandler.Interfaces.sub.Print();
-            Console.WriteLine(" Interfaces.sub");
+            Console.WriteLine(" Interfaces.sub");*/
             /*
             var ptr = IntPtr.CreateChecked(0xABFD3700);
             Console.WriteLine(ptr);
@@ -80,14 +81,14 @@ namespace test
             Console.WriteLine(Generator2(productid, ret));
             ptr = IntPtr.CreateChecked(22);
             Console.WriteLine(ptr);*/
-            /*
+            
             Console.WriteLine("Hello, World!");
-            var id = TESTAddNotify(666,OnOnAddNotifyResultImplementation);
+            var id = _TESTAddNotify(666,OnOnAddNotifyResultImplementation);
             Console.WriteLine("TESTAddNotifyID:  " + id);
-            TESTTriggerNotify(OnTriggerNotifyResultImplementation);
+            _TESTTriggerNotify(OnTriggerNotifyResultImplementation);
             Console.WriteLine("TESTTriggerNotify triggered!");
-            TESTRemoveNotify(id);
-            Console.WriteLine("TESTRemoveNotify removed: " + id);*/
+            _TESTRemoveNotify(id);
+            Console.WriteLine("TESTRemoveNotify removed: " + id);
 
         }
 
@@ -121,13 +122,13 @@ namespace test
         }
 
         [DllImport("EOSSDK-Win64-Shipping")]
-        public static extern int TESTAddNotify(int dataToPass ,OnAddNotifyResult completionDelegate);
+        public static extern int _TESTAddNotify(int dataToPass ,OnAddNotifyResult completionDelegate);
 
         [DllImport("EOSSDK-Win64-Shipping")]
-        public static extern void TESTRemoveNotify(int id);
+        public static extern void _TESTRemoveNotify(int id);
 
         [DllImport("EOSSDK-Win64-Shipping")]
-        public static extern void TESTTriggerNotify(OnTriggerNotifyResult completionDelegate);
+        public static extern void _TESTTriggerNotify(OnTriggerNotifyResult completionDelegate);
 
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
         internal struct AddNotifyResult
