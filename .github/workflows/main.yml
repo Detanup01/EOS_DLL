@@ -56,24 +56,25 @@ jobs:
         path: DLLs
         if-no-files-found: error
 
-  macos:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        builds: [ 'Debug', 'Release' ]
-    steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: '8.0.x'
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Publish
-      run: dotnet build EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r osx-x64 -o DLLs -p:DnneRuntimeIdentifier=osx-x64 -p:Platform=x64
-    - name: Upload artifact (Mac)
-      uses: actions/upload-artifact@v4
-      with:
-        name: SDK-Mac-${{ matrix.builds }}
-        path: DLLs
-        if-no-files-found: error
+# Disable MacOS for unforseenable future
+#  macos:
+#    runs-on: macos-latest
+#    strategy:
+#      matrix:
+#        builds: [ 'Debug', 'Release' ]
+#    steps:
+#    - uses: actions/checkout@v4
+#    - name: Setup .NET
+#      uses: actions/setup-dotnet@v4
+#      with:
+#        dotnet-version: '8.0.x'
+#    - name: Restore dependencies
+#      run: dotnet restore
+#    - name: Publish
+#      run: dotnet build EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r osx-x64 -o DLLs -p:DnneRuntimeIdentifier=osx-x64 -p:Platform=x64
+#    - name: Upload artifact (Mac)
+#      uses: actions/upload-artifact@v4
+#      with:
+#        name: SDK-Mac-${{ matrix.builds }}
+#        path: DLLs
+#        if-no-files-found: error

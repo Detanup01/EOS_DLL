@@ -22,18 +22,16 @@ His build helps me a lot about understanding some of it.
 # Download
 Go to the github actionss download your Main selected build and the CMake one.\
 For example you need to have:
-- EOSSDK-Win32-Shipping.dll (this to communicate to _native.dll)
+- EOSSDK-Win32-Shipping.dll (C++ to C# Caller)
 - EOSSDK-Win32-Shipping_cs.deps.json (C#)
 - EOSSDK-Win32-Shipping_cs.dll (C#)
 - EOSSDK-Win32-Shipping_cs.runtimeconfig.json (C#)
-- EOSSDK-Win32-Shipping_native.dll (C++ to C# Caller)
 - JWT.dll (C#)
 - L.dll (C#)
 - Newtonsoft.Json.dll (C#)
 - LiteNetLib.dll (C#)
 
 # Why? 
-Why you need to download 9 file to play a game?\
-Well probably because _native isnt starting up nethostfx when inside dllmain. and this could create some issues.\
-And also beacuse you cannot embed library inside your library.\
+Why you need to download 8 file to play a game?\
+Beacuse you cannot embed library inside your library.\
 And also my very very limited knowledge for C++. I am so sorry but I  trying my best to understand that.
