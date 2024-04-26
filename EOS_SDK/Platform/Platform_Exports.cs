@@ -110,7 +110,6 @@ namespace EOS_SDK.Platform
             Helpers.StructWriteOut(statusInfo, outDesktopCrossplayStatusInfo);
             return (int)Result.NotImplemented;
 #endif
-
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
