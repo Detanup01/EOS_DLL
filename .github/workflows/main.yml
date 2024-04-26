@@ -19,7 +19,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
     - name: Restore dependencies
@@ -27,7 +27,7 @@ jobs:
     - name: Publish
       run: dotnet build EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r linux-x64 -o DLLs -p:DnneRuntimeIdentifier=linux-x64 -p:Platform=x64
     - name: Upload artifact (Lin)
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: SDK-Linux
         path: DLLs
@@ -42,7 +42,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
     - name: Restore dependencies
@@ -50,7 +50,7 @@ jobs:
     - name: Publish
       run: dotnet build EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r win-${{ matrix.CPU }} -o DLLs -p:DnneRuntimeIdentifier=win-${{ matrix.CPU }} -p:Platform=${{ matrix.CPU }}
     - name: Upload artifact (Win)
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: SDK-Win
         path: DLLs
@@ -64,7 +64,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
     - name: Restore dependencies
@@ -72,7 +72,7 @@ jobs:
     - name: Publish
       run: dotnet build EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r osx-x64 -o DLLs -p:DnneRuntimeIdentifier=osx-x64 -p:Platform=x64
     - name: Upload artifact (Mac)
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: SDK-Mac
         path: DLLs
