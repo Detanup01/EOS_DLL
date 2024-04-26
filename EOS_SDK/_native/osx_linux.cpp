@@ -9,7 +9,7 @@
 #endif // !DNNE_COMPILE_AS_SOURCE
 
 #ifndef DNNE_WINDOWS
-DNNE_EXTERN_C __attribute__((constructor))
+__attribute__((constructor))
 /**
  * initializer of the dylib.
  */
@@ -18,7 +18,7 @@ DNNE_EXTERN_C __attribute__((constructor))
     preload_runtime();
 }
 
-DNNE_EXTERN_C __attribute__((destructor))
+__attribute__((destructor))
 /**
  * It is called when dylib is being unloaded.
  *
