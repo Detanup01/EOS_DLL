@@ -52,7 +52,7 @@ jobs:
     - name: Upload artifact (Win)
       uses: actions/upload-artifact@v4
       with:
-        name: SDK-Win-${{ matrix.builds }}
+        name: SDK-Win-${{ matrix.builds }}-${{ matrix.CPU }}
         path: DLLs
         if-no-files-found: error
 
