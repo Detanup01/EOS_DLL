@@ -46,6 +46,7 @@
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<AssemblyName>libEOSSDK-Linux-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+		<DnneCompilerUserFlags>$(DnneCompilerUserFlags) $(MSBuildThisFileDirectory)\_native\osx_linux.cpp</DnneCompilerUserFlags>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(RuntimeIdentifier)'=='osx-x64'">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
@@ -54,6 +55,7 @@
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<AssemblyName>libEOSSDK-Mac-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>mac-x64</RuntimeIdentifier>
+		<DnneCompilerUserFlags>$(DnneCompilerUserFlags) $(MSBuildThisFileDirectory)\_native\osx_linux.cpp</DnneCompilerUserFlags>
 	</PropertyGroup>
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="('$(RuntimeIdentifier)'=='win-x64' or '$(RuntimeIdentifier)'=='win-x86')">
 	  <Exec Command="call _native/compile.bat" />

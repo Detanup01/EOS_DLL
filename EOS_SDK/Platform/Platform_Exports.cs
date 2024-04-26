@@ -1,6 +1,4 @@
 ﻿using EOS_SDK._Data;
-using EOS_SDK.Achievements;
-using EOS_SDK.Auth;
 using EOS_SDK.Windows;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -110,7 +108,6 @@ namespace EOS_SDK.Platform
                 ServiceInitResult = 2
             };
             Helpers.StructWriteOut(statusInfo, outDesktopCrossplayStatusInfo);
-            return (int)Result.Success;
             return (int)Result.NotImplemented;
 #endif
 
