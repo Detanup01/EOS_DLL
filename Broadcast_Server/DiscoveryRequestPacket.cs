@@ -1,9 +1,4 @@
 ﻿using LiteNetLib.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EOS_SDK._Networking.Packets;
 
@@ -25,6 +20,6 @@ public struct DiscoveryRequestPacket : INetSerializable
 
     public override string ToString()
     {
-        return $"DiscoveryRequestPacket | AccountId: {AccountId} UserId: {AppId}";
+        return $"DiscoveryRequestPacket | AccountId: {AccountId} AppId: {AppId}";
     }
 }

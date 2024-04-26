@@ -24,8 +24,9 @@ namespace EOS_SDK._Networking
             NetPacketProcessor.RegisterNestedType<DiscoveryResponsePacket>();
             NetPacketProcessor.RegisterNestedType<GetPlayerAchReqPacket>();
             NetPacketProcessor.RegisterNestedType<GetPlayerAchRspPacket>();
+            NetPacketProcessor.RegisterNestedType<UserConnectedPacket>();
+            NetPacketProcessor.RegisterNestedType<UserDisconnectedPacket>();
             NetPacketProcessor.SubscribeNetSerializable<DiscoveryResponsePacket, IPEndPoint>(DiscoveryResponse);
-            NetPacketProcessor.SubscribeNetSerializable<DiscoveryRequestPacket, IPEndPoint>(DiscoveryRequest);
             NetPacketProcessor.SubscribeNetSerializable<GetPlayerAchReqPacket, IPEndPoint>(AchPacketWorker.PlayerAchGet_Send);
             NetPacketProcessor.SubscribeNetSerializable<GetPlayerAchRspPacket, IPEndPoint>(AchPacketWorker.PlayerAchGet_Recv);
         }
@@ -38,18 +39,6 @@ namespace EOS_SDK._Networking
         {
             Logger.WriteDebug($"[BiNet] Peer Id: {peer.Id} Peer RemoteId: {peer.RemoteId}");
             Logger.WriteDebug($"[BiNet {Net.LocalPort}] connected to: {peer.Address}:{peer.Port}");
-            Logger.WriteDebug($"[BiNet] Peer connected: {peer}");
-            var peers = Net.ConnectedPeerList;
-            foreach (var netPeer in peers)
-            {
-                Logger.WriteDebug($"ConnectedPeersList: id={netPeer.Id}, ep={netPeer}");
-            }
-            /*
-            UserPacket userPacket = GetMyUserPacket();
-            NetDataWriter writer = new NetDataWriter();
-            NetPacketProcessor.WriteNetSerializable(writer, ref userPacket);
-            peer.Send(writer, 1, DeliveryMethod.ReliableOrdered);
-            Logger.WriteDebug("[BiNet] Sending My UserPacket " + userPacket.UserId);*/
         }
 
         public void OnPeerDisconnected(NetPeer peer, DisconnectInfo disconnectInfo)
@@ -88,30 +77,7 @@ namespace EOS_SDK._Networking
         {
             Logger.WriteDebug($"DiscoveryResponsePacket: {packet} from: {remoteEndPoint.Address}");
             if (packet.CanConnect)
-                Net.Connect(remoteEndPoint, EOS_Main.GetConfig().AppId);
-        }
-
-        private void DiscoveryRequest(DiscoveryRequestPacket packet, IPEndPoint endPoint)
-        {
-            DiscoveryResponsePacket discoveryResponsePacket = new()
-            {
-                CanConnect = true,
-                DenyReason =  DiscoveryDenyEnums.None
-            };
-            Logger.WriteDebug($"{packet} from: {endPoint.Address}");
-            if (packet.AppId != EOS_Main.GetConfig().AppId)
-            {
-                discoveryResponsePacket.CanConnect = false;
-                discoveryResponsePacket.DenyReason = DiscoveryDenyEnums.AppIdMissmatch;
-            }
-            if (AddressHelper.GetIPs().Contains(endPoint.Address))
-            {
-                discoveryResponsePacket.CanConnect = false;
-                discoveryResponsePacket.DenyReason = DiscoveryDenyEnums.SelfConnection;
-            }
-            NetDataWriter writer = new();
-            NetPacketProcessor.WriteNetSerializable(writer, ref discoveryResponsePacket);
-            Net.SendUnconnectedMessage(writer, endPoint);
+                Net.Connect(remoteEndPoint, "EOS_BroadCast");
         }
 
         #endregion

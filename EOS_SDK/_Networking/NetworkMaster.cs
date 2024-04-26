@@ -5,7 +5,7 @@ namespace EOS_SDK._Networking
 {
     internal class NetworkMaster
     {
-        public BiNet BiNet;
+        public BiNet? BiNet;
         public bool Start()
         {
             BiNet = new BiNet();
@@ -19,7 +19,7 @@ namespace EOS_SDK._Networking
             };
             BiNet.Net = _net;
             Console.WriteLine("BiNet start");
-            if (!_net.Start(5555))
+            if (!_net.Start())
             {
                 Console.WriteLine("BiNet start failed");
                 return false;
@@ -27,15 +27,16 @@ namespace EOS_SDK._Networking
 
             return true;
         }
-        public void StartBroadcast()
+
+        public void ConnectToBroadCastServer()
         {
-            BiNet.SendBroadcast();
+            BiNet?.SendBroadcast();
         }
 
         public List<IPAddress> GetAddresses()
         {
             List<IPAddress> addresses = new();
-            BiNet.Net.ConnectedPeerList.ForEach(x => addresses.Add(x.Address));
+            BiNet?.Net.ConnectedPeerList.ForEach(x => addresses.Add(x.Address));
             Console.WriteLine("client addresses");
             foreach (var item in addresses)
             {
@@ -46,7 +47,7 @@ namespace EOS_SDK._Networking
 
         public void Update()
         {
-            if (BiNet.Net.IsRunning)
+            if (BiNet != null && BiNet.Net.IsRunning)
             {
                 BiNet.Net.PollEvents();
             }
@@ -54,7 +55,7 @@ namespace EOS_SDK._Networking
 
         public void Stop()
         {
-            BiNet.Net.Stop();
+            BiNet?.Net.Stop();
         }
     }
 }

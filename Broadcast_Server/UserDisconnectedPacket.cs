@@ -1,25 +1,29 @@
 ﻿using LiteNetLib.Utils;
+using System.Net;
 
 namespace EOS_SDK._Networking.Packets;
 
-public struct DiscoveryRequestPacket : INetSerializable
+public struct UserDisconnectedPacket : INetSerializable
 {
     public string AccountId;
     public string AppId;
+    public IPEndPoint IP;
     public void Deserialize(NetDataReader reader)
     {
         AccountId = reader.GetString();
         AppId = reader.GetString();
+        IP = reader.GetNetEndPoint();
     }
 
     public void Serialize(NetDataWriter writer)
     {
         writer.Put(AccountId);
         writer.Put(AppId);
+        writer.Put(IP);
     }
 
     public override string ToString()
     {
-        return $"DiscoveryRequestPacket | AccountId: {AccountId} UserId: {AppId}";
+        return $"UserDisconnectedPacket | AccountId: {AccountId} AppId: {AppId} IP: {IP.Address}";
     }
 }
