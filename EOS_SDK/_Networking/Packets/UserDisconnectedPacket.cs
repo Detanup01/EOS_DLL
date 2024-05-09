@@ -7,12 +7,12 @@ public struct UserDisconnectedPacket : INetSerializable
 {
     public string AccountId;
     public string AppId;
-    public IPEndPoint IP;
+    public string IP;
     public void Deserialize(NetDataReader reader)
     {
         AccountId = reader.GetString();
         AppId = reader.GetString();
-        IP = reader.GetNetEndPoint();
+        IP = reader.GetString();
     }
 
     public void Serialize(NetDataWriter writer)
@@ -24,6 +24,6 @@ public struct UserDisconnectedPacket : INetSerializable
 
     public override string ToString()
     {
-        return $"UserDisconnectedPacket | AccountId: {AccountId} AppId: {AppId} IP: {IP.Address}";
+        return $"UserDisconnectedPacket | AccountId: {AccountId} AppId: {AppId} IP: {IP}";
     }
 }

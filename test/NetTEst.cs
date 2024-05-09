@@ -45,19 +45,39 @@ namespace test
             });
             thread.Start();
             _NetTest_ConnectBroadcast();
-            
-            var acs = _NetTest_GetAccountIds();
-            var list = Marshal.PtrToStructure<LIST>(acs);
-            var accs = Helpers.ToStructArray<string>(list.Ptr, list.Len);
-            foreach (var item in accs)
+            sendping();
+            string ret = "ret";
+            while (ret != "q")
             {
-                Console.WriteLine(item);
-                _NetTest_Ping(Helpers.FromString(item));
+                ret = Console.ReadLine().ToLower();
+                if (ret == "ping")
+                {
+                    sendping();
+                }
             }
-            Thread.Sleep(10);
+            
+            
 
             Console.WriteLine(_NetTest_Stop());
             Stop = true;
+        }
+
+        static void sendping()
+        {
+            var acs = _NetTest_GetAccountIds();
+            Console.WriteLine("_NetTest_GetAccountIds:" + acs);
+            if (acs != 0)
+            {
+                var list = Marshal.PtrToStructure<LIST>(acs);
+                Console.WriteLine(list.Ptr + " " + list.Len);
+                var accs = Helpers.ToStructArray<string>(list.Ptr, list.Len);
+                foreach (var item in accs)
+                {
+                    Console.WriteLine(item);
+                    _NetTest_Ping(Helpers.FromString(item));
+                }
+                Thread.Sleep(10);
+            }
         }
     }
 }

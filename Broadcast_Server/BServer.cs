@@ -1,6 +1,7 @@
 ﻿using EOS_SDK._Networking.Packets;
 using LiteNetLib;
 using LiteNetLib.Utils;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 
@@ -11,8 +12,9 @@ namespace Broadcast_Server
         public NetManager Server;
         public NetPacketProcessor NetPacketProcessor = new();
 
-        public Dictionary<IPAddress, (string UserId, string AppId)> NetUsers = new();
-        public Dictionary<string /* AppId */, List<IPAddress>> AppIdAddresses = new();
+        public Dictionary<string /* IPEndPoint.String */, (string UserId, string AppId)> NetUsers = new();
+        public Dictionary<string /* AppId */, List<string /* IPEndPoint.String */>> AppIdAddresses = new();
+        public List<string> AppIds = new();
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public BServer()
@@ -28,10 +30,18 @@ namespace Broadcast_Server
         private void DiscoveryRequest(DiscoveryRequestPacket packet, IPEndPoint point)
         {
             Console.WriteLine(packet);
+            PrintNetUsers();
+            PrintAppIdAddresses();
             if (!AppIdAddresses.ContainsKey(packet.AppId))
-                AppIdAddresses.Add(packet.AppId, new());
-            AppIdAddresses[packet.AppId].Add(point.Address);
-            NetUsers.Add(point.Address, (packet.AccountId, packet.AppId));
+                AppIdAddresses.TryAdd(packet.AppId, new() { point.ToString() });
+            else
+            {
+                Console.WriteLine("already have appid");
+                AppIdAddresses[packet.AppId].Add(point.ToString());
+            }
+                
+            NetUsers.TryAdd(point.ToString(), (packet.AccountId, packet.AppId));
+            AppIds.Add(packet.AppId);
             DiscoveryResponsePacket discoveryResponsePacket = new()
             { 
                 CanConnect = true
@@ -39,6 +49,8 @@ namespace Broadcast_Server
             NetDataWriter writer = new();
             NetPacketProcessor.WriteNetSerializable(writer, ref discoveryResponsePacket);
             Server.SendUnconnectedMessage(writer, point);
+            PrintNetUsers();
+            PrintAppIdAddresses();
         }
 
         public void OnConnectionRequest(ConnectionRequest request)
@@ -48,7 +60,7 @@ namespace Broadcast_Server
 
         public void OnNetworkError(IPEndPoint endPoint, SocketError socketError)
         {
-            
+            Console.WriteLine("[Server] OnNetworkError: " + endPoint + " " + socketError);
         }
 
         public void OnNetworkLatencyUpdate(NetPeer peer, int latency)
@@ -70,19 +82,25 @@ namespace Broadcast_Server
         public void OnPeerConnected(NetPeer peer)
         {
             Console.WriteLine("[Server] Peer connected: " + peer);
-
-            var peers = GetPeersFromSameAddress(peer.Address);
+            PrintNetUsers();
+            PrintAppIdAddresses();
+            var peers = GetPeersFromSameAddress(peer);
 
             foreach (var item in peers)
             {
                 if (item == null)
                     continue;
-                var user = NetUsers[item.Address];
+                Console.WriteLine("OnPeerConnected peer: " + item);
+                if (!NetUsers.TryGetValue(item.ToString(), out var user))
+                {
+                    Console.WriteLine("[Server] Peer " + item + " not found in NetUsers!!!");
+                    continue;
+                }
                 UserConnectedPacket newUserConnectedPacket = new()
                 { 
                     AccountId = user.UserId,
                     AppId = user.AppId,
-                    IP = item
+                    IP = item.ToString()
                 };
                 NetDataWriter writer = new();
                 NetPacketProcessor.WriteNetSerializable(writer, ref newUserConnectedPacket);
@@ -93,8 +111,14 @@ namespace Broadcast_Server
         public void OnPeerDisconnected(NetPeer peer, DisconnectInfo disconnectInfo)
         {
             Console.WriteLine("[Server] Peer disconnected: " + peer);
-            var user = NetUsers[peer.Address];
-            var peers = GetPeersFromSameAddress(peer.Address);
+            PrintNetUsers();
+            PrintAppIdAddresses();
+            if (!NetUsers.TryGetValue(peer.ToString(), out var user))
+            {
+                Console.WriteLine("[Server] Peer " + peer + " not found in NetUsers!!!");
+                return;
+            }
+            var peers = GetPeersFromSameAddress(peer);
 
             foreach (var item in peers)
             {
@@ -104,30 +128,65 @@ namespace Broadcast_Server
                 {
                     AccountId = user.UserId,
                     AppId = user.AppId,
-                    IP = peer
+                    IP = peer.ToString()
                 };
                 NetDataWriter writer = new();
                 NetPacketProcessor.WriteNetSerializable(writer, ref userDisconnectedPacket);
                 item.Send(writer, DeliveryMethod.ReliableOrdered);
             }
             peers.Clear();
-            NetUsers.Remove(peer.Address);
-            AppIdAddresses[user.AppId].Remove(peer.Address);
+            NetUsers.Remove(peer.ToString());
+            AppIdAddresses[user.AppId].Remove(peer.ToString());
         }
 
         public List<NetPeer> GetPeersFromAppID(string AppId)
         {
             if (!AppIdAddresses.TryGetValue(AppId, out var iPAddresses))
                 return new();
-            return this.Server.ConnectedPeerList.Where(x => iPAddresses.Contains(x.Address)).ToList();
+            return this.Server.ConnectedPeerList.Where(x => iPAddresses.Contains(x.ToString())).ToList();
         }
 
-        public List<NetPeer> GetPeersFromSameAddress(IPAddress address)
+        public List<NetPeer> GetPeersFromSameAddress(IPEndPoint address)
         {
-            var iPAddresses = AppIdAddresses.Values.Where(x => x.Contains(address)).FirstOrDefault();
+            var iPAddresses = AppIdAddresses.Values.Where(x => x.Contains(address.ToString())).FirstOrDefault();
             if (iPAddresses == null)
                 return new();
-            return this.Server.ConnectedPeerList.Where(x => iPAddresses.Contains(x.Address)).ToList();
+            List<NetPeer> ret = new();
+            foreach (var peer in this.Server.ConnectedPeerList)
+            {
+                Console.WriteLine("checking peer " + (IPEndPoint)peer);
+                if (address == (IPEndPoint)peer)
+                {
+                    continue;
+                }
+                if (iPAddresses.Contains(peer.ToString()))
+                {
+                    ret.Add(peer);
+                }
+                else
+                {
+                    Console.WriteLine("Not contains: " + peer + " " + (IPEndPoint)peer);
+                }
+            }
+            return ret;
+        }
+
+        public void PrintNetUsers()
+        {
+            Console.WriteLine("PrintNetUsers");
+            foreach (var item in NetUsers)
+            {
+                Console.WriteLine("NetUsers: " + item.Key + " " + item.Value.AppId + " " + item.Value.UserId);
+            }
+        }
+
+        public void PrintAppIdAddresses()
+        {
+            Console.WriteLine("AppIdAddresses");
+            foreach (var item in AppIdAddresses)
+            {
+                Console.WriteLine("AppIdAddresses: " + item.Key + " " + string.Join(", ", item.Value));
+            }
         }
     }
 }

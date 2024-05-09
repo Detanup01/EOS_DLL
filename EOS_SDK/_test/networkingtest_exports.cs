@@ -24,7 +24,13 @@ namespace EOS_SDK._test
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
         public static IntPtr _NetTest_GetAccountIds()
         {
-            var keys = Master?.BiNet?.AccountId_To_PeerId.Keys;
+            if (Master == null)
+                return 0;
+            if (Master.BiNet == null)
+                return 0;
+            var keys = Master.BiNet.AccountId_To_PeerId.Keys;
+            if (keys == null)
+                return 0;
             var array = Helpers.FromStructArray(keys.ToArray());
             var list = new LIST()
             { 

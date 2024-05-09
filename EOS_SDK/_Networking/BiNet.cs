@@ -17,8 +17,8 @@ namespace EOS_SDK._Networking
         public NetPacketProcessor NetPacketProcessor = new();
         public NetManager Net;
         public Dictionary<int, string> NetPeerToUser = new();
-        public Dictionary<IPAddress, string> NetUsers;
-        public Dictionary<string, int> AccountId_To_PeerId;
+        public Dictionary<string /* IPEndPoint */, string> NetUsers = new();
+        public Dictionary<string, int> AccountId_To_PeerId = new();
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public BiNet()
@@ -50,9 +50,9 @@ namespace EOS_SDK._Networking
         public void OnPeerConnected(NetPeer peer)
         {
             Logger.WriteDebug($"[BiNet] Peer Id: {peer.Id} Peer RemoteId: {peer.RemoteId}");
-            Logger.WriteDebug($"[BiNet {Net.LocalPort}] connected to: {peer.Address}:{peer.Port}");
+            Logger.WriteDebug($"[BiNet {Net.LocalPort}] ({Net}) connected to: {peer}");
 
-            if (!NetUsers.TryGetValue(peer.Address, out var str))
+            if (!NetUsers.TryGetValue(peer.ToString(), out var str))
                 return;
             NetPeerToUser.Add(peer.Id, str);
             AccountId_To_PeerId.Add(str, peer.Id);
@@ -60,8 +60,9 @@ namespace EOS_SDK._Networking
 
         public void OnPeerDisconnected(NetPeer peer, DisconnectInfo disconnectInfo)
         {
-            Logger.WriteDebug($"[BiNet] Peer Id: {peer.Id} ({peer.Address}:{peer.Port}) disconnected: {disconnectInfo.Reason}");
-            var accountId = NetPeerToUser[peer.Id];
+            Logger.WriteDebug($"[BiNet] Peer Id: {peer.Id} ({peer}) disconnected: {disconnectInfo.Reason}");
+            if (!NetPeerToUser.TryGetValue(peer.Id, out var accountId))
+                return;
             NetPeerToUser.Remove(peer.Id);
             AccountId_To_PeerId.Remove(accountId);
         }
@@ -73,7 +74,7 @@ namespace EOS_SDK._Networking
 
         public void OnNetworkReceive(NetPeer peer, NetPacketReader reader, byte channel, DeliveryMethod deliveryMethod)
         {
-            NetPacketProcessor.ReadAllPackets(reader, (peer, channel));
+            NetPacketProcessor.ReadAllPackets(reader, (IPEndPoint)peer);
         }
 
         public void OnNetworkReceiveUnconnected(IPEndPoint remoteEndPoint, NetPacketReader reader, UnconnectedMessageType messageType)
@@ -88,6 +89,7 @@ namespace EOS_SDK._Networking
 
         public void OnConnectionRequest(ConnectionRequest request)
         {
+            Logger.WriteDebug($"OnConnectionRequest: {request.RemoteEndPoint}");
             request.AcceptIfKey(EOS_Main.GetConfig().AppId);
         }
         #endregion
@@ -95,25 +97,27 @@ namespace EOS_SDK._Networking
         #region Packet Stuff
         private void DiscoveryResponse(DiscoveryResponsePacket packet, IPEndPoint remoteEndPoint)
         {
-            Logger.WriteDebug($"DiscoveryResponsePacket: {packet} from: {remoteEndPoint.Address}");
+            Logger.WriteDebug($"DiscoveryResponsePacket: {packet} from: {remoteEndPoint}");
             if (packet.CanConnect)
                 Net.Connect(remoteEndPoint, "EOS_BroadCast");
         }
 
         private void UserDisconnected(UserDisconnectedPacket packet, IPEndPoint point)
         {
+            Logger.WriteDebug($"UserDisconnectedPacket: {packet} from: {point}");
             if (packet.AppId != EOS_Main.GetConfig().AppId)
                 return;
-            NetUsers.Remove(packet.IP.Address);
+            NetUsers.Remove(packet.IP);
             // Do we really need to send disconnect? (they automactly disconnect so no, I guess)
         }
 
         private void UserConnected(UserConnectedPacket packet, IPEndPoint point)
         {
+            Logger.WriteDebug($"UserConnectedPacket: {packet} from: {point}");
             if (packet.AppId != EOS_Main.GetConfig().AppId)
                 return;
-            NetUsers.Add(packet.IP.Address, packet.AppId);
-            Net.Connect(packet.IP, EOS_Main.GetConfig().AppId);
+            NetUsers.Add(packet.IP, packet.AppId);
+            Net.Connect(packet.IP, int.Parse(packet.IP.Split(":")[1]), EOS_Main.GetConfig().AppId);
         }
 
         private void PingProcess(PingPacket packet, IPEndPoint point)
