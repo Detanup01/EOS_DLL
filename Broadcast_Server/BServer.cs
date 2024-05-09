@@ -11,8 +11,8 @@ namespace Broadcast_Server
         public NetManager Server;
         public NetPacketProcessor NetPacketProcessor = new();
 
-        public Dictionary<IPAddress, (string UserId, string AppId)> NetUsers;
-        public Dictionary<string /* AppId */, List<IPAddress>> AppIdAddresses;
+        public Dictionary<IPAddress, (string UserId, string AppId)> NetUsers = new();
+        public Dictionary<string /* AppId */, List<IPAddress>> AppIdAddresses = new();
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public BServer()
@@ -34,8 +34,7 @@ namespace Broadcast_Server
             NetUsers.Add(point.Address, (packet.AccountId, packet.AppId));
             DiscoveryResponsePacket discoveryResponsePacket = new()
             { 
-                CanConnect = true,
-                DenyReason = DiscoveryDenyEnums.None
+                CanConnect = true
             };
             NetDataWriter writer = new();
             NetPacketProcessor.WriteNetSerializable(writer, ref discoveryResponsePacket);
@@ -111,6 +110,9 @@ namespace Broadcast_Server
                 NetPacketProcessor.WriteNetSerializable(writer, ref userDisconnectedPacket);
                 item.Send(writer, DeliveryMethod.ReliableOrdered);
             }
+            peers.Clear();
+            NetUsers.Remove(peer.Address);
+            AppIdAddresses[user.AppId].Remove(peer.Address);
         }
 
         public List<NetPeer> GetPeersFromAppID(string AppId)

@@ -3,7 +3,7 @@ using System.Net;
 
 namespace EOS_SDK._Networking
 {
-    internal class NetworkMaster
+    public class NetworkMaster
     {
         public BiNet? BiNet;
         public bool Start()

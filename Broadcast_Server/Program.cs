@@ -20,7 +20,7 @@ namespace Broadcast_Server
             };
             BServer.Server = _net;
             Console.WriteLine("BServer start");
-            if (!_net.Start())
+            if (!_net.Start(5555))
             {
                 Console.WriteLine("BServer start failed");
                 return;
@@ -28,7 +28,7 @@ namespace Broadcast_Server
             bool Stop = false;
             Thread thread = new Thread(() => 
             { 
-                if (!Stop)
+                while (!Stop)
                     BServer.Server.PollEvents(); 
                 
             });

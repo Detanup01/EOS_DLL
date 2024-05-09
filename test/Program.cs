@@ -52,6 +52,7 @@ namespace test
         static string productid = "d0864e41284a4c30926a6953b8e77422";
         static void Main(string[] args)
         {
+            NetTest.StartTest();
             /*
             MainHandler mainHandler = new();
             var myPointer = mainHandler.Create();
@@ -81,7 +82,7 @@ namespace test
             Console.WriteLine(Generator2(productid, ret));
             ptr = IntPtr.CreateChecked(22);
             Console.WriteLine(ptr);*/
-            
+            /*
             Console.WriteLine("Hello, World!");
             var id = _TESTAddNotify(666,OnOnAddNotifyResultImplementation);
             Console.WriteLine("TESTAddNotifyID:  " + id);
@@ -89,7 +90,7 @@ namespace test
             Console.WriteLine("TESTTriggerNotify triggered!");
             _TESTRemoveNotify(id);
             Console.WriteLine("TESTRemoveNotify removed: " + id);
-
+            */
         }
 
 

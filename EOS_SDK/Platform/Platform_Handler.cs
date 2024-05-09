@@ -1,4 +1,5 @@
 ﻿using EOS_SDK._Data;
+using EOS_SDK._Networking;
 using EOS_SDK.Windows;
 using System.Runtime.InteropServices;
 
@@ -19,6 +20,7 @@ namespace EOS_SDK.Platform
         public Dictionary<uint, IHandler> Handlers = new();
         public IntPtr MyDummyPtr;
         public Dictionary<IntPtr, uint> DummyPtrToHandler = new();
+        public NetworkMaster Network;
 
         public override string ToString()
         {
@@ -38,9 +40,6 @@ namespace EOS_SDK.Platform
             ProductId = Helpers.ToString(windowsOptions.ProductId);
             NetworkStatus = NetworkStatus.Offline;
             ApplicationStatus = ApplicationStatus.Foreground;
-            Handlers = new();
-            DummyPtrToHandler = new();
-            MyDummyPtr = 0;
             _log.Logger.WriteInfo("Platform_Handler.Create Windows: " + ToString());
             return Create();
         }
@@ -57,9 +56,6 @@ namespace EOS_SDK.Platform
             ProductId = Helpers.ToString(options.ProductId);
             NetworkStatus = NetworkStatus.Offline;
             ApplicationStatus = ApplicationStatus.Foreground;
-            Handlers = new();
-            DummyPtrToHandler = new();
-            MyDummyPtr = 0;
             _log.Logger.WriteInfo("Platform_Handler.Create Options: " + ToString());
             return Create();
         }
@@ -86,6 +82,7 @@ namespace EOS_SDK.Platform
         public void Update()
         {
             CallbackManager.Update();
+            Network.Update();
             Tick();
 
         }
@@ -93,13 +90,16 @@ namespace EOS_SDK.Platform
 
         public IntPtr Create()
         {
-            DummyStruct dummyStruct = new();
-            var retptr = Helpers.StructToPtr(dummyStruct);
-            _log.Logger.WriteInfo("Platform_Handler.Create Pointer: " + retptr);
-            MyDummyPtr = retptr;
+            Handlers = new();
+            DummyPtrToHandler = new();
+            MyDummyPtr = Helpers.StructToPtr(new DummyStruct());
+            _log.Logger.WriteInfo("Platform_Handler.Create Pointer: " + MyDummyPtr);
             Handlers.Add(SDK.PlatformPTR, this);
-            DummyPtrToHandler.Add(retptr, SDK.PlatformPTR);
-            return retptr;
+            DummyPtrToHandler.Add(MyDummyPtr, SDK.PlatformPTR);
+            Network = new();
+            Network.Start();
+
+            return MyDummyPtr;
         }
 
         public void Tick()
@@ -113,6 +113,7 @@ namespace EOS_SDK.Platform
         public void Close()
         {
             _log.Logger.WriteInfo("Platform_Handler.Close: ");
+            Network.Stop();
         }
 
         public IntPtr CreateHandler(uint handlerCRC)

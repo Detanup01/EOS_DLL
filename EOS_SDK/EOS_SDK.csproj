@@ -28,7 +28,7 @@
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<DefineConstants>WIN_X64</DefineConstants>
 		<DnneLinkerUserFlags>$(MSBuildProjectDirectory)\_native\file.res</DnneLinkerUserFlags>
-	<DnneCompilerUserFlags>$(DnneCompilerUserFlags) $(MSBuildThisFileDirectory)\_native\win.cpp</DnneCompilerUserFlags>
+		<DnneCompilerUserFlags>$(DnneCompilerUserFlags) $(MSBuildThisFileDirectory)\_native\win.c</DnneCompilerUserFlags>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Platform)'=='x86' And ('$(RuntimeIdentifier)'=='win' or '$(RuntimeIdentifier)'=='win-x86')">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
@@ -39,7 +39,7 @@
 		<RuntimeIdentifier>win-x86</RuntimeIdentifier>
 		<DefineConstants>WIN_X86</DefineConstants>
 		<DnneLinkerUserFlags>$(MSBuildProjectDirectory)\_native\file.res</DnneLinkerUserFlags>
-		<DnneCompilerUserFlags>$(DnneCompilerUserFlags) $(MSBuildThisFileDirectory)\_native\win.cpp</DnneCompilerUserFlags>
+		<DnneCompilerUserFlags>$(DnneCompilerUserFlags) $(MSBuildThisFileDirectory)\_native\win.c</DnneCompilerUserFlags>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(RuntimeIdentifier)'=='linux-x64'">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
@@ -48,7 +48,7 @@
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<AssemblyName>libEOSSDK-Linux-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
-		<DnneCompilerUserFlags>$(DnneCompilerUserFlags) $(MSBuildThisFileDirectory)/_native/osx_linux.cpp</DnneCompilerUserFlags>
+		<DnneCompilerUserFlags>$(DnneCompilerUserFlags) $(MSBuildThisFileDirectory)/_native/osx_linux.c</DnneCompilerUserFlags>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(RuntimeIdentifier)'=='osx-x64'">
 		<DnneAddGeneratedBinaryToProject>true</DnneAddGeneratedBinaryToProject>
@@ -57,7 +57,7 @@
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 		<AssemblyName>libEOSSDK-Mac-Shipping_cs</AssemblyName>
 		<RuntimeIdentifier>mac-x64</RuntimeIdentifier>
-		<DnneCompilerUserFlags>$(DnneCompilerUserFlags) $(MSBuildThisFileDirectory)/_native/osx_linux.cpp</DnneCompilerUserFlags>
+		<DnneCompilerUserFlags>$(DnneCompilerUserFlags) $(MSBuildThisFileDirectory)/_native/osx_linux.c</DnneCompilerUserFlags>
 	</PropertyGroup>
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="('$(RuntimeIdentifier)'=='win-x64' or '$(RuntimeIdentifier)'=='win-x86')">
 	  <Exec Command="call _native/compile.bat" />

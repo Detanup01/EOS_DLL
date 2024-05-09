@@ -144,6 +144,19 @@ namespace EOS_SDK._Networking
             Logger.WriteDebug("sending broadcast");
             Net.SendBroadcast(writer, 5555);
         }
+
+        public void SendPingPacket(string UserToPing)
+        {
+            PingPacket packet = new()
+            { 
+                PingTime = DateTimeOffset.UtcNow,
+                AccountId = UserToPing
+            };
+            NetDataWriter writer = new NetDataWriter();
+            NetPacketProcessor.WriteNetSerializable(writer, ref packet);
+            Logger.WriteDebug("sending ping");
+            Net.SendToAll(writer, DeliveryMethod.ReliableOrdered);
+        }
         #endregion
 
     }
