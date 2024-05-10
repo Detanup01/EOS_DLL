@@ -36,8 +36,8 @@ namespace EOS_SDK._Data
         public string AppId = "b4a0d2d15acb4db894a599b810297543";
         public string AccountId = "ffaabbccddeeff0123456789deadc0de";
         public string EpicProductUserId = "deadc0deffaabbccddeeff0123456789";
-        public string RSA_Private = "";
-        public string RSA_Public = "";
+        public string RSA_Private = string.Empty;
+        public string RSA_Public = string.Empty;
         public List<string> BannedNetworkUsers = new List<string>();
     }
 }

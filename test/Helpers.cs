@@ -202,5 +202,31 @@ namespace EOS_SDK
         {
             public int version;
         }
+
+        public static IntPtr StringListToPtr(List<string> strings)
+        {
+            List<IntPtr> ptrs = new();
+
+            foreach (var item in strings)
+            {
+                ptrs.Add(FromString(item));
+            }
+
+            return FromStructArray(ptrs.ToArray());
+        }
+
+        public static List<string> PtrToStringList(IntPtr ptr, int len)
+        {
+            List<string> strings = new();
+
+            var sarray = ToStructArray<IntPtr>(ptr, len);
+
+            foreach (var item in sarray)
+            {
+                strings.Add(ToString(item));
+            }
+
+            return strings;
+        }
     }
 }

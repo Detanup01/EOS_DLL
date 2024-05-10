@@ -30,16 +30,10 @@ namespace Broadcast_Server
         private void DiscoveryRequest(DiscoveryRequestPacket packet, IPEndPoint point)
         {
             Console.WriteLine(packet);
-            PrintNetUsers();
-            PrintAppIdAddresses();
             if (!AppIdAddresses.ContainsKey(packet.AppId))
                 AppIdAddresses.TryAdd(packet.AppId, new() { point.ToString() });
             else
-            {
-                Console.WriteLine("already have appid");
-                AppIdAddresses[packet.AppId].Add(point.ToString());
-            }
-                
+                AppIdAddresses[packet.AppId].Add(point.ToString());   
             NetUsers.TryAdd(point.ToString(), (packet.AccountId, packet.AppId));
             AppIds.Add(packet.AppId);
             DiscoveryResponsePacket discoveryResponsePacket = new()
@@ -49,8 +43,6 @@ namespace Broadcast_Server
             NetDataWriter writer = new();
             NetPacketProcessor.WriteNetSerializable(writer, ref discoveryResponsePacket);
             Server.SendUnconnectedMessage(writer, point);
-            PrintNetUsers();
-            PrintAppIdAddresses();
         }
 
         public void OnConnectionRequest(ConnectionRequest request)
@@ -81,16 +73,20 @@ namespace Broadcast_Server
 
         public void OnPeerConnected(NetPeer peer)
         {
-            Console.WriteLine("[Server] Peer connected: " + peer);
-            PrintNetUsers();
-            PrintAppIdAddresses();
+            if (!NetUsers.TryGetValue(peer.ToString(), out var peer_user))
+            {
+                Console.WriteLine("[Server] Peer " + peer + " not found in NetUsers!!!");
+                return;
+            }
+
+            Console.WriteLine("[Server] Peer connected: " + peer + " " + peer_user.UserId);
+
             var peers = GetPeersFromSameAddress(peer);
 
             foreach (var item in peers)
             {
                 if (item == null)
                     continue;
-                Console.WriteLine("OnPeerConnected peer: " + item);
                 if (!NetUsers.TryGetValue(item.ToString(), out var user))
                 {
                     Console.WriteLine("[Server] Peer " + item + " not found in NetUsers!!!");
@@ -105,19 +101,28 @@ namespace Broadcast_Server
                 NetDataWriter writer = new();
                 NetPacketProcessor.WriteNetSerializable(writer, ref newUserConnectedPacket);
                 peer.Send(writer, DeliveryMethod.ReliableOrdered);
+                writer.Reset();
+                newUserConnectedPacket = new()
+                {
+                    AccountId = peer_user.UserId,
+                    AppId = peer_user.AppId,
+                    IP = peer.ToString()
+                };
+                NetPacketProcessor.WriteNetSerializable(writer, ref newUserConnectedPacket);
+                item.Send(writer, DeliveryMethod.ReliableOrdered);
             }
         }
 
         public void OnPeerDisconnected(NetPeer peer, DisconnectInfo disconnectInfo)
         {
-            Console.WriteLine("[Server] Peer disconnected: " + peer);
-            PrintNetUsers();
-            PrintAppIdAddresses();
+
             if (!NetUsers.TryGetValue(peer.ToString(), out var user))
             {
                 Console.WriteLine("[Server] Peer " + peer + " not found in NetUsers!!!");
                 return;
             }
+            Console.WriteLine("[Server] Peer disconnected: " + peer + " " + user.UserId);
+
             var peers = GetPeersFromSameAddress(peer);
 
             foreach (var item in peers)
@@ -137,6 +142,12 @@ namespace Broadcast_Server
             peers.Clear();
             NetUsers.Remove(peer.ToString());
             AppIdAddresses[user.AppId].Remove(peer.ToString());
+
+            if (AppIdAddresses[user.AppId].Count == 0)
+            {
+                Console.WriteLine("AppId To Addressses cleaned  " + user.AppId);
+                AppIdAddresses.Remove(user.AppId);
+            }
         }
 
         public List<NetPeer> GetPeersFromAppID(string AppId)
@@ -154,7 +165,6 @@ namespace Broadcast_Server
             List<NetPeer> ret = new();
             foreach (var peer in this.Server.ConnectedPeerList)
             {
-                Console.WriteLine("checking peer " + (IPEndPoint)peer);
                 if (address == (IPEndPoint)peer)
                 {
                     continue;
@@ -169,24 +179,6 @@ namespace Broadcast_Server
                 }
             }
             return ret;
-        }
-
-        public void PrintNetUsers()
-        {
-            Console.WriteLine("PrintNetUsers");
-            foreach (var item in NetUsers)
-            {
-                Console.WriteLine("NetUsers: " + item.Key + " " + item.Value.AppId + " " + item.Value.UserId);
-            }
-        }
-
-        public void PrintAppIdAddresses()
-        {
-            Console.WriteLine("AppIdAddresses");
-            foreach (var item in AppIdAddresses)
-            {
-                Console.WriteLine("AppIdAddresses: " + item.Key + " " + string.Join(", ", item.Value));
-            }
         }
     }
 }

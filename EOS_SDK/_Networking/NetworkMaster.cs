@@ -1,4 +1,5 @@
-﻿using LiteNetLib;
+﻿using EOS_SDK._log;
+using LiteNetLib;
 using System.Net;
 
 namespace EOS_SDK._Networking
@@ -18,31 +19,19 @@ namespace EOS_SDK._Networking
                 ChannelsCount = 32
             };
             BiNet.Net = _net;
-            Console.WriteLine("BiNet start");
+            Logger.WriteDebug("BiNet Starting...");
             if (!_net.Start())
             {
-                Console.WriteLine("BiNet start failed");
+                Logger.WriteDebug("BiNet Starting failed!");
                 return false;
             }
-
+            Logger.WriteDebug("BiNet Started!");
             return true;
         }
 
         public void ConnectToBroadCastServer()
         {
             BiNet?.SendBroadcast();
-        }
-
-        public List<IPAddress> GetAddresses()
-        {
-            List<IPAddress> addresses = new();
-            BiNet?.Net.ConnectedPeerList.ForEach(x => addresses.Add(x.Address));
-            Console.WriteLine("client addresses");
-            foreach (var item in addresses)
-            {
-                Console.WriteLine(item.ToString());
-            }
-            return addresses;
         }
 
         public void Update()
@@ -55,7 +44,9 @@ namespace EOS_SDK._Networking
 
         public void Stop()
         {
+            Logger.WriteDebug("BiNet Stopping...");
             BiNet?.Net.Stop();
+            Logger.WriteDebug("BiNet Stopped!");
         }
     }
 }

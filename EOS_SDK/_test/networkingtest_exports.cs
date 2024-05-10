@@ -9,10 +9,10 @@ namespace EOS_SDK._test
         static NetworkMaster? Master;
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static void _NetTest_Ping(IntPtr UserId)
+        public static void _NetTest_Ping(IntPtr ptr_UserId)
         {
-            var ptr = Helpers.ToString(UserId);
-            Master?.BiNet?.SendPingPacket(ptr);
+            var UserId = Helpers.ToString(ptr_UserId);
+            Master?.BiNet?.SendPingPacket(UserId.Remove(UserId.Length - 1, 1));
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
@@ -31,7 +31,7 @@ namespace EOS_SDK._test
             var keys = Master.BiNet.AccountId_To_PeerId.Keys;
             if (keys == null)
                 return 0;
-            var array = Helpers.FromStructArray(keys.ToArray());
+            var array = Helpers.StringListToPtr(keys.ToList());
             var list = new LIST()
             { 
                 Len = keys.ToArray().Length,

@@ -13,7 +13,7 @@ namespace EOS_SDK.Others
         public const string Invalid_EpicAccountId = "ffffffffffffffffffffffffffffffff";
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static IntPtr _EOS_EpicAccountId_FromString(IntPtr accountIdString)
+        public static IntPtr EOS_EpicAccountId_FromString(IntPtr accountIdString)
         {
             string UserID = Helpers.ToString(accountIdString);
             if (UserID.Length == EpicaccountidMaxLength && Regex.Match(UserID, "[a-fA-F0-9]{32}").Success)
@@ -22,7 +22,7 @@ namespace EOS_SDK.Others
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int _EOS_EpicAccountId_IsValid(IntPtr accountId)
+        public static int EOS_EpicAccountId_IsValid(IntPtr accountId)
         {
             var UserId = Helpers.ToString(accountId);
             if (UserId.Length == EpicaccountidMaxLength)
@@ -33,7 +33,7 @@ namespace EOS_SDK.Others
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int _EOS_EpicAccountId_ToString(IntPtr accountId, IntPtr outBuffer, [Out] int inOutBufferLength)
+        public static int EOS_EpicAccountId_ToString(IntPtr accountId, IntPtr outBuffer, [Out] int inOutBufferLength)
         {
             string UserID = Helpers.ToString(accountId);
             if (UserID.Length == EpicaccountidMaxLength && Regex.Match(UserID, "[a-fA-F0-9]{32}").Success)

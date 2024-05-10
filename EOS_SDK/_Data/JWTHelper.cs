@@ -11,12 +11,12 @@ namespace EOS_SDK._Data
             if (!string.IsNullOrWhiteSpace(EOS_Main.GetConfig().RSA_Private) && !string.IsNullOrWhiteSpace(EOS_Main.GetConfig().RSA_Public))
                 return;
             RSA PrivateRSA = RSA.Create();
-            if (string.IsNullOrWhiteSpace(EOS_Main.GetConfig().RSA_Private))
+            if (!string.IsNullOrWhiteSpace(EOS_Main.GetConfig().RSA_Private))
             {
                 PrivateRSA.FromXmlString(EOS_Main.GetConfig().RSA_Private);
             }
             RSA PublicRSA = RSA.Create();
-            if (string.IsNullOrWhiteSpace(EOS_Main.GetConfig().RSA_Public))
+            if (!string.IsNullOrWhiteSpace(EOS_Main.GetConfig().RSA_Public))
             {
                 PublicRSA.FromXmlString(EOS_Main.GetConfig().RSA_Public);
             }

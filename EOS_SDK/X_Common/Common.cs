@@ -10,7 +10,7 @@ namespace EOS_SDK.Others
     public unsafe class Common
     {
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int _EOS_ByteArray_ToString(IntPtr byteArray, uint length, IntPtr outBuffer, uint inOutBufferLength)
+        public static int EOS_ByteArray_ToString(IntPtr byteArray, uint length, IntPtr outBuffer, uint inOutBufferLength)
         {
             List<byte> bytes = new List<byte>();
             try
@@ -35,13 +35,13 @@ namespace EOS_SDK.Others
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int _EOS_ContinuanceToken_ToString(IntPtr continuanceToken, IntPtr outBuffer, int inOutBufferLength)
+        public static int EOS_ContinuanceToken_ToString(IntPtr continuanceToken, IntPtr outBuffer, int inOutBufferLength)
         {
             return (int)Result.InvalidUser;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static IntPtr _EOS_EApplicationStatus_ToString(int applicationStatus)
+        public static IntPtr EOS_EApplicationStatus_ToString(int applicationStatus)
         {
             var status = (ApplicationStatus)applicationStatus;
             var str = $"EOS_AS_{status.ToString()}";
@@ -49,7 +49,7 @@ namespace EOS_SDK.Others
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static IntPtr _EOS_ENetworkStatus_ToString(int networkStatus)
+        public static IntPtr EOS_ENetworkStatus_ToString(int networkStatus)
         {
             var status = (NetworkStatus)networkStatus;
             var str = $"EOS_NS_{status.ToString()}";
@@ -57,13 +57,13 @@ namespace EOS_SDK.Others
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int _EOS_EResult_IsOperationComplete(int result)
+        public static int EOS_EResult_IsOperationComplete(int result)
         {
             return 1;
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static IntPtr _EOS_EResult_ToString(int result)
+        public static IntPtr EOS_EResult_ToString(int result)
         {
             var eresult = (Result)result;
             var str = $"EOS_{eresult.ToString()}";
@@ -71,7 +71,7 @@ namespace EOS_SDK.Others
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int _EOS_Initialize(IntPtr options)
+        public static int EOS_Initialize(IntPtr options)
         {
             if (EOS_Main.IsInited())
                 return (int)Result.AlreadyConfigured;
@@ -80,7 +80,7 @@ namespace EOS_SDK.Others
 
             var ver = Helpers.GetVersionFromStructPTR(options);
             if (ver > Versions.InitializeApiLatest)
-                Logger.WriteError("_EOS_Initialize trying to Initialize version " + ver);
+                Logger.WriteError("EOS_Initialize trying to Initialize version " + ver);
             // always fallback to 0
             var _InitializeOptions = Marshal.PtrToStructure<InitializeOptionsV1>(options);
             EOS_Main.Create(_InitializeOptions);
@@ -88,7 +88,7 @@ namespace EOS_SDK.Others
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int _EOS_Shutdown()
+        public static int EOS_Shutdown()
         {
             EOS_Main.Shutdown();
             return (int)Result.Success;

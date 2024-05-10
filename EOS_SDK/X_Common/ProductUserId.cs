@@ -12,7 +12,7 @@ namespace EOS_SDK.Others
         public const string Invalid_ProductUserId = "ffffffffffffffffffffffffffffffff";
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static IntPtr _EOS_ProductUserId_FromString(IntPtr productUserIdString)
+        public static IntPtr EOS_ProductUserId_FromString(IntPtr productUserIdString)
         {
             string UserID = Helpers.ToString(productUserIdString);
             if (UserID.Length == ProductuseridMaxLength && Regex.Match(UserID, "[a-fA-F0-9]{32}").Success)
@@ -21,7 +21,7 @@ namespace EOS_SDK.Others
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int _EOS_ProductUserId_IsValid(IntPtr accountId)
+        public static int EOS_ProductUserId_IsValid(IntPtr accountId)
         {
             var UserId = Helpers.ToString(accountId);
             if (UserId.Length == ProductuseridMaxLength)
@@ -32,7 +32,7 @@ namespace EOS_SDK.Others
         }
 
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static int _EOS_ProductUserId_ToString(IntPtr accountId, IntPtr outBuffer, int inOutBufferLength)
+        public static int EOS_ProductUserId_ToString(IntPtr accountId, IntPtr outBuffer, int inOutBufferLength)
         {
             string UserID = Helpers.ToString(accountId);
             if (UserID.Length == ProductuseridMaxLength && Regex.Match(UserID, "[a-fA-F0-9]{32}").Success)

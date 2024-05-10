@@ -16,9 +16,9 @@ namespace EOS_SDK._Networking
     {
         public NetPacketProcessor NetPacketProcessor = new();
         public NetManager Net;
-        public Dictionary<int, string> NetPeerToUser = new();
-        public Dictionary<string /* IPEndPoint */, string> NetUsers = new();
-        public Dictionary<string, int> AccountId_To_PeerId = new();
+        public Dictionary<int, /* PeerId */ string /* AccountId */> NetPeerToUser = new();
+        public Dictionary<string /* IPEndPoint */, string /* AccountId */> NetUsers = new();
+        public Dictionary<string /* AccountId */, int /* PeerId */> AccountId_To_PeerId = new();
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public BiNet()
@@ -52,15 +52,22 @@ namespace EOS_SDK._Networking
             Logger.WriteDebug($"[BiNet] Peer Id: {peer.Id} Peer RemoteId: {peer.RemoteId}");
             Logger.WriteDebug($"[BiNet {Net.LocalPort}] ({Net}) connected to: {peer}");
 
-            if (!NetUsers.TryGetValue(peer.ToString(), out var str))
+            if (!NetUsers.TryGetValue(peer.ToString(), out var accountId))
+            {
+                NetUsers.Add(peer.ToString(), string.Empty);
                 return;
-            NetPeerToUser.Add(peer.Id, str);
-            AccountId_To_PeerId.Add(str, peer.Id);
+            }
+            NetPeerToUser.Add(peer.Id, accountId);
+            AccountId_To_PeerId.Add(accountId, peer.Id);
         }
 
         public void OnPeerDisconnected(NetPeer peer, DisconnectInfo disconnectInfo)
         {
-            Logger.WriteDebug($"[BiNet] Peer Id: {peer.Id} ({peer}) disconnected: {disconnectInfo.Reason}");
+            Logger.WriteDebug("Disconnect! " + disconnectInfo.Reason + " " + disconnectInfo.SocketErrorCode);
+            Logger.WriteDebug("Is peer null? " + (peer == null));
+            if (peer == null)
+                return;
+            Logger.WriteDebug($"[BiNet] Peer Id: {peer.Id} disconnected: {disconnectInfo.Reason}");
             if (!NetPeerToUser.TryGetValue(peer.Id, out var accountId))
                 return;
             NetPeerToUser.Remove(peer.Id);
@@ -115,9 +122,40 @@ namespace EOS_SDK._Networking
         {
             Logger.WriteDebug($"UserConnectedPacket: {packet} from: {point}");
             if (packet.AppId != EOS_Main.GetConfig().AppId)
+            {
+                Logger.WriteDebug($"AppId is not the same as in our config ({packet.AppId})!=({EOS_Main.GetConfig().AppId})");
                 return;
-            NetUsers.Add(packet.IP, packet.AppId);
-            Net.Connect(packet.IP, int.Parse(packet.IP.Split(":")[1]), EOS_Main.GetConfig().AppId);
+            }
+
+            if (NetUsers.TryGetValue(packet.IP, out var id))
+            {
+                Logger.WriteDebug($"User already connected. IP: {packet.IP}");
+                if (id == string.Empty)
+                {
+                    NetUsers[packet.IP] = packet.AccountId;
+                    var peer = this.Net.ConnectedPeerList.Where(x => x.ToString() == packet.IP).FirstOrDefault();
+                    if (peer == null)
+                    {
+                        Logger.WriteDebug($"Peer NULL!");
+                        return;
+                    }
+                    NetPeerToUser.Add(peer.Id, packet.AccountId);
+                    AccountId_To_PeerId.Add(packet.AccountId, peer.Id);
+                    Logger.WriteDebug($"Everything set!");
+                }
+                else
+                {
+                    Logger.WriteDebug("Client Already connected before. Skipping connection sending.");
+                }
+                return;
+            }
+
+            NetUsers.Add(packet.IP, packet.AccountId);
+            var port = int.Parse(packet.IP.Split(":")[1]);
+            var ip = IPAddress.Parse(packet.IP.Split(":")[0]);
+            IPEndPoint endPoint = new(ip, port);
+            Net.Connect(endPoint, EOS_Main.GetConfig().AppId);
+            Logger.WriteDebug($"Connection Request send to: {endPoint.ToString()} ({packet.AccountId})");
         }
 
         private void PingProcess(PingPacket packet, IPEndPoint point)
@@ -126,10 +164,15 @@ namespace EOS_SDK._Networking
             if (EOS_Main.GetConfig().AccountId != packet.AccountId)
             {
                 //todo: check safely
-                var id = AccountId_To_PeerId[packet.AccountId];
-                NetDataWriter writer = new NetDataWriter();
-                NetPacketProcessor.WriteNetSerializable(writer, ref packet);
-                Net.GetPeerById(id).Send(writer, DeliveryMethod.ReliableOrdered);
+                if (AccountId_To_PeerId.TryGetValue(packet.AccountId, out int id))
+                {
+                    NetDataWriter writer = new NetDataWriter();
+                    NetPacketProcessor.WriteNetSerializable(writer, ref packet);
+                    Net.GetPeerById(id).Send(writer, DeliveryMethod.ReliableOrdered);
+                    Logger.WriteDebug("Resent packet");
+                }
+                else
+                    Logger.WriteDebug($"AccountId not exist in AID_2_PeerId ({packet.AccountId})");
             }
         }
 
@@ -145,7 +188,7 @@ namespace EOS_SDK._Networking
             };
             NetDataWriter writer = new NetDataWriter();
             NetPacketProcessor.WriteNetSerializable(writer, ref discovery);
-            Logger.WriteDebug("sending broadcast");
+            Logger.WriteDebug("Sending Broadcast");
             Net.SendBroadcast(writer, 5555);
         }
 
@@ -154,11 +197,11 @@ namespace EOS_SDK._Networking
             PingPacket packet = new()
             { 
                 PingTime = DateTimeOffset.UtcNow,
-                AccountId = UserToPing
+                AccountId = UserToPing.Trim().Replace(" ", "")
             };
             NetDataWriter writer = new NetDataWriter();
             NetPacketProcessor.WriteNetSerializable(writer, ref packet);
-            Logger.WriteDebug("sending ping");
+            Logger.WriteDebug($"Sending ping to user: {UserToPing.Trim().Replace(" ", "")}");
             Net.SendToAll(writer, DeliveryMethod.ReliableOrdered);
         }
         #endregion

@@ -6,7 +6,7 @@ namespace EOS_SDK.Version
     public class Version_Exports
     {
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static IntPtr _EOS_GetVersion()
+        public static IntPtr EOS_GetVersion()
         {
             return Helpers.FromString(_Data.SDK.Version);
         }

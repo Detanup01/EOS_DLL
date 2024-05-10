@@ -70,11 +70,11 @@ namespace test
             {
                 var list = Marshal.PtrToStructure<LIST>(acs);
                 Console.WriteLine(list.Ptr + " " + list.Len);
-                var accs = Helpers.ToStructArray<string>(list.Ptr, list.Len);
+                var accs = Helpers.PtrToStringList(list.Ptr, list.Len);
                 foreach (var item in accs)
                 {
-                    Console.WriteLine(item);
-                    _NetTest_Ping(Helpers.FromString(item));
+                    Console.WriteLine("[" + item.Remove(item.Length - 1, 1) + "]");
+                    _NetTest_Ping(Helpers.FromString(item.Remove(item.Length - 1, 1)));
                 }
                 Thread.Sleep(10);
             }

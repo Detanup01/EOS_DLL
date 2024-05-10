@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using EOS_SDK;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -52,6 +53,14 @@ namespace test
         static string productid = "d0864e41284a4c30926a6953b8e77422";
         static void Main(string[] args)
         {
+            List<string> test = new()
+            { 
+                "test2",
+                "yeet",
+                "ydfsds"
+            };
+
+
             NetTest.StartTest();
             /*
             MainHandler mainHandler = new();
