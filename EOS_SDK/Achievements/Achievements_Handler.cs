@@ -7,23 +7,32 @@ namespace EOS_SDK.Achievements
 {
     public class Achievements_Handler : IHandler
     {
-        public List<Achievement_Model> Achievements = new();
-        public Dictionary<string, List<Achievement_Model>> AchiKVs = new(); //support for servers/multiple users.
+        public List<Achievement_Model> Achievements = new(); // Achivements. DO NOT EDIT
+        public Dictionary<string, List<Achievement_Model>> AchKVs = new(); //User Dependent Achieves
+
+
+        List<string> _AchReqs = new();
         IntPtr MyDummyPtr;
+
+
         public IntPtr CreateHandler()
         {
-            Achievements = JsonConvert.DeserializeObject<List<Achievement_Model>>("achievements.json")!;
-            AchiKVs = new();
-            _log.Logger.WriteDebug("", Logging.LogCategory.Achievements);
+            Achievements = JsonConvert.DeserializeObject<List<Achievement_Model>>("eos_emu/achievements.json")!;
+            AchKVs = new()
+            {
+                { EOS_Main.GetConfig().AccountId, Achievements }
+            };
+            _log.Logger.WriteDebug("Achievements_Handler.CreateHandler", Logging.LogCategory.Achievements);
             return Create();
         }
 
         public UnlockAchievementsOptions UnlockAchievements(UnlockAchievementsOptions options)
         {
+            var Ach = GetAchievement_FromAccount(Helpers.ToString(options.UserId));
             var achis = Helpers.ToStructArray<string>(options.AchievementIds, (int)options.AchievementsCount);
             _log.Logger.WriteDebug("Achi IDs to Unlock:" + JsonConvert.SerializeObject(achis), Logging.LogCategory.Achievements);
 
-            var achiv = Achievements.Where(x => achis.Contains(x.AchievementId)).ToList();
+            var achiv = Ach.Where(x => achis.Contains(x.AchievementId)).ToList();
             List<string> UnlockedAchis = new();
             foreach (var item in achiv)
             {
@@ -31,7 +40,7 @@ namespace EOS_SDK.Achievements
                 item._Data.IsUnlocked = true;
                 item._Data.UnlockedTime = TimeHelper.ConvertTimeFrom(DateTimeOffset.UtcNow);
                 OnAchievementsUnlockedCallbackV2Info info = new()
-                { 
+                {
                     AchievementId = Helpers.FromString(item.AchievementId),
                     UnlockTime = item._Data.UnlockedTime,
                     UserId = options.UserId
@@ -40,7 +49,7 @@ namespace EOS_SDK.Achievements
             }
             var ptr = Helpers.FromStructArray(UnlockedAchis.ToArray());
             UnlockAchievementsOptions unlockAchievementsOptions = new()
-            { 
+            {
                 ApiVersion = options.ApiVersion,
                 UserId = options.UserId,
                 AchievementIds = ptr,
@@ -53,7 +62,7 @@ namespace EOS_SDK.Achievements
         public bool IsAchiExist(IntPtr ptr)
         {
             string achi = Helpers.ToString(ptr);
-            return Achievements.Where(x=>x.AchievementId == achi).Any();
+            return Achievements.Where(x => x.AchievementId == achi).Any();
         }
 
         public bool IsAchiExistIndex(uint index)
@@ -105,19 +114,19 @@ namespace EOS_SDK.Achievements
             };
         }
 
-        public UnlockedAchievement GetUnlockedAchievement(IntPtr ptr)
+        public UnlockedAchievement GetUnlockedAchievement(string AccountId, IntPtr ptr)
         {
             string achi = Helpers.ToString(ptr);
-            var indx = Achievements.FindIndex(0, x => x.AchievementId == achi);
-            return GetUnlockedAchievementIndex((uint)indx);
+            var indx = GetAchievement_FromAccount(AccountId).FindIndex(0, x => x.AchievementId == achi);
+            return GetUnlockedAchievementIndex(AccountId, (uint)indx);
         }
 
-        public UnlockedAchievement GetUnlockedAchievementIndex(uint index)
+        public UnlockedAchievement GetUnlockedAchievementIndex(string AccountId, uint index)
         {
-            if (Achievements.Count >= index)
+            if (GetAchievement_FromAccount(AccountId).Count >= index)
                 return new();
 
-            var achiv = Achievements[(int)index];
+            var achiv = GetAchievement_FromAccount(AccountId)[(int)index];
 
             return new()
             {
@@ -130,9 +139,27 @@ namespace EOS_SDK.Achievements
 
         public void SaveAchis()
         {
-            File.WriteAllText("achievements.json", JsonConvert.SerializeObject(Achievements));
-            
+            File.WriteAllText("eos_emu/achievements.json", JsonConvert.SerializeObject(Achievements));
+            File.WriteAllText("eos_emu/user_achievements.json", JsonConvert.SerializeObject(AchKVs));
         }
+
+        public void CreateAchForUser(string AccountId)
+        {
+            AchKVs.Add(AccountId, Achievements);
+            _AchReqs.Add(AccountId);
+        }
+
+        public List<Achievement_Model> GetAchievement_FromAccount(string AccountId)
+        {
+            if (AchKVs.TryGetValue(AccountId, out var achievement_Models))
+            {
+                return achievement_Models;
+            }
+            CreateAchForUser(AccountId);
+            return GetAchievement_FromAccount(AccountId);
+        }
+
+
 
         public bool CheckIfPointerValid(IntPtr ptr)
         {
@@ -152,7 +179,14 @@ namespace EOS_SDK.Achievements
 
         public void Tick()
         {
-            
+            if (EOS_Main.GetPlatform().Network.BiNet != null)
+            {
+                foreach (var AccountId in _AchReqs)
+                {
+                    //EOS_Main.GetPlatform().Network.BiNet!.SendNetPacketToUser(playerAchReqPacket, AccountId);
+                }
+                _AchReqs.Clear();
+            }
         }
 
         public void Close()

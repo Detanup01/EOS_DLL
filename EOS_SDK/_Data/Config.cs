@@ -7,9 +7,9 @@ namespace EOS_SDK._Data
     {
         public static Config GetConfig()
         {
-            if (File.Exists("eos.json"))
+            if (File.Exists("eos_emu/eos.json"))
             {
-                var config = JsonConvert.DeserializeObject<Config>(File.ReadAllText("eos.json"));
+                var config = JsonConvert.DeserializeObject<Config>(File.ReadAllText("eos_emu/eos.json"));
                 return ApplyConfig(config!);
             }
             return ApplyConfig(new());
@@ -27,7 +27,9 @@ namespace EOS_SDK._Data
 
         public static void Save(Config config)
         {
-            File.WriteAllText("eos.json", JsonConvert.SerializeObject(config));
+            if (Directory.Exists("eos_emu"))
+                Directory.CreateDirectory("eos_emu");
+            File.WriteAllText("eos_emu/eos.json", JsonConvert.SerializeObject(config, Formatting.Indented));
         }
 
         public bool IsLogEnabled = false;

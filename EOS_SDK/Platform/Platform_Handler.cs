@@ -20,7 +20,7 @@ namespace EOS_SDK.Platform
         public Dictionary<uint, IHandler> Handlers = new();
         public IntPtr MyDummyPtr;
         public Dictionary<IntPtr, uint> DummyPtrToHandler = new();
-        public NetworkMaster Network;
+        public NetworkMaster Network = new();
 
         public override string ToString()
         {
@@ -90,15 +90,18 @@ namespace EOS_SDK.Platform
 
         public IntPtr Create()
         {
-            Handlers = new();
-            DummyPtrToHandler = new();
             MyDummyPtr = Helpers.StructToPtr(new DummyStruct());
             _log.Logger.WriteInfo("Platform_Handler.Create Pointer: " + MyDummyPtr);
             Handlers.Add(SDK.PlatformPTR, this);
             DummyPtrToHandler.Add(MyDummyPtr, SDK.PlatformPTR);
-            Network = new();
             Network.Start();
-
+            //  PreCreate All Handles
+            foreach (var pointer in SDK.PTRs)
+            {
+                if (pointer == SDK.PlatformPTR)
+                    continue;
+                CreateHandler(pointer);
+            }
             return MyDummyPtr;
         }
 
@@ -112,7 +115,7 @@ namespace EOS_SDK.Platform
 
         public void Close()
         {
-            _log.Logger.WriteInfo("Platform_Handler.Close: ");
+            _log.Logger.WriteInfo("Platform_Handler.Close");
             Network.Stop();
         }
 
@@ -154,12 +157,23 @@ namespace EOS_SDK.Platform
             return true;
         }
 
-        public T? GetHandler<T>(IntPtr ptr_handle) where T : class
+        public T? GetHandler<T>(IntPtr ptr_handle) where T : IHandler
         {
             if (!DummyPtrToHandler.TryGetValue(ptr_handle, out uint hex))
             {
                 return default;
             }
+            if (!Handlers.TryGetValue(hex, out IHandler? handler))
+            {
+                return default;
+            }
+            if (handler == null)
+                return default;
+            return (T)handler;
+        }
+
+        public T? GetHandlerNoDummy<T>(uint hex) where T : IHandler
+        {
             if (!Handlers.TryGetValue(hex, out IHandler? handler))
             {
                 return default;

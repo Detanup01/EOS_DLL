@@ -5,7 +5,7 @@ using System.Net;
 using EOS_SDK._Networking.Packets;
 using EOS_SDK._Data;
 using EOS_SDK._log;
-using EOS_SDK._Networking.Packets.Ach;
+using EOS_SDK._Networking.Packets.ResponsePackets;
 
 namespace EOS_SDK._Networking
 {
@@ -30,16 +30,21 @@ namespace EOS_SDK._Networking
             NetPacketProcessor.RegisterNestedType<UserDisconnectedPacket>();
 
             NetPacketProcessor.RegisterNestedType<PingPacket>();
-            NetPacketProcessor.RegisterNestedType<GetPlayerAchReqPacket>();
-            NetPacketProcessor.RegisterNestedType<GetPlayerAchRspPacket>();
+            NetPacketProcessor.RegisterNestedType<ReqPacket>();
+            NetPacketProcessor.RegisterNestedType<AchResponsePacket>();
+
+            NetPacketProcessor.RegisterNestedType<PlayerPacket<ReqPacket>>();
+            NetPacketProcessor.RegisterNestedType<PlayerPacket<PingPacket>>();
+            NetPacketProcessor.RegisterNestedType<PlayerPacket<AchResponsePacket>>();
+
 
             NetPacketProcessor.SubscribeNetSerializable<DiscoveryResponsePacket, IPEndPoint>(DiscoveryResponse);
             NetPacketProcessor.SubscribeNetSerializable<UserConnectedPacket, IPEndPoint>(UserConnected);
             NetPacketProcessor.SubscribeNetSerializable<UserDisconnectedPacket, IPEndPoint>(UserDisconnected);
-            NetPacketProcessor.SubscribeNetSerializable<GetPlayerAchReqPacket, IPEndPoint>(AchPacketWorker.PlayerAchGet_Send);
-            NetPacketProcessor.SubscribeNetSerializable<GetPlayerAchRspPacket, IPEndPoint>(AchPacketWorker.PlayerAchGet_Recv);
 
-            NetPacketProcessor.SubscribeNetSerializable<PingPacket, IPEndPoint>(PingProcess);
+            NetPacketProcessor.SubscribeNetSerializable<PlayerPacket<ReqPacket>, IPEndPoint>(PlayerPacketWorker.ReqPacket);
+            NetPacketProcessor.SubscribeNetSerializable<PlayerPacket<PingPacket>, IPEndPoint>(PlayerPacketWorker.PingPacket);
+            NetPacketProcessor.SubscribeNetSerializable<PlayerPacket<AchResponsePacket>, IPEndPoint>(PlayerPacketWorker.AchResponsePacket);
         }
 
 
@@ -192,17 +197,34 @@ namespace EOS_SDK._Networking
             Net.SendBroadcast(writer, 5555);
         }
 
-        public void SendPingPacket(string UserToPing)
+        public void SendNetPacketToAll(INetSerializable netSerializable)
         {
-            PingPacket packet = new()
-            { 
-                PingTime = DateTimeOffset.UtcNow,
-                AccountId = UserToPing.Trim().Replace(" ", "")
-            };
             NetDataWriter writer = new NetDataWriter();
-            NetPacketProcessor.WriteNetSerializable(writer, ref packet);
-            Logger.WriteDebug($"Sending ping to user: {UserToPing.Trim().Replace(" ", "")}");
+            NetPacketProcessor.WriteNetSerializable(writer, ref netSerializable);
+            Logger.WriteDebug($"Sending NetPacket to All");
             Net.SendToAll(writer, DeliveryMethod.ReliableOrdered);
+        }
+
+        public void SendNetPacketToUser(INetSerializable netSerializable, string AccountId)
+        {
+            NetDataWriter writer = new NetDataWriter();
+            NetPacketProcessor.WriteNetSerializable(writer, ref netSerializable);
+            Logger.WriteDebug($"Sending NetPacket to {AccountId}");
+            if (AccountId_To_PeerId.TryGetValue(AccountId, out int PeerId))
+            {
+                var peer = Net.GetPeerById(PeerId);
+                if (peer == null)
+                {
+                    Logger.WriteError($"Net Peer for AccountId {AccountId} is null!");
+                    return;
+                }
+                peer.Send(writer, DeliveryMethod.ReliableOrdered);
+            }
+            else
+            {
+                Logger.WriteError($"Net Peer for AccountId {AccountId} not exist!");
+                return;
+            }
         }
         #endregion
 

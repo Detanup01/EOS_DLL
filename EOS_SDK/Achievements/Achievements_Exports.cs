@@ -295,10 +295,7 @@ namespace EOS_SDK.Achievements
                 return (int)Result.InvalidParameters;
             var _CopyUnlockedAchievementByIndexOptions = Marshal.PtrToStructure<CopyUnlockedAchievementByIndexOptions>(options);
 
-            if (EOS_Main.IsMyUser(_CopyUnlockedAchievementByIndexOptions.TargetUserId))
-            {
-                phandler.GetUnlockedAchievementIndex(_CopyUnlockedAchievementByIndexOptions.AchievementIndex);
-            }
+            phandler.GetUnlockedAchievementIndex(Helpers.ToString(_CopyUnlockedAchievementByIndexOptions.TargetUserId), _CopyUnlockedAchievementByIndexOptions.AchievementIndex);
 
             return (int)Result.Success;
         }
