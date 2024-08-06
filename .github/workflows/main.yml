@@ -22,10 +22,8 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
-    - name: Restore dependencies
-      run: dotnet restore
     - name: Publish
-      run: dotnet build EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r linux-x64 -o DLLs -p:Platform=x64
+      run: dotnet publish EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r linux-x64 -o DLLs -p:Platform=x64
     - name: Upload artifact (Lin)
       uses: actions/upload-artifact@v4
       with:
@@ -45,10 +43,8 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
-    - name: Restore dependencies
-      run: dotnet restore
     - name: Publish
-      run: dotnet build EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r win-${{ matrix.CPU }} -o DLLs -p:Platform=${{ matrix.CPU }}
+      run: dotnet publish EOS_SDK/EOS_SDK.csproj --arch ${{ matrix.CPU }} -c ${{ matrix.builds }} -r win-${{ matrix.CPU }} -o DLLs -p:Platform=${{ matrix.CPU }}
     - name: Upload artifact (Win)
       uses: actions/upload-artifact@v4
       with:
@@ -68,10 +64,8 @@ jobs:
 #      uses: actions/setup-dotnet@v4
 #      with:
 #        dotnet-version: '8.0.x'
-#    - name: Restore dependencies
-#      run: dotnet restore
 #    - name: Publish
-#      run: dotnet build EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r osx-x64 -o DLLs -p:Platform=x64
+#      run: dotnet publish EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r osx-x64 -o DLLs -p:Platform=x64
 #    - name: Upload artifact (Mac)
 #      uses: actions/upload-artifact@v4
 #      with:
