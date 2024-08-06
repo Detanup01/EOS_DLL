@@ -44,7 +44,7 @@ jobs:
       with:
         dotnet-version: '8.0.x'
     - name: Publish
-      run: dotnet publish EOS_SDK/EOS_SDK.csproj --arch ${{ matrix.CPU }} -c ${{ matrix.builds }} -r win-${{ matrix.CPU }} -o DLLs -p:Platform=${{ matrix.CPU }}
+      run: dotnet publish EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r win-${{ matrix.CPU }} -o DLLs -p:Platform=${{ matrix.CPU }}
     - name: Upload artifact (Win)
       uses: actions/upload-artifact@v4
       with:

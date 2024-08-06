@@ -5,8 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Platforms>AnyCPU;x64;x86</Platforms>
-	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
-	<RuntimeIdentifiers>win;win-x64;win-x86;osx-x64;linux-x64</RuntimeIdentifiers>
+	<RuntimeIdentifiers>win-x64;win-x86;osx-x64;linux-x64</RuntimeIdentifiers>
 	<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	<IsAotCompatible>True</IsAotCompatible>
 	<IsTrimmable>True</IsTrimmable>
@@ -38,10 +37,8 @@
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(RuntimeIdentifier)'=='linux-x64'">
 		<AssemblyName>libEOSSDK-Linux-Shipping</AssemblyName>
-		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(RuntimeIdentifier)'=='osx-x64'">
 		<AssemblyName>libEOSSDK-Mac-Shipping</AssemblyName>
-		<RuntimeIdentifier>mac-x64</RuntimeIdentifier>
 	</PropertyGroup>
 </Project>
