@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace EOS_SDK
 {
@@ -48,11 +47,11 @@ namespace EOS_SDK
             int SizeOfT;
             if (IsNotValueType)
             {
-                SizeOfT = Marshal.SizeOf(typeof(IntPtr));
+                SizeOfT = Marshal.SizeOf<IntPtr>();
             }
             else
             {
-                SizeOfT = Marshal.SizeOf(typeof(T));
+                SizeOfT = Marshal.SizeOf<T>();
             }
 
             var address = Marshal.AllocHGlobal(array.Length * SizeOfT);
@@ -90,17 +89,17 @@ namespace EOS_SDK
             return address;
         }
 
-        public static T[] ToStructArray<T>(IntPtr from, int arrayLength)
+        public static T[] ToStructArray<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)] T>(IntPtr from, int arrayLength)
         {
             var IsNotValueType = !typeof(T).IsValueType;
             int itemSize;
             if (IsNotValueType)
             {
-                itemSize = Marshal.SizeOf(typeof(IntPtr));
+                itemSize = Marshal.SizeOf<IntPtr>();
             }
             else
             {
-                itemSize = Marshal.SizeOf(typeof(T));
+                itemSize = Marshal.SizeOf<T>();
             }
             List<T> items = new List<T>();
             for (int itemIndex = 0; itemIndex < arrayLength; ++itemIndex)
@@ -120,7 +119,7 @@ namespace EOS_SDK
                 }
                 else
                 {
-                    item = (T)Marshal.PtrToStructure(itemAddress, typeof(T))!;
+                    item = Marshal.PtrToStructure<T>(itemAddress)!;
                 }
                 items.Add(item);
             }
@@ -133,11 +132,11 @@ namespace EOS_SDK
             int itemSize;
             if (IsNotValueType)
             {
-                itemSize = Marshal.SizeOf(typeof(IntPtr));
+                itemSize = Marshal.SizeOf<IntPtr>();
             }
             else
             {
-                itemSize = Marshal.SizeOf(typeof(T));
+                itemSize = Marshal.SizeOf<T>();
             }
             for (int itemIndex = 0; itemIndex < arrayLength; ++itemIndex)
             {
@@ -167,16 +166,16 @@ namespace EOS_SDK
 
         public static IntPtr StructToPtr<T>([DisallowNull] T _struct)
         {
-            var itemSize = Marshal.SizeOf(typeof(T));
+            var itemSize = Marshal.SizeOf<T>();
             IntPtr address = Marshal.AllocHGlobal(itemSize);
             Marshal.StructureToPtr(_struct, address, false);
             return address;
         }
 
-        public static IntPtr StructToPtr(object _struct, Type type)
+
+        public static IntPtr StructToPtr<T>([DisallowNull] T _struct, int Size)
         {
-            var itemSize = Marshal.SizeOf(type);
-            IntPtr address = Marshal.AllocHGlobal(itemSize);
+            IntPtr address = Marshal.AllocHGlobal(Size);
             Marshal.StructureToPtr(_struct, address, false);
             return address;
         }

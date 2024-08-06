@@ -1,33 +1,26 @@
 ﻿using EOS_SDK._Data;
-using EOS_SDK._log;
-using EOS_SDK.Others;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using static EOS_SDK._test.test_exports;
 
 namespace EOS_SDK._test
 {
     public unsafe class test_exports
     {
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
-        public static ulong _TESTAddNotify(int number, IntPtr completionDelegate)
+        [UnmanagedCallersOnly(EntryPoint = "_TESTAddNotify")]
+        public static ulong _TESTAddNotify(int number, IntPtr notifyDelegate)
         {
-            Console.WriteLine(EpicAccountId.Generate());
-            AddNotifyResult notifyResult = new()
-            { dataPassed = number };
+            AddNotifyResult notifyResult = new() { dataPassed = number };
             Console.WriteLine("DLL_TESTAddNotify");
             Console.WriteLine(notifyResult.ToString());
-            return NotifyManager.AddNotify(nameof(_TESTTriggerNotify), completionDelegate, notifyResult);
+            return NotifyManager.AddNotify(nameof(_TESTTriggerNotify), notifyDelegate, notifyResult);
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "_TESTRemoveNotify")]
         public static void _TESTRemoveNotify(ulong id)
         {
             NotifyManager.RemoveNotify(id);
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "_TESTTriggerNotify")]
         public static void _TESTTriggerNotify(IntPtr completionDelegate)
         {
             TriggerNotifyResult triggerNotifyResult = new()

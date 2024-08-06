@@ -11,18 +11,15 @@
 	<IsAotCompatible>True</IsAotCompatible>
 	<IsTrimmable>True</IsTrimmable>
 	<PublishAot>true</PublishAot>
-	<Version>1.16.3.0</Version>
+	<Version>1.16.1.0</Version>
 	<Copyright>Copyright (C) 2024</Copyright>
 	<Description>Epic Online Services SDK</Description>
-	<Title>Epic Online Services SDK</Title>
-	<ProductName>Epic Online Services SDK</ProductName>
-	<ProductVersion>1.16.3.0-32303053</ProductVersion>
-	<NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="JWT" Version="10.1.1" />
     <PackageReference Include="LiteNetLib" Version="1.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	<PackageReference Include="L" Version="5.0.0" />
   </ItemGroup>
 	

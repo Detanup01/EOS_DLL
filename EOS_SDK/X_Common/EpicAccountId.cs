@@ -12,7 +12,7 @@ namespace EOS_SDK.Others
         public static string Static_EpicAccountId = "ffaabbccddeeff0123456789deadc0de";   //Init just for test stuff
         public const string Invalid_EpicAccountId = "ffffffffffffffffffffffffffffffff";
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "EOS_EpicAccountId_FromString")]
         public static IntPtr EOS_EpicAccountId_FromString(IntPtr accountIdString)
         {
             string UserID = Helpers.ToString(accountIdString);
@@ -21,7 +21,7 @@ namespace EOS_SDK.Others
             return Helpers.FromString(Static_EpicAccountId);
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "EOS_EpicAccountId_IsValid")]
         public static int EOS_EpicAccountId_IsValid(IntPtr accountId)
         {
             var UserId = Helpers.ToString(accountId);
@@ -32,7 +32,7 @@ namespace EOS_SDK.Others
             return 0;
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "EOS_EpicAccountId_ToString")]
         public static int EOS_EpicAccountId_ToString(IntPtr accountId, IntPtr outBuffer, [Out] int inOutBufferLength)
         {
             string UserID = Helpers.ToString(accountId);

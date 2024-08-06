@@ -1,5 +1,4 @@
 ﻿using EOS_SDK._Networking;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace EOS_SDK._test
@@ -8,20 +7,20 @@ namespace EOS_SDK._test
     {
         static NetworkMaster? Master;
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "_NetTest_Ping")]
         public static void _NetTest_Ping(IntPtr ptr_UserId)
         {
             var UserId = Helpers.ToString(ptr_UserId);
             //Master?.BiNet?.SendPingPacket(UserId.Remove(UserId.Length - 1, 1));
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "_NetTest_ConnectBroadcast")]
         public static void _NetTest_ConnectBroadcast()
         {
             Master?.ConnectToBroadCastServer();
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "_NetTest_GetAccountIds")]
         public static IntPtr _NetTest_GetAccountIds()
         {
             if (Master == null)
@@ -41,7 +40,7 @@ namespace EOS_SDK._test
             return ptr;
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "_NetTest_Start")]
         public static int _NetTest_Start()
         {
             Master = new();
@@ -49,7 +48,7 @@ namespace EOS_SDK._test
             return 1;
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "_NetTest_Stop")]
         public static int _NetTest_Stop()
         {
             if (Master == null)
@@ -59,7 +58,7 @@ namespace EOS_SDK._test
             return 1;
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "_NetTest_Update")]
         public static void _NetTest_Update()
         {
             Master?.Update();

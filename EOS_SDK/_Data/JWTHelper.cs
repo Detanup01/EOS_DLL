@@ -1,6 +1,5 @@
 ﻿using EOS_SDK.Others;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace EOS_SDK._Data;
 
@@ -13,20 +12,20 @@ public static class JWTHelper
         RSA PrivateRSA = RSA.Create();
         if (!string.IsNullOrWhiteSpace(EOS_Main.GetConfig().RSA_Private))
         {
-            PrivateRSA.FromXmlString(EOS_Main.GetConfig().RSA_Private);
+            PrivateRSA.ImportRSAPrivateKey(Convert.FromHexString(EOS_Main.GetConfig().RSA_Private), out _);
         }
         RSA PublicRSA = RSA.Create();
         if (!string.IsNullOrWhiteSpace(EOS_Main.GetConfig().RSA_Public))
         {
-            PublicRSA.FromXmlString(EOS_Main.GetConfig().RSA_Public);
+            PublicRSA.ImportRSAPublicKey(Convert.FromHexString(EOS_Main.GetConfig().RSA_Public), out _);
         }
         else
         {
-            PublicRSA.FromXmlString(PrivateRSA.ToXmlString(false));
+            PublicRSA.ImportRSAPublicKey(PrivateRSA.ExportRSAPublicKey(), out _);
         }
-        EOS_Main.GetConfig().RSA_Public = PrivateRSA.ToXmlString(false);
-        EOS_Main.GetConfig().RSA_Private = PrivateRSA.ToXmlString(true);
-        _log.Logger.WriteInfo("RSA: Private XML (base64): " + Convert.ToBase64String(Encoding.UTF8.GetBytes(PrivateRSA.ToXmlString(true))) + " | Public XML (base64): " + Convert.ToBase64String(Encoding.UTF8.GetBytes(PublicRSA.ToXmlString(false))));
+        EOS_Main.GetConfig().RSA_Public = Convert.ToHexString(PrivateRSA.ExportRSAPublicKey());
+        EOS_Main.GetConfig().RSA_Private = Convert.ToHexString(PrivateRSA.ExportRSAPrivateKey());
+        _log.Logger.WriteInfo("RSA: Private RSA (HEX): " + EOS_Main.GetConfig().RSA_Private + " | Public RSA (HEX): " + EOS_Main.GetConfig().RSA_Public);
 
     }
 
@@ -34,8 +33,8 @@ public static class JWTHelper
     {
         RSA PrivateRSA = RSA.Create();
         RSA PublicRSA = RSA.Create();
-        PrivateRSA.FromXmlString(EOS_Main.GetConfig().RSA_Private);
-        PublicRSA.FromXmlString(EOS_Main.GetConfig().RSA_Public);
+        PrivateRSA.ImportRSAPrivateKey(Convert.FromHexString(EOS_Main.GetConfig().RSA_Private), out _);
+        PublicRSA.ImportRSAPublicKey(Convert.FromHexString(EOS_Main.GetConfig().RSA_Public), out _);
         return (PublicRSA, PrivateRSA);
     }
 
@@ -127,18 +126,18 @@ public static class JWTHelper
 
     public struct JWTToken
     {
-        public string sub;  //AccountId
-        public string pfsid; //sandboxId
-        public string iss; //ISS
+        public string sub;  //Product User ID of the authenticated user.
+        public string pfsid; //EOS Sandbox ID.
+        public string iss; //Token issuer. Always starts with https://api.epicgames.dev.
         public string dn; //UserName/DisplayName
         public string nonce; //nonce
-        public string pfpid; //productId
-        public string aud; //clientId
-        public string pfdid; //deplaymentid
+        public string pfpid; //EOS Product ID.
+        public string aud; //Client ID used to authenticate the user with EOS Connect.
+        public string pfdid; //EOS Deployment ID.
         public string t; //type of login, epic_id always
         public string appid; //appid
-        public string exp; //exp
-        public string iat; //iat
+        public string exp; //Expiration time of the token, seconds since the epoch.
+        public string iat; //Issue time of the token, seconds since the epoc.
         public string jti; //jti random id
     }
 }

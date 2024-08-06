@@ -124,7 +124,7 @@ namespace EOS_SDK.Platform
             IHandler? handler = null;
             switch (handlerCRC)
             {
-                case SDK.AchivementPTR:
+                case SDK.AchievementPTR:
                     handler = new Achievements.Achievements_Handler();
                     break;
                 default:

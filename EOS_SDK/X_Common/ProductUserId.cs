@@ -11,7 +11,7 @@ namespace EOS_SDK.Others
         public static string Static_ProductUserId = "deadc0deffaabbccddeeff0123456789";   //Init just for test stuff
         public const string Invalid_ProductUserId = "ffffffffffffffffffffffffffffffff";
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "EOS_ProductUserId_FromString")]
         public static IntPtr EOS_ProductUserId_FromString(IntPtr productUserIdString)
         {
             string UserID = Helpers.ToString(productUserIdString);
@@ -20,7 +20,7 @@ namespace EOS_SDK.Others
             return Helpers.FromString(Static_ProductUserId);
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "EOS_ProductUserId_IsValid")]
         public static int EOS_ProductUserId_IsValid(IntPtr accountId)
         {
             var UserId = Helpers.ToString(accountId);
@@ -31,7 +31,7 @@ namespace EOS_SDK.Others
             return 0;
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "EOS_ProductUserId_ToString")]
         public static int EOS_ProductUserId_ToString(IntPtr accountId, IntPtr outBuffer, int inOutBufferLength)
         {
             string UserID = Helpers.ToString(accountId);

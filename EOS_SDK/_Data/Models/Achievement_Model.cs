@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace EOS_SDK._Data.Models
 {
@@ -27,7 +27,7 @@ namespace EOS_SDK._Data.Models
 
         public class Langs
         {
-            [JsonProperty("default")]
+            [JsonPropertyName("default")]
             public string Default { get; set; } = string.Empty;
         }
 

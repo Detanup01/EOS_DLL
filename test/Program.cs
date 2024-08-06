@@ -1,4 +1,5 @@
 ﻿using EOS_SDK;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -42,7 +43,7 @@ namespace test
             Marshal.Copy(result_bytes, 0, PTR, result_bytes.Length);
             return PTR;
         }
-        public static IntPtr StructToPtr<T>(T _struct)
+        public static IntPtr StructToPtr<T>([DisallowNull] T _struct)
         {
             var itemSize = Marshal.SizeOf(typeof(T));
             IntPtr address = Marshal.AllocHGlobal(itemSize);
@@ -62,6 +63,7 @@ namespace test
 
 
             NetTest.StartTest();
+            Console.WriteLine("NetTest.StartTest");
             /*
             MainHandler mainHandler = new();
             var myPointer = mainHandler.Create();
@@ -91,15 +93,15 @@ namespace test
             Console.WriteLine(Generator2(productid, ret));
             ptr = IntPtr.CreateChecked(22);
             Console.WriteLine(ptr);*/
-            /*
+            
             Console.WriteLine("Hello, World!");
-            var id = _TESTAddNotify(666,OnOnAddNotifyResultImplementation);
+            var id = _TESTAddNotify(666, OnOnAddNotifyResultImplementation);
             Console.WriteLine("TESTAddNotifyID:  " + id);
             _TESTTriggerNotify(OnTriggerNotifyResultImplementation);
             Console.WriteLine("TESTTriggerNotify triggered!");
             _TESTRemoveNotify(id);
             Console.WriteLine("TESTRemoveNotify removed: " + id);
-            */
+            
         }
 
 
@@ -132,7 +134,7 @@ namespace test
         }
 
         [DllImport("EOSSDK-Win64-Shipping")]
-        public static extern int _TESTAddNotify(int dataToPass ,OnAddNotifyResult completionDelegate);
+        public static extern int _TESTAddNotify(int dataToPass, OnAddNotifyResult completionDelegate);
 
         [DllImport("EOSSDK-Win64-Shipping")]
         public static extern void _TESTRemoveNotify(int id);

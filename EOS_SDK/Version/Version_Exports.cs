@@ -1,11 +1,10 @@
-﻿using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace EOS_SDK.Version
 {
     public class Version_Exports
     {
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(EntryPoint = "EOS_GetVersion")]
         public static IntPtr EOS_GetVersion()
         {
             return Helpers.FromString(_Data.SDK.Version);

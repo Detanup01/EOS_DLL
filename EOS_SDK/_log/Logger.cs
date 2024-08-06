@@ -6,7 +6,7 @@ namespace EOS_SDK._log
 {
     public class Logger
     {
-        public static L Log = new L(true, directory: "eos_log");
+        public static L Log = new(true, directory: "eos_log");
 
         static Config Config = Config.GetConfig();
         static Logging.LogLevel LogLevel = Logging.LogLevel.Off;
