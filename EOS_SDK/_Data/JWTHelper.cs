@@ -1,5 +1,7 @@
-﻿using EOS_SDK.Others;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
+using EOS_SDK.JWT;
+using EOS_SDK.Others;
+using LitJWT.Algorithms;
 
 namespace EOS_SDK._Data;
 
@@ -42,49 +44,35 @@ public static class JWTHelper
     {
         var now = DateTime.UtcNow;
         var pair = GetRSAPair();
-        JWT.Algorithms.RS256Algorithm rS256Algorithm = new(pair.PublicRSA, pair.PrivateRSA);
+        RS256Algorithm rs256Algorithm = new( ()=>pair.PublicRSA, () => pair.PrivateRSA);
+        JwtHeader jwtHeader = new JwtHeader("RS256");
+        jwtHeader.OtherHeaders.Add("kid", "WMS7EnkIGpcH9DGZsv2WcY9xsuFnZCtxZjj4Ahb-_8E");
+        jwtHeader.OtherHeaders.Add("t", "epic_id");
+        var writer = new JwtWriter(rs256Algorithm);
+        var jwt_token = new JWT.JWTToken()
+        {
+            t = "epic_id",
+            sub = EOS_Main.GetConfig().AccountId,
+            pfsid = EOS_Main.GetPlatform().SandboxId,
+            iss = "https://api.epicgames.dev/epic/oauth/v1",
+            dn = EOS_Main.GetConfig().UserName,
+            nonce = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32)),
+            pfpid = EOS_Main.GetPlatform().ProductId,
+            appid = EOS_Main.GetConfig().AppId,
+            aud = Helpers.ToString(EOS_Main.GetPlatform().ClientCredentials.ClientId),
+            pfdid = EOS_Main.GetPlatform().DeploymentId,
+            exp = TimeHelper.GetEpochTime(now.AddSeconds(7200)).ToString(),
+            iat = TimeHelper.GetEpochTime(now).ToString(),
+            jti = EpicAccountId.Generate(),
+            scope = "basic_profile friends_list openid presence",
+            sec = 1,
 
-        var auth_Token = JWT.Builder.JwtBuilder.Create()
-            .AddHeader(JWT.Builder.HeaderName.Algorithm, "RS256")
-            .AddHeader(JWT.Builder.HeaderName.KeyId, "WMS7EnkIGpcH9DGZsv2WcY9xsuFnZCtxZjj4Ahb-_8E")
-            .AddHeader("t", "epic_id")
-            .AddClaim("sub", EOS_Main.GetConfig().AccountId)
-            .AddClaim("pfsid", EOS_Main.GetPlatform().SandboxId)
-            .AddClaim("iss", "https://api.epicgames.dev/epic/oauth/v1")
-            .AddClaim("dn", EOS_Main.GetConfig().UserName)
-            .AddClaim("nonce", Convert.ToBase64String(RandomNumberGenerator.GetBytes(32)))
-            .AddClaim("pfpid", EOS_Main.GetPlatform().ProductId)
-            .AddClaim("sec", 1)
-            .AddClaim("aud", Helpers.ToString(EOS_Main.GetPlatform().ClientCredentials.ClientId))
-            .AddClaim("pfdid", EOS_Main.GetPlatform().DeploymentId)
-            .AddClaim("t", "epic_id")
-            .AddClaim("scope", "basic_profile friends_list openid presence")
-            .AddClaim("appid", EOS_Main.GetConfig().AppId)
-            .AddClaim("exp", TimeHelper.GetEpochTime(now.AddSeconds(7200)))
-            .AddClaim("iat", TimeHelper.GetEpochTime(now))
-            .AddClaim("jti", EpicAccountId.Generate())
-            .WithAlgorithm(rS256Algorithm)
-            .Encode();
-
-        var refresh_Token = JWT.Builder.JwtBuilder.Create()
-            .AddHeader(JWT.Builder.HeaderName.Algorithm, "RS256")
-            .AddHeader(JWT.Builder.HeaderName.KeyId, "WMS7EnkIGpcH9DGZsv2WcY9xsuFnZCtxZjj4Ahb-_8E")
-            .AddHeader("t", "epic_id")
-            .AddClaim("sub", EOS_Main.GetConfig().AccountId)
-            .AddClaim("pfsid", EOS_Main.GetPlatform().SandboxId)
-            .AddClaim("iss", "https://api.epicgames.dev/epic/oauth/v1")
-            .AddClaim("dn", EOS_Main.GetConfig().UserName)
-            .AddClaim("pfpid", EOS_Main.GetPlatform().ProductId)
-            .AddClaim("aud", Helpers.ToString(EOS_Main.GetPlatform().ClientCredentials.ClientId))
-            .AddClaim("pfdid", EOS_Main.GetPlatform().DeploymentId)
-            .AddClaim("t", "epic_id")
-            .AddClaim("appid", EOS_Main.GetConfig().AppId)
-            .AddClaim("scope", "basic_profile friends_list openid presence")
-            .AddClaim("exp", TimeHelper.GetEpochTime(now.AddSeconds(28800)))
-            .AddClaim("iat", TimeHelper.GetEpochTime(now))
-            .AddClaim("jti", EpicAccountId.Generate())
-            .WithAlgorithm(rS256Algorithm)
-            .Encode();
+        };
+        var auth_Token = writer.WriteWithHeader(jwt_token, jwtHeader);
+        jwt_token.nonce = null;
+        jwt_token.exp = TimeHelper.GetEpochTime(now.AddSeconds(7200)).ToString();
+        jwt_token.iat = TimeHelper.GetEpochTime(now).ToString();
+        var refresh_Token = writer.WriteWithHeader(jwt_token, jwtHeader);
 
         return (auth_Token, refresh_Token, now);
     }
@@ -93,51 +81,38 @@ public static class JWTHelper
     {
         var now = DateTime.UtcNow;
         var pair = GetRSAPair();
-        JWT.Algorithms.RS256Algorithm rS256Algorithm = new(pair.PublicRSA, pair.PrivateRSA);
-
-        var creater = JWT.Builder.JwtBuilder.Create()
-            .AddHeader(JWT.Builder.HeaderName.Algorithm, "RS256")
-            .AddHeader(JWT.Builder.HeaderName.KeyId, "WMS7EnkIGpcH9DGZsv2WcY9xsuFnZCtxZjj4Ahb-_8E")
-            .AddHeader("t", "epic_id")
-            .AddClaim("sub", EOS_Main.GetConfig().AccountId)
-            .AddClaim("pfsid", EOS_Main.GetPlatform().SandboxId)
-            .AddClaim("iss", "https://api.epicgames.dev/epic/oauth/v1")
-            .AddClaim("dn", EOS_Main.GetConfig().UserName)
-            .AddClaim("pfpid", EOS_Main.GetPlatform().ProductId)
-            .AddClaim("aud", Helpers.ToString(EOS_Main.GetPlatform().ClientCredentials.ClientId))
-            .AddClaim("pfdid", EOS_Main.GetPlatform().DeploymentId)
-            .AddClaim("t", "epic_id")
-            .AddClaim("appid", EOS_Main.GetConfig().AppId)
-            .AddClaim("exp", TimeHelper.GetEpochTime(now.AddSeconds(7200)))
-            .AddClaim("iat", TimeHelper.GetEpochTime(now))
-            .AddClaim("jti", EpicAccountId.Generate());
-
+        RS256Algorithm rs256Algorithm = new(() => pair.PublicRSA, () => pair.PrivateRSA);
+        JwtHeader jwtHeader = new JwtHeader("RS256");
+        jwtHeader.OtherHeaders.Add("kid", "WMS7EnkIGpcH9DGZsv2WcY9xsuFnZCtxZjj4Ahb-_8E");
+        jwtHeader.OtherHeaders.Add("t", "epic_id");
+        var writer = new JwtWriter(rs256Algorithm);
+        var jwt_token = new JWT.JWTToken()
+        {
+            t = "epic_id",
+            sub = EOS_Main.GetConfig().AccountId,
+            pfsid = EOS_Main.GetPlatform().SandboxId,
+            iss = "https://api.epicgames.dev/epic/oauth/v1",
+            dn = EOS_Main.GetConfig().UserName,
+            pfpid = EOS_Main.GetPlatform().ProductId,
+            appid = EOS_Main.GetConfig().AppId,
+            aud = Helpers.ToString(EOS_Main.GetPlatform().ClientCredentials.ClientId),
+            pfdid = EOS_Main.GetPlatform().DeploymentId,
+            exp = TimeHelper.GetEpochTime(now.AddSeconds(7200)).ToString(),
+            iat = TimeHelper.GetEpochTime(now).ToString(),
+            jti = EpicAccountId.Generate(),
+        };
         if (GenerateNonce)
-            creater.AddClaim("nonce", Convert.ToBase64String(RandomNumberGenerator.GetBytes(32)));
-
-        return creater.WithAlgorithm(rS256Algorithm)
-            .Encode();
+            jwt_token.nonce = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
+        return writer.WriteWithHeader(jwt_token, jwtHeader);
     }
 
     public static JWTToken GetToken(string jwt)
     {
-        return JWT.Builder.JwtBuilder.Create().Decode<JWTToken>(jwt);
-    }
-
-    public struct JWTToken
-    {
-        public string sub;  //Product User ID of the authenticated user.
-        public string pfsid; //EOS Sandbox ID.
-        public string iss; //Token issuer. Always starts with https://api.epicgames.dev.
-        public string dn; //UserName/DisplayName
-        public string nonce; //nonce
-        public string pfpid; //EOS Product ID.
-        public string aud; //Client ID used to authenticate the user with EOS Connect.
-        public string pfdid; //EOS Deployment ID.
-        public string t; //type of login, epic_id always
-        public string appid; //appid
-        public string exp; //Expiration time of the token, seconds since the epoch.
-        public string iat; //Issue time of the token, seconds since the epoc.
-        public string jti; //jti random id
+        var pair = GetRSAPair();
+        RS256Algorithm rs256Algorithm = new(() => pair.PublicRSA, () => pair.PrivateRSA);
+        JwtReader reader = new JwtReader(rs256Algorithm);
+        if (!reader.Read(jwt, out _, out JWTToken token))
+            return new();
+        return token;
     }
 }

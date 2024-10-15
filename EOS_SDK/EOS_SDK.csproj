@@ -17,12 +17,13 @@
 	<ProductName>Epic Online Services SDK</ProductName>
 	<ProductVersion>1.16.3.0-32303053</ProductVersion>
 	<NeutralLanguage>en-US</NeutralLanguage>
+	<JsonSerializerIsReflectionEnabledByDefault>false</JsonSerializerIsReflectionEnabledByDefault>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JWT" Version="10.1.1" />
     <PackageReference Include="LiteNetLib" Version="1.2.0" />
 	<PackageReference Include="L" Version="5.0.0" />
+	<PackageReference Include="LitJWT" Version="2.0.2" />
   </ItemGroup>
 	
 	<PropertyGroup Condition="'$(Platform)'=='x64' And ('$(RuntimeIdentifier)'=='win' or '$(RuntimeIdentifier)'=='win-x64')">

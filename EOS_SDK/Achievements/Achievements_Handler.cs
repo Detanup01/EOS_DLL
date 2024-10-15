@@ -1,7 +1,7 @@
 ﻿using EOS_SDK._Data;
 using EOS_SDK._Data.Models;
 using EOS_SDK.Version;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace EOS_SDK.Achievements
 {
@@ -17,7 +17,7 @@ namespace EOS_SDK.Achievements
 
         public IntPtr CreateHandler()
         {
-            Achievements = JsonConvert.DeserializeObject<List<Achievement_Model>>("eos_emu/achievements.json")!;
+            Achievements = JsonSerializer.Deserialize(File.ReadAllText("eos_emu/achievements.json"), SourceGenerationContext.Default.ListAchievement_Model)!;
             AchKVs = new()
             {
                 { EOS_Main.GetConfig().AccountId, Achievements }
@@ -30,7 +30,7 @@ namespace EOS_SDK.Achievements
         {
             var Ach = GetAchievement_FromAccount(Helpers.ToString(options.UserId));
             var achis = Helpers.ToStructArray<string>(options.AchievementIds, (int)options.AchievementsCount);
-            _log.Logger.WriteDebug("Achi IDs to Unlock:" + JsonConvert.SerializeObject(achis), Logging.LogCategory.Achievements);
+            _log.Logger.WriteDebug("Achi IDs to Unlock:" + JsonSerializer.Serialize(achis, SourceGenerationContext.Default.ListString), Logging.LogCategory.Achievements);
 
             var achiv = Ach.Where(x => achis.Contains(x.AchievementId)).ToList();
             List<string> UnlockedAchis = new();
@@ -139,8 +139,8 @@ namespace EOS_SDK.Achievements
 
         public void SaveAchis()
         {
-            File.WriteAllText("eos_emu/achievements.json", JsonConvert.SerializeObject(Achievements));
-            File.WriteAllText("eos_emu/user_achievements.json", JsonConvert.SerializeObject(AchKVs));
+            File.WriteAllText("eos_emu/achievements.json", JsonSerializer.Serialize(Achievements, SourceGenerationContext.Default.ListAchievement_Model));
+            File.WriteAllText("eos_emu/user_achievements.json", JsonSerializer.Serialize(AchKVs, SourceGenerationContext.Default.DictionaryStringListAchievement_Model));
         }
 
         public void CreateAchForUser(string AccountId)

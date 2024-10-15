@@ -39,6 +39,12 @@ namespace EOS_SDK._Networking
             if (BiNet != null && BiNet.Net.IsRunning)
             {
                 BiNet.Net.PollEvents();
+                if (BiNet.Net.FirstPeer != null)
+                {
+                    var fpeer = BiNet.Net.FirstPeer;
+                    BiNet.Net.ConnectedPeerList.ForEach(peer => { Logger.WriteDebug($"NetManager.Test: FirstPeer {PrintDetailedPeer(fpeer)}, ConnectedPeers: {BiNet.Net.ConnectedPeersCount} ConnectedPeer: {PrintDetailedPeer(peer)}"); });
+
+                }
             }
         }
 
@@ -47,6 +53,11 @@ namespace EOS_SDK._Networking
             Logger.WriteDebug("BiNet Stopping...");
             BiNet?.Net.Stop();
             Logger.WriteDebug("BiNet Stopped!");
+        }
+
+        public static string PrintDetailedPeer(NetPeer peer)
+        {
+            return $" IpPort: {peer.ToString()}, PeerId: {peer.Id}, PeerRemoteId: {peer.RemoteId}";
         }
     }
 }

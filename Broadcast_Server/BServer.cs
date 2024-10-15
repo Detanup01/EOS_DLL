@@ -31,7 +31,7 @@ namespace Broadcast_Server
         {
             Console.WriteLine(packet);
             if (!AppIdAddresses.ContainsKey(packet.AppId))
-                AppIdAddresses.TryAdd(packet.AppId, new() { point.ToString() });
+                AppIdAddresses.TryAdd(packet.AppId, [point.ToString()]);
             else
                 AppIdAddresses[packet.AppId].Add(point.ToString());   
             NetUsers.TryAdd(point.ToString(), (packet.AccountId, packet.AppId));
@@ -75,11 +75,11 @@ namespace Broadcast_Server
         {
             if (!NetUsers.TryGetValue(peer.ToString(), out var peer_user))
             {
-                Console.WriteLine("[Server] Peer " + peer + " not found in NetUsers!!!");
+                Console.WriteLine("[Server] Peer " + PrintDetailedPeer(peer) + " not found in NetUsers!!!");
                 return;
             }
 
-            Console.WriteLine("[Server] Peer connected: " + peer + " " + peer_user.UserId);
+            Console.WriteLine("[Server] Peer connected: " + PrintDetailedPeer(peer) + " " + peer_user.UserId);
 
             var peers = GetPeersFromSameAddress(peer);
 
@@ -89,7 +89,7 @@ namespace Broadcast_Server
                     continue;
                 if (!NetUsers.TryGetValue(item.ToString(), out var user))
                 {
-                    Console.WriteLine("[Server] Peer " + item + " not found in NetUsers!!!");
+                    Console.WriteLine("[Server] Peer " + PrintDetailedPeer(item) + " not found in NetUsers!!!");
                     continue;
                 }
                 UserConnectedPacket newUserConnectedPacket = new()
@@ -118,10 +118,10 @@ namespace Broadcast_Server
 
             if (!NetUsers.TryGetValue(peer.ToString(), out var user))
             {
-                Console.WriteLine("[Server] Peer " + peer + " not found in NetUsers!!!");
+                Console.WriteLine("[Server] Peer " + PrintDetailedPeer(peer) + " not found in NetUsers!!!");
                 return;
             }
-            Console.WriteLine("[Server] Peer disconnected: " + peer + " " + user.UserId);
+            Console.WriteLine("[Server] Peer disconnected: " + PrintDetailedPeer(peer) + " " + user.UserId);
 
             var peers = GetPeersFromSameAddress(peer);
 
@@ -175,10 +175,15 @@ namespace Broadcast_Server
                 }
                 else
                 {
-                    Console.WriteLine("Not contains: " + peer + " " + (IPEndPoint)peer);
+                    Console.WriteLine("Not contains: " + PrintDetailedPeer(peer));
                 }
             }
             return ret;
+        }
+
+        public static string PrintDetailedPeer(NetPeer peer)
+        {
+            return $" IpPort: {peer.ToString()}, PeerId: {peer.Id}, PeerRemoteId: {peer.RemoteId}";
         }
     }
 }

@@ -1,15 +1,16 @@
-﻿using EOS_SDK;
+﻿//using EOS_SDK;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-using test.HandlerTest;
+//using test.HandlerTest;
 
 namespace test
 {
     internal class Program
     {
+        /*
         public static string ToString(IntPtr source)
         {
             if (source == IntPtr.Zero)
@@ -49,20 +50,14 @@ namespace test
             IntPtr address = Marshal.AllocHGlobal(itemSize);
             Marshal.StructureToPtr(_struct, address, false);
             return address;
-        }
+        }*/
 
         static string productid = "d0864e41284a4c30926a6953b8e77422";
         static void Main(string[] args)
         {
-            List<string> test = new()
-            { 
-                "test2",
-                "yeet",
-                "ydfsds"
-            };
 
 
-            NetTest.StartTest();
+            //NetTest.StartTest();
             Console.WriteLine("NetTest.StartTest");
             /*
             MainHandler mainHandler = new();
@@ -93,7 +88,7 @@ namespace test
             Console.WriteLine(Generator2(productid, ret));
             ptr = IntPtr.CreateChecked(22);
             Console.WriteLine(ptr);*/
-            
+            /*
             Console.WriteLine("Hello, World!");
             var id = _TESTAddNotify(666, OnOnAddNotifyResultImplementation);
             Console.WriteLine("TESTAddNotifyID:  " + id);
@@ -101,10 +96,10 @@ namespace test
             Console.WriteLine("TESTTriggerNotify triggered!");
             _TESTRemoveNotify(id);
             Console.WriteLine("TESTRemoveNotify removed: " + id);
-            
+            */
         }
 
-
+        /*
         public static string Generator(string appid, string username)
         {
 
@@ -179,6 +174,6 @@ namespace test
             Console.WriteLine(data.data);
             Console.WriteLine(data.Result);
         }
-
+        */
     }
 }
