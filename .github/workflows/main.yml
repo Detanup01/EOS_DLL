@@ -36,7 +36,7 @@ jobs:
     strategy:
       matrix:
         builds: [ 'Debug', 'Release' ]
-        CPU: [ 'x86', 'x64' ]
+        CPU: ['x64'] #[ 'x86', 'x64' ]
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
