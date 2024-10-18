@@ -39,12 +39,12 @@ namespace EOS_SDK._Networking
             if (BiNet != null && BiNet.Net.IsRunning)
             {
                 BiNet.Net.PollEvents();
+                /*
                 if (BiNet.Net.FirstPeer != null)
                 {
                     var fpeer = BiNet.Net.FirstPeer;
                     BiNet.Net.ConnectedPeerList.ForEach(peer => { Logger.WriteDebug($"NetManager.Test: FirstPeer {PrintDetailedPeer(fpeer)}, ConnectedPeers: {BiNet.Net.ConnectedPeersCount} ConnectedPeer: {PrintDetailedPeer(peer)}"); });
-
-                }
+                }*/
             }
         }
 

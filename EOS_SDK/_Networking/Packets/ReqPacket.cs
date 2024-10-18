@@ -23,6 +23,6 @@ public struct ReqPacket : INetSerializable
 
     public override string ToString()
     {
-        return $"GetPlayerAchRspPacket | {Request}";
+        return $"ReqPacket | {Request}";
     }
 }

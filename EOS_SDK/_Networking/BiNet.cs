@@ -205,7 +205,7 @@ namespace EOS_SDK._Networking
             Net.SendToAll(writer, DeliveryMethod.ReliableOrdered);
         }
 
-        public void SendNetPacketToUser(INetSerializable netSerializable, string AccountId)
+        public void SendNetPacketToUser(INetSerializable netSerializable, string AccountId, DeliveryMethod delivery = DeliveryMethod.ReliableOrdered)
         {
             NetDataWriter writer = new NetDataWriter();
             NetPacketProcessor.WriteNetSerializable(writer, ref netSerializable);
@@ -218,7 +218,7 @@ namespace EOS_SDK._Networking
                     Logger.WriteError($"Net Peer for AccountId {AccountId} is null!");
                     return;
                 }
-                peer.Send(writer, DeliveryMethod.ReliableOrdered);
+                peer.Send(writer, delivery);
             }
             else
             {

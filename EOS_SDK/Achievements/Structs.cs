@@ -1,19 +1,23 @@
-﻿using System.Runtime.InteropServices;
+﻿using EOS_SDK._Data;
+using System.Runtime.InteropServices;
 
 namespace EOS_SDK.Achievements
 {
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyAchievementsUnlockedOptions
     {
         public int ApiVersion;
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct AddNotifyAchievementsUnlockedV2Options
     {
         public int ApiVersion;
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyAchievementDefinitionByAchievementIdOptions
     {
@@ -21,6 +25,7 @@ namespace EOS_SDK.Achievements
         public IntPtr AchievementId; //string
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyAchievementDefinitionByIndexOptions
     {
@@ -28,6 +33,7 @@ namespace EOS_SDK.Achievements
         public uint AchievementIndex;
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyAchievementDefinitionV2ByAchievementIdOptions
     {
@@ -35,6 +41,7 @@ namespace EOS_SDK.Achievements
         public IntPtr AchievementId; //string
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyAchievementDefinitionV2ByIndexOptions
     {
@@ -42,8 +49,18 @@ namespace EOS_SDK.Achievements
         public uint AchievementIndex;
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct CopyPlayerAchievementByAchievementIdOptions
+    public struct CopyPlayerAchievementByAchievementIdOptionsV1
+    {
+        public int ApiVersion;
+        public IntPtr TargetUserId; //ProductUserId
+        public IntPtr AchievementId; //string
+    }
+
+    [APIVersion(2)]
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    public struct CopyPlayerAchievementByAchievementIdOptionsV2
     {
         public int ApiVersion;
         public IntPtr TargetUserId; //ProductUserId
@@ -51,8 +68,18 @@ namespace EOS_SDK.Achievements
         public IntPtr LocalUserId; //ProductUserId
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct CopyPlayerAchievementByIndexOptions
+    public struct CopyPlayerAchievementByIndexOptionsV1
+    {
+        public int ApiVersion;
+        public IntPtr TargetUserId; //ProductUserId
+        public uint AchievementIndex;
+    }
+
+    [APIVersion(2)]
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    public struct CopyPlayerAchievementByIndexOptionsV2
     {
         public int ApiVersion;
         public IntPtr TargetUserId; //ProductUserId
@@ -60,6 +87,7 @@ namespace EOS_SDK.Achievements
         public IntPtr LocalUserId; //ProductUserId
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyUnlockedAchievementByAchievementIdOptions
     {
@@ -68,6 +96,7 @@ namespace EOS_SDK.Achievements
         public IntPtr AchievementId; //string
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct CopyUnlockedAchievementByIndexOptions
     {
@@ -76,6 +105,7 @@ namespace EOS_SDK.Achievements
         public uint AchievementIndex;
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct Definition
     {
@@ -94,6 +124,7 @@ namespace EOS_SDK.Achievements
         public IntPtr StatThresholds; //StatThresholds[]
     }
 
+    [APIVersion(2)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct DefinitionV2
     {
@@ -111,12 +142,14 @@ namespace EOS_SDK.Achievements
         public IntPtr StatThresholds; //StatThresholds[]
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct GetAchievementDefinitionCountOptions
     {
         public int ApiVersion;
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct GetPlayerAchievementCountOptions
     {
@@ -124,6 +157,7 @@ namespace EOS_SDK.Achievements
         public IntPtr UserId; //ProductUserId
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct GetUnlockedAchievementCountOptions
     {
@@ -192,10 +226,23 @@ namespace EOS_SDK.Achievements
         public uint AchievementsCount;
     }
 
+
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct PlayerAchievement
+    public struct PlayerAchievementV1
     {
-        public int ApiVersion;
+        public int ApiVersion { get => 1; }
+        public IntPtr AchievementId; //string
+        public long UnlockTime; //DateTimeOffset
+        public int StatInfoCount;
+        public IntPtr StatInfo; //PlayerStatInfo[]
+    }
+
+    [APIVersion(2)]
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    public struct PlayerAchievementV2
+    {
+        public int ApiVersion { get => 2; }
         public IntPtr AchievementId; //string
         public long UnlockTime; //DateTimeOffset
         public int StatInfoCount;
@@ -206,6 +253,7 @@ namespace EOS_SDK.Achievements
         public IntPtr FlavorText; //string
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct PlayerStatInfo
     {
@@ -225,14 +273,24 @@ namespace EOS_SDK.Achievements
         public uint HiddenAchievementsCount_DEPRECATED;
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
-    public struct QueryPlayerAchievementsOptions
+    public struct QueryPlayerAchievementsOptionsV1
     {
-        public int ApiVersion;
+        public int ApiVersion { get => 1; }
+        public IntPtr TargetUserId; //ProductUserId
+    }
+
+    [APIVersion(2)]
+    [StructLayout(LayoutKind.Sequential, Pack = 8)]
+    public struct QueryPlayerAchievementsOptionsV2
+    {
+        public int ApiVersion { get => 2; }
         public IntPtr TargetUserId; //ProductUserId
         public IntPtr LocalUserId; //ProductUserId
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct StatThresholds
     {
@@ -241,6 +299,7 @@ namespace EOS_SDK.Achievements
         public int Threshold;
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct UnlockAchievementsOptions
     {
@@ -250,6 +309,7 @@ namespace EOS_SDK.Achievements
         public uint AchievementsCount;
     }
 
+    [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
     public struct UnlockedAchievement
     {

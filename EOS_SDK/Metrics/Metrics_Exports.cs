@@ -9,13 +9,13 @@ namespace EOS_SDK.Metrics
     public unsafe class Metrics_Exports
     {
 #if false
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl), typeof(CallConvStdcall)])]
         public static Result EOS_Metrics_BeginPlayerSession(IntPtr handle, IntPtr options)
 		{
 			var _BeginPlayerSessionOptions = Marshal.PtrToStructure<BeginPlayerSessionOptions>(options);
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl), typeof(CallConvStdcall)])]
         public static Result EOS_Metrics_EndPlayerSession(IntPtr handle, IntPtr options)
 		{
 			var _EndPlayerSessionOptions = Marshal.PtrToStructure<EndPlayerSessionOptions>(options);

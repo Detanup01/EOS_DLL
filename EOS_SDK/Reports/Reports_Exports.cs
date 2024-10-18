@@ -9,7 +9,7 @@ namespace EOS_SDK.Reports
     public unsafe class Reports_Exports
     {
 #if false
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl), typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl), typeof(CallConvStdcall)])]
         public static void EOS_Reports_SendPlayerBehaviorReport(IntPtr handle, IntPtr options, IntPtr clientData, IntPtr completionDelegate)
 		{
 			var _SendPlayerBehaviorReportOptions = Marshal.PtrToStructure<SendPlayerBehaviorReportOptions>(options);

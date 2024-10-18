@@ -127,7 +127,7 @@ namespace EOS_SDK._Data
             Logger.WriteDebug($"[NotifyManager] Removed Notify with ID: {id}");
             Notifies.Remove(id);
         }
-        public static unsafe void TriggerNotify<T>(string name, [DisallowNull]T struct_from_notfiy)
+        public static unsafe void TriggerNotify<T>(string name, [DisallowNull] T struct_from_notfiy)
         {
             var notifyDict = Notifies.Where(n => n.Value.nameTrigger == name).ToDictionary();
             if (notifyDict == null)

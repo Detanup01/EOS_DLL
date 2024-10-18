@@ -55,7 +55,22 @@ namespace test
         static string productid = "d0864e41284a4c30926a6953b8e77422";
         static void Main(string[] args)
         {
+            var test2 = new TestV2()
+            {
+                Version = 2,
+                x = 77,
+                y = 546
+            };
+            var itemSize = Marshal.SizeOf<TestV2>();
+            IntPtr address = Marshal.AllocHGlobal(itemSize);
+            Marshal.StructureToPtr(test2, address, false);
+            Console.WriteLine(test2.Version);
+            Console.WriteLine(test2.x);
+            Console.WriteLine(test2.y);
 
+            var testv1 = Marshal.PtrToStructure<TestV1>(address);
+            Console.WriteLine(testv1.Version);
+            Console.WriteLine(testv1.x);
 
             //NetTest.StartTest();
             Console.WriteLine("NetTest.StartTest");

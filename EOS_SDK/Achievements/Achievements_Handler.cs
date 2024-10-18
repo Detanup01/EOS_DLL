@@ -1,7 +1,10 @@
 ﻿using EOS_SDK._Data;
 using EOS_SDK._Data.Models;
+using EOS_SDK._Networking.Packets;
 using EOS_SDK.Version;
+using System.Net.Sockets;
 using System.Text.Json;
+using static EOS_SDK._Data.Models.Achievement_Model;
 
 namespace EOS_SDK.Achievements
 {
@@ -11,20 +14,8 @@ namespace EOS_SDK.Achievements
         public Dictionary<string, List<Achievement_Model>> AchKVs = new(); //User Dependent Achieves
 
 
-        List<string> _AchReqs = new();
+        List<(string, bool)> _AchReqs = new();
         IntPtr MyDummyPtr;
-
-
-        public IntPtr CreateHandler()
-        {
-            Achievements = JsonSerializer.Deserialize(File.ReadAllText("eos_emu/achievements.json"), SourceGenerationContext.Default.ListAchievement_Model)!;
-            AchKVs = new()
-            {
-                { EOS_Main.GetConfig().AccountId, Achievements }
-            };
-            _log.Logger.WriteDebug("Achievements_Handler.CreateHandler", Logging.LogCategory.Achievements);
-            return Create();
-        }
 
         public UnlockAchievementsOptions UnlockAchievements(UnlockAchievementsOptions options)
         {
@@ -73,7 +64,7 @@ namespace EOS_SDK.Achievements
         public Definition GetDefinition(IntPtr ptr)
         {
             string achi = Helpers.ToString(ptr);
-            var indx = Achievements.FindIndex(0, x => x.AchievementId == achi);
+            int indx = Achievements.FindIndex(0, x => x.AchievementId == achi);
             return GetDefinitionIndex((uint)indx);
         }
 
@@ -114,6 +105,49 @@ namespace EOS_SDK.Achievements
             };
         }
 
+        public DefinitionV2 GetDefinitionV2(IntPtr ptr)
+        {
+            string achi = Helpers.ToString(ptr);
+            int indx = Achievements.FindIndex(0, x => x.AchievementId == achi);
+            return GetDefinitionV2Index((uint)indx);
+        }
+
+        public DefinitionV2 GetDefinitionV2Index(uint index)
+        {
+            if (Achievements.Count >= index)
+                return new();
+
+            var achiv = Achievements[(int)index];
+
+            List<StatThresholds> thresholds = new();
+            foreach (var item in achiv.StatsThresholds)
+            {
+                StatThresholds statThresholds = new StatThresholds()
+                {
+                    ApiVersion = Versions.StatthresholdsApiLatest,
+                    Name = Helpers.FromString(item.Name),
+                    Threshold = item.Threshold
+                };
+                thresholds.Add(statThresholds);
+            }
+
+            return new()
+            {
+                ApiVersion = Versions.Definitionv2ApiLatest,
+                AchievementId = Helpers.FromString(achiv.AchievementId),
+                UnlockedDescription = Helpers.FromString(achiv.UnlockedDescription.Default),
+                UnlockedDisplayName = Helpers.FromString(achiv.UnlockedDisplayName.Default),
+                LockedDescription = Helpers.FromString(achiv.LockedDescription.Default),
+                LockedDisplayName = Helpers.FromString(achiv.LockedDisplayName.Default),
+                IsHidden = Convert.ToInt32(achiv.IsHidden),
+                LockedIconURL = Helpers.FromString(achiv.LockedIconUrl),
+                StatThresholds = Helpers.FromStructArray(thresholds.ToArray()),
+                StatThresholdsCount = (uint)thresholds.Count,
+                UnlockedIconURL = Helpers.FromString(achiv.UnlockedIconUrl),
+                FlavorText = Helpers.FromString(achiv.FlavorText.Default),
+            };
+        }
+
         public UnlockedAchievement GetUnlockedAchievement(string AccountId, IntPtr ptr)
         {
             string achi = Helpers.ToString(ptr);
@@ -146,7 +180,26 @@ namespace EOS_SDK.Achievements
         public void CreateAchForUser(string AccountId)
         {
             AchKVs.Add(AccountId, Achievements);
-            _AchReqs.Add(AccountId);
+            _AchReqs.Add((AccountId, false));
+        }
+
+        public void AddUserToAchRequest(string AccountId)
+        {
+            _AchReqs.Add((AccountId, false));
+        }
+
+        public void SetAchForUser(string AccountId, List<Achievement_Model> ach)
+        {
+            _AchReqs.Remove((AccountId, true));
+            if (!AchKVs.ContainsKey(AccountId))
+                AchKVs.Add(AccountId, ach);
+            else
+                AchKVs[AccountId] = ach;
+        }
+
+        public bool IsAccountStillWaiting(string AccountId)
+        {
+            return _AchReqs.FirstOrDefault(x=>x.Item1 == AccountId).Item2;
         }
 
         public List<Achievement_Model> GetAchievement_FromAccount(string AccountId)
@@ -160,16 +213,26 @@ namespace EOS_SDK.Achievements
         }
 
 
-
-        public bool CheckIfPointerValid(IntPtr ptr)
-        {
-            if (ptr == IntPtr.Zero)
-                return false;
-            return ptr == MyDummyPtr;
-        }
-
+        #region From IHandle
         public IntPtr Create()
         {
+            if (File.Exists("eos_emu/achievements.json"))
+            {
+                Achievements = JsonSerializer.Deserialize(File.ReadAllText("eos_emu/achievements.json"), SourceGenerationContext.Default.ListAchievement_Model)!;
+                AchKVs = new()
+                {
+                    { EOS_Main.GetConfig().AccountId, Achievements }
+                };
+            }
+            else
+            {
+                Achievements = [];
+                AchKVs = new()
+                {
+                    { EOS_Main.GetConfig().AccountId, [] }
+                };
+            }
+            _log.Logger.WriteDebug("Achievements_Handler.Create", Logging.LogCategory.Achievements);
             DummyStruct dummyStruct = new();
             var retptr = Helpers.StructToPtr(dummyStruct);
             _log.Logger.WriteInfo("Achievements_Handler.Create Pointer: " + retptr);
@@ -181,11 +244,23 @@ namespace EOS_SDK.Achievements
         {
             if (EOS_Main.GetPlatform().Network.BiNet != null)
             {
-                foreach (var AccountId in _AchReqs)
+                for (int i = 0; i < _AchReqs.Count; i++)
                 {
-                    //EOS_Main.GetPlatform().Network.BiNet!.SendNetPacketToUser(playerAchReqPacket, AccountId);
+                    var acc = _AchReqs[i];
+                    if (acc.Item2)
+                        continue;
+                    PlayerPacket<ReqPacket> playerPacket = new()
+                    {
+                        PacketData = new()
+                        {
+                            Request = ReqEnum.Ach
+                        },
+                        SenderAccountId = EOS_Main.GetConfig().AccountId,
+                        ToAccountId = acc.Item1
+                    };
+                    EOS_Main.GetPlatform().Network.BiNet!.SendNetPacketToUser(playerPacket, acc.Item1);
+                    acc.Item2 = true;
                 }
-                _AchReqs.Clear();
             }
         }
 
@@ -193,5 +268,6 @@ namespace EOS_SDK.Achievements
         {
             SaveAchis();
         }
+        #endregion
     }
 }

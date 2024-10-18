@@ -1,4 +1,5 @@
-﻿using EOS_SDK._Data;
+﻿using EOS_SDK._Coroutines;
+using EOS_SDK._Data;
 using EOS_SDK._Networking;
 using EOS_SDK.Windows;
 using System.Runtime.InteropServices;
@@ -84,12 +85,13 @@ namespace EOS_SDK.Platform
             CallbackManager.Update();
             Network.Update();
             Tick();
-
+            
         }
 
 
         public IntPtr Create()
         {
+            CoroutineWorker.Instance.Watch.Start();
             MyDummyPtr = Helpers.StructToPtr(new DummyStruct());
             _log.Logger.WriteInfo("Platform_Handler.Create Pointer: " + MyDummyPtr);
             Handlers.Add(SDK.PlatformPTR, this);
@@ -151,6 +153,19 @@ namespace EOS_SDK.Platform
             if (handle == IntPtr.Zero)
                 return false;
             if (completionDelegate == IntPtr.Zero)
+                return false;
+            if (!DummyPtrToHandler.ContainsKey(handle))
+                return false;
+            return true;
+        }
+
+        public bool CheckArgs(IntPtr handle, IntPtr options, IntPtr outParam)
+        {
+            if (handle == IntPtr.Zero)
+                return false;
+            if (options == IntPtr.Zero)
+                    return false;
+            if (outParam == IntPtr.Zero)
                 return false;
             if (!DummyPtrToHandler.ContainsKey(handle))
                 return false;
