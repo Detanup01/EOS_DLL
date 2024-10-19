@@ -85,7 +85,6 @@ namespace EOS_SDK.Platform
             CallbackManager.Update();
             Network.Update();
             Tick();
-            
         }
 
 

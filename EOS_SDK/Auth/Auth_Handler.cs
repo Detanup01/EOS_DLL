@@ -1,49 +1,54 @@
 ﻿using EOS_SDK._Data;
 using EOS_SDK.Enums;
-using EOS_SDK.Others;
-using EOS_SDK.Platform;
-using System.Security.Cryptography;
-using System.Text;
 
-namespace EOS_SDK.Auth
+namespace EOS_SDK.Auth;
+
+public class Auth_Handler : IHandler
 {
-    public class Auth_Handler
+    struct AuthStruct
     {
-        struct AuthStruct
-        {
-            public bool IsLoggedIn;
-        }
+        public bool IsLoggedIn;
+    }
 
-        static AuthStruct Auth_Struct;
+    AuthStruct Auth_Struct;
 
-        public static IntPtr Create()
-        {
-            Auth_Struct = new AuthStruct();
-            _log.Logger.WriteDebug("Auth Created", Logging.LogCategory.Auth);
-            return IntPtr.CreateChecked(SDK.AuthPTR);
-        }
+    public string GetAccountId()
+    {
+        return Config.GetConfig().AccountId;
+    }
 
-        public static string GetAccountId()
+    public void TriggerStateChange(bool IsLoggedIn, IntPtr localuserid)
+    {
+        Auth_Struct.IsLoggedIn = IsLoggedIn;
+        LoginStatusChangedCallbackInfo info = new()
         {
-            return Config.GetConfig().AccountId;
-        }
+            CurrentStatus = GetLoginStatus(),
+            LocalUserId = localuserid
+        };
+        NotifyManager.TriggerNotify("AuthNotifyLoginStatus", info);
+    }
 
-        public static void TriggerStateChange(bool IsLoggedIn, IntPtr localuserid)
-        {
-            Auth_Struct.IsLoggedIn = IsLoggedIn;
-            LoginStatusChangedCallbackInfo info = new()
-            {
-                CurrentStatus = GetLoginStatus(),
-                LocalUserId = localuserid
-            };
-            NotifyManager.TriggerNotify("AuthNotifyLoginStatus", info);
-        }
+    public LoginStatus GetLoginStatus()
+    {
+        if (Auth_Struct.IsLoggedIn)
+            return LoginStatus.LoggedIn;
+        return LoginStatus.NotLoggedIn;
+    }
 
-        public static LoginStatus GetLoginStatus()
-        {
-            if (Auth_Struct.IsLoggedIn)
-                return LoginStatus.LoggedIn;
-            return LoginStatus.NotLoggedIn;
-        }
+    public IntPtr Create()
+    {
+        Auth_Struct = new AuthStruct();
+        _log.Logger.WriteDebug("Auth Created", Logging.LogCategory.Auth);
+        return Helpers.StructToPtr(new DummyStruct(nameof(Auth_Handler)));
+    }
+
+    public void Tick()
+    {
+        
+    }
+
+    public void Close()
+    {
+        
     }
 }

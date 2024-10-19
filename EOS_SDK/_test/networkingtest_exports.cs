@@ -17,7 +17,7 @@ namespace EOS_SDK._test
         [UnmanagedCallersOnly(EntryPoint = "_NetTest_ConnectBroadcast")]
         public static void _NetTest_ConnectBroadcast()
         {
-            Master?.ConnectToBroadCastServer();
+            Master?.SendBroadcast();
         }
 
         [UnmanagedCallersOnly(EntryPoint = "_NetTest_GetAccountIds")]

@@ -2,25 +2,25 @@
 
 namespace EOS_SDK._Networking.Packets;
 
-public struct PingPacket : INetSerializable
+public struct PingPongPacket : INetSerializable
 {
-    public string AccountId;
     public DateTimeOffset PingTime;
+    public bool IsPing;
 
     public void Deserialize(NetDataReader reader)
     {
-        AccountId = reader.GetString();
         PingTime = DateTimeOffset.FromUnixTimeMilliseconds(reader.GetLong());
+        IsPing = reader.GetBool();
     }
 
     public void Serialize(NetDataWriter writer)
     {
-        writer.Put(AccountId);
         writer.Put(PingTime.ToUnixTimeMilliseconds());
+        writer.Put(IsPing);
     }
 
     public override string ToString()
     {
-        return $"PingPacket | Sender: {AccountId} PingTime: {PingTime} ({PingTime.ToUnixTimeMilliseconds()})";
+        return $"PingPacket | PingTime: {PingTime} ({PingTime.ToUnixTimeMilliseconds()}) IsPing: {IsPing}";
     }
 }

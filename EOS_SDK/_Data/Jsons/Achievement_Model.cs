@@ -1,41 +1,23 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace EOS_SDK._Data.Models;
 
-namespace EOS_SDK._Data.Models
+public class Achievement_Model
 {
-    public class Achievement_Model
+    public string AchievementId { get; set; } = string.Empty;
+    public string UnlockedDisplayName { get; set; } = string.Empty;
+    public string UnlockedDescription { get; set; } = string.Empty;
+    public string LockedDisplayName { get; set; } = string.Empty;
+    public string LockedDescription { get; set; } = string.Empty;
+    public string FlavorText { get; set; } = string.Empty;
+    public string UnlockedIconUrl { get; set; } = string.Empty;
+    public string LockedIconUrl { get; set; } = string.Empty;
+    public bool IsHidden { get; set; }
+    public List<StatThresholds> StatsThresholds { get; set; } = new();
+    public long UnlockedTime { get; set; } = -1;
+
+    public class StatThresholds
     {
-        public string AchievementId { get; set; } = string.Empty;
-        public Langs UnlockedDisplayName { get; set; } = new();
-        public Langs UnlockedDescription { get; set; } = new();
-        public Langs LockedDisplayName { get; set; } = new();
-        public Langs LockedDescription { get; set; } = new();
-        public Langs FlavorText { get; set; } = new();
-        public string UnlockedIconUrl { get; set; } = string.Empty;
-        public string LockedIconUrl { get; set; } = string.Empty;
-        public bool IsHidden { get; set; }
-        public List<StatThresholds> StatsThresholds { get; set; } = new();
-
-        [JsonIgnore]
-        public Data _Data { get; set; } = new();
-
-        public class StatThresholds
-        {
-            public string Name { get; set; } = string.Empty;
-
-            public int Threshold { get; set; }
-        }
-
-        public class Langs
-        {
-            [JsonPropertyName("default")]
-            public string Default { get; set; } = string.Empty;
-        }
-
-        public class Data
-        {
-            public long UnlockedTime { get; set; } = -1;
-            public bool IsUnlocked { get; set; } = false;
-
-        }
+        public string Name { get; set; } = string.Empty;
+        public int Current { get; set; }
+        public int Threshold { get; set; }
     }
 }

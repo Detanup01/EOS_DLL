@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EOS_SDK.SessionSearch
+namespace EOS_SDK.Sessions
 {
     internal unsafe class SessionSearch_Exports
     {

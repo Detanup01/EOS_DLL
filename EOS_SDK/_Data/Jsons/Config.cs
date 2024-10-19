@@ -41,5 +41,12 @@ namespace EOS_SDK._Data
         public string RSA_Private { get; set; } = string.Empty;
         public string RSA_Public { get; set; } = string.Empty;
         public List<string> BannedNetworkUsers { get; set; } = [];
+        public ConfigNetworking Networking { get; set; } = new();
+
+        public class ConfigNetworking
+        {
+            public bool UseIPV6 { get; set; } = false;
+        }
+
     }
 }
