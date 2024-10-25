@@ -22,7 +22,7 @@ namespace EOS_SDK.Enums
 
         public override string ToString()
         {
-            return $"ApiVersion: {ApiVersion}, AccountId: {Helpers.ToString(AccountId)}";
+            return $"ApiVersion: {ApiVersion}, AccountId: {Helpers.ToUTF8String(AccountId)}";
         }
     }
 
@@ -45,7 +45,7 @@ namespace EOS_SDK.Enums
 
         public override string ToString()
         {
-            return $"ApiVersion: {ApiVersion}, RefreshToken: {Helpers.ToString(RefreshToken)}";
+            return $"ApiVersion: {ApiVersion}, RefreshToken: {Helpers.ToUTF8String(RefreshToken)}";
         }
     }
 
@@ -59,7 +59,7 @@ namespace EOS_SDK.Enums
 
         public override string ToString()
         {
-            return $"ApiVersion: {ApiVersion}, LinkAccountFlags: {LinkAccountFlags}, ContinuanceToken: {ContinuanceToken}, LocalUserId: {Helpers.ToString(LocalUserId)}";
+            return $"ApiVersion: {ApiVersion}, LinkAccountFlags: {LinkAccountFlags}, ContinuanceToken: {ContinuanceToken}, LocalUserId: {Helpers.ToUTF8String(LocalUserId)}";
         }
     }
 
@@ -100,7 +100,7 @@ namespace EOS_SDK.Enums
 
         public override string ToString()
         {
-            return $"ApiVersion: {ApiVersion}, LocalUserId: {Helpers.ToString(LocalUserId)}";
+            return $"ApiVersion: {ApiVersion}, LocalUserId: {Helpers.ToUTF8String(LocalUserId)}";
         }
     }
 
@@ -113,7 +113,7 @@ namespace EOS_SDK.Enums
 
         public override string ToString()
         {
-            return $"ApiVersion: {ApiVersion}, LocalUserId: {Helpers.ToString(LocalUserId)}, TargetAccountId: {Helpers.ToString(TargetAccountId)}";
+            return $"ApiVersion: {ApiVersion}, LocalUserId: {Helpers.ToUTF8String(LocalUserId)}, TargetAccountId: {Helpers.ToUTF8String(TargetAccountId)}";
         }
     }
 
@@ -186,7 +186,7 @@ namespace EOS_SDK.Enums
 
         public override string ToString()
         {
-            return $"ApiVersion: {ApiVersion}, AccountId: {Helpers.ToString(AccountId)}, JsonWebToken: {Helpers.ToString(JsonWebToken)}";
+            return $"ApiVersion: {ApiVersion}, AccountId: {Helpers.ToUTF8String(AccountId)}, JsonWebToken: {Helpers.ToUTF8String(JsonWebToken)}";
         }
     }
 

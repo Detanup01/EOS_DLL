@@ -12,10 +12,7 @@ public class Auth_Handler : IHandler
 
     AuthStruct Auth_Struct;
 
-    public string GetAccountId()
-    {
-        return Config.GetConfig().AccountId;
-    }
+    public string AccountId => Config.GetConfig().AccountId;
 
     public void TriggerStateChange(bool IsLoggedIn, IntPtr localuserid)
     {
@@ -47,8 +44,8 @@ public class Auth_Handler : IHandler
         
     }
 
-    public void Close()
+    public void Dispose()
     {
-        
+        GC.SuppressFinalize(this);
     }
 }

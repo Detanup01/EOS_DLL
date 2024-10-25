@@ -9,10 +9,7 @@ namespace EOS_SDK.Platform
         public IntPtr ClientId;
         public IntPtr ClientSecret;
 
-        public override string ToString()
-        {
-            return $"ClientId: {Helpers.ToString(ClientId)}, ClientSecret: {Helpers.ToString(ClientSecret)}";
-        }
+        public override readonly string ToString() => $"ClientId: {Helpers.ToUTF8String(ClientId)}, ClientSecret: {Helpers.ToUTF8String(ClientSecret)}";
     }
     [APIVersion(1)]
     [StructLayout(LayoutKind.Sequential, Pack = 8)]

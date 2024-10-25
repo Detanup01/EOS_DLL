@@ -315,7 +315,7 @@ namespace EOS_SDK.Platform
         {
             if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
             {
-                EOS_Main.GetPlatform().OverrideCountryCode = Helpers.ToString(newCountryCode);
+                EOS_Main.GetPlatform().OverrideCountryCode = Helpers.ToUTF8String(newCountryCode);
                 return (int)Result.Success;
             }
             return (int)Result.UnexpectedError;
@@ -326,7 +326,7 @@ namespace EOS_SDK.Platform
         {
             if (EOS_Main.GetPlatform().CheckIfPointerValid(handle))
             {
-                EOS_Main.GetPlatform().OverrideLocaleCode = Helpers.ToString(newLocaleCode);
+                EOS_Main.GetPlatform().OverrideLocaleCode = Helpers.ToUTF8String(newLocaleCode);
                 return (int)Result.Success;
             }
             return (int)Result.UnexpectedError;

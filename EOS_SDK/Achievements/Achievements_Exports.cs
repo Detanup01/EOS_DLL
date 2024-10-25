@@ -157,7 +157,7 @@ public unsafe class Achievements_Exports
                 {
                     
                     var playerAchievementByAchievementIdOptionsV1 = Marshal.PtrToStructure<CopyPlayerAchievementByAchievementIdOptionsV1>(options);
-                    var userID = Helpers.ToString(playerAchievementByAchievementIdOptionsV1.TargetUserId);
+                    var userID = Helpers.ToUTF8String(playerAchievementByAchievementIdOptionsV1.TargetUserId);
                     if (!EOS_Main.GetPlatform().Network.IsUserExists(userID))
                         return (int)Result.InvalidProductUserID;
                     if (!phandler.IsAchiExist(playerAchievementByAchievementIdOptionsV1.AchievementId))
@@ -170,7 +170,7 @@ public unsafe class Achievements_Exports
                 {
 
                     var playerAchievementByAchievementIdOptionsV1 = Marshal.PtrToStructure<CopyPlayerAchievementByAchievementIdOptionsV2>(options);
-                    var userID = Helpers.ToString(playerAchievementByAchievementIdOptionsV1.TargetUserId);
+                    var userID = Helpers.ToUTF8String(playerAchievementByAchievementIdOptionsV1.TargetUserId);
                     if (!EOS_Main.GetPlatform().Network.IsUserExists(userID))
                         return (int)Result.InvalidProductUserID;
                     if (!phandler.IsAchiExist(playerAchievementByAchievementIdOptionsV1.AchievementId))
@@ -200,7 +200,7 @@ public unsafe class Achievements_Exports
                 {
 
                     var optionsV1 = Marshal.PtrToStructure<CopyPlayerAchievementByIndexOptionsV1>(options);
-                    var userID = Helpers.ToString(optionsV1.TargetUserId);
+                    var userID = Helpers.ToUTF8String(optionsV1.TargetUserId);
                     if (!EOS_Main.GetPlatform().Network.IsUserExists(userID))
                         return (int)Result.InvalidProductUserID;
                     if (!phandler.IsAchiExistIndex(optionsV1.AchievementIndex))
@@ -213,7 +213,7 @@ public unsafe class Achievements_Exports
                 {
 
                     var optionsV2 = Marshal.PtrToStructure<CopyPlayerAchievementByIndexOptionsV2>(options);
-                    var userID = Helpers.ToString(optionsV2.TargetUserId);
+                    var userID = Helpers.ToUTF8String(optionsV2.TargetUserId);
                     if (!EOS_Main.GetPlatform().Network.IsUserExists(userID))
                         return (int)Result.InvalidProductUserID;
                     if (!phandler.IsAchiExistIndex(optionsV2.AchievementIndex))
@@ -275,7 +275,7 @@ public unsafe class Achievements_Exports
         if (phandler == null)
             return 0;
         var _GetPlayerAchievementCountOptions = Marshal.PtrToStructure<GetPlayerAchievementCountOptions>(options);
-        return (uint)phandler.GetAchievement_FromAccount(Helpers.ToString(_GetPlayerAchievementCountOptions.UserId)).Count;
+        return (uint)phandler.GetAchievement_FromAccount(Helpers.ToUTF8String(_GetPlayerAchievementCountOptions.UserId)).Count;
     }
 
     [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl), typeof(CallConvStdcall)])]
@@ -287,7 +287,7 @@ public unsafe class Achievements_Exports
             return 0;
         var _GetUnlockedAchievementCountOptions = Marshal.PtrToStructure<GetUnlockedAchievementCountOptions>(options);
         var _GetPlayerAchievementCountOptions = Marshal.PtrToStructure<GetPlayerAchievementCountOptions>(options);
-        return (uint)phandler.GetAchievement_FromAccount(Helpers.ToString(_GetPlayerAchievementCountOptions.UserId)).Where(x=>x.UnlockedTime != -1).Count();
+        return (uint)phandler.GetAchievement_FromAccount(Helpers.ToUTF8String(_GetPlayerAchievementCountOptions.UserId)).Where(x=>x.UnlockedTime != -1).Count();
     }
     #endregion
     #region Query
@@ -307,7 +307,7 @@ public unsafe class Achievements_Exports
             ResultCode = Result.Success
         };
         CallbackManager.WaitDelegateForCompletionOrTimeOut(completionDelegate, info, nameof(EOS_Achievements_QueryDefinitions),
-        () => { return phandler.IsAccountStillWaiting(Helpers.ToString(_QueryDefinitionsOptions.LocalUserId)); });
+        () => { return phandler.IsAccountStillWaiting(Helpers.ToUTF8String(_QueryDefinitionsOptions.LocalUserId)); });
     }
 
     [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl), typeof(CallConvStdcall)])]
@@ -321,7 +321,7 @@ public unsafe class Achievements_Exports
             return;
         // Currently we dont care about V1 and V2 here.
         var _QueryPlayerAchievementsOptions = Marshal.PtrToStructure<QueryPlayerAchievementsOptionsV1>(options);
-        phandler.AddUserToAchRequest(Helpers.ToString(_QueryPlayerAchievementsOptions.TargetUserId));
+        phandler.AddUserToAchRequest(Helpers.ToUTF8String(_QueryPlayerAchievementsOptions.TargetUserId));
 
         OnQueryPlayerAchievementsCompleteCallbackInfo onQueryPlayerAchievementsCompleteCallbackInfo = new()
         { 
@@ -331,7 +331,7 @@ public unsafe class Achievements_Exports
         };
 
         CallbackManager.WaitDelegateForCompletionOrTimeOut(completionDelegate, onQueryPlayerAchievementsCompleteCallbackInfo, nameof(EOS_Achievements_QueryPlayerAchievements),
-            () => { return phandler.IsAccountStillWaiting(Helpers.ToString(_QueryPlayerAchievementsOptions.TargetUserId)); });
+            () => { return phandler.IsAccountStillWaiting(Helpers.ToUTF8String(_QueryPlayerAchievementsOptions.TargetUserId)); });
     }
     #endregion
     #region UnlockAchivement
@@ -371,11 +371,11 @@ public unsafe class Achievements_Exports
         if (phandler == null)
             return (int)Result.InvalidParameters;
         var _CopyUnlockedAchievementByAchievementIdOptions = Marshal.PtrToStructure<CopyUnlockedAchievementByAchievementIdOptions>(options);
-        if (!EOS_Main.GetPlatform().Network.IsUserExists(Helpers.ToString(_CopyUnlockedAchievementByAchievementIdOptions.UserId)))
+        if (!EOS_Main.GetPlatform().Network.IsUserExists(Helpers.ToUTF8String(_CopyUnlockedAchievementByAchievementIdOptions.UserId)))
             return (int)Result.InvalidProductUserID;
         if (!phandler.IsAchiExist(_CopyUnlockedAchievementByAchievementIdOptions.AchievementId))
             return (int)Result.NotFound;
-        var ret = phandler.GetUnlockedAchievement(Helpers.ToString(_CopyUnlockedAchievementByAchievementIdOptions.UserId), _CopyUnlockedAchievementByAchievementIdOptions.AchievementId);
+        var ret = phandler.GetUnlockedAchievement(Helpers.ToUTF8String(_CopyUnlockedAchievementByAchievementIdOptions.UserId), _CopyUnlockedAchievementByAchievementIdOptions.AchievementId);
         Helpers.StructWriteOut(ret, outAchievement);
         return (int)Result.Success;
     }
@@ -390,11 +390,11 @@ public unsafe class Achievements_Exports
         if (phandler == null)
             return (int)Result.InvalidParameters;
         var _CopyUnlockedAchievementByIndexOptions = Marshal.PtrToStructure<CopyUnlockedAchievementByIndexOptions>(options);
-        if (!EOS_Main.GetPlatform().Network.IsUserExists(Helpers.ToString(_CopyUnlockedAchievementByIndexOptions.TargetUserId)))
+        if (!EOS_Main.GetPlatform().Network.IsUserExists(Helpers.ToUTF8String(_CopyUnlockedAchievementByIndexOptions.TargetUserId)))
             return (int)Result.InvalidProductUserID;
         if (!phandler.IsAchiExistIndex(_CopyUnlockedAchievementByIndexOptions.AchievementIndex))
             return (int)Result.NotFound;
-        var ret = phandler.GetUnlockedAchievementIndex(Helpers.ToString(_CopyUnlockedAchievementByIndexOptions.TargetUserId), _CopyUnlockedAchievementByIndexOptions.AchievementIndex);
+        var ret = phandler.GetUnlockedAchievementIndex(Helpers.ToUTF8String(_CopyUnlockedAchievementByIndexOptions.TargetUserId), _CopyUnlockedAchievementByIndexOptions.AchievementIndex);
         Helpers.StructWriteOut(ret, outAchievement);
         return (int)Result.Success;
     }

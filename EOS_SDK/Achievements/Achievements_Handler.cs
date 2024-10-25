@@ -17,7 +17,7 @@ public class Achievements_Handler : IHandler
     List<string> _SentReq = [];
     public UnlockAchievementsOptions UnlockAchievements(UnlockAchievementsOptions options)
     {
-        var Ach = GetAchievement_FromAccount(Helpers.ToString(options.UserId));
+        var Ach = GetAchievement_FromAccount(Helpers.ToUTF8String(options.UserId));
         var achis = Helpers.ToStructArray<string>(options.AchievementIds, (int)options.AchievementsCount);
         _log.Logger.WriteDebug("Achi IDs to Unlock:" + JsonSerializer.Serialize(achis, SourceGenerationContext.Default.ListString), Logging.LogCategory.Achievements);
 
@@ -51,7 +51,7 @@ public class Achievements_Handler : IHandler
     #region Achi Check
     public bool IsAchiExist(IntPtr ptr)
     {
-        string achi = Helpers.ToString(ptr);
+        string achi = Helpers.ToUTF8String(ptr);
         return Achievements.Where(x => x.AchievementId == achi).Any();
     }
 
@@ -63,7 +63,7 @@ public class Achievements_Handler : IHandler
     #region GetX
     public Definition GetDefinition(IntPtr ptr)
     {
-        string achi = Helpers.ToString(ptr);
+        string achi = Helpers.ToUTF8String(ptr);
         int indx = Achievements.FindIndex(0, x => x.AchievementId == achi);
         return GetDefinitionIndex((uint)indx);
     }
@@ -107,7 +107,7 @@ public class Achievements_Handler : IHandler
 
     public DefinitionV2 GetDefinitionV2(IntPtr ptr)
     {
-        string achi = Helpers.ToString(ptr);
+        string achi = Helpers.ToUTF8String(ptr);
         int indx = Achievements.FindIndex(0, x => x.AchievementId == achi);
         return GetDefinitionV2Index((uint)indx);
     }
@@ -150,7 +150,7 @@ public class Achievements_Handler : IHandler
 
     public UnlockedAchievement GetUnlockedAchievement(string AccountId, IntPtr ptr)
     {
-        string achi = Helpers.ToString(ptr);
+        string achi = Helpers.ToUTF8String(ptr);
         var indx = GetAchievement_FromAccount(AccountId).FindIndex(0, x => x.AchievementId == achi);
         return GetUnlockedAchievementIndex(AccountId, (uint)indx);
     }
@@ -173,7 +173,7 @@ public class Achievements_Handler : IHandler
 
     public PlayerAchievementV1 GetPlayerAchievementV1(string AccountId, IntPtr ptr)
     {
-        string achi = Helpers.ToString(ptr);
+        string achi = Helpers.ToUTF8String(ptr);
         var indx = GetAchievement_FromAccount(AccountId).FindIndex(0, x => x.AchievementId == achi);
         return GetPlayerAchievementV1Index(AccountId, (uint)indx);
     }
@@ -212,7 +212,7 @@ public class Achievements_Handler : IHandler
 
     public PlayerAchievementV2 GetPlayerAchievementV2(string AccountId, IntPtr ptr)
     {
-        string achi = Helpers.ToString(ptr);
+        string achi = Helpers.ToUTF8String(ptr);
         var indx = GetAchievement_FromAccount(AccountId).FindIndex(0, x => x.AchievementId == achi);
         return GetPlayerAchievementV2Index(AccountId, (uint)indx);
     }
@@ -270,10 +270,7 @@ public class Achievements_Handler : IHandler
     public void SetAchForUser(string AccountId, List<Achievement_Model> ach)
     {
         _AchReqs.Remove(AccountId);
-        if (!AchKVs.ContainsKey(AccountId))
-            AchKVs.Add(AccountId, ach);
-        else
-            AchKVs[AccountId] = ach;
+        AchKVs.TryAdd(AccountId, ach);
     }
 
     public bool IsAccountStillWaiting(string AccountId)
@@ -402,11 +399,12 @@ public class Achievements_Handler : IHandler
         }
     }
 
-    public void Close()
+    public void Dispose()
     {
         _SentReq.Clear();
         SaveAchis();
         AchiSync();
+        GC.SuppressFinalize(this);
     }
     #endregion
 }

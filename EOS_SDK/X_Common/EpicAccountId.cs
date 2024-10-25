@@ -13,7 +13,7 @@ public unsafe class EpicAccountId
     [UnmanagedCallersOnly(EntryPoint = "EOS_EpicAccountId_FromString")]
     public static IntPtr EOS_EpicAccountId_FromString(IntPtr accountIdString)
     {
-        string UserID = Helpers.ToString(accountIdString);
+        string UserID = Helpers.ToUTF8String(accountIdString);
         if (UserID.Length == EpicaccountidMaxLength && Regex.Match(UserID, "[a-fA-F0-9]{32}").Success)
             Static_EpicAccountId = UserID;
         return Helpers.FromString(Static_EpicAccountId);
@@ -22,7 +22,7 @@ public unsafe class EpicAccountId
     [UnmanagedCallersOnly(EntryPoint = "EOS_EpicAccountId_IsValid")]
     public static int EOS_EpicAccountId_IsValid(IntPtr accountId)
     {
-        var UserId = Helpers.ToString(accountId);
+        var UserId = Helpers.ToUTF8String(accountId);
         if (UserId.Length == EpicaccountidMaxLength)
             return 1;
         if (Regex.Match(UserId, "[a-fA-F0-9]{32}").Success)
@@ -33,7 +33,7 @@ public unsafe class EpicAccountId
     [UnmanagedCallersOnly(EntryPoint = "EOS_EpicAccountId_ToString")]
     public static int EOS_EpicAccountId_ToString(IntPtr accountId, IntPtr outBuffer, [Out] int inOutBufferLength)
     {
-        string UserID = Helpers.ToString(accountId);
+        string UserID = Helpers.ToUTF8String(accountId);
         if (UserID.Length == EpicaccountidMaxLength && Regex.Match(UserID, "[a-fA-F0-9]{32}").Success)
             Static_EpicAccountId = UserID;
         else

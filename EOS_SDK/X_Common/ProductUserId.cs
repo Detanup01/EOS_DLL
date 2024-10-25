@@ -14,7 +14,7 @@ namespace EOS_SDK.Others
         [UnmanagedCallersOnly(EntryPoint = "EOS_ProductUserId_FromString")]
         public static IntPtr EOS_ProductUserId_FromString(IntPtr productUserIdString)
         {
-            string UserID = Helpers.ToString(productUserIdString);
+            string UserID = Helpers.ToUTF8String(productUserIdString);
             if (UserID.Length == ProductuseridMaxLength && Regex.Match(UserID, "[a-fA-F0-9]{32}").Success)
                 Static_ProductUserId = UserID;
             return Helpers.FromString(Static_ProductUserId);
@@ -23,7 +23,7 @@ namespace EOS_SDK.Others
         [UnmanagedCallersOnly(EntryPoint = "EOS_ProductUserId_IsValid")]
         public static int EOS_ProductUserId_IsValid(IntPtr accountId)
         {
-            var UserId = Helpers.ToString(accountId);
+            var UserId = Helpers.ToUTF8String(accountId);
             if (UserId.Length == ProductuseridMaxLength)
                 return 1;
             if (Regex.Match(UserId, "[a-fA-F0-9]{32}").Success)
@@ -34,7 +34,7 @@ namespace EOS_SDK.Others
         [UnmanagedCallersOnly(EntryPoint = "EOS_ProductUserId_ToString")]
         public static int EOS_ProductUserId_ToString(IntPtr accountId, IntPtr outBuffer, int inOutBufferLength)
         {
-            string UserID = Helpers.ToString(accountId);
+            string UserID = Helpers.ToUTF8String(accountId);
             if (UserID.Length == ProductuseridMaxLength && Regex.Match(UserID, "[a-fA-F0-9]{32}").Success)
                 Static_ProductUserId = UserID;
             else

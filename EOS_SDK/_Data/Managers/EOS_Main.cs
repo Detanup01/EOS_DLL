@@ -2,19 +2,12 @@
 
 namespace EOS_SDK._Data;
 
-public class EOS_Main
+public class EOS_Main(IntPtr name, IntPtr version)
 {
     static EOS_Main? Main;
 
-    public string ProductName;
-    public string ProductVersion;
-
-    public EOS_Main(IntPtr name, IntPtr version)
-    {
-        ProductName = Helpers.ToString(name);
-        ProductVersion = Helpers.ToString(version);
-    }
-
+    public string ProductName = Helpers.ToUTF8String(name);
+    public string ProductVersion = Helpers.ToUTF8String(version);
     public bool IsInit = false;
     static Platform_Handler? _Platform;
     static Config? _Config;
@@ -38,17 +31,14 @@ public class EOS_Main
 
     public static void Shutdown()
     {
-        GetPlatform().Close();
+        ((IDisposable)GetPlatform()).Dispose();
         Main = null;
     }
 
 
     public static Platform_Handler GetPlatform()
     {
-        if (_Platform == null)
-        {
-            _Platform = new Platform_Handler();
-        }
+        _Platform ??= new Platform_Handler();
         return _Platform;
     }
 
@@ -65,7 +55,7 @@ public class EOS_Main
 
     public static bool IsMyUser(IntPtr ptr)
     {
-        string str = Helpers.ToString(ptr);
+        string str = Helpers.ToUTF8String(ptr);
         if (GetConfig().AccountId == str || GetConfig().EpicProductUserId == str)
             return true;
         return false;

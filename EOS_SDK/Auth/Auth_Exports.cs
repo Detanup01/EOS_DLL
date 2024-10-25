@@ -1,7 +1,5 @@
 ﻿using EOS_SDK._Data;
-using EOS_SDK.Achievements;
 using EOS_SDK.Enums;
-using EOS_SDK.Platform;
 using EOS_SDK.Version;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -55,7 +53,7 @@ public unsafe class Auth_Exports
         IdToken idToken = new()
         { 
             ApiVersion = Versions.IdtokenApiLatest_Auth,
-            AccountId = Helpers.FromString(phandler.GetAccountId()),
+            AccountId = Helpers.FromString(phandler.AccountId),
             JsonWebToken = Helpers.FromString(JWTHelper.CreateToken())
         };
         Helpers.StructWriteOut(idToken, outIdToken);
@@ -79,7 +77,7 @@ public unsafe class Auth_Exports
             ClientData = clientData,
             LocalUserId = _QueryIdTokenOptions.LocalUserId,
             ResultCode = Result.Success,
-            TargetAccountId = Helpers.FromString(phandler.GetAccountId()),
+            TargetAccountId = Helpers.FromString(phandler.AccountId),
         };
         @delegate(Helpers.StructToPtr(queryIdTokenCallbackInfo));
     }
@@ -98,14 +96,17 @@ public unsafe class Auth_Exports
     public static int EOS_Auth_CopyUserAuthToken(IntPtr handle, IntPtr options, IntPtr localUserId, IntPtr outUserAuthToken)
     {
         _log.Logger.WriteDebug($"{nameof(EOS_Auth_CopyUserAuthToken)} Called", Logging.LogCategory.Auth);
-        if (outUserAuthToken == IntPtr.Zero)
+        if (!EOS_Main.GetPlatform().CheckArgs(handle, options, localUserId))
             return (int)Result.InvalidParameters;
-        var _CopyUserAuthTokenOptions = Marshal.PtrToStructure<CopyUserAuthTokenOptions>(options);
+        var phandler = EOS_Main.GetPlatform().GetHandler<Auth_Handler>(handle);
+        if (phandler == null)
+            return (int)Result.InvalidParameters;
+        //var _CopyUserAuthTokenOptions = Marshal.PtrToStructure<CopyUserAuthTokenOptions>(options);
         var auth_refresh = JWTHelper.CreateAuthRefresh();
         Token token = new()
         {
             AccessToken = Helpers.FromString(auth_refresh.Auth),
-            AccountId = Helpers.FromString(Auth_Handler.GetAccountId()),
+            AccountId = Helpers.FromString(phandler.AccountId),
             ApiVersion = Versions.CopyuserauthtokenApiLatest,
             AuthType = AuthTokenType.User,
             App = Helpers.FromString(Config.GetConfig().AppId),
@@ -135,8 +136,13 @@ public unsafe class Auth_Exports
     public static IntPtr EOS_Auth_GetLoggedInAccountByIndex(IntPtr handle, int index)
     {
         _log.Logger.WriteDebug($"{nameof(EOS_Auth_GetLoggedInAccountByIndex)} Called", Logging.LogCategory.Auth);
-        if (Auth_Handler.GetLoginStatus() == LoginStatus.LoggedIn)
-            return Helpers.FromString(Auth_Handler.GetAccountId());
+        if (handle == IntPtr.Zero)
+            return IntPtr.Zero;
+        var phandler = EOS_Main.GetPlatform().GetHandler<Auth_Handler>(handle);
+        if (phandler == null)
+            return IntPtr.Zero;
+        if (phandler.GetLoginStatus() == LoginStatus.LoggedIn)
+            return Helpers.FromString(phandler.AccountId);
         return IntPtr.Zero;
     }
 
@@ -144,7 +150,12 @@ public unsafe class Auth_Exports
     public static int EOS_Auth_GetLoggedInAccountsCount(IntPtr handle)
     {
         _log.Logger.WriteDebug($"{nameof(EOS_Auth_GetLoggedInAccountsCount)} Called", Logging.LogCategory.Auth);
-        if (Auth_Handler.GetLoginStatus() == LoginStatus.LoggedIn)
+        if (handle == IntPtr.Zero)
+            return 0;
+        var phandler = EOS_Main.GetPlatform().GetHandler<Auth_Handler>(handle);
+        if (phandler == null)
+            return 0;
+        if (phandler.GetLoginStatus() == LoginStatus.LoggedIn)
             return 1;
         return 0;
     }
@@ -154,7 +165,14 @@ public unsafe class Auth_Exports
     public static IntPtr EOS_Auth_GetMergedAccountByIndex(IntPtr handle, IntPtr localUserId, uint index)
     {
         _log.Logger.WriteDebug($"{nameof(EOS_Auth_GetMergedAccountByIndex)} Called", Logging.LogCategory.Auth);
-        return Helpers.FromString(Auth_Handler.GetAccountId());
+        if (handle == IntPtr.Zero)
+            return IntPtr.Zero;
+        var phandler = EOS_Main.GetPlatform().GetHandler<Auth_Handler>(handle);
+        if (phandler == null)
+            return IntPtr.Zero;
+        if (phandler.GetLoginStatus() == LoginStatus.LoggedIn)
+            return Helpers.FromString(phandler.AccountId);
+        return IntPtr.Zero;
     }
 
     [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl), typeof(CallConvStdcall)])]
@@ -172,8 +190,13 @@ public unsafe class Auth_Exports
         if (completionDelegate == IntPtr.Zero)
             return;
         var _LinkAccountOptions = Marshal.PtrToStructure<LinkAccountOptions>(options);
+        if (handle == IntPtr.Zero)
+            return;
+        var phandler = EOS_Main.GetPlatform().GetHandler<Auth_Handler>(handle);
+        if (phandler == null)
+            return;
         delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: Auth.OnLinkAccountCallback
-        var userid_ = Helpers.FromString(Auth_Handler.GetAccountId());
+        var userid_ = Helpers.FromString(phandler.AccountId);
         LinkAccountCallbackInfo linkAccountCallbackInfo = new()
         { 
             ClientData = clientData,
@@ -190,6 +213,9 @@ public unsafe class Auth_Exports
         _log.Logger.WriteDebug($"{nameof(EOS_Auth_Login)} Called", Logging.LogCategory.Auth);
         if (completionDelegate == IntPtr.Zero)
             return;
+        var phandler = EOS_Main.GetPlatform().GetHandler<Auth_Handler>(handle);
+        if (phandler == null)
+            return;
         /*
         var version = Helpers.GetVersionFromStructPTR(options);
 
@@ -204,9 +230,7 @@ public unsafe class Auth_Exports
 
         var _LoginOptions = Marshal.PtrToStructure<LoginOptionsV3>(options);
         */
-        delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: OnLoginCallback
-
-        var userid_ = Helpers.FromString(Auth_Handler.GetAccountId());
+        var userid_ = Helpers.FromString(phandler.AccountId);
         LoginCallbackInfo loginCallbackInfo = new()
         {
             ClientData = clientData,
@@ -214,8 +238,8 @@ public unsafe class Auth_Exports
             LocalUserId = userid_,
             SelectedAccountId = userid_
         };
-        @delegate(Helpers.StructToPtr(loginCallbackInfo));
-        Auth_Handler.TriggerStateChange(true, userid_);
+        CallbackManager.AddCallback(completionDelegate, loginCallbackInfo, nameof(EOS_Auth_Login));
+        phandler.TriggerStateChange(true, userid_);
     }
 
     [UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl), typeof(CallConvStdcall)])]
@@ -224,17 +248,18 @@ public unsafe class Auth_Exports
         _log.Logger.WriteDebug($"{nameof(EOS_Auth_Logout)} Called", Logging.LogCategory.Auth);
         if (completionDelegate == IntPtr.Zero)
             return;
+        var phandler = EOS_Main.GetPlatform().GetHandler<Auth_Handler>(handle);
+        if (phandler == null)
+            return;
         var _LogoutOptions = Marshal.PtrToStructure<LogoutOptions>(options);
-        delegate* unmanaged<IntPtr, void> @delegate = (delegate* unmanaged<IntPtr, void>)completionDelegate; //Delegate Class was: OnLogoutCallback
-
         LogoutCallbackInfo logoutCallbackInfo = new()
         { 
             ClientData = clientData,
             ResultCode = Result.Success,
             LocalUserId = _LogoutOptions.LocalUserId
         };
-        @delegate(Helpers.StructToPtr(logoutCallbackInfo));
-        Auth_Handler.TriggerStateChange(false, _LogoutOptions.LocalUserId);
+        CallbackManager.AddCallback(completionDelegate, logoutCallbackInfo, nameof(EOS_Auth_Login));
+        phandler.TriggerStateChange(false, _LogoutOptions.LocalUserId);
     }
     #endregion
     #region Verify

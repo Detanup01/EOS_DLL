@@ -10,7 +10,7 @@ namespace EOS_SDK._test
         [UnmanagedCallersOnly(EntryPoint = "_NetTest_Ping")]
         public static void _NetTest_Ping(IntPtr ptr_UserId)
         {
-            var UserId = Helpers.ToString(ptr_UserId);
+            var UserId = Helpers.ToUTF8String(ptr_UserId);
             //Master?.BiNet?.SendPingPacket(UserId.Remove(UserId.Length - 1, 1));
         }
 
