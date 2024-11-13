@@ -21,7 +21,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '9.0.x'
     - name: Publish
       run: dotnet publish EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r linux-x64 -o DLLs -p:Platform=x64
     - name: Upload artifact (Lin)
@@ -36,13 +36,13 @@ jobs:
     strategy:
       matrix:
         builds: [ 'Debug', 'Release' ]
-        CPU: ['x64'] #[ 'x86', 'x64' ]
+        CPU: [ 'x86', 'x64' ]
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '9.0.x'
     - name: Publish
       run: dotnet publish EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r win-${{ matrix.CPU }} -o DLLs -p:Platform=${{ matrix.CPU }}
     - name: Upload artifact (Win)
@@ -52,23 +52,23 @@ jobs:
         path: DLLs
         if-no-files-found: error
 
-# Disable MacOS for unforseenable future
-#  macos:
-#    runs-on: macos-latest
-#    strategy:
-#      matrix:
-#        builds: [ 'Debug', 'Release' ]
-#    steps:
-#    - uses: actions/checkout@v4
-#    - name: Setup .NET
-#      uses: actions/setup-dotnet@v4
-#      with:
-#        dotnet-version: '8.0.x'
-#    - name: Publish
-#      run: dotnet publish EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r osx-x64 -o DLLs -p:Platform=x64
-#    - name: Upload artifact (Mac)
-#      uses: actions/upload-artifact@v4
-#      with:
-#        name: SDK-Mac-${{ matrix.builds }}
-#        path: DLLs
-#        if-no-files-found: error
+# Enable MAC for testing
+  macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        builds: [ 'Debug', 'Release' ]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+    - name: Publish
+      run: dotnet publish EOS_SDK/EOS_SDK.csproj -c ${{ matrix.builds }} -r osx-x64 -o DLLs -p:Platform=x64
+    - name: Upload artifact (Mac)
+      uses: actions/upload-artifact@v4
+      with:
+        name: SDK-Mac-${{ matrix.builds }}
+        path: DLLs
+        if-no-files-found: error
